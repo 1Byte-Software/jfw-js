@@ -1,0 +1,28 @@
+{
+  "name": "jfw-js",
+  "version": "3.9.11.0",
+  "description": "Javascript package for jfw",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "prepare": "npm run build",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1Byte-Software/jfw-js.git"
+  },
+  "author": "1byte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1Byte-Software/jfw-js/issues"
+  },
+  "homepage": "https://github.com/1Byte-Software/jfw-js",
+  "devDependencies": {
+    "typescript": "^5.6.2"
+  }
+}
