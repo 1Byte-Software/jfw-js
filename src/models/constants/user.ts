@@ -1,27 +1,27 @@
 // Define an object to represent different user types.
 export const USER_TYPE = {
-    Admin: "Admin",
-    SuperAdmin: "SuperAdmin",
-    Partner: "Partner",
-    EndUser: "EndUser",
+    admin: "Admin",
+    superAdmin: "SuperAdmin",
+    partner: "Partner",
+    endUser: "EndUser",
 };
 
 // Define an array of user type options for selection in a dropdown or similar UI component
 export const USER_TYPE_OPTIONS = [
     {
-        value: USER_TYPE.Admin,
+        value: USER_TYPE.admin,
         label: "Admin",
     },
     {
-        value: USER_TYPE.SuperAdmin,
+        value: USER_TYPE.superAdmin,
         label: "Super Admin",
     },
     {
-        value: USER_TYPE.Partner,
+        value: USER_TYPE.partner,
         label: "Partner",
     },
     {
-        value: USER_TYPE.EndUser,
+        value: USER_TYPE.endUser,
         label: "End User",
     },
 ];
