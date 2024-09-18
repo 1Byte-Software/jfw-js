@@ -9,8 +9,8 @@ import {
 import { BRAND_URL } from "@/utils/common";
 
 const REST = "brands";
-const EMAIL = "emails";
 const BY_URL = "by-url";
+const EMAIL = "emails";
 const LINK = "links";
 
 export const getListBrandEmailsAPI = async (path: IById): Promise<IBrandEmail> => {

@@ -5,8 +5,8 @@ import { BRAND_URL } from "@/utils/common";
 import { Cookies } from "react-cookie";
 
 const REST = "licenses";
-const CHECK = "check";
 const APPLY = "apply";
+const CHECK = "check";
 
 export const checkValidLicenseAPI = async (params: IMutateLicenseParams) => {
     const url = `${REST}/${CHECK}`;

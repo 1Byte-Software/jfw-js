@@ -15,12 +15,12 @@ import {
 } from "@/models/interfaces";
 
 const REST = "wallets";
-const REST_EVENT = "wallet-earning-events";
-const HISTORY = "histories";
-const CONVERT = "convert";
-const APPLY_REDEEM = "apply-redeem";
 const ADD_MONEY = "add-money/checkout-link";
+const APPLY_REDEEM = "apply-redeem";
 const CLOSE = "close";
+const CONVERT = "convert";
+const HISTORY = "histories";
+const REST_EVENT = "wallet-earning-events";
 
 export const getWalletAPI = async (params: IGetWalletParams): Promise<IWallet[]> => {
     const url = `${REST}`;

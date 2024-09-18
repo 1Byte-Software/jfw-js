@@ -12,10 +12,10 @@ import {
 } from "@/models/interfaces";
 
 const REST = "issues";
-const REST_REACTION = "issue-reactions";
-const REST_TYPE = "issue-types";
 const BY_LIST = "by-list";
 const CHILDREN = "children";
+const REST_REACTION = "issue-reactions";
+const REST_TYPE = "issue-types";
 
 export const createIssueAPI = async (payload: ICreateIssuePayload) => {
     const url = `${REST}`;

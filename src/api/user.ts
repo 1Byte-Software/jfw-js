@@ -1,31 +1,39 @@
-import { axiosInstanceJfw } from '@/config/axios/axiosClient';
-import { AUTH_KEY } from '@/models/constants';
+import { axiosInstanceJfw } from "@/config/axios/axiosClient";
+import { AUTH_KEY, BRAND_URL } from "@/models/constants";
 import {
     IApplyCodeParams,
     IById,
     IChangePasswordPayload,
     ICheckCodePath,
     IEditProfilePayload,
+    IForgotPasswordPayload,
     IPaginationParams,
     IReferee,
+    IResetPasswordPayload,
+    ISignUpPayload,
     IUser,
-} from '@/models/interfaces';
+} from "@/models/interfaces";
 import {
     IConfiguration,
     IConfigurationPayload,
     IGetConfigurationParams,
     IUpdateUserConfigurationPath,
-} from '@/models/interfaces/configuration';
-import { Cookies } from 'react-cookie';
+} from "@/models/interfaces/configuration";
+import { Cookies } from "react-cookie";
 
-const REST = 'users';
+const REST = "users";
+const REGISTER = `${REST}/register`;
+const FORGOT_PASSWORD = `${REST}/forgot-password`;
+const RESET_PASSWORD = `${REST}/reset-password`;
+const CHANGE_PASSWORD = "change-password";
+
+const APPLY = "apply";
+const CHECK = "check";
+const CHECK_FIRST_LOGIN = `${REST}/check-first-login-today`;
+const CONFIGURATION = "configurations";
 const ME = `v1/${REST}/me`;
-const CHANGE_PASSWORD = 'change-password';
-const CONFIGURATION = 'configurations';
-const REFEREE = 'referees';
-const REFERRAL = 'referrals';
-const CHECK = 'check';
-const APPLY = 'apply';
+const REFEREE = "referees";
+const REFERRAL = "referrals";
 
 export const getUserInfoAPI = async (): Promise<IUser> => {
     const url = `${ME}`;
@@ -132,4 +140,42 @@ export const applyCodeAPI = async (path: IById, params: IApplyCodeParams) => {
     return await axiosInstanceJfw.post(url, null, {
         params,
     });
+};
+
+export const signUpAPI = async (payload: ISignUpPayload) => {
+    const url = `${REGISTER}`;
+    const body = {
+        brandUrl: BRAND_URL,
+        ...payload,
+    };
+    const response = await axiosInstanceJfw.post(url, body);
+    return response.data;
+};
+
+export const forgotPasswordAPI = async (payload: IForgotPasswordPayload) => {
+    const url = `${FORGOT_PASSWORD}`;
+    const body = {
+        brandUrl: BRAND_URL,
+        ...payload,
+    };
+    const response = await axiosInstanceJfw.post(url, body);
+    return response.data;
+};
+
+export const resetPasswordAPI = async (payload: IResetPasswordPayload) => {
+    const url = `${RESET_PASSWORD}`;
+    const body = {
+        brandUrl: BRAND_URL,
+        ...payload,
+    };
+    const response = await axiosInstanceJfw.post(url, body);
+    return response.data;
+};
+
+export const checkFirstLoginTodayAPI = async (): Promise<boolean> => {
+    const url = `${CHECK_FIRST_LOGIN}`;
+
+    const response = await axiosInstanceJfw.get(url);
+
+    return response.data;
 };

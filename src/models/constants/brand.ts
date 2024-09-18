@@ -9,7 +9,7 @@ export const BRAND_LINK_TYPE = {
     footerCopyRight: "FooterCopyRight",
     footerDescription: "FooterDescription",
     footerLogo: "FooterLogo",
-    guide: "Guide",
+    footerWidget: "FooterWidget",
     header: "Header",
     headerAvatar: "HeaderAvatar",
     headerCustomLogo: "HeaderCustomLogo",
@@ -17,18 +17,13 @@ export const BRAND_LINK_TYPE = {
     headerSearch: "HeaderSearch",
     headerSlider: "HeaderSlider",
     knowledge: "Knowledge",
-    listeningGuide: "ListeningGuide",
-    mockTest: "MockTests",
     navigation: "Navigation",
     navigationCopyRight: "NavigationCopyRight",
     navigationMenu: "NavigationMenu",
     navigationSearch: "NavigationSearch",
-    practiceSite: "PracticeSite",
-    readingGuide: "ReadingGuide",
     reference: "ReferenceLink",
     slider: "Slider",
-    speakingGuide: "SpeakingGuide",
-    writingGuide: "WritingGuide",
+    unknown: "Unknown",
 };
 
 /*

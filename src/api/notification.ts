@@ -1,15 +1,15 @@
-import { axiosInstanceJfw } from '@/config/axios/axiosClient';
-import { IById, IListResponse } from '@/models/interfaces';
+import { axiosInstanceJfw } from "@/config/axios/axiosClient";
+import { IById, IListResponse } from "@/models/interfaces";
 import {
     IGetNotificationRequestParams,
     INotification,
     IUpdateAllNotificationsParams,
     IUpdateNotificationRequestParams,
-} from '@/models/interfaces/notification';
+} from "@/models/interfaces/notification";
 
-const REST = 'notifications';
-const STATUS = 'update-status';
-const UPDATE_ALL_STATUS = 'update-all-status';
+const REST = "notifications";
+const UPDATE_ALL_STATUS = "update-all-status";
+const STATUS = "update-status";
 
 export const getNotificationsAPI = async (
     params: IGetNotificationRequestParams

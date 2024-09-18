@@ -1,3 +1,3 @@
 export type IdType = string;
 export type DateType = Date | string;
-export type Mode = "development" | "production";
+export type ModeType = "development" | "production";
