@@ -1,90 +1,94 @@
-import { axiosInstanceJfw } from "@/config/axios/axiosClient";
+import { axiosInstanceJfw } from '../config/axios/axiosClient';
 import {
-    IAddMoneyPayload,
-    IApplyRedeemPath,
-    IById,
-    ICreateWalletPath,
-    IEarnEvent,
-    IExchangeWalletPayload,
-    IGetEarnEventParams,
-    IGetWalletHistoriesParams,
-    IGetWalletParams,
-    IListResponse,
-    IWallet,
-    IWalletHistory,
-} from "@/models/interfaces";
+  IAddMoneyPayload,
+  IApplyRedeemPath,
+  IById,
+  ICreateWalletPath,
+  IEarnEvent,
+  IExchangeWalletPayload,
+  IGetEarnEventParams,
+  IGetWalletHistoriesParams,
+  IGetWalletParams,
+  IListResponse,
+  IWallet,
+  IWalletHistory,
+} from '../models/interfaces';
 
-const REST = "wallets";
-const ADD_MONEY = "add-money/checkout-link";
-const APPLY_REDEEM = "apply-redeem";
-const CLOSE = "close";
-const CONVERT = "convert";
-const HISTORY = "histories";
-const REST_EVENT = "wallet-earning-events";
+const REST = 'wallets';
+const ADD_MONEY = 'add-money/checkout-link';
+const APPLY_REDEEM = 'apply-redeem';
+const CLOSE = 'close';
+const CONVERT = 'convert';
+const HISTORY = 'histories';
+const REST_EVENT = 'wallet-earning-events';
 
-export const getWalletAPI = async (params: IGetWalletParams): Promise<IWallet[]> => {
-    const url = `${REST}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+export const getWalletAPI = async (
+  params: IGetWalletParams,
+): Promise<IWallet[]> => {
+  const url = `${REST}`;
+  const response = await axiosInstanceJfw.get(url, {
+    params,
+  });
 
-    return response.data;
+  return response.data;
 };
 
 export const getWalletHistoriesAPI = async (
-    path: IById,
-    params: IGetWalletHistoriesParams
+  path: IById,
+  params: IGetWalletHistoriesParams,
 ): Promise<IListResponse<IWalletHistory>> => {
-    const { id } = path;
-    const url = `${REST}/${id}/${HISTORY}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+  const { id } = path;
+  const url = `${REST}/${id}/${HISTORY}`;
+  const response = await axiosInstanceJfw.get(url, {
+    params,
+  });
 
-    return response.data;
+  return response.data;
 };
 
-export const getListEarnEventsAPI = async (params: IGetEarnEventParams): Promise<IEarnEvent[]> => {
-    const url = `${REST_EVENT}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+export const getListEarnEventsAPI = async (
+  params: IGetEarnEventParams,
+): Promise<IEarnEvent[]> => {
+  const url = `${REST_EVENT}`;
+  const response = await axiosInstanceJfw.get(url, {
+    params,
+  });
 
-    return response.data;
+  return response.data;
 };
 
 export const createWalletAPI = async (path: ICreateWalletPath) => {
-    const { currencyCode } = path;
-    const url = `${REST}/${currencyCode}`;
+  const { currencyCode } = path;
+  const url = `${REST}/${currencyCode}`;
 
-    return await axiosInstanceJfw.post(url);
+  return await axiosInstanceJfw.post(url);
 };
 
 export const exchangeWalletAPI = async (payload: IExchangeWalletPayload) => {
-    const url = `${REST}/${CONVERT}`;
+  const url = `${REST}/${CONVERT}`;
 
-    return await axiosInstanceJfw.post(url, payload);
+  return await axiosInstanceJfw.post(url, payload);
 };
 
 export const applyRedeemAPI = async (path: IApplyRedeemPath) => {
-    const { redeemCode, walletId } = path;
+  const { redeemCode, walletId } = path;
 
-    const url = `${REST}/${walletId}/${APPLY_REDEEM}/${redeemCode}`;
+  const url = `${REST}/${walletId}/${APPLY_REDEEM}/${redeemCode}`;
 
-    return await axiosInstanceJfw.post(url);
+  return await axiosInstanceJfw.post(url);
 };
 
 export const addMoneyAPI = async (params: IAddMoneyPayload) => {
-    const url = `${REST}/${ADD_MONEY}`;
+  const url = `${REST}/${ADD_MONEY}`;
 
-    return await axiosInstanceJfw.post(url, null, {
-        params,
-    });
+  return await axiosInstanceJfw.post(url, null, {
+    params,
+  });
 };
 
 export const closeWalletAPI = async (path: IById) => {
-    const { id } = path;
-    const url = `${REST}/${id}/${CLOSE}`;
+  const { id } = path;
+  const url = `${REST}/${id}/${CLOSE}`;
 
-    return await axiosInstanceJfw.put(url);
+  return await axiosInstanceJfw.put(url);
 };

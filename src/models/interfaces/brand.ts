@@ -29,6 +29,10 @@ export interface IBrandSetting {
     websiteProtocolUrl?: string;
     reCaptchaKey: string;
 }
+
+export interface IGetBrandInfoPath {
+    brandUrl: string;
+}
 export interface IBrandInfo {
     alias: string;
     code: string;

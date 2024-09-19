@@ -11,7 +11,6 @@ export * from "./license";
 export * from "./notification";
 export * from "./organization";
 export * from "./package";
-export * from "./payment";
 export * from "./paymentProvider";
 export * from "./price";
 export * from "./role";

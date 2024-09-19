@@ -9,6 +9,7 @@ export * from "./integration";
 export * from "./invoice";
 export * from "./issue";
 export * from "./language";
+export * from "./lifeCycle";
 export * from "./notification";
 export * from "./organization";
 export * from "./payment";

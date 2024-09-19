@@ -1,5 +1,5 @@
 import ".";
-import { IdType, Mode } from "../types";
+import { IdType } from "../types";
 
 export interface IPaginationParams {
     pageNumber?: number;
@@ -40,8 +40,4 @@ export interface ISortParamsDefault {
 }
 export interface IById {
     id: IdType;
-}
-export interface JfwConfig {
-    mode?: Mode;
-    brandUrl?: string;
 }

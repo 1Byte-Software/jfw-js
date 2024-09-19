@@ -1,9 +1,0 @@
-export const AUTH_KEY = "authKey";
-export const USERNAME = "username";
-export const IP_ADDRESS = "ipAddress";
-export const BROWSER_ID = "browserCodeGenerate";
-export const PAYER_ID = "PayerID";
-export const IS_SHOW_COIN = "isShowCoin";
-export const DEVICE_TOKEN = "deviceToken";
-export const MODE = "mode";
-export const BRAND_URL = "brandUrl";

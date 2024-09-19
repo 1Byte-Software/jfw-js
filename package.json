@@ -1,35 +1,36 @@
 {
   "name": "jfw-js",
-  "version": "3.8.16.0",
+  "version": "3.8.18.19",
   "description": "Javascript package for jfw",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "lib"
-  ],
-  "prepare": "npm run build",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && tsc-alias"
+    "build": "rollup -c",
+    "watch": "npm run build -- --watch src",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/1Byte-Software/jfw-js.git"
   },
-  "author": "1byte",
+  "author": "1byte devteam",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/1Byte-Software/jfw-js/issues"
   },
   "homepage": "https://github.com/1Byte-Software/jfw-js",
-  "devDependencies": {
-    "@types/node": "^22.5.5",
-    "tsc-alias": "^1.8.10",
-    "typescript": "^5.6.2"
-  },
   "dependencies": {
     "axios": "^1.7.7",
+    "concurrently": "^9.0.1",
     "query-string": "^9.1.0",
-    "react-cookie": "^7.2.0"
+    "rollup": "^4.22.0",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "prettier": "^3.3.3",
+    "tsc-alias": "^1.8.10",
+    "typescript": "^5.6.2"
   }
 }

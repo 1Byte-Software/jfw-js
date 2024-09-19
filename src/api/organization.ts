@@ -1,118 +1,120 @@
-import { axiosInstanceJfw } from "@/config/axios/axiosClient";
+import { axiosInstanceJfw } from '../config/axios/axiosClient';
 import {
-    IById,
-    IGetListOrganizationsByViewerParams,
-    IGetListOrganizationsParams,
-    IGetListUsersOfOrganizationParams,
-    IGetOrganizationDetailPath,
-    IListResponse,
-    IOrganization,
-    IOrganizationUser,
-    IResponse,
-    IResponseNotPermission,
-    IUpdateOrganizationUserParams,
-    IUpdateOrganizationUserPath,
-} from "@/models/interfaces";
+  IById,
+  IGetListOrganizationsByViewerParams,
+  IGetListOrganizationsParams,
+  IGetListUsersOfOrganizationParams,
+  IGetOrganizationDetailPath,
+  IListResponse,
+  IOrganization,
+  IOrganizationUser,
+  IResponse,
+  IResponseNotPermission,
+  IUpdateOrganizationUserParams,
+  IUpdateOrganizationUserPath,
+} from '../models/interfaces';
 
-const REST = "organizations";
-const UPLOAD = "upload-file";
-const USER = "users";
+const REST = 'organizations';
+const UPLOAD = 'upload-file';
+const USER = 'users';
 
 export const getListOrganizationsAPI = async (
-    params: IGetListOrganizationsParams
+  params: IGetListOrganizationsParams,
 ): Promise<IListResponse<IOrganization>> => {
-    const url = `${REST}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+  const url = `${REST}`;
+  const response = await axiosInstanceJfw.get(url, {
+    params,
+  });
 
-    const { items, ...rest } = response.data;
+  const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+  return {
+    items,
+    pagination: rest,
+  };
 };
 
 export const getOrganizationDetailAPI = async (
-    path: IGetOrganizationDetailPath
+  path: IGetOrganizationDetailPath,
 ): Promise<IOrganization> => {
-    const { identify } = path;
-    const url = `${REST}/${identify}`;
-    const response = await axiosInstanceJfw.get(url);
+  const { identify } = path;
+  const url = `${REST}/${identify}`;
+  const response = await axiosInstanceJfw.get(url);
 
-    return response.data;
+  return response.data;
 };
 
 export const uploadFileAPI = async (path: IById, payload: FormData) => {
-    const { id } = path;
-    const url = `${REST}/${id}/${UPLOAD}`;
+  const { id } = path;
+  const url = `${REST}/${id}/${UPLOAD}`;
 
-    return axiosInstanceJfw.post(url, payload, {
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    });
+  return axiosInstanceJfw.post(url, payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };
 
 export const getListOrganizationsByViewerAPI = async (
-    params: IGetListOrganizationsByViewerParams
+  params: IGetListOrganizationsByViewerParams,
 ): Promise<IListResponse<IOrganization>> => {
-    const url = `${REST}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+  const url = `${REST}`;
+  const response = await axiosInstanceJfw.get(url, {
+    params,
+  });
 
-    const { items, ...rest } = response.data;
+  const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+  return {
+    items,
+    pagination: rest,
+  };
 };
 
 export const createOrganizationUserAPI = async (
-    path: IUpdateOrganizationUserPath
+  path: IUpdateOrganizationUserPath,
 ): Promise<IResponse<IOrganizationUser>> => {
-    const { userId, organizationId } = path;
-    const url = `${REST}/${organizationId}/${USER}/${userId}`;
+  const { userId, organizationId } = path;
+  const url = `${REST}/${organizationId}/${USER}/${userId}`;
 
-    return axiosInstanceJfw.post(url);
+  return axiosInstanceJfw.post(url);
 };
 
 export const updateOrganizationUserAPI = async (
-    path: IUpdateOrganizationUserPath,
-    params: IUpdateOrganizationUserParams
+  path: IUpdateOrganizationUserPath,
+  params: IUpdateOrganizationUserParams,
 ): Promise<IResponse<IOrganizationUser> | IResponseNotPermission> => {
-    const { userId, organizationId } = path;
-    const url = `${REST}/${organizationId}/${USER}/${userId}`;
+  const { userId, organizationId } = path;
+  const url = `${REST}/${organizationId}/${USER}/${userId}`;
 
-    return axiosInstanceJfw.patch(url, null, {
-        params,
-    });
+  return axiosInstanceJfw.patch(url, null, {
+    params,
+  });
 };
 
-export const deleteOrganizationUserAPI = async (path: IUpdateOrganizationUserPath) => {
-    const { userId, organizationId } = path;
-    const url = `${REST}/${organizationId}/${USER}/${userId}`;
+export const deleteOrganizationUserAPI = async (
+  path: IUpdateOrganizationUserPath,
+) => {
+  const { userId, organizationId } = path;
+  const url = `${REST}/${organizationId}/${USER}/${userId}`;
 
-    return axiosInstanceJfw.delete(url);
+  return axiosInstanceJfw.delete(url);
 };
 
 export const getListUsersOfOrganizationAPI = async (
-    path: IById,
-    params: IGetListUsersOfOrganizationParams
+  path: IById,
+  params: IGetListUsersOfOrganizationParams,
 ): Promise<IListResponse<IOrganizationUser>> => {
-    const { id } = path;
-    const url = `${REST}/${id}/${USER}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+  const { id } = path;
+  const url = `${REST}/${id}/${USER}`;
+  const response = await axiosInstanceJfw.get(url, {
+    params,
+  });
 
-    const { items, ...rest } = response.data;
+  const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+  return {
+    items,
+    pagination: rest,
+  };
 };
