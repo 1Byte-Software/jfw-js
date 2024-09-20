@@ -4,7 +4,7 @@ import {
   IById,
   ICreateIssuePayload,
   IDeleteReactionPath,
-  IGetListIssueTypesParams,
+  IGetListIssueCategoriesParams,
   IGetListIssuesParams,
   IIssue,
   IIssueType,
@@ -60,7 +60,7 @@ export const createIssueReactionAPI = async (
   return await post(url, payload, null, userHeaders);
 };
 
-export const deleteReactionAPI = async (
+export const deleteIssueReactionAPI = async (
   path: IDeleteReactionPath,
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
@@ -70,8 +70,8 @@ export const deleteReactionAPI = async (
   return await remove(url, userHeaders);
 };
 
-export const getListIssueTypesAPI = async (
-  params: IGetListIssueTypesParams,
+export const getListIssueCategoriesAPI = async (
+  params: IGetListIssueCategoriesParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IIssueType[]> => {
   const url = `${REST_TYPE}`;

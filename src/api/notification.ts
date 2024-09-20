@@ -4,7 +4,7 @@ import {
   IGetNotificationRequestParams,
   INotification,
   IUpdateAllNotificationsParams,
-  IUpdateNotificationRequestParams,
+  IUpdateNotificationStatusParams,
 } from '../models/interfaces/notification';
 import { get, put, remove } from '../utils/axiosHelper';
 
@@ -26,9 +26,9 @@ export const getNotificationsAPI = async (
   };
 };
 
-export const updateNotificationsAPI = async (
+export const updateNotificationStatusAPI = async (
   path: IById,
-  params: IUpdateNotificationRequestParams,
+  params: IUpdateNotificationStatusParams,
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { id } = path;

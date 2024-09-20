@@ -42,7 +42,7 @@ export const getUserInfoAPI = async (
   return response.data;
 };
 
-export const getUserinfoByIdsAPI = async (
+export const getListUsersByIdsAPI = async (
   path: string,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IUser[]> => {
@@ -52,7 +52,7 @@ export const getUserinfoByIdsAPI = async (
   return response.data;
 };
 
-export const getUserinfoByIdAPI = async (
+export const getUserInfoByIdAPI = async (
   path: IById,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IUser> => {

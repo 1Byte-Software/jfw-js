@@ -55,7 +55,7 @@ export interface IAddReactionPayload {
 export interface IDeleteReactionPath {
   id: string;
 }
-export interface IGetListIssueTypesParams {
+export interface IGetListIssueCategoriesParams {
   brandCode: string;
 }
 export interface IIssueType {

@@ -4,7 +4,7 @@ import { IPaginationParams } from './filter';
 export interface IGetNotificationRequestParams extends IPaginationParams {
   status?: string;
 }
-export interface IUpdateNotificationRequestParams {
+export interface IUpdateNotificationStatusParams {
   status: string;
 }
 export interface IUpdateAllNotificationsParams {

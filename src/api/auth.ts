@@ -1,7 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import {
   IGetGoogleLinkParams,
-  ILoginUsingEmailPayload,
+  ISignUsingEmailPayload,
   ISignInPayload,
   ISignInResponse,
 } from '../models/interfaces';
@@ -22,7 +22,7 @@ export const getGoogleLinkAPI = async (
   return response.data;
 };
 
-export const signInAPI = async (
+export const signInUsingUsernameAPI = async (
   payload: ISignInPayload,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<ISignInResponse> => {
@@ -32,8 +32,8 @@ export const signInAPI = async (
   return response.data;
 };
 
-export const loginUsingEmailAPI = async (
-  payload: ILoginUsingEmailPayload,
+export const signInUsingEmailAPI = async (
+  payload: ISignUsingEmailPayload,
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const url = `${AUTH_BY_EMAIL}`;

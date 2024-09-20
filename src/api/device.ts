@@ -1,12 +1,12 @@
 import { RawAxiosRequestHeaders } from 'axios';
-import { ICheckConcurrencyParams, IResponse } from '../models/interfaces';
+import { ICheckUserAccessParams, IResponse } from '../models/interfaces';
 import { get } from '../utils/axiosHelper';
 
 const REST = 'devices';
 const USER_ACCESS = 'check-user-access';
 
-export const checkConcurrencyAPI = async (
-  params: ICheckConcurrencyParams,
+export const checkUserAccessAPI = async (
+  params: ICheckUserAccessParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IResponse<boolean>> => {
   const url = `v1/${REST}/${USER_ACCESS}`;
