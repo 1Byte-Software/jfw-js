@@ -1,62 +1,83 @@
-import {
-    AUTH_KEY,
-    BRAND_URL,
-    BROWSER_ID,
-    DEVICE_TOKEN,
-    IP_ADDRESS,
-    MODE,
-    MODE_VALUES,
-} from "@/models/constants";
-import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import queryString from "query-string";
-import { Cookies } from "react-cookie";
+import axios, {
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+  RawAxiosRequestHeaders,
+} from 'axios';
+import { _AppService } from '../../core/app';
+import { MODE_VALUES } from '../../models';
 
-const JFW_API_PRODUCTION = "https://protocol.jframework.io/api/";
-const JFW_API_DEVELOP = "https://protocol.jframework.dev/api/";
+const JFW_API_PRODUCTION = 'https://protocol.jframework.io/api/';
+const JFW_API_DEVELOP = 'https://protocol.jframework.dev/api/';
 
-const axiosInstance = (baseURL: string) => {
-    const axiosClient = axios.create({
-        baseURL,
-        headers: {
-            "content-type": "application/json",
-        },
-        paramsSerializer: (params) => queryString.stringify(params),
-    });
-    axiosClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-        const cookies = new Cookies();
-        const authKey = cookies.get(AUTH_KEY);
-        const IPAdress = cookies.get(IP_ADDRESS);
-        const browserId = JSON.parse(localStorage.getItem(BROWSER_ID) as string);
-        const deviceToken = JSON.parse(localStorage.getItem(DEVICE_TOKEN) as string);
+let axiosInstanceJfw: ReturnType<typeof axiosInstance>;
+let brandUrl = '';
+let authKey = '';
+let userHeaders: RawAxiosRequestHeaders = {};
 
-        config.headers["BrandUrl"] = BRAND_URL;
-        if (authKey) {
-            config.headers["AuthKey"] = authKey;
-        }
-        config.headers["IPAddressRemote"] = IPAdress;
-        config.headers["UrlRequest"] = window.location.href;
-        config.headers["BrowserCodeGenerate"] = browserId;
-        config.headers["DeviceToken"] = deviceToken;
+// Get config, then set values to axiosInstanceJfw and brandUrl
+const config$ = _AppService.getConfig$();
 
-        return config;
-    });
-    axiosClient.interceptors.response.use(
-        (response: AxiosResponse) => {
-            return response;
-        },
-        (error) => {
-            // Handle errors
-            throw error;
-        }
-    );
-
-    return axiosClient;
-};
-
-const baseURL =
-    (localStorage.getItem(MODE) as string) === MODE_VALUES.development
+config$.subscribe((config) => {
+  if (config) {
+    const baseUrl =
+      config.mode === MODE_VALUES.development
         ? JFW_API_DEVELOP
         : JFW_API_PRODUCTION;
-const axiosInstanceJfw = axiosInstance(baseURL || "");
+    axiosInstanceJfw = axiosInstance(baseUrl || '');
+    brandUrl = config.brandUrl;
+  }
+});
+
+// Get authKey, then set value to authKey
+const authKey$ = _AppService.getAuthKey();
+
+authKey$.subscribe((key) => {
+  authKey = key;
+});
+
+// Get userHeaders, then set value to userHeaders
+const userHeaders$ = _AppService.getUserHeaders();
+
+userHeaders$.subscribe((headers) => {
+  userHeaders = headers;
+});
+
+// Create axios instance
+const axiosInstance = (baseUrl: string) => {
+  const axiosClient = axios.create({
+    baseURL: baseUrl,
+    headers: {
+      'content-type': 'application/json',
+      ...userHeaders,
+    },
+  });
+  axiosClient.interceptors.request.use(
+    async (config: InternalAxiosRequestConfig) => {
+      config.headers['BrandUrl'] = brandUrl;
+      if (authKey) {
+        config.headers['AuthKey'] = authKey;
+      }
+
+      return config;
+    },
+  );
+  axiosClient.interceptors.response.use(
+    (response: AxiosResponse) => {
+      if (response && response.data) {
+        return response.data;
+      }
+      if (typeof response.data === 'boolean') {
+        return response.data;
+      }
+      return response;
+    },
+    (error) => {
+      // Handle errors
+      throw error;
+    },
+  );
+
+  return axiosClient;
+};
 
 export { axiosInstanceJfw };

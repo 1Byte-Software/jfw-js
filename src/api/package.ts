@@ -1,10 +1,13 @@
-import { axiosInstanceJfw } from '@/config/axios/axiosClient';
-import { IPackage } from '@/models/interfaces';
+import { RawAxiosRequestHeaders } from 'axios';
+import { IPackage } from '../models/interfaces';
+import { get } from '../utils/axiosHelper';
 
 const REST = 'packages';
 
-export const getListPackagesAPI = async () => {
-    const url = `${REST}`;
-    const response = await axiosInstanceJfw.get<IPackage[]>(url);
-    return response.data;
+export const getListPackagesAPI = async (
+  userHeaders?: RawAxiosRequestHeaders,
+): Promise<IPackage[]> => {
+  const url = `${REST}`;
+  const response = await get(url, null, userHeaders);
+  return response.data;
 };

@@ -1,33 +1,35 @@
-import { axiosInstanceJfw } from '@/config/axios/axiosClient';
+import { RawAxiosRequestHeaders } from 'axios';
 import {
-    ICurrency,
-    IExchangeRate,
-    IGetListCurrenciesParams,
-    IListResponse,
-} from '@/models/interfaces';
+  ICurrency,
+  IExchangeRate,
+  IGetListCurrenciesParams,
+  IListResponse,
+} from '../models/interfaces';
+import { get } from '../utils/axiosHelper';
 
 const REST = 'currencies';
 const REST_RATE = 'v1/exchange-rates';
 
 export const getListCurrenciesAPI = async (
-    params: IGetListCurrenciesParams
+  params: IGetListCurrenciesParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IListResponse<ICurrency>> => {
-    const url = `${REST}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+  const url = `${REST}`;
+  const response = await get(url, { params }, userHeaders);
 
-    const { items, ...rest } = response.data;
+  const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+  return {
+    items,
+    pagination: rest,
+  };
 };
 
-export const getListExchangeRatesAPI = async (): Promise<IExchangeRate[]> => {
-    const url = `${REST_RATE}`;
-    const response = await axiosInstanceJfw.get(url);
+export const getListExchangeRatesAPI = async (
+  userHeaders?: RawAxiosRequestHeaders,
+): Promise<IExchangeRate[]> => {
+  const url = `${REST_RATE}`;
+  const response = await get(url, null, userHeaders);
 
-    return response.data;
+  return response.data;
 };

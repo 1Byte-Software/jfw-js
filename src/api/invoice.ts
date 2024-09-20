@@ -1,24 +1,33 @@
-import { axiosInstanceJfw } from "@/config/axios/axiosClient";
-import { IById, IGetListInvoicesParams, IInvoice } from "@/models/interfaces";
+import { RawAxiosRequestHeaders } from 'axios';
+import { IById, IGetListInvoicesParams, IInvoice } from '../models/interfaces';
+import { get } from '../utils/axiosHelper';
 
-const REST = "invoices";
-const EXPORT = "export";
+const REST = 'invoices';
+const EXPORT = 'export';
 
-export const getListInvoicesAPI = async (params: IGetListInvoicesParams): Promise<IInvoice[]> => {
-    const url = `${REST}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+export const getListInvoicesAPI = async (
+  params: IGetListInvoicesParams,
+  userHeaders?: RawAxiosRequestHeaders,
+): Promise<IInvoice[]> => {
+  const url = `${REST}`;
+  const response = await get(url, { params }, userHeaders);
 
-    return response.data;
+  return response.data;
 };
 
-export const exportInvoiceAPI = async (path: IById) => {
-    const { id } = path;
-    const url = `${REST}/${id}/${EXPORT}`;
-    const response = await axiosInstanceJfw.get(url, {
-        responseType: "blob",
-    });
+export const exportInvoiceAPI = async (
+  path: IById,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
+  const { id } = path;
+  const url = `${REST}/${id}/${EXPORT}`;
+  const response = await get(
+    url,
+    {
+      responseType: 'blob',
+    },
+    userHeaders,
+  );
 
-    return response;
+  return response;
 };

@@ -1,21 +1,21 @@
-import { IdType } from "../types";
-import { IPaginationParams } from "./common";
+import { IdType } from '../types';
+import { IPaginationParams } from './filter';
 
 export interface IGetNotificationRequestParams extends IPaginationParams {
-    status?: string;
+  status?: string;
 }
-export interface IUpdateNotificationRequestParams {
-    status: string;
+export interface IUpdateNotificationStatusParams {
+  status: string;
 }
 export interface IUpdateAllNotificationsParams {
-    status: string;
+  status: string;
 }
 export interface INotification {
-    createdDate: string;
-    emailBody: string;
-    emailSubject: string;
-    id: IdType;
-    patternCode: string;
-    supportCode: string;
-    status: string;
+  createdDate: string;
+  emailBody: string;
+  emailSubject: string;
+  id: IdType;
+  patternCode: string;
+  supportCode: string;
+  status: string;
 }

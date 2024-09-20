@@ -1,10 +1,13 @@
-import { axiosInstanceJfw } from '@/config/axios/axiosClient';
-import { ILanguage } from '@/models/interfaces';
+import { RawAxiosRequestHeaders } from 'axios';
+import { ILanguage } from '../models/interfaces';
+import { get } from '../utils/axiosHelper';
 
 const REST = 'languages';
 
-export const getListLanguagesAPI = async (): Promise<ILanguage[]> => {
-    const url = `${REST}`;
-    const response = await axiosInstanceJfw.get(url);
-    return response.data;
+export const getListLanguagesAPI = async (
+  userHeaders?: RawAxiosRequestHeaders,
+): Promise<ILanguage[]> => {
+  const url = `${REST}`;
+  const response = await get(url, null, userHeaders);
+  return response.data;
 };

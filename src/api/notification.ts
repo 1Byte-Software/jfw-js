@@ -1,55 +1,65 @@
-import { axiosInstanceJfw } from '@/config/axios/axiosClient';
-import { IById, IListResponse } from '@/models/interfaces';
+import { RawAxiosRequestHeaders } from 'axios';
+import { IById, IListResponse } from '../models/interfaces';
 import {
-    IGetNotificationRequestParams,
-    INotification,
-    IUpdateAllNotificationsParams,
-    IUpdateNotificationRequestParams,
-} from '@/models/interfaces/notification';
+  IGetNotificationRequestParams,
+  INotification,
+  IUpdateAllNotificationsParams,
+  IUpdateNotificationStatusParams,
+} from '../models/interfaces/notification';
+import { get, put, remove } from '../utils/axiosHelper';
 
 const REST = 'notifications';
-const STATUS = 'update-status';
 const UPDATE_ALL_STATUS = 'update-all-status';
+const STATUS = 'update-status';
 
 export const getNotificationsAPI = async (
-    params: IGetNotificationRequestParams
+  params: IGetNotificationRequestParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IListResponse<INotification>> => {
-    const url = REST;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
-    const { items, ...rest } = response.data;
+  const url = REST;
+  const response = await get(url, { params }, userHeaders);
+  const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+  return {
+    items,
+    pagination: rest,
+  };
 };
 
-export const updateNotificationsAPI = async (
-    path: IById,
-    params: IUpdateNotificationRequestParams
+export const updateNotificationStatusAPI = async (
+  path: IById,
+  params: IUpdateNotificationStatusParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ) => {
-    const { id } = path;
-    const url = `${REST}/${id}/${STATUS}`;
-    const response = await axiosInstanceJfw.put(url, null, {
-        params,
-    });
-    return response.data;
+  const { id } = path;
+  const url = `${REST}/${id}/${STATUS}`;
+  const response = await put(
+    url,
+    null,
+    {
+      params,
+    },
+    userHeaders,
+  );
+  return response.data;
 };
 
-export const deleteNotificationsAPI = async (path: IById) => {
-    const { id } = path;
-    const url = `${REST}/${id}`;
-    const response = await axiosInstanceJfw.delete(url);
-    return response.data;
+export const deleteNotificationsAPI = async (
+  path: IById,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
+  const { id } = path;
+  const url = `${REST}/${id}`;
+  const response = await remove(url, userHeaders);
+  return response.data;
 };
 
-export const updateAllNotificationsAPI = async (params: IUpdateAllNotificationsParams) => {
-    const url = `${REST}/${UPDATE_ALL_STATUS}`;
-    const response = await axiosInstanceJfw.get(url, {
-        params,
-    });
+export const updateAllNotificationsAPI = async (
+  params: IUpdateAllNotificationsParams,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
+  const url = `${REST}/${UPDATE_ALL_STATUS}`;
+  const response = await get(url, { params }, userHeaders);
 
-    return response.data;
+  return response.data;
 };
