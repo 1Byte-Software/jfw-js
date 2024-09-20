@@ -1,6 +1,4 @@
-import ".";
-
 export interface ICheckConcurrencyParams {
-    userId: string;
-    deviceCode: string;
+  userId: string;
+  deviceCode: string;
 }

@@ -1,4 +1,4 @@
-import { axiosInstanceJfw } from '../config/axios/axiosClient';
+import { RawAxiosRequestHeaders } from 'axios';
 import {
   IAddMoneyPayload,
   IApplyRedeemPath,
@@ -13,6 +13,7 @@ import {
   IWallet,
   IWalletHistory,
 } from '../models/interfaces';
+import { get, post, put } from '../utils/axiosHelper';
 
 const REST = 'wallets';
 const ADD_MONEY = 'add-money/checkout-link';
@@ -24,11 +25,10 @@ const REST_EVENT = 'wallet-earning-events';
 
 export const getWalletAPI = async (
   params: IGetWalletParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IWallet[]> => {
   const url = `${REST}`;
-  const response = await axiosInstanceJfw.get(url, {
-    params,
-  });
+  const response = await get(url, { params }, userHeaders);
 
   return response.data;
 };
@@ -36,59 +36,77 @@ export const getWalletAPI = async (
 export const getWalletHistoriesAPI = async (
   path: IById,
   params: IGetWalletHistoriesParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IListResponse<IWalletHistory>> => {
   const { id } = path;
   const url = `${REST}/${id}/${HISTORY}`;
-  const response = await axiosInstanceJfw.get(url, {
-    params,
-  });
+  const response = await get(url, { params }, userHeaders);
 
   return response.data;
 };
 
 export const getListEarnEventsAPI = async (
   params: IGetEarnEventParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IEarnEvent[]> => {
   const url = `${REST_EVENT}`;
-  const response = await axiosInstanceJfw.get(url, {
-    params,
-  });
+  const response = await get(url, { params }, userHeaders);
 
   return response.data;
 };
 
-export const createWalletAPI = async (path: ICreateWalletPath) => {
+export const createWalletAPI = async (
+  path: ICreateWalletPath,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const { currencyCode } = path;
   const url = `${REST}/${currencyCode}`;
 
-  return await axiosInstanceJfw.post(url);
+  return await post(url, null, null, userHeaders);
 };
 
-export const exchangeWalletAPI = async (payload: IExchangeWalletPayload) => {
+export const exchangeWalletAPI = async (
+  payload: IExchangeWalletPayload,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${REST}/${CONVERT}`;
 
-  return await axiosInstanceJfw.post(url, payload);
+  return await post(url, payload, null, userHeaders);
 };
 
-export const applyRedeemAPI = async (path: IApplyRedeemPath) => {
+export const applyRedeemAPI = async (
+  path: IApplyRedeemPath,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const { redeemCode, walletId } = path;
 
   const url = `${REST}/${walletId}/${APPLY_REDEEM}/${redeemCode}`;
 
-  return await axiosInstanceJfw.post(url);
+  return await post(url, null, null, userHeaders);
 };
 
-export const addMoneyAPI = async (params: IAddMoneyPayload) => {
+export const addMoneyAPI = async (
+  params: IAddMoneyPayload,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${REST}/${ADD_MONEY}`;
 
-  return await axiosInstanceJfw.post(url, null, {
-    params,
-  });
+  return await post(
+    url,
+    null,
+    {
+      params,
+    },
+    userHeaders,
+  );
 };
 
-export const closeWalletAPI = async (path: IById) => {
+export const closeWalletAPI = async (
+  path: IById,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const { id } = path;
   const url = `${REST}/${id}/${CLOSE}`;
 
-  return await axiosInstanceJfw.put(url);
+  return await put(url, null, null, userHeaders);
 };

@@ -1,16 +1,16 @@
-import { axiosInstanceJfw } from '../config/axios/axiosClient';
+import { RawAxiosRequestHeaders } from 'axios';
 import { ICheckConcurrencyParams, IResponse } from '../models/interfaces';
+import { get } from '../utils/axiosHelper';
 
 const REST = 'devices';
 const USER_ACCESS = 'check-user-access';
 
 export const checkConcurrencyAPI = async (
   params: ICheckConcurrencyParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IResponse<boolean>> => {
   const url = `v1/${REST}/${USER_ACCESS}`;
-  const response = await axiosInstanceJfw.get(url, {
-    params,
-  });
+  const response = await get(url, { params }, userHeaders);
 
   return response;
 };

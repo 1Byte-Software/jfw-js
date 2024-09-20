@@ -1,15 +1,24 @@
-import { axiosInstanceJfw } from '../config/axios/axiosClient';
+import { RawAxiosRequestHeaders } from 'axios';
+import { post } from '../utils/axiosHelper';
 
 const REST = 'cdn';
 const UPLOAD = 'upload-file';
 
-export const cdnUploadFileAPI = async (payload: FormData) => {
+export const cdnUploadFileAPI = async (
+  payload: FormData,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${REST}/${UPLOAD}`;
-  const response = await axiosInstanceJfw.post(url, payload, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
+  const response = await post(
+    url,
+    payload,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     },
-  });
+    userHeaders,
+  );
 
   return response.data;
 };

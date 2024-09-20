@@ -1,4 +1,4 @@
-import { axiosInstanceJfw } from '../config/axios/axiosClient';
+import { RawAxiosRequestHeaders } from 'axios';
 import {
   IApplyCodeParams,
   IById,
@@ -18,6 +18,7 @@ import {
   IGetConfigurationParams,
   IUpdateUserConfigurationPath,
 } from '../models/interfaces/configuration';
+import { get, post, put } from '../utils/axiosHelper';
 
 const REST = 'users';
 const REGISTER = `${REST}/register`;
@@ -27,30 +28,37 @@ const CHANGE_PASSWORD = 'change-password';
 
 const APPLY = 'apply';
 const CHECK = 'check';
-const CHECK_FIRST_LOGIN = `${REST}/check-first-login-today`;
 const CONFIGURATION = 'configurations';
 const ME = `v1/${REST}/me`;
 const REFEREE = 'referees';
 const REFERRAL = 'referrals';
 
-export const getUserInfoAPI = async (): Promise<IUser> => {
+export const getUserInfoAPI = async (
+  userHeaders?: RawAxiosRequestHeaders,
+): Promise<IUser> => {
   const url = `${ME}`;
-  const response = await axiosInstanceJfw.get<IUser>(url);
+  const response = await get(url, null, userHeaders);
 
   return response.data;
 };
 
-export const getUserinfoByIdsAPI = async (path: string): Promise<IUser[]> => {
+export const getUserinfoByIdsAPI = async (
+  path: string,
+  userHeaders?: RawAxiosRequestHeaders,
+): Promise<IUser[]> => {
   const url = `${REST}?${path}`;
-  const response = await axiosInstanceJfw.get<IUser[]>(url);
+  const response = await get(url, null, userHeaders);
 
   return response.data;
 };
 
-export const getUserinfoByIdAPI = async (path: IById): Promise<IUser> => {
+export const getUserinfoByIdAPI = async (
+  path: IById,
+  userHeaders?: RawAxiosRequestHeaders,
+): Promise<IUser> => {
   const { id } = path;
   const url = `${REST}/${id}`;
-  const response = await axiosInstanceJfw(url);
+  const response = await get(url, null, userHeaders);
 
   return response.data;
 };
@@ -58,19 +66,23 @@ export const getUserinfoByIdAPI = async (path: IById): Promise<IUser> => {
 export const updateUserAPI = async (
   path: IById,
   payload: IEditProfilePayload,
+  userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { id } = path;
   const url = `${REST}/${id}`;
 
-  const response = await axiosInstanceJfw.put(url, payload);
+  const response = await put(url, payload, null, userHeaders);
 
   return response.data;
 };
 
-export const changePasswordAPI = async (payload: IChangePasswordPayload) => {
+export const changePasswordAPI = async (
+  payload: IChangePasswordPayload,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${REST}/${CHANGE_PASSWORD}`;
 
-  const response = await axiosInstanceJfw.put(url, payload);
+  const response = await put(url, payload, null, userHeaders);
 
   return response.data;
 };
@@ -78,12 +90,11 @@ export const changePasswordAPI = async (payload: IChangePasswordPayload) => {
 export const getListUserConfigurationsAPI = async (
   path: IById,
   params: IGetConfigurationParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IConfiguration[]> => {
   const { id } = path;
   const url = `${REST}/${id}/${CONFIGURATION}`;
-  const response = await axiosInstanceJfw.get(url, {
-    params,
-  });
+  const response = await get(url, { params }, userHeaders);
 
   return response.data;
 };
@@ -91,86 +102,91 @@ export const getListUserConfigurationsAPI = async (
 export const createUserConfigurationsAPI = async (
   path: IById,
   payload: IConfigurationPayload,
+  userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { id } = path;
   const url = `${REST}/${id}/${CONFIGURATION}`;
 
-  return await axiosInstanceJfw.post(url, payload);
+  return await post(url, payload, null, userHeaders);
 };
 
 export const updateUserConfigurationsAPI = async (
   path: IUpdateUserConfigurationPath,
   payload: IConfigurationPayload,
+  userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { configurationId } = path;
   const url = `${CONFIGURATION}/${configurationId}`;
 
-  return await axiosInstanceJfw.put(url, payload);
+  return await put(url, payload, null, userHeaders);
 };
 
 export const getRefereesAPI = async (
   path: IById,
   params: IPaginationParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IReferee[]> => {
   const { id } = path;
   const url = `${REST}/${id}/${REFEREE}`;
 
-  const response = await axiosInstanceJfw.get(url, {
-    params,
-  });
+  const response = await get(url, { params }, userHeaders);
 
   return response.data;
 };
 
-export const checkCodeValidAPI = async (path: ICheckCodePath) => {
+export const checkCodeValidAPI = async (
+  path: ICheckCodePath,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const { code } = path;
   const url = `${REST}/${REFERRAL}/${code}/${CHECK}`;
 
-  const response = await axiosInstanceJfw.get(url);
+  const response = await get(url, null, userHeaders);
 
   return response.data;
 };
 
-export const applyCodeAPI = async (path: IById, params: IApplyCodeParams) => {
+export const applyCodeAPI = async (
+  path: IById,
+  params: IApplyCodeParams,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const { id } = path;
   const url = `v1/${REST}/${id}/${REFERRAL}/${APPLY}`;
 
-  return await axiosInstanceJfw.post(url, null, {
-    params,
-  });
+  return await post(
+    url,
+    null,
+    {
+      params,
+    },
+    userHeaders,
+  );
 };
 
-export const signUpAPI = async (payload: ISignUpPayload) => {
+export const signUpAPI = async (
+  payload: ISignUpPayload,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${REGISTER}`;
-  const body = {
-    ...payload,
-  };
-  const response = await axiosInstanceJfw.post(url, body);
+  const response = await post(url, payload, null, userHeaders);
   return response.data;
 };
 
-export const forgotPasswordAPI = async (payload: IForgotPasswordPayload) => {
+export const forgotPasswordAPI = async (
+  payload: IForgotPasswordPayload,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${FORGOT_PASSWORD}`;
-  const body = {
-    ...payload,
-  };
-  const response = await axiosInstanceJfw.post(url, body);
+  const response = await post(url, payload, null, userHeaders);
   return response.data;
 };
 
-export const resetPasswordAPI = async (payload: IResetPasswordPayload) => {
+export const resetPasswordAPI = async (
+  payload: IResetPasswordPayload,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${RESET_PASSWORD}`;
-  const body = {
-    ...payload,
-  };
-  const response = await axiosInstanceJfw.post(url, body);
-  return response.data;
-};
-
-export const checkFirstLoginTodayAPI = async (): Promise<boolean> => {
-  const url = `${CHECK_FIRST_LOGIN}`;
-
-  const response = await axiosInstanceJfw.get(url);
-
+  const response = await post(url, payload, null, userHeaders);
   return response.data;
 };

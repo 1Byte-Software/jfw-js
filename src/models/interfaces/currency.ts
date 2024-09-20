@@ -1,17 +1,19 @@
-import { IPaginationParams, ISortParamsDefault } from "./common";
+import { IPaginationParams, ISortParams } from './filter';
 
 export interface ICurrency {
-    code: string;
-    name: string;
-    symbol: string;
-    isDefault: boolean;
-    decimalDigits: number;
-    isCoin: boolean;
+  code: string;
+  name: string;
+  symbol: string;
+  isDefault: boolean;
+  decimalDigits: number;
+  isCoin: boolean;
 }
-export interface IGetListCurrenciesParams extends ISortParamsDefault, IPaginationParams {}
+export interface IGetListCurrenciesParams
+  extends ISortParams,
+    IPaginationParams {}
 export interface IExchangeRate {
-    fromCurrencyCode: string;
-    toCurrencyCode: string;
-    rate: number;
+  fromCurrencyCode: string;
+  toCurrencyCode: string;
+  rate: number;
 }
-type IUserExchange = Omit<IExchangeRate, "rate">;
+type IUserExchange = Omit<IExchangeRate, 'rate'>;

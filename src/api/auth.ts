@@ -1,10 +1,11 @@
+import { RawAxiosRequestHeaders } from 'axios';
 import {
   IGetGoogleLinkParams,
   ILoginUsingEmailPayload,
   ISignInPayload,
   ISignInResponse,
 } from '../models/interfaces';
-import { axiosInstanceJfw } from '../config/axios/axiosClient';
+import { get, post } from '../utils/axiosHelper';
 
 const REST = 'users';
 const GOOGLE = `v1/${REST}/auth/integrations/google/authenticate-url`;
@@ -13,29 +14,31 @@ const AUTH_BY_EMAIL = `${REST}/auth/by-email`;
 
 export const getGoogleLinkAPI = async (
   params: IGetGoogleLinkParams,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<string> => {
   const url = `${GOOGLE}`;
-  const response = await axiosInstanceJfw.get(url, {
-    params,
-  });
+  const response = await get(url, { params }, userHeaders);
+
   return response.data;
 };
 
 export const signInAPI = async (
   payload: ISignInPayload,
+  userHeaders?: RawAxiosRequestHeaders,
 ): Promise<ISignInResponse> => {
   const url = `${AUTH}`;
-  const body = {
-    ...payload,
-  };
-  const response = await axiosInstanceJfw.post<ISignInResponse>(url, body);
+  const response = await post(url, payload, null, userHeaders);
+
   return response.data;
 };
 
-export const loginUsingEmailAPI = async (payload: ILoginUsingEmailPayload) => {
+export const loginUsingEmailAPI = async (
+  payload: ILoginUsingEmailPayload,
+  userHeaders?: RawAxiosRequestHeaders,
+) => {
   const url = `${AUTH_BY_EMAIL}`;
 
-  const response = await axiosInstanceJfw.post(url, payload);
+  const response = await post(url, payload, null, userHeaders);
 
   return response.data;
 };

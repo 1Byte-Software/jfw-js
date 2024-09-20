@@ -1,43 +1,29 @@
-import ".";
-import { IdType } from "../types";
+import { IdType } from '../types';
 
-export interface IPaginationParams {
-    pageNumber?: number;
-    pageSize?: number;
-    isPagination?: boolean;
-}
-export interface ISortParams {
-    sortOrder?: string;
-    sortBy?: string;
-}
 export interface IPagination {
-    totalItems: number;
-    totalPractices?: number;
-    totalPages?: number;
-    pageNumber?: number;
-    pageSize?: number;
+  totalItems: number;
+  totalPractices?: number;
+  totalPages?: number;
+  pageNumber?: number;
+  pageSize?: number;
 }
 export interface IListResponse<T> {
-    items: T[];
-    pagination: IPagination | null;
+  items: T[];
+  pagination: IPagination | null;
 }
 export interface IResponse<T> {
-    statusCode?: number;
-    data: T | null;
+  statusCode?: number;
+  data: T | null;
 }
 export interface IErrorNotPermission {
-    httpCode: number;
+  httpCode: number;
 }
 export interface IResponseNotPermission {
-    error: IErrorNotPermission;
+  error: IErrorNotPermission;
 }
 export interface IObjectHasKeyAsString<T> {
-    [key: string]: T;
-}
-export interface ISortParamsDefault {
-    sortOrder: string;
-    sortDataField: string;
+  [key: string]: T;
 }
 export interface IById {
-    id: IdType;
+  id: IdType;
 }
