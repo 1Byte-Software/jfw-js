@@ -102,7 +102,7 @@ authClient.setAuthKey(authKey);
 
 #### `setHeaders()`
 
-If you want to set header for all API, use this method.
+If you want to set headers for all APIs, use this method.
 
 Example:
 
