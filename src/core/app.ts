@@ -20,7 +20,7 @@ class AppService {
     this._appConfig$.next(config);
   }
 
-  getAuthKey() {
+  getAuthKey$() {
     return this._authKey$;
   }
 
@@ -28,7 +28,7 @@ class AppService {
     this._authKey$.next(authKey);
   }
 
-  getUserHeaders(): BehaviorSubject<RawAxiosRequestHeaders | null> {
+  getUserHeaders$(): BehaviorSubject<RawAxiosRequestHeaders | null> {
     return this._userHeaders$;
   }
 

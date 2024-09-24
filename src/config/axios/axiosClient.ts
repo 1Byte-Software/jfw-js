@@ -29,14 +29,14 @@ config$.subscribe((config) => {
 });
 
 // Get authKey, then set value to authKey
-const authKey$ = _AppService.getAuthKey();
+const authKey$ = _AppService.getAuthKey$();
 
 authKey$.subscribe((key) => {
   authKey = key;
 });
 
 // Get userHeaders, then set value to userHeaders
-const userHeaders$ = _AppService.getUserHeaders();
+const userHeaders$ = _AppService.getUserHeaders$();
 
 userHeaders$.subscribe((headers) => {
   userHeaders = headers;

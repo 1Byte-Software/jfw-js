@@ -43,7 +43,7 @@ export interface IPackage {
   patternAvatarUrl?: string;
   isFree: boolean;
 }
-export interface IGetDirectCheckoutLinkParams {
+export interface IGenerateCheckoutLinkParams {
   providerMethod: string;
 }
 export interface IMutateLicenseParams {

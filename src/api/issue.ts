@@ -90,7 +90,7 @@ export const getListIssuesByIdsAPI = async (
   return response.data;
 };
 
-export const getListIssueChildren = async (
+export const getListIssueChildrenAPI = async (
   path: IById,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IIssue[]> => {
