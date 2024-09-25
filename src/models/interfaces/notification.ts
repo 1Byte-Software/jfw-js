@@ -19,3 +19,9 @@ export interface INotification {
   supportCode: string;
   status: string;
 }
+export interface IPushDataMessageParams {
+  deviceTokens: string;
+}
+export interface IPushDataMessagePayload {
+  [key: string]: string;
+}

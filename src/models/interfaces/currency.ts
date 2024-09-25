@@ -16,4 +16,4 @@ export interface IExchangeRate {
   toCurrencyCode: string;
   rate: number;
 }
-type IUserExchange = Omit<IExchangeRate, 'rate'>;
+export type IUserExchange = Omit<IExchangeRate, 'rate'>;

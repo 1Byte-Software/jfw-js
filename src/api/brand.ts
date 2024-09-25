@@ -13,6 +13,7 @@ const REST = 'brands';
 const BY_URL = 'by-url';
 const EMAIL = 'emails';
 const LINK = 'links';
+const LOAD_TYPE = 'load-type';
 
 export const getListBrandEmailsAPI = async (
   path: IById,
@@ -41,7 +42,7 @@ export const getListBrandLinksAPI = async (
   userHeaders?: AxiosHeaders,
 ): Promise<IBrandLink[]> => {
   const { id, type } = path;
-  const url = `${REST}/${id}/${LINK}/load-type/${type}`;
+  const url = `${REST}/${id}/${LINK}/${LOAD_TYPE}/${type}`;
   const response = await get(url, null, userHeaders);
 
   return response.data;

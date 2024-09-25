@@ -1,13 +1,13 @@
 import { RawAxiosRequestHeaders } from 'axios';
-import { IById, IGetDirectCheckoutLinkParams } from '../models/interfaces';
+import { IById, IGenerateCheckoutLinkParams } from '../models/interfaces';
 import { post } from '../utils/axiosHelper';
 
 const REST = 'prices';
 const LINK = 'generate-checkout-link';
 
-export const getDirectCheckoutLink = async (
+export const generateCheckoutLink = async (
   path: IById,
-  params: IGetDirectCheckoutLinkParams,
+  params: IGenerateCheckoutLinkParams,
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { id } = path;

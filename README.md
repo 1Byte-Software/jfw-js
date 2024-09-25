@@ -102,7 +102,7 @@ authClient.setAuthKey(authKey);
 
 #### `setHeaders()`
 
-If you want to set header for all API, use this method.
+If you want to set headers for all APIs, use this method.
 
 Example:
 
@@ -143,7 +143,7 @@ authClient.setHeaders(userHeaders);
   - [createIssueReactionAPI](https://developers.jframework.io/references/api-reference/endpoints/issues/create-an-issue-reaction)
   - [deleteIssueReactionAPI](https://developers.jframework.io/references/api-reference/endpoints/issues/remove-a-issue-reaction)
   - [getListIssuesByIdsAPI](https://developers.jframework.io/references/api-reference/endpoints/issues/get-issues-by-list-id)
-  - [getListIssueChildren](https://developers.jframework.io/references/api-reference/endpoints/issues/get-children-issues)
+  - [getListIssueChildrenAPI](https://developers.jframework.io/references/api-reference/endpoints/issues/get-children-issues)
   - [getListIssueCategoriesAPI](https://developers.jframework.io/references/api-reference/endpoints/issue-categories/get-issue-categories)
 - [language](https://developers.jframework.io/references/api-reference/endpoints/languages)
   - [getListLanguagesAPI](https://developers.jframework.io/references/api-reference/endpoints/languages)
@@ -168,7 +168,7 @@ authClient.setHeaders(userHeaders);
 - payment-provider
   - [getListPaymentProvidersAPI]
 - [price](https://developers.jframework.io/references/api-reference/endpoints/prices)
-  - [getDirectCheckoutLink](https://developers.jframework.io/references/api-reference/endpoints/prices#api-prices-id-direct-checkout-link)
+  - [generateCheckoutLink](https://developers.jframework.io/references/api-reference/endpoints/prices#api-prices-id-direct-checkout-link)
 - [role](https://developers.jframework.io/references/api-reference/endpoints/roles)
   - [getListRolesAPI](https://developers.jframework.io/references/api-reference/endpoints/roles#api-roles)
 - [timezone](https://developers.jframework.io/references/api-reference/endpoints/time-zones)
