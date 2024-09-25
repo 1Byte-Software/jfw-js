@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { JfwConfig } from '../models/interfaces';
+import { JfwConfig } from '../models';
 import { RawAxiosRequestHeaders } from 'axios';
 
 class AppService {

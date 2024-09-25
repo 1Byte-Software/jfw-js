@@ -1,3 +1,4 @@
+export * from './app';
 export * from './auth';
 export * from './brand';
 export * from './cdn';
@@ -6,11 +7,11 @@ export * from './configuration';
 export * from './currency';
 export * from './device';
 export * from './filter';
+export * from './http';
 export * from './integration';
 export * from './invoice';
 export * from './issue';
 export * from './language';
-export * from './lifeCycle';
 export * from './notification';
 export * from './organization';
 export * from './payment';

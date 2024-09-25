@@ -49,10 +49,6 @@ export interface IGenerateCheckoutLinkParams {
 export interface IMutateLicenseParams {
   licenseKey: string;
 }
-export interface ICheckFeatureParams {
-  userId: IdType;
-  featureCode: string;
-}
 export interface IPaymentDetailPrice {
   packageName: string;
   subscriptionName: string;
