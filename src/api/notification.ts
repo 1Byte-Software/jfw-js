@@ -63,7 +63,7 @@ export const updateAllNotificationsAPI = async (
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const url = `${REST}/${UPDATE_ALL_STATUS}`;
-  const response = await get(url, { params }, userHeaders);
+  const response = await put(url, { params }, null, userHeaders);
 
   return response.data;
 };
