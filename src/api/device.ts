@@ -3,7 +3,7 @@ import { ICheckUserAccessParams, IResponse } from '../models/interfaces';
 import { get } from '../utils/axiosHelper';
 
 const REST = 'devices';
-const USER_ACCESS = 'user-access';
+const USER_ACCESS = 'check-user-access';
 
 export const checkUserAccessAPI = async (
   params: ICheckUserAccessParams,
