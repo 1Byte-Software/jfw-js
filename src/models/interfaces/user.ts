@@ -54,7 +54,6 @@ export interface IGetUserByIdParams {
   authKey: string;
 }
 export interface IChangePasswordPayload {
-  oldPassword: string;
   newPassword: string;
 }
 export interface IInitialSignUpValues {

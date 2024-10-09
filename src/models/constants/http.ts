@@ -7,5 +7,5 @@ export const HTTP_CODE = {
   maxDevice: 405,
   wrongPassword: 701,
   userNotFound: 704,
-  emailExist: 724,
+  emailExist: 723,
 };
