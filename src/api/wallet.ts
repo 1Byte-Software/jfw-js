@@ -1,6 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import {
   IAddMoneyPayload,
+  IAddWalletParams,
   IApplyRedeemPath,
   IById,
   ICreateWalletPath,
@@ -57,12 +58,13 @@ export const getListEarnEventsAPI = async (
 
 export const createWalletAPI = async (
   path: ICreateWalletPath,
+  params?: IAddWalletParams,
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { currencyCode } = path;
   const url = `${REST}/${currencyCode}`;
 
-  return await post(url, null, null, userHeaders);
+  return await post(url, null, { params }, userHeaders);
 };
 
 export const exchangeWalletAPI = async (

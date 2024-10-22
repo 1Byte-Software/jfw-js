@@ -1,22 +1,22 @@
-import { DateType } from "../types";
-import { IPackage } from "./payment";
+import { DateType } from '../types';
+import { IPackage } from './package';
 
-export interface IPayment {
-    currencyCode: string;
-    amountGross: number;
+export interface IInvoicePayment {
+  currencyCode: string;
+  amountGross: number;
 }
 export interface IInvoice {
-    code: string;
-    name: string;
-    createdDate: DateType;
-    invoiceDate: DateType;
-    overdueDate: DateType;
-    packageCode: string;
-    package?: IPackage;
-    payment: IPayment;
-    displayAmount?: string;
-    id: string;
+  code: string;
+  name: string;
+  createdDate: DateType;
+  invoiceDate: DateType;
+  overdueDate: DateType;
+  packageCode: string;
+  package?: IPackage;
+  payment: IInvoicePayment;
+  displayAmount?: string;
+  id: string;
 }
 export interface IGetListInvoicesParams {
-    status?: string;
+  status?: string;
 }

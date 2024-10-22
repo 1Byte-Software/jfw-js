@@ -1,4 +1,5 @@
 import { DateType, IdType } from '../types';
+import { IFilterDate, IPaginationParams } from './filter';
 import { IUser } from './user';
 
 export interface IDevice {
@@ -28,4 +29,9 @@ export interface IDevice {
 export interface ICheckUserAccessParams {
   userId: string;
   deviceCode: string;
+}
+export interface IGetListDevicesParams extends IPaginationParams, IFilterDate {
+  isPagination?: boolean;
+  userId?: IdType;
+  isMobile?: boolean;
 }

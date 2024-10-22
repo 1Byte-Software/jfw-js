@@ -1,6 +1,7 @@
 import { DateType, IdType } from '../types';
 import { IMedia } from './cdn';
 import { IPaginationParams } from './filter';
+import { IIssueCategory } from './issueCategory';
 
 export interface ICreateIssuePayload {
   content: string;
@@ -11,10 +12,12 @@ export interface ICreateIssuePayload {
   priority?: string;
 }
 export interface IGetListIssuesParams extends IPaginationParams {
-  refId: number;
-  refObject: string;
+  refId?: number;
+  refObject?: string;
   id?: string;
-  brandCode: string;
+  brandCode?: string;
+  name?: string;
+  issueTypeId?: string;
 }
 export interface IIssueReaction {
   userId: string;
@@ -46,6 +49,9 @@ export interface IIssue {
   listChildren?: IIssue[];
   parent?: IIssue;
   childrenCount: number;
+  issueTypeCode?: string;
+  issueType?: IIssueCategory;
+  parentId?: string;
 }
 export interface IAddReactionPayload {
   issueId: string;
@@ -54,11 +60,4 @@ export interface IAddReactionPayload {
 }
 export interface IDeleteReactionPath {
   id: string;
-}
-export interface IGetListIssueCategoriesParams {
-  brandCode: string;
-}
-export interface IIssueType {
-  code: string;
-  name: string;
 }

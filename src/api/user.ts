@@ -5,22 +5,29 @@ import {
   IChangePasswordPayload,
   ICheckCodePath,
   IEditProfilePayload,
+  IEditUserTypePath,
   IForgotPasswordPayload,
+  IGetListUsersParams,
+  IGetUserInfoByUsernamePath,
+  IListResponse,
   IPaginationParams,
   IReferee,
   IResetPasswordPayload,
   ISignUpPayload,
+  IStatistic,
+  IStatisticCommonParams,
   IUser,
 } from '../models/interfaces';
 import {
   IConfiguration,
-  IConfigurationPayload,
-  IGetConfigurationParams,
-  IUpdateUserConfigurationPath,
+  ICreateConfigurationPayload,
+  IGetUserConfigurationParams,
 } from '../models/interfaces/configuration';
-import { get, post, put } from '../utils/axiosHelper';
+import { get, patch, post, put, remove } from '../utils/axiosHelper';
 
 const REST = 'users';
+const REST_V1 = 'v1/users';
+const ME = `${REST_V1}/me`;
 const REGISTER = `${REST}/register`;
 const FORGOT_PASSWORD = `${REST}/forgot-password`;
 const RESET_PASSWORD = `${REST}/reset-password`;
@@ -29,9 +36,28 @@ const CHANGE_PASSWORD = 'change-password';
 const APPLY = 'apply';
 const CHECK = 'check';
 const CONFIGURATION = 'configurations';
-const ME = `v1/${REST}/me`;
 const REFEREE = 'referees';
 const REFERRAL = 'referrals';
+const ROLES = 'roles';
+const STATISTIC = 'statistics';
+const TYPE = 'type';
+const BY_USERNAME = 'by-username';
+
+export const getListUsersAPI = async (
+  params: IGetListUsersParams,
+): Promise<IListResponse<IUser>> => {
+  const url = `${REST_V1}`;
+  const response = await get(url, {
+    params,
+  });
+
+  const { items, ...rest } = response.data;
+
+  return {
+    items,
+    pagination: rest,
+  };
+};
 
 export const getUserInfoAPI = async (
   userHeaders?: RawAxiosRequestHeaders,
@@ -48,6 +74,17 @@ export const getListUsersByIdsAPI = async (
 ): Promise<IUser[]> => {
   const url = `${REST}?${path}`;
   const response = await get(url, null, userHeaders);
+
+  return response.data;
+};
+
+export const getUserInfoByUsernameAPI = async (
+  path: IGetUserInfoByUsernamePath,
+): Promise<IUser> => {
+  const { username } = path;
+  const url = `${REST}/${BY_USERNAME}/${username}`;
+
+  const response = await get(url, null);
 
   return response.data;
 };
@@ -76,6 +113,15 @@ export const updateUserAPI = async (
   return response.data;
 };
 
+export const deleteUserAPI = async (path: IById) => {
+  const { id } = path;
+  const url = `${REST}/${id}`;
+
+  const response = await remove(url);
+
+  return response.data;
+};
+
 export const changePasswordAPI = async (
   payload: IChangePasswordPayload,
   userHeaders?: RawAxiosRequestHeaders,
@@ -89,7 +135,7 @@ export const changePasswordAPI = async (
 
 export const getListUserConfigurationsAPI = async (
   path: IById,
-  params: IGetConfigurationParams,
+  params: IGetUserConfigurationParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IConfiguration[]> => {
   const { id } = path;
@@ -101,24 +147,13 @@ export const getListUserConfigurationsAPI = async (
 
 export const createUserConfigurationsAPI = async (
   path: IById,
-  payload: IConfigurationPayload,
+  payload: ICreateConfigurationPayload,
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { id } = path;
   const url = `${REST}/${id}/${CONFIGURATION}`;
 
   return await post(url, payload, null, userHeaders);
-};
-
-export const updateUserConfigurationsAPI = async (
-  path: IUpdateUserConfigurationPath,
-  payload: IConfigurationPayload,
-  userHeaders?: RawAxiosRequestHeaders,
-) => {
-  const { configurationId } = path;
-  const url = `${CONFIGURATION}/${configurationId}`;
-
-  return await put(url, payload, null, userHeaders);
 };
 
 export const getRefereesAPI = async (
@@ -188,5 +223,40 @@ export const resetPasswordAPI = async (
 ) => {
   const url = `${RESET_PASSWORD}`;
   const response = await post(url, payload, null, userHeaders);
+  return response.data;
+};
+
+export const userStatisticAPI = async (
+  params: IStatisticCommonParams,
+): Promise<IStatistic[]> => {
+  const url = `${REST}/${STATISTIC}`;
+  const response = await get(url, {
+    params,
+  });
+
+  return response.data;
+};
+
+export const editUserTypeAPI = async (path: IEditUserTypePath) => {
+  const { type, userCode } = path;
+  const url = `${REST_V1}/${userCode}/${TYPE}/${type}`;
+  const response = await put(url);
+  return response.data;
+};
+
+export const assignRolesToUserAPI = async (path: IById, params: string) => {
+  const { id } = path;
+  const url = `${REST_V1}/${id}/${ROLES}?${params}`;
+
+  const response = await patch(url);
+
+  return response.data;
+};
+
+export const deleteRolesFromUserAPI = async (path: IById, params: string) => {
+  const { id } = path;
+  const url = `${REST_V1}/${id}/${ROLES}?${params}`;
+  const response = await remove(url);
+
   return response.data;
 };

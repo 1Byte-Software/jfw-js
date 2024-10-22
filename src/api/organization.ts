@@ -1,5 +1,6 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import {
+  IAddOrganizationPayload,
   IById,
   IGetListOrganizationsByViewerParams,
   IGetListOrganizationsParams,
@@ -13,7 +14,7 @@ import {
   IUpdateOrganizationUserParams,
   IUpdateOrganizationUserPath,
 } from '../models/interfaces';
-import { get, patch, post, remove } from '../utils/axiosHelper';
+import { get, patch, post, put, remove } from '../utils/axiosHelper';
 
 const REST = 'organizations';
 const UPLOAD = 'upload-file';
@@ -126,4 +127,31 @@ export const getListUsersOfOrganizationAPI = async (
     items,
     pagination: rest,
   };
+};
+
+export const addOrganizationAPI = async (payload: IAddOrganizationPayload) => {
+  const url = `${REST}`;
+  const response = await post(url, payload);
+
+  return response.data;
+};
+
+export const editOrganizationAPI = async (
+  path: IById,
+  payload: IAddOrganizationPayload,
+) => {
+  const { id } = path;
+  const url = `${REST}/${id}`;
+  const response = await put(url, payload);
+
+  return response.data;
+};
+
+export const deleteOrganizationAPI = async (path: IById) => {
+  const { id } = path;
+  const url = `${REST}/${id}`;
+
+  const response = await remove(url);
+
+  return response.data;
 };

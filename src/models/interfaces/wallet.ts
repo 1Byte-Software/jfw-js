@@ -4,6 +4,7 @@ import { IPaginationParams } from './filter';
 
 export interface IGetWalletParams {
   userId: string;
+  testMode?: boolean;
 }
 export interface IWallet {
   currencyCode: string;
@@ -25,6 +26,8 @@ export interface IWalletHistory {
   description: string;
   paymentDate: DateType;
   status: string;
+  currencyCode?: string;
+  displayAmount?: string;
 }
 export interface IEarnEvent {
   code: string;
@@ -53,4 +56,7 @@ export interface IAddMoneyPayload {
 export interface IFirebaseCoinData {
   amount: number;
   message: string;
+}
+export interface IAddWalletParams {
+  testMode: boolean;
 }
