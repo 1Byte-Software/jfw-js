@@ -22,7 +22,7 @@ export interface IBrandSetting {
   menuCode?: string;
   productAlias?: string;
   productName?: string;
-  productPrefixName: string;
+  productPrefixName?: string;
   productWebsiteUrl?: string;
   websiteAdminTool2Url?: string;
   websiteAdminTool3Url?: string;

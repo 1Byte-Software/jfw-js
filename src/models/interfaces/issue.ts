@@ -52,6 +52,7 @@ export interface IIssue {
   issueTypeCode?: string;
   issueType?: IIssueCategory;
   parentId?: string;
+  description?: string;
 }
 export interface IAddReactionPayload {
   issueId: string;

@@ -10,6 +10,7 @@ import {
   IEditBrandPayload,
   IEditEmailsPayload,
   IGetBrandInfoPath,
+  IGetBrandLinksParams,
   IGetListBrandLinksPath,
   IGetListBrandsParams,
 } from '../models/interfaces';
@@ -111,11 +112,12 @@ export const editBrandEmailsAPI = async (
 // Brand Links
 export const getListBrandLinksAPI = async (
   path: IGetListBrandLinksPath,
+  params?: IGetBrandLinksParams,
   userHeaders?: AxiosHeaders,
 ): Promise<IBrandLink[]> => {
   const { id, type } = path;
   const url = `${REST}/${id}/${LINK}/${LOAD_TYPE}/${type}`;
-  const response = await get(url, null, userHeaders);
+  const response = await get(url, { params }, userHeaders);
 
   return response.data;
 };
