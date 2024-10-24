@@ -9,7 +9,10 @@ export const get = (
   const config: AxiosRequestConfig = { ...configArg };
 
   if (userHeaders) {
-    config.headers = userHeaders;
+    config.headers = {
+      ...config.headers,
+      ...userHeaders,
+    };
   }
 
   return axiosInstanceJfw.get(url, config);
@@ -24,7 +27,10 @@ export const post = (
   const config: AxiosRequestConfig = { ...configArg };
 
   if (userHeaders) {
-    config.headers = userHeaders;
+    config.headers = {
+      ...config.headers,
+      ...userHeaders,
+    };
   }
 
   return axiosInstanceJfw.post(url, payload, config);
@@ -39,7 +45,10 @@ export const put = (
   const config: AxiosRequestConfig = { ...configArg };
 
   if (userHeaders) {
-    config.headers = userHeaders;
+    config.headers = {
+      ...config.headers,
+      ...userHeaders,
+    };
   }
 
   return axiosInstanceJfw.put(url, payload, config);
@@ -54,7 +63,10 @@ export const patch = (
   const config: AxiosRequestConfig = { ...configArg };
 
   if (userHeaders) {
-    config.headers = userHeaders;
+    config.headers = {
+      ...config.headers,
+      ...userHeaders,
+    };
   }
 
   return axiosInstanceJfw.patch(url, payload, config);

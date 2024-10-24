@@ -1,6 +1,7 @@
 import { DateType, IdType } from '../types';
 import { IMedia } from './cdn';
 import { IPaginationParams } from './filter';
+import { ILanguage } from './language';
 import { IUser } from './user';
 
 export interface IOrganization {
@@ -20,6 +21,8 @@ export interface IOrganization {
   statusUser?: string;
   code: string;
   isSystem: boolean;
+  isDefault: boolean;
+  language?: ILanguage;
 }
 export interface IGetOrganizationDetailPath {
   identify: string;
@@ -33,6 +36,7 @@ export interface IGetListOrganizationsParams {
   brandCode?: string;
   code?: string;
   status?: string;
+  isPrivate?: boolean;
 }
 export interface IOrganizationUser {
   joinedDate: DateType;
@@ -52,4 +56,14 @@ export interface IUpdateOrganizationUserParams {
 }
 export interface IGetListUsersOfOrganizationParams extends IPaginationParams {
   status: string;
+}
+export interface IAddOrganizationPayload {
+  countryCode?: string;
+  languageCode?: string;
+  name: string;
+  description?: string;
+  avatar?: string;
+  isPrivate?: boolean;
+  isDefault?: boolean;
+  status?: string;
 }

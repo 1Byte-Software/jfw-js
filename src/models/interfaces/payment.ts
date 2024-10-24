@@ -1,53 +1,38 @@
 import { DateType, IdType } from '../types';
-import { ICurrency } from './currency';
+import { ICommonFilterParams } from './filter';
+import { IUser } from './user';
 
-export interface IFeature {
-  code: string;
-  description: string;
-  id: IdType;
-  name: string;
-  quantity: number;
-  tags?: string;
-  zOrder: number;
-  status: string;
-}
-export interface IPrice {
-  amount: number;
-  checkoutLink: string;
-  code: string;
-  createdDate: DateType;
-  currency: string;
-  description: string;
-  id: IdType;
-  packageId: IdType;
-  status: number;
-  subscriptionTypeId: IdType;
-  zOrder: number;
-  subscriptionName: string;
-  displayAmount?: string;
-  currencyData?: ICurrency;
-}
-export interface IPackage {
-  code: string;
-  createdDate: DateType;
-  description: string;
-  features: IFeature[];
-  id: IdType;
-  isDefault: boolean;
-  modifiedDate: DateType;
-  name: string;
-  prices: IPrice[];
-  tags: string | null;
-  status: number;
-  zOrder: number;
-  patternAvatarUrl?: string;
-  isFree: boolean;
-}
 export interface IGenerateCheckoutLinkParams {
   providerMethod: string;
 }
-export interface IMutateLicenseParams {
-  licenseKey: string;
+
+// Payment
+export interface IPayment {
+  id: IdType;
+  merchantId: IdType;
+  packageId: IdType;
+  userId: IdType;
+  paymentDate: DateType;
+  amount: number;
+  amountFee: number;
+  package?: string;
+  user?: IUser;
+}
+export interface IPaymentHistory {
+  id: IdType;
+  user?: IUser;
+  paymentDate: DateType;
+  amountGross: number;
+  amountFee?: number;
+  amountNet: number;
+  currencyCode: string;
+  paymentType: string;
+  description: string;
+  code: string;
+  status: string;
+  displayGross?: string;
+  displayFee?: string;
+  displayNet?: string;
 }
 export interface IPaymentDetailPrice {
   packageName: string;
@@ -62,9 +47,77 @@ export interface IPaymentDetail {
   currencyCode: string;
   invoiceNo: string;
 }
+export interface IGetPaymentHistoriesParams extends ICommonFilterParams {
+  userId?: IdType;
+  id?: IdType;
+  brandId?: IdType;
+  status?: string;
+  packageId?: IdType;
+  userCode?: string;
+  emailAddress?: string;
+  testMode?: boolean;
+}
+
+// Payment Providers
 export interface IPaymentProvider {
+  id: IdType;
   code: string;
-  isDefault: boolean;
-  status: string;
   name: string;
+  description: string;
+  website: string;
+  isDefault: boolean;
+  createdDate: DateType;
+  merchantType: IdType;
+  status: number;
+}
+export interface IGetListPaymentProvidersParams extends ICommonFilterParams {
+  id?: IdType;
+  name?: string;
+}
+
+// Payment Methods
+export interface IPaymentMethod {
+  id: IdType;
+  createdDate: DateType;
+  isDefault: boolean;
+  publicKey: string;
+  privateKey: string;
+  returnLink: string;
+  cancelLink: string;
+  cancelLinkWithoutLogin: string;
+  ipnListenerLink: string;
+  paymentInfo: string;
+  paymentProviderId: IdType;
+  interalNote: string;
+  paymentProvider?: IPaymentProvider;
+}
+export interface IGetListPaymentMethodsParams extends ICommonFilterParams {
+  brandId?: IdType;
+  interalNote?: string;
+}
+export interface IAddPaymentMethodPayload {
+  interalNote?: string;
+  returnLink: string;
+  cancelLink: string;
+  cancelLinkWithoutLogin: string;
+  ipnListenerLink: string;
+  paymentInfo: string;
+  publicKey: string;
+  privateKey: string;
+  brandId: IdType;
+  paymentProviderId: IdType;
+  status: number;
+}
+
+// Payment Overview
+export interface IPaymentOverview {
+  dailyRevenue: number;
+  dailySells: number;
+  totalRevenue: number;
+  totalSells: number;
+}
+
+export interface IGetPaymentOverviewParams extends ICommonFilterParams {
+  brandId?: IdType;
+  testMode?: boolean;
 }

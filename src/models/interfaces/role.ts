@@ -1,17 +1,17 @@
-import { IdType } from "../types";
+import { DateType, IdType } from '../types';
+import { ICommonFilterParams } from './filter';
+import { IPermission } from './permission';
 
 export interface IRole {
-    id: IdType;
-    permissions: string[];
-    name: string;
-    description: string;
-    isSystem: boolean;
-    code: string;
+  id: IdType;
+  name: string;
+  description: string;
+  permissions: string[];
+  isSystem: boolean;
+  createdDate: DateType;
+  code: string;
+  fullPermissions?: IPermission[];
 }
-
-export interface IPermission {
-    id: IdType;
-    name: string;
-    description: string;
-    isSystem: boolean;
+export interface IGetListRolesParams extends ICommonFilterParams {
+  name?: string;
 }

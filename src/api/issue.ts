@@ -1,22 +1,17 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import {
-  IAddReactionPayload,
+  IByCode,
   IById,
   ICreateIssuePayload,
-  IDeleteReactionPath,
-  IGetListIssueCategoriesParams,
   IGetListIssuesParams,
   IIssue,
-  IIssueType,
   IListResponse,
 } from '../models/interfaces';
-import { get, post, remove } from '../utils/axiosHelper';
+import { get, patch, post, remove } from '../utils/axiosHelper';
 
 const REST = 'issues';
 const BY_LIST = 'by-list';
 const CHILDREN = 'children';
-const REST_REACTION = 'issue-reactions';
-const REST_TYPE = 'issue-types';
 
 export const createIssueAPI = async (
   payload: ICreateIssuePayload,
@@ -51,35 +46,6 @@ export const deleteIssueAPI = async (
   return await remove(url, userHeaders);
 };
 
-export const createIssueReactionAPI = async (
-  payload: IAddReactionPayload,
-  userHeaders?: RawAxiosRequestHeaders,
-) => {
-  const url = `${REST_REACTION}`;
-
-  return await post(url, payload, null, userHeaders);
-};
-
-export const deleteIssueReactionAPI = async (
-  path: IDeleteReactionPath,
-  userHeaders?: RawAxiosRequestHeaders,
-) => {
-  const { id } = path;
-  const url = `${REST_REACTION}/${id}`;
-
-  return await remove(url, userHeaders);
-};
-
-export const getListIssueCategoriesAPI = async (
-  params: IGetListIssueCategoriesParams,
-  userHeaders?: RawAxiosRequestHeaders,
-): Promise<IIssueType[]> => {
-  const url = `${REST_TYPE}`;
-  const response = await get(url, { params }, userHeaders);
-
-  return response.data;
-};
-
 export const getListIssuesByIdsAPI = async (
   path: string,
   userHeaders?: RawAxiosRequestHeaders,
@@ -97,6 +63,25 @@ export const getListIssueChildrenAPI = async (
   const { id } = path;
   const url = `${REST}/${id}/${CHILDREN}`;
   const response = await get(url, null, userHeaders);
+
+  return response.data;
+};
+
+export const getIssueDetailsAPI = async (path: IByCode): Promise<IIssue> => {
+  const { code } = path;
+  const url = `${REST}/${code}`;
+  const response = await get(url);
+
+  return response.data;
+};
+
+export const editIssueAPI = async (
+  path: IByCode,
+  payload: ICreateIssuePayload,
+) => {
+  const { code } = path;
+  const url = `${REST}/${code}`;
+  const response = await patch(url, payload);
 
   return response.data;
 };
