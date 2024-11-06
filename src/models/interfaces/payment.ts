@@ -68,7 +68,7 @@ export interface IPaymentProvider {
   isDefault: boolean;
   createdDate: DateType;
   merchantType: IdType;
-  status: number;
+  status: string;
 }
 export interface IGetListPaymentProvidersParams extends ICommonFilterParams {
   id?: IdType;
