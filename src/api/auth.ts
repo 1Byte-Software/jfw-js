@@ -9,7 +9,7 @@ import { get, post } from '../utils/axiosHelper';
 
 const REST = 'users';
 const AUTH = `v1/${REST}/auth`;
-const AUTH_BY_EMAIL = `${REST}/auth/by-email`;
+const AUTH_BY_EMAIL = `v1/${REST}/auth/by-email`;
 const GOOGLE = `v1/${REST}/auth/integrations/google/authenticate-url`;
 
 export const getGoogleLinkAPI = async (

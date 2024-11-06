@@ -2,23 +2,24 @@ import { DateType, IdType } from '../types';
 import { ICommonFilterParams } from './filter';
 
 export interface IFeature {
+  id: IdType;
   code: string;
-  createdBy: IdType | null;
-  createdDate: DateType;
+  quantity: number;
   description: string;
   displayDataEvenExpired: boolean;
   featureValue: number;
-  id: IdType;
   isBeta: boolean;
-  modifiedBy: IdType | null;
-  modifiedDate: DateType;
   name: string;
   osAvailable: string | null;
   privateNotes: string | null;
   rootAccessRequired: boolean;
-  status: number;
+  status: string;
   tags: string | null;
   zOrder: number;
+  createdBy: IdType | null;
+  createdDate: DateType;
+  modifiedBy: IdType | null;
+  modifiedDate: DateType;
 }
 export interface IGetListFeatureParams extends ICommonFilterParams {
   name?: string;
