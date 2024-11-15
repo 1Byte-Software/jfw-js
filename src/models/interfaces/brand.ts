@@ -17,6 +17,7 @@ export interface IBrandProfile {
 export interface IBrandSetting {
   cdnFolder: string;
   cdnUrl: string;
+  coinCurrencyCode?: string;
   domainWhiteListUrls?: string;
   googleAnalyticsAccount?: string;
   menuCode?: string;
