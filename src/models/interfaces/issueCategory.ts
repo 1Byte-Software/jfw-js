@@ -2,6 +2,7 @@ import { IdType } from '../types';
 import { IPaginationParams } from './filter';
 
 export interface IIssueCategory {
+  name: string | null;
   code: string;
   description: string;
   groupCode: string;
