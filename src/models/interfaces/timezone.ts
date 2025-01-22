@@ -2,10 +2,11 @@ import { DateType, IdType } from '../types';
 import { ICommonFilterParams } from './filter';
 
 export interface ITimezone {
-  id: IdType;
+  code: string;
   countryCode: string;
   description: string;
-  code: string;
+  displayName?: string;
+  id: IdType;
   name: string;
   value: string;
   createdDate: DateType;
