@@ -8,7 +8,7 @@ export interface ISignInResponse {
   username: string;
 }
 export interface ISignUsingEmailPayload {
-  email: string;
+  emailAddress: string;
   callbackUrl: string;
   returnUrl: string;
   brandUrl?: string;

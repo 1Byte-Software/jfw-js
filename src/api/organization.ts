@@ -1,11 +1,11 @@
 import { RawAxiosRequestHeaders } from 'axios';
+import { IdType } from '../models';
 import {
   IAddOrganizationPayload,
   IById,
   IGetListOrganizationsByViewerParams,
   IGetListOrganizationsParams,
   IGetListUsersOfOrganizationParams,
-  IGetOrganizationDetailPath,
   IListResponse,
   IOrganization,
   IOrganizationUser,
@@ -35,12 +35,11 @@ export const getListOrganizationsAPI = async (
   };
 };
 
-export const getOrganizationDetailAPI = async (
-  path: IGetOrganizationDetailPath,
+export const getOrganizationByIdAPI = async (
+  id: IdType,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IOrganization> => {
-  const { identify } = path;
-  const url = `${REST}/${identify}`;
+  const url = `${REST}/${id}`;
   const response = await get(url, null, userHeaders);
 
   return response.data;
@@ -67,7 +66,7 @@ export const uploadFileAPI = async (
 };
 
 export const getListOrganizationsByViewerAPI = async (
-  params: IGetListOrganizationsByViewerParams,
+  params?: IGetListOrganizationsByViewerParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IListResponse<IOrganization>> => {
   const url = `${REST}`;
@@ -113,11 +112,10 @@ export const deleteOrganizationUserAPI = async (
 };
 
 export const getListUsersOfOrganizationAPI = async (
-  path: IById,
-  params: IGetListUsersOfOrganizationParams,
+  id: IdType,
+  params?: IGetListUsersOfOrganizationParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IListResponse<IOrganizationUser>> => {
-  const { id } = path;
   const url = `${REST}/${id}/${USER}`;
   const response = await get(url, { params }, userHeaders);
 
@@ -137,18 +135,16 @@ export const addOrganizationAPI = async (payload: IAddOrganizationPayload) => {
 };
 
 export const editOrganizationAPI = async (
-  path: IById,
+  id: IdType,
   payload: IAddOrganizationPayload,
 ) => {
-  const { id } = path;
   const url = `${REST}/${id}`;
   const response = await put(url, payload);
 
   return response.data;
 };
 
-export const deleteOrganizationAPI = async (path: IById) => {
-  const { id } = path;
+export const deleteOrganizationAPI = async (id: IdType) => {
   const url = `${REST}/${id}`;
 
   const response = await remove(url);

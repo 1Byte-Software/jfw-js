@@ -55,7 +55,7 @@ export interface IUpdateOrganizationUserParams {
   status: string;
 }
 export interface IGetListUsersOfOrganizationParams extends IPaginationParams {
-  status: string;
+  status?: string;
 }
 export interface IAddOrganizationPayload {
   countryCode?: string;
