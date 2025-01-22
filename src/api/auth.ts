@@ -4,6 +4,7 @@ import {
   ISignUsingEmailPayload,
   ISignInPayload,
   ISignInResponse,
+  JFWResponse,
 } from '../models/interfaces';
 import { get, post } from '../utils/axiosHelper';
 
@@ -35,7 +36,7 @@ export const signInUsingUsernameAPI = async (
 export const signInUsingEmailAPI = async (
   payload: ISignUsingEmailPayload,
   userHeaders?: RawAxiosRequestHeaders,
-) => {
+): Promise<JFWResponse<null>> => {
   const url = `${AUTH_BY_EMAIL}`;
 
   const response = await post(url, payload, null, userHeaders);

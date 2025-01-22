@@ -24,6 +24,7 @@ import {
   IGetUserConfigurationParams,
 } from '../models/interfaces/configuration';
 import { get, patch, post, put, remove } from '../utils/axiosHelper';
+import { IdType } from '../models';
 
 const REST = 'users';
 const REST_V1 = 'v1/users';
@@ -90,10 +91,9 @@ export const getUserInfoByUsernameAPI = async (
 };
 
 export const getUserInfoByIdAPI = async (
-  path: IById,
+  id: IdType,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IUser> => {
-  const { id } = path;
   const url = `${REST}/${id}`;
   const response = await get(url, null, userHeaders);
 
@@ -134,11 +134,10 @@ export const changePasswordAPI = async (
 };
 
 export const getListUserConfigurationsAPI = async (
-  path: IById,
-  params: IGetUserConfigurationParams,
+  id: IdType,
+  params?: IGetUserConfigurationParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IConfiguration[]> => {
-  const { id } = path;
   const url = `${REST}/${id}/${CONFIGURATION}`;
   const response = await get(url, { params }, userHeaders);
 
@@ -157,11 +156,10 @@ export const createUserConfigurationsAPI = async (
 };
 
 export const getRefereesAPI = async (
-  path: IById,
-  params: IPaginationParams,
+  id: IdType,
+  params?: IPaginationParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IReferee[]> => {
-  const { id } = path;
   const url = `${REST}/${id}/${REFEREE}`;
 
   const response = await get(url, { params }, userHeaders);

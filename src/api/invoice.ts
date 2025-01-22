@@ -6,7 +6,7 @@ const REST = 'invoices';
 const EXPORT = 'export';
 
 export const getListInvoicesAPI = async (
-  params: IGetListInvoicesParams,
+  params?: IGetListInvoicesParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IInvoice[]> => {
   const url = `${REST}`;

@@ -1,4 +1,5 @@
-import { RawAxiosRequestHeaders } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import { ICdn } from '../models';
 import { post } from '../utils/axiosHelper';
 
 const REST = 'cdn';
@@ -6,19 +7,18 @@ const UPLOAD = 'upload-file';
 
 export const cdnUploadFileAPI = async (
   payload: FormData,
-  userHeaders?: RawAxiosRequestHeaders,
-) => {
+  configArg: AxiosRequestConfig = {
+    headers: {},
+  },
+): Promise<ICdn> => {
   const url = `${REST}/${UPLOAD}`;
-  const response = await post(
-    url,
-    payload,
-    {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    },
-    userHeaders,
-  );
+
+  if (!configArg.headers?.['Content-Type'])
+    configArg.headers ?? (configArg.headers = {});
+
+  configArg.headers['Content-Type'] = 'multipart/form-data';
+
+  const response = await post(url, payload, configArg);
 
   return response.data;
 };
