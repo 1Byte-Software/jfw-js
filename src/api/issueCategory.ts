@@ -11,7 +11,7 @@ import { get, patch, post, remove } from '../utils/axiosHelper';
 const REST = 'issue-categories';
 
 export const getListIssueCategoriesAPI = async (
-  params: IGetListIssueCategoriesParams,
+  params?: IGetListIssueCategoriesParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IIssueCategory[]> => {
   const url = `${REST}`;

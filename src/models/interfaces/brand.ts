@@ -17,6 +17,7 @@ export interface IBrandProfile {
 export interface IBrandSetting {
   cdnFolder: string;
   cdnUrl: string;
+  coinCurrencyCode?: string;
   domainWhiteListUrls?: string;
   googleAnalyticsAccount?: string;
   menuCode?: string;
@@ -82,18 +83,18 @@ export interface IAddBrandLinkPayload {
 }
 
 // Brand Email
-export interface IBrandEmail {
-  chargebackNotificationEmail?: string;
-  developerTeamEmail?: string;
+export interface IBrandEmailAddress {
+  chargebackNotificationEmailAddress?: string;
+  developerTeamEmailAddress?: string;
   id: IdType;
-  loginNotificationEmail?: string;
-  loginNotificationTitleEmail?: string;
-  maintenanceTeamEmail?: string;
-  orderNotificationEmail?: string;
-  purchaseNotificationEmail?: string;
-  refundNotificationEmail?: string;
-  supportEmail?: string;
-  supportTitleEmail?: string;
-  systemEmail?: string;
-  systemTitleEmail?: string;
+  loginNotificationEmailAddress?: string;
+  loginNotificationTitleEmailAddress?: string;
+  maintenanceTeamEmailAddress?: string;
+  orderNotificationEmailAddress?: string;
+  purchaseNotificationEmailAddress?: string;
+  refundNotificationEmailAddress?: string;
+  supportEmailAddress?: string;
+  supportTitleEmailAddress?: string;
+  systemEmailAddress?: string;
+  systemTitleEmailAddress?: string;
 }

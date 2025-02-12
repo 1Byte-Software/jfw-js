@@ -10,7 +10,7 @@ export * from './coupon';
 export * from './currency';
 export * from './decode';
 export * from './device';
-export * from './email';
+export * from './emailAddress';
 export * from './emailPattern';
 export * from './feature';
 export * from './filter';

@@ -67,30 +67,32 @@ export interface IGetUserByIdParams {
   authKey: string;
 }
 export interface IChangePasswordPayload {
+  oldPassword: string;
   newPassword: string;
+  confirmPassword: string;
 }
 export interface IInitialSignUpValues {
   username: string;
-  email: string;
+  emailAddress: string;
   password: string;
   confirmPassword: string;
 }
 export interface ISignUpPayload {
   username: string;
   password: string;
-  email: string;
+  emailAddress: string;
   referralCode?: string;
   timeZoneId?: string;
   languageCode?: string;
   brandUrl?: string;
 }
 export interface IForgotPasswordPayload {
-  email: string;
+  emailAddress: string;
   resetPasswordLink: string;
   brandUrl?: string;
 }
 export interface IResetPasswordPayload {
-  email: string;
+  emailAddress: string;
   newPassword: string;
   token: string;
 }

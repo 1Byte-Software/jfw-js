@@ -8,7 +8,7 @@ import {
 } from '../models';
 import { get, post, put, remove } from '../utils/axiosHelper';
 
-const REST = 'email-patterns';
+const REST = 'email-address-patterns';
 const PLACEHOLDER_KEYS = 'placeholder-keys';
 
 export const getListEmailPatternsAPI = async (

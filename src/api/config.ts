@@ -5,6 +5,7 @@ import {
   ICreateConfigurationPayload,
   IGetListConfigurationsPrams,
   IUpdateConfigurationPath,
+  IUpdateConfigurationPayload,
 } from '../models';
 import { get, post, put, remove } from '../utils/axiosHelper';
 
@@ -33,7 +34,7 @@ export const getListConfigurationsAPI = async (
 
 export const updateConfigurationsAPI = async (
   path: IUpdateConfigurationPath,
-  payload: ICreateConfigurationPayload,
+  payload: IUpdateConfigurationPayload,
   userHeaders?: RawAxiosRequestHeaders,
 ) => {
   const { configurationId } = path;

@@ -8,6 +8,7 @@ import {
   IListResponse,
 } from '../models/interfaces';
 import { get, patch, post, remove } from '../utils/axiosHelper';
+import { IdType } from '../models';
 
 const REST = 'issues';
 const BY_LIST = 'by-list';
@@ -23,7 +24,7 @@ export const createIssueAPI = async (
 };
 
 export const getListIssuesAPI = async (
-  params: IGetListIssuesParams,
+  params?: IGetListIssuesParams,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IListResponse<IIssue>> => {
   const url = `${REST}`;
@@ -57,10 +58,9 @@ export const getListIssuesByIdsAPI = async (
 };
 
 export const getListIssueChildrenAPI = async (
-  path: IById,
+  id: IdType,
   userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IIssue[]> => {
-  const { id } = path;
   const url = `${REST}/${id}/${CHILDREN}`;
   const response = await get(url, null, userHeaders);
 

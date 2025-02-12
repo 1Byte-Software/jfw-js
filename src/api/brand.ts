@@ -1,7 +1,7 @@
 import { AxiosHeaders } from 'axios';
 import {
   IAddBrandLinkPayload,
-  IBrandEmail,
+  IBrandEmailAddress,
   IBrandInfo,
   IBrandLink,
   IBrandProfile,
@@ -19,7 +19,7 @@ import { get, post, put, remove } from '../utils/axiosHelper';
 const REST = 'brands';
 const REST_V1 = 'v1/brands';
 const BY_URL = 'by-url';
-const EMAIL = 'emails';
+const EMAIL_ADDRESS = 'email-addresses';
 const LINK = 'links';
 const LOAD_TYPE = 'load-type';
 const PROFILE = 'profile';
@@ -90,9 +90,9 @@ export const editBrandSettingsAPI = async (
 export const getListBrandEmailsAPI = async (
   path: IById,
   userHeaders?: AxiosHeaders,
-): Promise<IBrandEmail> => {
+): Promise<IBrandEmailAddress> => {
   const { id } = path;
-  const url = `v1/${REST}/${id}/${EMAIL}`;
+  const url = `v1/${REST}/${id}/${EMAIL_ADDRESS}`;
   const response = await get(url, null, userHeaders);
 
   return response.data;
@@ -103,7 +103,7 @@ export const editBrandEmailsAPI = async (
   payload: IEditEmailsPayload,
 ) => {
   const { id } = path;
-  const url = `${REST}/${EMAIL}/${id}`;
+  const url = `${REST}/${EMAIL_ADDRESS}/${id}`;
   const response = await put(url, payload);
 
   return response.data;

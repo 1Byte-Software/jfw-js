@@ -4,12 +4,13 @@ import {
   ISignUsingEmailPayload,
   ISignInPayload,
   ISignInResponse,
+  JFWResponse,
 } from '../models/interfaces';
 import { get, post } from '../utils/axiosHelper';
 
 const REST = 'users';
 const AUTH = `v1/${REST}/auth`;
-const AUTH_BY_EMAIL = `v1/${REST}/auth/by-email`;
+const AUTH_BY_EMAIL_ADDRESS = `v1/${REST}/auth/by-email-address`;
 const GOOGLE = `v1/${REST}/auth/integrations/google/authenticate-url`;
 
 export const getGoogleLinkAPI = async (
@@ -35,8 +36,8 @@ export const signInUsingUsernameAPI = async (
 export const signInUsingEmailAPI = async (
   payload: ISignUsingEmailPayload,
   userHeaders?: RawAxiosRequestHeaders,
-) => {
-  const url = `${AUTH_BY_EMAIL}`;
+): Promise<JFWResponse<null>> => {
+  const url = `${AUTH_BY_EMAIL_ADDRESS}`;
 
   const response = await post(url, payload, null, userHeaders);
 
