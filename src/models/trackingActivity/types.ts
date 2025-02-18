@@ -1,0 +1,61 @@
+import { DateType, IdType } from '../asdas';
+import { IPageable, ISortable } from '../base';
+import { ITrackingEvent } from '../trackingEvent';
+import { IUser } from '../user';
+
+export interface ITrackingActivity {
+    id: IdType;
+    userId: IdType;
+    createdDate: DateType;
+    description: string;
+    longitude: number;
+    latitude: number;
+    location: string;
+    browserName: string;
+    os: string;
+    ipAddress: string;
+    url: string;
+    trackingEventId: IdType;
+    user?: IUser;
+    trackingEvent?: ITrackingEvent;
+}
+//#region API types
+export interface IGetListTrackingActivitiesParams extends IPageable, ISortable {
+    userId?: IdType;
+    trackingEventId?: IdType;
+}
+export interface IQueryTrackingActivityParams {
+    browserName: string;
+    browserVersion: string;
+    description: string;
+    deviceId: null;
+    ipAddress: string;
+    latitude: number;
+    location: string;
+    longitude: number;
+    os: string;
+    requestFromMobile: boolean;
+    trackingEventId: IdType;
+    url: string;
+    userAgent: string;
+    userId: IdType;
+}
+
+export interface ICreateTrackingActivityParams {
+    browserName: string;
+    browserVersion: string;
+    description: string;
+    deviceId: null;
+    ipAddress: string;
+    latitude: number;
+    location: string;
+    longitude: number;
+    os: string;
+    requestFromMobile: boolean;
+    trackingEventId: IdType;
+    url: string;
+    userAgent: string;
+    userId: IdType;
+}
+
+//#endregion
