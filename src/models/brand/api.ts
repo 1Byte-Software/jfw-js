@@ -1,19 +1,18 @@
 import { AxiosHeaders } from 'axios';
+import { IResponse } from '../../core';
 import { get, put } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 import { BRAND_PATH } from './paths';
-import { IBrandInfo, IGetQueryBrandParams, IUpdateBrandParams } from './types';
-
-const REST_V1 = 'v1/brands';
+import { IBrand, IGetQueryBrandParams, IUpdateBrandParams } from './types';
 
 /**
  * List all brands.
  */
 export const queryBrandAPI = async (
     params?: IGetQueryBrandParams,
-): Promise<IBrandInfo[]> => {
-    const url = `${REST_V1}`;
+): Promise<IResponse<IBrand[]>> => {
+    const url = BRAND_PATH.QUERY;
     const response = await get(url, {
         params,
     });
@@ -27,7 +26,7 @@ export const queryBrandAPI = async (
 export const getBrandByUrlAPI = async (
     brandUrl: string,
     userHeaders?: AxiosHeaders,
-): Promise<IBrandInfo> => {
+): Promise<IBrand> => {
     const url = generatePath(BRAND_PATH.GET_BY_URL, {
         brandUrl,
     });
@@ -40,7 +39,7 @@ export const getBrandByUrlAPI = async (
 /**
  * Gets brand by the given brand id.
  */
-export const getBrandByIdAPI = async (id: IdType): Promise<IBrandInfo> => {
+export const getBrandByIdAPI = async (id: IdType): Promise<IBrand> => {
     const url = generatePath(BRAND_PATH.GET_BY_ID, {
         id,
     });

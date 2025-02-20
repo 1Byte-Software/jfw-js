@@ -1,9 +1,10 @@
-import { IdType } from '../asdas';
-import { IBaseObject, IPageable } from '../base';
+import { IPageable } from '../../core';
+import { IBaseObject } from '../base';
+import { IdType } from '../base';
 import { IBrandProfile } from './profile';
 import { IBrandSetting } from './setting';
 
-export interface IBrandInfo extends IBaseObject {
+export interface IBrand extends IBaseObject {
     parentId?: IdType;
 
     profile: IBrandProfile;
@@ -68,6 +69,6 @@ export interface IGetQueryBrandParams extends IPageable {
     titlePage?: string;
 }
 
-export interface IUpdateBrandParams extends IBrandInfo {}
+export interface IUpdateBrandParams extends IBrand {}
 
 //#endregion

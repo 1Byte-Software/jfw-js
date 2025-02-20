@@ -1,5 +1,5 @@
-import { DateType, IdType } from '../asdas';
-import { IPageable } from '../base';
+import { IPageable } from '../../core';
+import { DateType, IdType } from '../base';
 
 export interface IConfiguration {
     id: IdType;

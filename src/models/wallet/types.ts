@@ -1,5 +1,6 @@
-import { DateType, IdType } from '../asdas';
-import { ICurrency } from '../interfaces';
+import { DateType, IdType } from '../base';
+import { ICurrency } from '../currency';
+import { IPageable } from '../../core';
 
 export interface IWallet {
     currencyCode: string;
@@ -20,12 +21,6 @@ export interface IWalletHistory {
     displayAmount?: string;
 }
 
-export interface IEarnEvent {
-    code: string;
-    amount: number;
-    description: string;
-}
-
 export interface IFirebaseCoinData {
     amount: number;
     message: string;
@@ -36,7 +31,7 @@ export interface IGetWalletParams {
     userId: string;
     testMode?: boolean;
 }
-export interface IGetWalletHistoryParams extends IPaginationParams {
+export interface IGetWalletHistoryParams extends IPageable {
     status?: string;
 }
 export interface IGetEarnEventParams {

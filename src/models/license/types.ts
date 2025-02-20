@@ -1,6 +1,6 @@
-import { DateType, IdType } from '../asdas';
-import { IBaseObject, IPageable, ISortable } from '../base';
-import { IPackage, IUser } from '../interfaces';
+import { IBaseObject, DateType, IdType } from '../base';
+import { IPackage } from '../packages';
+import { IUser } from '../user';
 
 export interface ILicense extends IBaseObject {
     usedByUserId: IdType;

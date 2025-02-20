@@ -1,9 +1,9 @@
 import { RawAxiosRequestHeaders } from 'axios';
+import { IResponse, IStatistic, IStatisticCommonParams } from '../../core';
 import { get, patch, post, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IStatistic, IStatisticCommonParams } from '../common';
-import { IListResponse, JFWResponse } from '../interfaces';
+import { IListResponse, IdType } from '../base';
+import { IConfiguration, ICreateConfigurationParams } from '../configuration';
 import { USER_PATH } from './paths';
 import {
     IApplyReferralCodeParams,
@@ -22,10 +22,10 @@ import {
     IUpdateUserTypeParams,
     IUser,
 } from './types';
-import { IConfiguration, ICreateConfigurationParams } from '../configuration';
 
-const REST = 'users';
-
+/**
+ * Gets all the users.
+ */
 export const queryUserAPI = async (
     params: IQueryUserParams,
 ): Promise<IListResponse<IUser>> => {
@@ -42,6 +42,9 @@ export const queryUserAPI = async (
     };
 };
 
+/**
+ * Gets the current user logged in.
+ */
 export const getMeAPI = async (
     userHeaders?: RawAxiosRequestHeaders,
 ): Promise<IUser> => {
@@ -347,7 +350,7 @@ export const authenticateAPI = async (
 export const authenticateByEmailAddressAPI = async (
     payload: IAuthenticateByEmailAddressParams,
     userHeaders?: RawAxiosRequestHeaders,
-): Promise<JFWResponse<null>> => {
+): Promise<IResponse<null>> => {
     const url = USER_PATH.AUTH.BY_EMAIL_ADDRESS;
 
     const response = await post(url, payload, null, userHeaders);

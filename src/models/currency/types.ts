@@ -1,4 +1,4 @@
-import { ISortable } from '../base';
+import { IPageable, ISortable } from '../../core';
 
 export interface ICurrency {
     code: string;
@@ -10,5 +10,5 @@ export interface ICurrency {
 }
 
 //#region API types
-export interface IQueryCurrencyParams extends ISortable {}
+export interface IQueryCurrencyParams extends ISortable, IPageable {}
 //#endregion

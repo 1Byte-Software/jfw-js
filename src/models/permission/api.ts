@@ -1,7 +1,6 @@
 import { get, post, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IListResponse } from '../interfaces';
+import { IdType } from '../base';
 import { PERMISSION_PATH } from './paths';
 import {
     ICreatePermissionParams,
@@ -13,21 +12,14 @@ import {
 /**
  * Gets a list of all permissions.
  */
-export const queryPermissionAPI = async (
-    params?: IQueryPermissionParams,
-): Promise<IListResponse<IPermission>> => {
+export const queryPermissionAPI = async (params?: IQueryPermissionParams) => {
     const url = PERMISSION_PATH.QUERY;
 
     const response = await get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response;
 };
 
 /**

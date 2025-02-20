@@ -1,5 +1,5 @@
-import { DateType, IdType } from '../asdas';
-import { IBaseObject, IPageable, ISortable } from '../base';
+import { IPageable, ISortable } from '../../core';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IPrice } from '../price';
 import { IUser } from '../user';
 

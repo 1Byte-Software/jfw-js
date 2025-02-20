@@ -1,4 +1,5 @@
-import { IBaseObject, IPageable, ISortable } from '../base';
+import { IPageable, ISortable } from '../../core';
+import { IBaseObject } from '../base';
 
 export interface INotification extends IBaseObject {
     patternCode: string;
@@ -29,11 +30,4 @@ export interface IQueryNotificationParams extends IPageable, ISortable {
     status?: string;
 }
 
-export interface IUpdateNotificationStatusParams {
-    status: string;
-}
-
-export interface IUpdateAllNotificationsParams {
-    status: string;
-}
 //#endregion

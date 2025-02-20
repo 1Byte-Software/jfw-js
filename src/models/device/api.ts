@@ -1,10 +1,10 @@
-import { RawAxiosRequestHeaders } from 'axios';
+import { AxiosResponse, RawAxiosRequestHeaders } from 'axios';
 import { get, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IListResponse, IResponse } from '../interfaces';
+import { IListResponse, IdType } from '../base';
 import { DEVICE_PATH } from './paths';
 import { ICheckUserAccessParams, IDevice, IQueryDeviceParams } from './types';
+import { IResponse } from '../../core';
 
 /**
  * Gets the list off all devices by the given filter.
@@ -35,14 +35,16 @@ export const createDeviceAPI = async () => {
 /**
  * Gets a device data by the specified ID.
  */
-export const getDeviceByIdAPI = async (deviceId: IdType): Promise<IDevice> => {
+export const getDeviceByIdAPI = async (
+    deviceId: IdType,
+): Promise<AxiosResponse<IDevice>> => {
     const url = generatePath(DEVICE_PATH.GET_BY_ID, {
         id: deviceId,
     });
 
     const response = await get(url);
 
-    return response.data;
+    return response;
 };
 
 /**
@@ -77,7 +79,7 @@ export const checkUserAccessAPI = async (
 
     const response = await get(url, { params }, userHeaders);
 
-    return response;
+    return response.data;
 };
 
 /**

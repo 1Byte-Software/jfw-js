@@ -1,10 +1,10 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, post, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 import { PACKAGE_PATH } from './paths';
 import {
-    IAddFeaturesToPackagePayload,
+    IAddFeaturesToPackageParams,
     ICreatePackageParams,
     IPackage,
     IQueryPackageParams,
@@ -78,7 +78,7 @@ export const deletePackageAPI = async (id: IdType) => {
  */
 export const addFeaturesToPackageAPI = async (
     packageId: IdType,
-    payload: IAddFeaturesToPackagePayload[],
+    payload: IAddFeaturesToPackageParams[],
 ) => {
     const url = generatePath(PACKAGE_PATH.FEATURES.ADD_TO_PACKAGE, {
         id: packageId,

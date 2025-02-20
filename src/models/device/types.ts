@@ -1,6 +1,6 @@
-import { IdType } from '../asdas';
-import { IBaseObject, IBaseQuery } from '../base';
-import { IUser } from '../interfaces';
+import { IBaseFilter, IPageable, ISortable } from '../../core';
+import { IBaseObject, IdType } from '../base';
+import { IUser } from '../user';
 
 export interface IDevice extends IBaseObject {
     userId: IdType;
@@ -31,7 +31,7 @@ export interface ICheckUserAccessParams {
     deviceCode: string;
 }
 
-export interface IQueryDeviceParams extends IBaseQuery {
+export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
     id?: IdType;
 
     userId?: IdType;

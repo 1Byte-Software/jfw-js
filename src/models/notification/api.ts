@@ -1,14 +1,9 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IListResponse } from '../interfaces';
+import { IListResponse, IdType } from '../base';
 import { NOTIFICATION_PATH } from './paths';
-import {
-    INotification,
-    IQueryNotificationParams,
-    IUpdateNotificationStatusParams,
-} from './types';
+import { INotification, IQueryNotificationParams } from './types';
 
 /**
  * List all notifications by the user authorized.
@@ -32,7 +27,7 @@ export const queryNotificationAPI = async (
  */
 export const updateNotificationStatusAPI = async (
     trackingNotificationId: IdType,
-    params: IUpdateNotificationStatusParams,
+    status: string,
     userHeaders?: RawAxiosRequestHeaders,
 ) => {
     const url = generatePath(NOTIFICATION_PATH.UPDATE_STATUS, {
@@ -43,7 +38,9 @@ export const updateNotificationStatusAPI = async (
         url,
         null,
         {
-            params,
+            params: {
+                status,
+            },
         },
         userHeaders,
     );

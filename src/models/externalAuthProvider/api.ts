@@ -1,7 +1,6 @@
 import { get, post, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IListResponse } from '../interfaces';
+import { IListResponse, IdType } from '../base';
 import { EXTERNAL_AUTH_PROVIDER_PATH } from './paths';
 import {
     ICreateExternalAuthProviderParams,

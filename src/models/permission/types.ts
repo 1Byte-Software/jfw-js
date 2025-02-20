@@ -1,5 +1,5 @@
-import { DateType, IdType } from '../asdas';
-import { IPageable, ISortable } from '../base';
+import { IPageable, ISortable } from '../../core';
+import { DateType, IdType } from '../base';
 
 export interface IPermission {
     id: IdType;

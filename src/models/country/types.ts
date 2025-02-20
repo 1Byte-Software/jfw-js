@@ -1,5 +1,5 @@
-import { DateType, IdType } from '../asdas';
-import { IBaseFilter, IPageable, ISortable } from '../base';
+import { IPageable, ISortable } from '../../core';
+import { DateType, IdType } from '../base';
 
 export interface ICountry {
     id: IdType;
@@ -18,7 +18,7 @@ export interface ICountry {
 }
 
 //#region API types
-export interface IQueryCountryParams extends IPageable, IBaseFilter, ISortable {
+export interface IQueryCountryParams extends IPageable, ISortable {
     name?: string;
     countryCode?: string;
     stateCode?: string;

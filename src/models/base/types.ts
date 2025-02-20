@@ -1,14 +1,5 @@
-import { DateType, IdType } from '../asdas';
-
-export interface IPageable {
-    pageSize?: number;
-    pageNumber?: number;
-}
-
-export interface ISortable {
-    sortDataField?: string;
-    sortOrder?: string;
-}
+export type IdType = string;
+export type DateType = Date | string;
 
 export interface IBaseObject {
     id: IdType;
@@ -19,15 +10,15 @@ export interface IBaseObject {
     modifiedDate: DateType;
 }
 
-export interface IBaseFilter {
-    modifiedUserBy?: IdType;
-    modifiedDateFrom?: DateType;
-    modifiedDateTo?: DateType;
-    createdUserBy?: IdType;
-    createdDateFrom?: DateType;
-    createdDateTo?: DateType;
-
-    limit?: number;
+export interface IListResponse<T> {
+    items: T[];
+    pagination: IPagination | null;
 }
 
-export interface IBaseQuery extends IPageable, ISortable, IBaseFilter {}
+export interface IPagination {
+    totalItems: number;
+    totalPractices?: number;
+    totalPages?: number;
+    pageNumber?: number;
+    pageSize?: number;
+}

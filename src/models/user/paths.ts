@@ -14,7 +14,7 @@ export const USER_PATH = {
 
     VERIFY_EMAIL: `${REST}/:userId/email/verify/send`,
     DELETE_BY_ID: `${REST}/:id`,
-    GET_ME: `${REST}/me`,
+    GET_ME: `v1/${REST}/me`,
     GET_BY_USERNAME: `${REST}/by-username/:username`,
     CHANGE_PASSWORD: `${REST}/change-password`,
     FORGOT_PASSWORD: `${REST}/forgot-password`,

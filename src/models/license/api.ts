@@ -1,8 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, post, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IListResponse } from '../interfaces';
+import { IListResponse, IdType } from '../base';
 import { LICENSE_PATH } from './paths';
 import {
     ICreateLicenseParams,

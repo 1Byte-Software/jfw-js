@@ -1,7 +1,6 @@
 import { get } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IListResponse } from '../interfaces';
+import { IListResponse, IdType } from '../base';
 import { STATE_PATH } from './paths';
 import { IQueryStateParams, IState } from './types';
 

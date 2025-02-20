@@ -1,8 +1,8 @@
-import { DateType, IdType } from '../asdas';
-import { IBaseObject, IPageable, ISortable } from '../base';
+import { DateType, IdType } from '../base';
+import { IPageable, ISortable } from '../../core';
 import { IMedia } from '../cdn';
-import { IPackage, IUser } from '../interfaces';
 import { ILanguage } from '../language';
+import { IUser } from '../user';
 
 export interface IOrganization {
     avatar?: string;

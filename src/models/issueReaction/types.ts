@@ -1,4 +1,4 @@
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 
 export interface IIssueReaction {
     id: IdType;

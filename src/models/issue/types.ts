@@ -1,8 +1,8 @@
-import { IdType } from '../asdas';
-import { IBaseObject, IPageable } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IMedia } from '../cdn';
-import { IIssueCategory } from '../interfaces';
+import { IIssueCategory } from '../issueCategory';
 import { IIssueReaction } from '../issueReaction';
+import { IPageable } from '../../core';
 
 export interface IIssue extends IBaseObject {
     parentId?: IdType;

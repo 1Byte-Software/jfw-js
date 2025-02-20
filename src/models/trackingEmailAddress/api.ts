@@ -1,5 +1,5 @@
 import { get } from '../../utils/axiosHelper';
-import { IListResponse } from '../interfaces';
+import { IListResponse } from '../base';
 import { TRACKING_EMAIL_ADDRESS_PATH } from './paths';
 import {
     IQueryTrackingEmailAddressParams,

@@ -1,4 +1,4 @@
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 import { IPermission } from '../permission';
 
 export interface IRole {

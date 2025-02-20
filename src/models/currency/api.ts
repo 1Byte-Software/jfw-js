@@ -1,6 +1,6 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get } from '../../utils/axiosHelper';
-import { IListResponse } from '../interfaces';
+import { IListResponse } from '../base';
 import { CURRENCY_PATH } from './paths';
 import { ICurrency, IQueryCurrencyParams } from './types';
 

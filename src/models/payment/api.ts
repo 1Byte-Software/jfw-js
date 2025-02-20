@@ -1,8 +1,7 @@
+import { IStatistic, IStatisticCommonParams } from '../../core';
 import { get } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import { IStatistic, IStatisticCommonParams } from '../common';
-import { IListResponse } from '../interfaces';
+import { IdType, IListResponse } from '../base';
 import { PAYMENT_PATH } from './paths';
 import {
     IGetPaymentDashboardParams,

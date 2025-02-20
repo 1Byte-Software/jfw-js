@@ -1,7 +1,7 @@
 import { AxiosHeaders } from 'axios';
 import { get, post, put, remove } from '../../../utils/axiosHelper';
 import { generatePath } from '../../../utils/path';
-import { IdType } from '../../asdas';
+import { IdType } from '../../base';
 import { BRAND_LINK_PATH } from './paths';
 import {
     IBrandLink,

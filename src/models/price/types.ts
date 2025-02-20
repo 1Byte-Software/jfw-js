@@ -1,6 +1,5 @@
-import { IdType } from '../asdas';
-import { IBaseObject } from '../base';
-import { ICurrency } from '../interfaces';
+import { IBaseObject, IdType } from '../base';
+import { ICurrency } from '../currency';
 import { IPackage } from '../packages';
 
 export interface IPrice extends IBaseObject {

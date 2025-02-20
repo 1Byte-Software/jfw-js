@@ -1,7 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, patch, post, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 import { ISSUE_CATEGORY_PATH } from './paths';
 import {
     ICreateIssueCategoryParams,

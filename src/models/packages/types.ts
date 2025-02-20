@@ -1,7 +1,6 @@
-import { IdType } from '../asdas';
-import { IBaseObject } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IFeature } from '../feature';
-import { IPrice } from '../interfaces';
+import { IPrice } from '../price';
 
 export interface IPackage extends IBaseObject {
     code: string;
@@ -45,7 +44,7 @@ export interface ICreatePackageParams {
 
 export type IUpdatePackageParams = ICreatePackageParams;
 
-export interface IAddFeaturesToPackagePayload {
+export interface IAddFeaturesToPackageParams {
     featureId: IdType;
     value: number;
 }

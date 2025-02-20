@@ -1,6 +1,6 @@
-import { DateType, IdType } from '../asdas';
-import { IBaseObject, IPageable, ISortable } from '../base';
-import { IPackage } from '../interfaces';
+import { IBaseObject, DateType, IdType } from '../base';
+import { IPackage } from '../packages';
+import { IPageable, ISortable } from '../../core';
 
 export interface IInvoice extends IBaseObject {
     code: string;

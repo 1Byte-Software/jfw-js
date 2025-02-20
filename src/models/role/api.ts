@@ -1,6 +1,6 @@
 import { get, patch, post, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 import { ROLE_PATH } from './paths';
 import {
     ICreateRoleParams,

@@ -1,5 +1,5 @@
-import { IdType } from '../asdas';
-import { IBaseObject, IPageable } from '../base';
+import { IBaseObject, IdType } from '../base';
+import { IPageable } from '../../core';
 
 export interface IIssueCategory extends IBaseObject {
     code: string;

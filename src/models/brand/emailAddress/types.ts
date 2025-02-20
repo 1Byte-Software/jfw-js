@@ -1,5 +1,4 @@
-import { IdType } from '../../asdas';
-import { IBaseObject } from '../../base';
+import { IBaseObject, IdType } from '../../base';
 
 export interface IBrandEmailAddress extends IBaseObject {
     brandId: IdType;

@@ -1,7 +1,7 @@
 import { AxiosHeaders } from 'axios';
 import { get, put } from '../../../utils/axiosHelper';
 import { generatePath } from '../../../utils/path';
-import { IdType } from '../../asdas';
+import { IdType } from '../../base';
 import { BRAND_PROFILE_PATH } from './paths';
 import { IBrandEmailAddress, IUpdateEmailAddressParams } from './types';
 

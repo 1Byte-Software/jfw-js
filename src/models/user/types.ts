@@ -1,4 +1,4 @@
-import { DateType, IdType } from '../asdas';
+import { DateType, IdType } from '../base';
 import { ILanguage } from '../language';
 import { IPackage } from '../packages';
 import { IRole } from '../role';

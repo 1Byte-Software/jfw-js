@@ -1,12 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, patch, post, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
-import {
-    IListResponse,
-    IResponse,
-    IResponseNotPermission,
-} from '../interfaces';
+import { IListResponse, IdType } from '../base';
 import { ORGANIZATION_PATH } from './paths';
 import {
     IAddUserToOrganizationParams,
@@ -19,7 +14,11 @@ import {
     IUpdateOrganizationParams,
     IUpdateUserStatusInOrganizationParams,
 } from './types';
+import { IResponse } from '../../core';
 
+/**
+ * JFW-49: Thiếu tài liệu GET: api/organizations
+ */
 export const queryOrganizationAPI = async (
     params: IQueryOrganizationParams,
     userHeaders?: RawAxiosRequestHeaders,
@@ -88,7 +87,9 @@ export const addUserToOrganizationAPI = async (
         userId,
     });
 
-    return post(url, null, null, userHeaders);
+    const response = await post(url, null, null, userHeaders);
+
+    return response.data;
 };
 
 /**
@@ -97,14 +98,21 @@ export const addUserToOrganizationAPI = async (
 export const updateUserStatusInOrganizationAPI = async (
     params: IUpdateUserStatusInOrganizationParams,
     userHeaders?: RawAxiosRequestHeaders,
-): Promise<IResponse<IOrganizationUser> | IResponseNotPermission> => {
+): Promise<IResponse<IOrganizationUser>> => {
     const { userId, organizationId, ...restParams } = params;
     const url = generatePath(ORGANIZATION_PATH.USERS.UPDATE_STATUS_BY_ID, {
         id: organizationId,
         userId,
     });
 
-    return patch(url, null, { params: restParams }, userHeaders);
+    const response = await patch(
+        url,
+        null,
+        { params: restParams },
+        userHeaders,
+    );
+
+    return response.data;
 };
 
 /**

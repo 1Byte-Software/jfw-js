@@ -1,7 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 import { INVOICE_PATH } from './paths';
 import { IInvoice, IQueryInvoiceParams } from './types';
 

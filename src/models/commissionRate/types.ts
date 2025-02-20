@@ -1,4 +1,4 @@
-import { IPageable } from '../base';
+import { IPageable } from '../../core';
 import { IUser } from '../user';
 
 export interface ICommissionRate {

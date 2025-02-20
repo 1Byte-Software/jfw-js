@@ -1,4 +1,5 @@
-import { IBaseFilter, IBaseObject } from '../base';
+import { IPageable, ISortable } from '../../core';
+import { IBaseObject } from '../base';
 
 export interface IFeature extends IBaseObject {
     code: string;
@@ -17,7 +18,7 @@ export interface IFeature extends IBaseObject {
 }
 //#region API types
 
-export interface IQueryFeatureParams extends IBaseFilter {
+export interface IQueryFeatureParams extends IPageable, ISortable {
     name?: string;
 }
 

@@ -1,6 +1,6 @@
 import { put } from '../../../utils/axiosHelper';
 import { generatePath } from '../../../utils/path';
-import { IdType } from '../../asdas';
+import { IdType } from '../../base';
 import { BRAND_SETTING_PATH } from './paths';
 import { IBrandSetting } from './types';
 

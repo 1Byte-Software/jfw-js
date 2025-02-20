@@ -1,5 +1,5 @@
-import { DateType, IdType } from '../asdas';
-import { IPageable, ISortable } from '../base';
+import { DateType, IdType } from '../base';
+import { IPageable, ISortable } from '../../core';
 
 export interface ITimezone {
     code: string;

@@ -1,7 +1,6 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, patch, post, remove } from '../../utils/axiosHelper';
-import { IdType } from '../asdas';
-import { IListResponse } from '../interfaces';
+import { IListResponse, IdType } from '../base';
 import {
     ICreateIssueParams,
     IIssue,

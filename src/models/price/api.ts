@@ -1,7 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { get, post, put, remove } from '../../utils/axiosHelper';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../asdas';
+import { IdType } from '../base';
 import { PRICE_PATH } from './paths';
 import {
     ICreatePriceParams,

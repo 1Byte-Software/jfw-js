@@ -1,4 +1,4 @@
-import { DateType, IdType } from '../asdas';
+import { DateType, IdType } from '../base';
 
 export interface ITrackingEvent {
     id: IdType;

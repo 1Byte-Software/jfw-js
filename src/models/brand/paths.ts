@@ -1,4 +1,4 @@
-const REST = 'v1/brands';
+const REST = 'brands';
 
 export const BRAND_PATH = {
     QUERY: `${REST}`,
