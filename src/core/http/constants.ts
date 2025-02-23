@@ -1,4 +1,4 @@
-export enum JFW_STATUS_CODE {
+export enum JFW_HTTP_CODE {
     success = 200,
     notPermission = 209,
     badRequest = 400,

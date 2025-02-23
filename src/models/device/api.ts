@@ -77,9 +77,13 @@ export const checkUserAccessAPI = async (
 ): Promise<IResponse<boolean>> => {
     const url = DEVICE_PATH.CHECK_USER_ACCESS;
 
-    const response = await get(url, { params }, userHeaders);
+    const response = (await get(
+        url,
+        { params },
+        userHeaders,
+    )) as unknown as IResponse<boolean>;
 
-    return response.data;
+    return response;
 };
 
 /**
