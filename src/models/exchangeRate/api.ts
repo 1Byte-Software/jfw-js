@@ -1,7 +1,7 @@
 import { RawAxiosRequestHeaders } from 'axios';
 import { IExchangeRate } from './types';
 import { EXCHANGE_RATE_PATH } from './paths';
-import { get } from '../../utils/axiosHelper';
+import { get } from '../../utils/axiosHelper222';
 
 /**
  * Gets all exchange rate in the system.

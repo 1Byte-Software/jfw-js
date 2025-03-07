@@ -1,5 +1,7 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../core';
+import { jfwAxios } from '../../core/client/client';
+import { get, post, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { PACKAGE_PATH } from './paths';
@@ -16,10 +18,13 @@ import {
  */
 export const queryPackageAPI = async (
     params?: IQueryPackageParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IPackage[]> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = PACKAGE_PATH.QUERY;
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IPackage[]>>(url, {
+        ...config,
+        params,
+    });
     return response.data;
 };
 

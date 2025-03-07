@@ -1,5 +1,6 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { TIMEZONE_PATH } from './paths';
 import { IGetTimezoneParams, ITimezone } from './types';
 
@@ -8,15 +9,12 @@ import { IGetTimezoneParams, ITimezone } from './types';
  */
 export const getTimezoneAPI = async (
     params?: IGetTimezoneParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<ITimezone[]> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = TIMEZONE_PATH.GET;
-    const response = await get(
-        url,
-        {
-            params,
-        },
-        userHeaders,
-    );
+    const response = await jfwAxios.get<HttpResponse<ITimezone[]>>(url, {
+        ...config,
+        params,
+    });
     return response.data;
 };

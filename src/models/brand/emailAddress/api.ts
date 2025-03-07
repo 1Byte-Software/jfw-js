@@ -1,5 +1,5 @@
 import { AxiosHeaders } from 'axios';
-import { get, put } from '../../../utils/axiosHelper';
+import { get, put } from '../../../utils/axiosHelper222';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { BRAND_PROFILE_PATH } from './paths';

@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { ICdn } from './types';
-import { post } from '../../utils/axiosHelper';
+import { post } from '../../utils/axiosHelper222';
 
 /**
  * Save the specified the file to the CDN folder with CDN file information.

@@ -1,6 +1,7 @@
-import { get, post } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, post } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { TRACKING_ACTIVITY_PATH } from './paths';
 import {
     ICreateTrackingActivityParams,
@@ -13,19 +14,14 @@ import {
  */
 export const queryTrackingActivityAPI = async (
     params?: IQueryTrackingActivityParams,
-): Promise<IListResponse<ITrackingActivity>> => {
+): Promise<HttpResponseList<ITrackingActivity>> => {
     const url = TRACKING_ACTIVITY_PATH.QUERY;
 
     const response = await get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

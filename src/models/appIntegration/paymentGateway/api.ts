@@ -1,6 +1,6 @@
-import { get, post, put, remove } from '../../../utils/axiosHelper';
+import { HttpResponseList } from '../../../core';
+import { get, post, put, remove } from '../../../utils/axiosHelper222';
 import { generatePath } from '../../../utils/path';
-import { IListResponse } from '../../base';
 import { IdType } from '../../base';
 import { INTEGRATION_PAYMENT_GATEWAY_PATH } from './paths';
 import {
@@ -15,19 +15,14 @@ import {
  */
 export const queryIntegrationPaymentGatewayAPI = async (
     params?: IQueryIntegrationPaymentGatewayParams,
-): Promise<IListResponse<IIntegrationPaymentGateway>> => {
+): Promise<HttpResponseList<IIntegrationPaymentGateway>> => {
     const url = INTEGRATION_PAYMENT_GATEWAY_PATH.QUERY;
 
     const response = await get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data;
 };
 
 /**

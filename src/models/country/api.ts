@@ -1,6 +1,7 @@
-import { get } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { COUNTRY_PATH } from './paths';
 import { ICountry, IQueryCountryParams } from './types';
 
@@ -9,17 +10,12 @@ import { ICountry, IQueryCountryParams } from './types';
  */
 export const queryCountryAPI = async (
     params?: IQueryCountryParams,
-): Promise<IListResponse<ICountry>> => {
+): Promise<HttpResponseList<ICountry>> => {
     const url = COUNTRY_PATH.QUERY;
     const response = await get(url, {
         params,
     });
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

@@ -1,14 +1,15 @@
 import { RawAxiosRequestHeaders } from 'axios';
-import { get, patch, post, remove } from '../../utils/axiosHelper';
-import { IListResponse, IdType } from '../base';
+import { HttpResponseList } from '../../core';
+import { get, patch, post, remove } from '../../utils/axiosHelper222';
+import { generatePath } from '../../utils/path';
+import { IdType } from '../base';
+import { ISSUE_PATH } from './paths';
 import {
     ICreateIssueParams,
     IIssue,
     IQueryIssueParams,
     IUpdateIssueParams,
 } from './types';
-import { ISSUE_PATH } from './paths';
-import { generatePath } from '../../utils/path';
 
 /**
  * Gets the list of issues.
@@ -16,15 +17,11 @@ import { generatePath } from '../../utils/path';
 export const queryIssueAPI = async (
     params?: IQueryIssueParams,
     userHeaders?: RawAxiosRequestHeaders,
-): Promise<IListResponse<IIssue>> => {
+): Promise<HttpResponseList<IIssue>> => {
     const url = ISSUE_PATH.QUERY;
     const response = await get(url, { params }, userHeaders);
-    const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**
@@ -60,7 +57,7 @@ export const deleteIssueByIdAPI = async (
 export const getIssueByIdsAPI = async (
     params: string,
     userHeaders?: RawAxiosRequestHeaders,
-): Promise<IListResponse<IIssue>> => {
+): Promise<HttpResponseList<IIssue>> => {
     const url = `${ISSUE_PATH.GET_BY_LIST}?${params}`;
     const response = await get(url, null, userHeaders);
 

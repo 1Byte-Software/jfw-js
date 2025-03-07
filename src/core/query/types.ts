@@ -1,6 +1,6 @@
 import { DateType, IdType } from '../../models';
 import { JFWError } from '../error';
-import { JFW_STATUS_CODE } from '../http';
+import { JFWHttpCode } from '../http';
 
 //#region Query params types
 export interface IPageable {
@@ -26,15 +26,15 @@ export interface IBaseFilter {
 //#endregion
 
 //#region Query response types
-export interface IResponse<T = any> {
+export interface HttpResponse<T = any> {
     success: boolean;
-    statusCode?: JFW_STATUS_CODE;
+    statusCode?: JFWHttpCode;
     message: string;
     data: T | null;
     errors: JFWError[];
 }
 
-interface IListItemsWithPagination<T = any> {
+export interface ListData<T = any> {
     items: T[];
 
     totalItems: number;
@@ -42,5 +42,5 @@ interface IListItemsWithPagination<T = any> {
     pageSize: number;
 }
 
-export type IResponseList<T = any> = IResponse<IListItemsWithPagination<T>>;
+export type HttpResponseList<T = any> = HttpResponse<ListData<T>>;
 //#endregion

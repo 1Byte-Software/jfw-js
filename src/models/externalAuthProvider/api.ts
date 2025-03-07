@@ -1,6 +1,7 @@
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, post, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { EXTERNAL_AUTH_PROVIDER_PATH } from './paths';
 import {
     ICreateExternalAuthProviderParams,
@@ -16,17 +17,13 @@ const REST_EXTERNAL = 'external-auth-providers';
  */
 export const queryExternalAuthProviderAPI = async (
     params?: IQueryExternalAuthProviderParams,
-): Promise<IListResponse<IExternalAuthProvider>> => {
+): Promise<HttpResponseList<IExternalAuthProvider>> => {
     const url = `${REST_EXTERNAL}`;
     const response = await get(url, {
         params,
     });
-    const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

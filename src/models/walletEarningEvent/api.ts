@@ -1,4 +1,4 @@
-import { get } from '../../utils/axiosHelper';
+import { get } from '../../utils/axiosHelper222';
 import { WALLET_EARNING_EVENT_PATH } from './paths';
 import { IQueryWalletEarningEventParams, IWalletEarningEvent } from './types';
 

@@ -1,7 +1,8 @@
 import { RawAxiosRequestHeaders } from 'axios';
-import { get, post, put } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, post, put } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { WALLET_PATH } from './paths';
 import {
     IAddMoneyParams,
@@ -34,7 +35,7 @@ export const getWalletHistoryAPI = async (
     walletId: IdType,
     params: IGetWalletHistoryParams,
     userHeaders?: RawAxiosRequestHeaders,
-): Promise<IListResponse<IWalletHistory>> => {
+): Promise<HttpResponseList<IWalletHistory>> => {
     const url = generatePath(WALLET_PATH.GET_HISTORY, {
         id: walletId,
     });

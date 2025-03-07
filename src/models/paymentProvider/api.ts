@@ -1,26 +1,27 @@
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, post, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { PAYMENT_PROVIDER_PATH } from './paths';
-import { ICreatePaymentProviderParams, IPaymentProvider, IQueryPaymentProviderParams, IUpdatePaymentProviderParams } from './types';
+import {
+    ICreatePaymentProviderParams,
+    IPaymentProvider,
+    IQueryPaymentProviderParams,
+    IUpdatePaymentProviderParams,
+} from './types';
 
 /**
  * #VDT-61: Thiếu tài liệu GET, POST, PUT, DELETE: api/payment-providers
  */
 export const queryPaymentProviderAPI = async (
     params?: IQueryPaymentProviderParams,
-): Promise<IListResponse<IPaymentProvider>> => {
+): Promise<HttpResponseList<IPaymentProvider>> => {
     const url = PAYMENT_PROVIDER_PATH.QUERY;
     const response = await get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

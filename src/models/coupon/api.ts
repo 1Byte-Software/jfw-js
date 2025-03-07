@@ -1,6 +1,7 @@
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, post, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { COUPON_PATH } from './paths';
 import {
     ICoupon,
@@ -11,18 +12,13 @@ import {
 
 export const queryCouponAPI = async (
     params: IQueryCouponsParams,
-): Promise<IListResponse<ICoupon>> => {
+): Promise<HttpResponseList<ICoupon>> => {
     const url = `${REST}`;
     const response = await get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

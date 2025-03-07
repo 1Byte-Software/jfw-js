@@ -1,34 +1,32 @@
-import { AxiosResponse, RawAxiosRequestHeaders } from 'axios';
-import { get, remove } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { DEVICE_PATH } from './paths';
 import { ICheckUserAccessParams, IDevice, IQueryDeviceParams } from './types';
-import { IResponse } from '../../core';
 
 /**
  * Gets the list off all devices by the given filter.
  */
 export const queryDeviceAPI = async (
     params: IQueryDeviceParams,
-): Promise<IListResponse<IDevice>> => {
+    config?: AxiosRequestConfig,
+): Promise<HttpResponseList<IDevice>> => {
     const url = DEVICE_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
+        ...config,
         params,
     });
-    const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data;
 };
 
 /**
  * Adds a new device to the user.
  * @feature Will make in feature
  */
-export const createDeviceAPI = async () => {
+export const createDeviceAPI = async (config?: AxiosRequestConfig) => {
     const url = DEVICE_PATH.CREATE;
 };
 
@@ -37,12 +35,13 @@ export const createDeviceAPI = async () => {
  */
 export const getDeviceByIdAPI = async (
     deviceId: IdType,
-): Promise<AxiosResponse<IDevice>> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(DEVICE_PATH.GET_BY_ID, {
         id: deviceId,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get<HttpResponse<IDevice>>(url, config);
 
     return response;
 };
@@ -50,19 +49,25 @@ export const getDeviceByIdAPI = async (
 /**
  * Delete a device by data ID.
  */
-export const deleteDeviceByIdAPI = async (deviceId: IdType) => {
+export const deleteDeviceByIdAPI = async (
+    deviceId: IdType,
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(DEVICE_PATH.DELETE_BY_ID, {
         id: deviceId,
     });
 
-    return await remove(url);
+    return await jfwAxios.delete(url, config);
 };
 
 /**
  * Updates the device data.
  * @feature Will make in feature
  */
-export const updateDeviceById = (deviceId: IdType) => {
+export const updateDeviceById = (
+    deviceId: IdType,
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(DEVICE_PATH.UPDATE_BY_ID, {
         id: deviceId,
     });
@@ -73,17 +78,16 @@ export const updateDeviceById = (deviceId: IdType) => {
  */
 export const checkUserAccessAPI = async (
     params: ICheckUserAccessParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IResponse<boolean>> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = DEVICE_PATH.CHECK_USER_ACCESS;
 
-    const response = (await get(
-        url,
-        { params },
-        userHeaders,
-    )) as unknown as IResponse<boolean>;
+    const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
+        ...config,
+        params,
+    });
 
-    return response;
+    return response.data;
 };
 
 /**
@@ -92,7 +96,7 @@ export const checkUserAccessAPI = async (
  */
 export const getDevicesByIds = async (
     deviceIds: IdType[],
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = DEVICE_PATH.GET_BY_LIST_ID;
 };
@@ -101,7 +105,7 @@ export const getDevicesByIds = async (
  * Gets the current device information.
  * @feature Will make in the feature
  */
-export const getDeviceCurrent = async () => {
+export const getDeviceCurrent = async (config?: AxiosRequestConfig) => {
     const url = DEVICE_PATH.GET_CURRENT;
 };
 
@@ -109,7 +113,10 @@ export const getDeviceCurrent = async () => {
  * Gets the device data by specified code.
  * @feature Will make in the feature
  */
-export const getDeviceByCode = async (deviceCode: string) => {
+export const getDeviceByCode = async (
+    deviceCode: string,
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(DEVICE_PATH.GET_BY_CODE, {
         code: deviceCode,
     });

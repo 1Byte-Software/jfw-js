@@ -9,16 +9,3 @@ export interface IBaseObject {
     modifiedBy?: IdType;
     modifiedDate: DateType;
 }
-
-export interface IListResponse<T> {
-    items: T[];
-    pagination: IPagination | null;
-}
-
-export interface IPagination {
-    totalItems: number;
-    totalPractices?: number;
-    totalPages?: number;
-    pageNumber?: number;
-    pageSize?: number;
-}

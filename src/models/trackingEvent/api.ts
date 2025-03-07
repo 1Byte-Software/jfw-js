@@ -1,4 +1,4 @@
-import { get } from '../../utils/axiosHelper';
+import { get } from '../../utils/axiosHelper222';
 import { TRACKING_EVENT_PATH } from './paths';
 import { IQueryTrackingEventParams, ITrackingEvent } from './types';
 

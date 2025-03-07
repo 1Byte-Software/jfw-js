@@ -1,6 +1,7 @@
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, post, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { EMAIL_ADDRESS_PATTERN_PATH } from './paths';
 import {
     ICreateEmailAddressPatternParams,
@@ -18,7 +19,7 @@ const PLACEHOLDER_KEYS = 'placeholder-keys';
  */
 export const queryEmailAddressPatternAPI = async (
     params: IQueryEmailAddressPatternParams,
-): Promise<IListResponse<IEmailAddressPattern>> => {
+): Promise<HttpResponseList<IEmailAddressPattern>> => {
     const url = EMAIL_ADDRESS_PATTERN_PATH.QUERY;
     const response = await get(url, {
         params,

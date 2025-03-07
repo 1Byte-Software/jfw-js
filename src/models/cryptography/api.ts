@@ -1,4 +1,4 @@
-import { post } from '../../utils/axiosHelper';
+import { post } from '../../utils/axiosHelper222';
 import { CRYPTOGRAPHY_PATH } from './paths';
 import { IDecryptParams, IEncryptParams } from './types';
 

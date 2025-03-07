@@ -1,5 +1,5 @@
 import { RawAxiosRequestHeaders } from 'axios';
-import { get, remove } from '../../utils/axiosHelper';
+import { get, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { INVOICE_PATH } from './paths';

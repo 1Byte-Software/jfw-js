@@ -1,6 +1,7 @@
-import { get, post, put, remove } from '../../../utils/axiosHelper';
+import { HttpResponseList } from '../../../core';
+import { get, post, put, remove } from '../../../utils/axiosHelper222';
 import { generatePath } from '../../../utils/path';
-import { IListResponse, IdType } from '../../base';
+import { IdType } from '../../base';
 import { INTEGRATION_SMTP_PATH } from './paths';
 import {
     ICreateIntegrationSMTPParams,
@@ -14,19 +15,14 @@ import {
  */
 export const queryIntegrationSMTPAPI = async (
     params?: IQueryIntegrationSMTPParams,
-): Promise<IListResponse<IIntegrationSMTP>> => {
+): Promise<HttpResponseList<IIntegrationSMTP>> => {
     const url = INTEGRATION_SMTP_PATH.QUERY;
 
     const response = await get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data;
 };
 
 /**

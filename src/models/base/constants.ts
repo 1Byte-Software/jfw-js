@@ -1,9 +1,9 @@
-export enum STATUS {
-    active = 'Active',
-    inactive = 'Inactive',
+export enum Status {
+    ACTIVE = 'Active',
+    INACTIVE = 'Inactive',
 }
 
-export enum SORT_ORDER {
-    asc = 'asc',
-    desc = 'desc',
+export enum SortOrder {
+    ASC = 'asc',
+    DESC = 'desc',
 }

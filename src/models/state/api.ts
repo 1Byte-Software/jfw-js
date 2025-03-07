@@ -1,6 +1,7 @@
-import { get } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { STATE_PATH } from './paths';
 import { IQueryStateParams, IState } from './types';
 
@@ -9,17 +10,13 @@ import { IQueryStateParams, IState } from './types';
  */
 export const queryStateAPI = async (
     params?: IQueryStateParams,
-): Promise<IListResponse<IState>> => {
+): Promise<HttpResponseList<IState>> => {
     const url = STATE_PATH.QUERY;
     const response = await get(url, {
         params,
     });
-    const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

@@ -1,6 +1,7 @@
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, post, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { SUBSCRIPTION_TYPE_PATH } from './paths';
 import {
     ICreateSubscriptionTypeParams,
@@ -16,15 +17,11 @@ const REST = 'subscription-types';
  */
 export const querySubscriptionTypeAPI = async (
     params?: IQuerySubscriptionTypeParams,
-): Promise<IListResponse<ISubscriptionType>> => {
+): Promise<HttpResponseList<ISubscriptionType>> => {
     const url = `${REST}`;
     const response = await get(url, { params });
-    const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

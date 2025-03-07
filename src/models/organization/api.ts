@@ -1,7 +1,8 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get, patch, post, put, remove } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { ORGANIZATION_PATH } from './paths';
 import {
     IAddUserToOrganizationParams,
@@ -14,25 +15,22 @@ import {
     IUpdateOrganizationParams,
     IUpdateUserStatusInOrganizationParams,
 } from './types';
-import { IResponse } from '../../core';
 
 /**
  * JFW-49: Thiếu tài liệu GET: api/organizations
  */
 export const queryOrganizationAPI = async (
     params: IQueryOrganizationParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IListResponse<IOrganization>> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = ORGANIZATION_PATH.QUERY;
 
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get<HttpResponseList<IOrganization>>(url, {
+        ...config,
+        params,
+    });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data;
 };
 
 /**
@@ -40,12 +38,15 @@ export const queryOrganizationAPI = async (
  */
 export const getOrganizationByIdAPI = async (
     id: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IOrganization> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(ORGANIZATION_PATH.GET_BY_ID, {
         id,
     });
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IOrganization>>(
+        url,
+        config,
+    );
 
     return response.data;
 };
@@ -56,22 +57,18 @@ export const getOrganizationByIdAPI = async (
 export const uploadFileToOrganizationAPI = async (
     id: IdType,
     payload: FormData,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ORGANIZATION_PATH.UPLOAD_FILE, {
         id,
     });
 
-    return post(
-        url,
-        payload,
-        {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
+    return jfwAxios.post(url, payload, {
+        ...config,
+        headers: {
+            'Content-Type': 'multipart/form-data',
         },
-        userHeaders,
-    );
+    });
 };
 
 /**
@@ -79,15 +76,15 @@ export const uploadFileToOrganizationAPI = async (
  */
 export const addUserToOrganizationAPI = async (
     params: IAddUserToOrganizationParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IResponse<IOrganizationUser>> => {
+    config?: AxiosRequestConfig,
+): Promise<HttpResponse<IOrganizationUser>> => {
     const { userId, organizationId } = params;
     const url = generatePath(ORGANIZATION_PATH.USERS.ADD_TO_ORGANIZATION, {
         id: organizationId,
         userId,
     });
 
-    const response = await post(url, null, null, userHeaders);
+    const response = await jfwAxios.post(url, null, config);
 
     return response.data;
 };
@@ -97,20 +94,18 @@ export const addUserToOrganizationAPI = async (
  */
 export const updateUserStatusInOrganizationAPI = async (
     params: IUpdateUserStatusInOrganizationParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IResponse<IOrganizationUser>> => {
+    config?: AxiosRequestConfig,
+): Promise<HttpResponse<IOrganizationUser>> => {
     const { userId, organizationId, ...restParams } = params;
     const url = generatePath(ORGANIZATION_PATH.USERS.UPDATE_STATUS_BY_ID, {
         id: organizationId,
         userId,
     });
 
-    const response = await patch(
-        url,
-        null,
-        { params: restParams },
-        userHeaders,
-    );
+    const response = await jfwAxios.patch(url, null, {
+        ...config,
+        params: restParams,
+    });
 
     return response.data;
 };
@@ -120,7 +115,7 @@ export const updateUserStatusInOrganizationAPI = async (
  */
 export const removeUserInOrganizationAPI = async (
     params: IRemoveUserInOrganizationParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const { userId, organizationId } = params;
 
@@ -129,7 +124,7 @@ export const removeUserInOrganizationAPI = async (
         userId,
     });
 
-    return remove(url, userHeaders);
+    return jfwAxios.delete(url, config);
 };
 
 /**
@@ -137,30 +132,26 @@ export const removeUserInOrganizationAPI = async (
  */
 export const queryUsersOfOrganizationAPI = async (
     params?: IQueryUsersOfOrganizationParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IListResponse<IOrganizationUser>> => {
+    config?: AxiosRequestConfig,
+): Promise<HttpResponse<IOrganizationUser>> => {
     const { organizationId, ...restParams } = params;
     const url = generatePath(ORGANIZATION_PATH.USERS.QUERY, {
         id: organizationId,
     });
-    const response = await get(url, { params: restParams }, userHeaders);
+    const response = await jfwAxios.get(url, { ...config, params: restParams });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data;
 };
 
 /**
  * Creates a new organization.
  */
 export const createOrganizationAPI = async (
-    params: ICreateOrganizationParams,
+    data: ICreateOrganizationParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = ORGANIZATION_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, data, config);
 
     return response.data;
 };
@@ -170,12 +161,13 @@ export const createOrganizationAPI = async (
  */
 export const updateOrganizationAPI = async (
     id: IdType,
-    payload: IUpdateOrganizationParams,
+    data: IUpdateOrganizationParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ORGANIZATION_PATH.UPDATE_BY_ID, {
         id,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, data, config);
 
     return response.data;
 };
@@ -183,11 +175,14 @@ export const updateOrganizationAPI = async (
 /**
  * #JFW-54: Thiếu tài liệu UPDATE: api/organizations/:id
  */
-export const deleteOrganizationAPI = async (id: IdType) => {
+export const deleteOrganizationAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(ORGANIZATION_PATH.DELETE_BY_ID, {
         id,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url, config);
 
     return response.data;
 };

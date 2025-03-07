@@ -1,5 +1,5 @@
 import { RawAxiosRequestHeaders } from 'axios';
-import { post, remove } from '../../utils/axiosHelper';
+import { post, remove } from '../../utils/axiosHelper222';
 import { ICreateIssueReactionParams } from './types';
 import { IdType } from '../base';
 import { generatePath } from '../../utils/path';

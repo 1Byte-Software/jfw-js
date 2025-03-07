@@ -1,4 +1,4 @@
-import { put } from '../../../utils/axiosHelper';
+import { put } from '../../../utils/axiosHelper222';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { BRAND_SETTING_PATH } from './paths';

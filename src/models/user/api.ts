@@ -1,8 +1,13 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { IResponse, IStatistic, IStatisticCommonParams } from '../../core';
-import { get, patch, post, put, remove } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import {
+    HttpResponse,
+    HttpResponseList,
+    IStatistic,
+    IStatisticCommonParams,
+} from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { IConfiguration, ICreateConfigurationParams } from '../configuration';
 import { USER_PATH } from './paths';
 import {
@@ -26,30 +31,21 @@ import {
 /**
  * Gets all the users.
  */
-export const queryUserAPI = async (
-    params: IQueryUserParams,
-): Promise<IListResponse<IUser>> => {
+export const queryUserAPI = async (params: IQueryUserParams) => {
     const url = USER_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get<HttpResponseList<IUser>>(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data;
 };
 
 /**
  * Gets the current user logged in.
  */
-export const getMeAPI = async (
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IUser> => {
+export const getMeAPI = async (config?: AxiosRequestConfig) => {
     const url = USER_PATH.GET_ME;
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IUser>>(url, config);
 
     return response.data;
 };
@@ -59,10 +55,10 @@ export const getMeAPI = async (
  */
 export const getUserByIdsAPI = async (
     path: string,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IUser[]> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = `${REST}?${path}`;
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
 
     return response.data;
 };
@@ -70,14 +66,12 @@ export const getUserByIdsAPI = async (
 /**
  * #JFW-65: Thiếu tài liệu GET: api/users/by-username/{username}
  */
-export const getUserByUsernameAPI = async (
-    username: string,
-): Promise<IUser> => {
+export const getUserByUsernameAPI = async (username: string) => {
     const url = generatePath(USER_PATH.GET_BY_USERNAME, {
         username,
     });
 
-    const response = await get(url, null);
+    const response = await jfwAxios.get<HttpResponse<IUser>>(url, null);
 
     return response.data;
 };
@@ -87,12 +81,12 @@ export const getUserByUsernameAPI = async (
  */
 export const getUserByIdAPI = async (
     userId: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IUser> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(USER_PATH.GET_BY_ID, {
         id: userId,
     });
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IUser>>(url, config);
 
     return response.data;
 };
@@ -102,14 +96,14 @@ export const getUserByIdAPI = async (
  */
 export const updateUserByIdAPI = async (
     userId: IdType,
-    payload: IUpdateProfileParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    data: IUpdateProfileParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.UPDATE_BY_ID, {
         id: userId,
     });
 
-    const response = await put(url, payload, null, userHeaders);
+    const response = await jfwAxios.put(url, data, config);
 
     return response.data;
 };
@@ -117,12 +111,15 @@ export const updateUserByIdAPI = async (
 /**
  * Delete a user
  */
-export const deleteUserAPI = async (userId: IdType) => {
+export const deleteUserAPI = async (
+    userId: IdType,
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(USER_PATH.DELETE_BY_ID, {
         id: userId,
     });
 
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url, config);
 
     return response.data;
 };
@@ -131,12 +128,12 @@ export const deleteUserAPI = async (userId: IdType) => {
  * Change the password of the user. If the user logs in to the system using the Google method, after calling the API change password successfully, we send an email to verify the user request.
  */
 export const changePasswordAPI = async (
-    params: IChangePasswordParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    data: IChangePasswordParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = USER_PATH.CHANGE_PASSWORD;
 
-    const response = await put(url, params, null, userHeaders);
+    const response = await jfwAxios.put(url, data, config);
 
     return response.data;
 };
@@ -147,12 +144,12 @@ export const changePasswordAPI = async (
 export const getUserConfigurationAPI = async (
     userId: IdType,
     params?: IGetUserConfigurationParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IConfiguration[]> => {
     const url = generatePath(USER_PATH.CONFIGURATIONS.GET, {
         id: userId,
     });
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get(url, { ...config, params });
 
     return response.data;
 };
@@ -162,14 +159,14 @@ export const getUserConfigurationAPI = async (
  */
 export const createUserConfigurationAPI = async (
     userId: IdType,
-    payload: ICreateConfigurationParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    data: ICreateConfigurationParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.CONFIGURATIONS.CREATE, {
         id: userId,
     });
 
-    return await post(url, payload, null, userHeaders);
+    return await jfwAxios.post(url, data, config);
 };
 
 /**
@@ -177,13 +174,13 @@ export const createUserConfigurationAPI = async (
  */
 export const getRefereeAPI = async (
     userId: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IReferee[]> => {
     const url = generatePath(USER_PATH.GET_REFEREE, {
         id: userId,
     });
 
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get(url, config);
 
     return response.data;
 };
@@ -193,13 +190,13 @@ export const getRefereeAPI = async (
  */
 export const checkReferralCodeAPI = async (
     code: string,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.REFERRAL.CHECK, {
         code,
     });
 
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get(url, config);
 
     return response.data;
 };
@@ -210,31 +207,27 @@ export const checkReferralCodeAPI = async (
 export const applyReferralCodeAPI = async (
     userId: IdType,
     params: IApplyReferralCodeParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.REFERRAL.APPLY, {
         id: userId,
     });
 
-    return await post(
-        url,
-        null,
-        {
-            params,
-        },
-        userHeaders,
-    );
+    return await jfwAxios.post(url, null, {
+        ...config,
+        params,
+    });
 };
 
 /**
  * Register a new user by the given information.
  */
 export const registerAPI = async (
-    payload: IRegisterParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    data: IRegisterParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = USER_PATH.REGISTER;
-    const response = await post(url, payload, null, userHeaders);
+    const response = await jfwAxios.post(url, data, config);
     return response.data;
 };
 
@@ -242,11 +235,11 @@ export const registerAPI = async (
  * Forgot password
  */
 export const forgotPasswordAPI = async (
-    payload: IForgotPasswordParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    data: IForgotPasswordParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = USER_PATH.FORGOT_PASSWORD;
-    const response = await post(url, payload, null, userHeaders);
+    const response = await jfwAxios.post(url, data, config);
     return response.data;
 };
 
@@ -254,11 +247,12 @@ export const forgotPasswordAPI = async (
  * Resets the user's password from the reset password token.
  */
 export const resetPasswordAPI = async (
-    payload: IResetPasswordParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    data: IResetPasswordParams,
+    config?: AxiosRequestConfig,
 ) => {
     const url = USER_PATH.RESET_PASSWORD;
-    const response = await post(url, payload, null, userHeaders);
+    const response = await jfwAxios.post(url, data, config);
+
     return response.data;
 };
 
@@ -267,9 +261,11 @@ export const resetPasswordAPI = async (
  */
 export const getUserStatisticAPI = async (
     params: IStatisticCommonParams,
-): Promise<IStatistic[]> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = USER_PATH.STATISTIC;
-    const response = await get(url, {
+    const response = await jfwAxios.get<HttpResponse<IStatistic[]>>(url, {
+        ...config,
         params,
     });
 
@@ -279,26 +275,33 @@ export const getUserStatisticAPI = async (
 /**
  * #JFW-68: Thiếu tài liệu GET api/v1/users/{userCode}/type/{type}
  */
-export const updateUserTypeAPI = async (params: IUpdateUserTypeParams) => {
+export const updateUserTypeAPI = async (
+    params: IUpdateUserTypeParams,
+    config?: AxiosRequestConfig,
+) => {
     const { type, userCode } = params;
     const url = generatePath(USER_PATH.UPDATE_TYPE, {
         userCode,
         type,
     });
 
-    const response = await put(url);
+    const response = await jfwAxios.put(url, config);
     return response.data;
 };
 
 /**
  * Assigns roles to the user.
  */
-export const assignRolesToUserAPI = async (userId: IdType, params: string) => {
+export const assignRolesToUserAPI = async (
+    userId: IdType,
+    params: string,
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(USER_PATH.ROLES.ASSIGN_TO_USER, {
         id: userId,
     });
 
-    const response = await patch(`${url}?${params}`);
+    const response = await jfwAxios.patch(`${url}?${params}`, config);
 
     return response.data;
 };
@@ -309,11 +312,12 @@ export const assignRolesToUserAPI = async (userId: IdType, params: string) => {
 export const revokeRolesFromUserAPI = async (
     userId: IdType,
     params: string,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.ROLES.REMOVE_FROM_USER, {
         id: userId,
     });
-    const response = await remove(`${url}?${params}`);
+    const response = await jfwAxios.delete(`${url}?${params}`, config);
 
     return response.data;
 };
@@ -323,10 +327,13 @@ export const revokeRolesFromUserAPI = async (
  */
 export const authenticationByGoogleAPI = async (
     params: IAuthenticationByGoogleParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<string> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = USER_PATH.AUTH.BY_GOOGLE;
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<string>>(url, {
+        ...config,
+        params,
+    });
 
     return response.data;
 };
@@ -335,11 +342,17 @@ export const authenticationByGoogleAPI = async (
  * This gets user data, creates authentication token and returns it.
  */
 export const authenticateAPI = async (
-    payload: IAuthenticationParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IAuthenticateResponse> => {
+    data: IAuthenticationParams,
+    config?: AxiosRequestConfig,
+) => {
     const url = USER_PATH.AUTH.ROOT;
-    const response = await post(url, payload, null, userHeaders);
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        data,
+        config,
+    );
+
+    console.debug('response', response);
 
     return response.data;
 };
@@ -348,12 +361,12 @@ export const authenticateAPI = async (
  * Authenticates the user with the given email and brand URL.
  */
 export const authenticateByEmailAddressAPI = async (
-    payload: IAuthenticateByEmailAddressParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IResponse<null>> => {
+    data: IAuthenticateByEmailAddressParams,
+    config?: AxiosRequestConfig,
+) => {
     const url = USER_PATH.AUTH.BY_EMAIL_ADDRESS;
 
-    const response = await post(url, payload, null, userHeaders);
+    const response = await jfwAxios.post<HttpResponse<null>>(url, data, config);
 
     return response.data;
 };

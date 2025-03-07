@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
-import { IResponseList } from '../../../core';
-import { get, post, put, remove } from '../../../utils/axiosHelper';
+import { ListData } from '../../../core';
+import { get, post, put, remove } from '../../../utils/axiosHelper222';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { INTEGRATION_AUTHENTICATION_PATH } from './paths';
@@ -19,7 +19,7 @@ export const queryIntegrationAuthenticationAPI = async (
 ) => {
     const url = INTEGRATION_AUTHENTICATION_PATH.QUERY;
 
-    const response: AxiosResponse<IResponseList<IIntegrationAuthentication>> =
+    const response: AxiosResponse<ListData<IIntegrationAuthentication>> =
         await get(url, {
             params,
         });

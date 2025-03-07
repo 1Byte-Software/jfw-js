@@ -5,10 +5,10 @@ export const MODE_VALUES = {
     production: 'production',
 };
 
-export const API_DOMAIN = {
-    production: 'https://protocol.jframework.io/api/',
-    development: 'https://protocol.jframework.dev/api/',
-};
+// export const API_DOMAIN = {
+//     production: 'https://protocol.jframework.io/api/',
+//     development: 'https://protocol.jframework.dev/api/',
+// };
 
 // Represents a collection of date formats for international use.
 export const FORMATS_DATE: IObjectHasKeyAsString<string> = {

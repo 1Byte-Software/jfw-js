@@ -1,7 +1,8 @@
 import { RawAxiosRequestHeaders } from 'axios';
-import { get, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { get, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { NOTIFICATION_PATH } from './paths';
 import { INotification, IQueryNotificationParams } from './types';
 
@@ -11,15 +12,11 @@ import { INotification, IQueryNotificationParams } from './types';
 export const queryNotificationAPI = async (
     params: IQueryNotificationParams,
     userHeaders?: RawAxiosRequestHeaders,
-): Promise<IListResponse<INotification>> => {
+): Promise<HttpResponseList<INotification>> => {
     const url = NOTIFICATION_PATH.QUERY;
     const response = await get(url, { params }, userHeaders);
-    const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**

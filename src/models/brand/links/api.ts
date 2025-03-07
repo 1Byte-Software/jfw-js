@@ -1,5 +1,7 @@
-import { AxiosHeaders } from 'axios';
-import { get, post, put, remove } from '../../../utils/axiosHelper';
+import { AxiosHeaders, AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../../core';
+import { jfwAxios } from '../../../core/client/client';
+import { get, post, put, remove } from '../../../utils/axiosHelper222';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { BRAND_LINK_PATH } from './paths';
@@ -30,14 +32,17 @@ export const getBrandLinkAPI = async (
  */
 export const getBrandLinkByTypeAPI = async (
     params: IGetBrandLinkByTypeParams,
-    userHeaders?: AxiosHeaders,
-): Promise<IBrandLink[]> => {
+    config?: AxiosRequestConfig,
+) => {
     const { brandId, type } = params;
     const url = generatePath(BRAND_LINK_PATH.GET_BY_TYPE, {
         id: brandId,
         type,
     });
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IBrandLink[]>>(url, {
+        ...config,
+        params,
+    });
 
     return response.data;
 };

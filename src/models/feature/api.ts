@@ -1,4 +1,4 @@
-import { get, patch, post, remove } from '../../utils/axiosHelper';
+import { get, patch, post, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { FEATURE_PATH } from './paths';

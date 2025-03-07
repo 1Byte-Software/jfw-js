@@ -1,6 +1,9 @@
 import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
 import { axiosInstanceJfw } from '../config/axios/axiosClient';
 
+/**
+ * @deprecated Use jfwAxios instead
+ */
 export const get = (
     url: string,
     configArg: AxiosRequestConfig = {},
@@ -18,6 +21,9 @@ export const get = (
     return axiosInstanceJfw.get(url, config);
 };
 
+/**
+ * @deprecated Use jfwAxios instead
+ */
 export const post = (
     url: string,
     payload?: any,
@@ -36,6 +42,9 @@ export const post = (
     return axiosInstanceJfw.post(url, payload, config);
 };
 
+/**
+ * @deprecated Use jfwAxios instead
+ */
 export const put = (
     url: string,
     payload?: any,
@@ -54,6 +63,9 @@ export const put = (
     return axiosInstanceJfw.put(url, payload, config);
 };
 
+/**
+ * @deprecated Use jfwAxios instead
+ */
 export const patch = (
     url: string,
     payload?: any,
@@ -72,6 +84,9 @@ export const patch = (
     return axiosInstanceJfw.patch(url, payload, config);
 };
 
+/**
+ * @deprecated Use jfwAxios instead
+ */
 export const remove = (url: string, userHeaders?: RawAxiosRequestHeaders) => {
     const config = {
         headers: userHeaders,
