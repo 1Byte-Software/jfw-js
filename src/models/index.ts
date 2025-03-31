@@ -27,6 +27,7 @@ export * from './paymentMethod';
 export * from './paymentProvider';
 export * from './permission';
 export * from './price';
+export * from './resourceType';
 export * from './role';
 export * from './subscriptionType';
 export * from './timezone';

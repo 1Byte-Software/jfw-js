@@ -1,5 +1,5 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get, patch, post, remove } from '../../utils/axiosHelper222';
+import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { ISSUE_CATEGORY_PATH } from './paths';
@@ -14,10 +14,10 @@ import {
  */
 export const queryIssueCategoryAPI = async (
     params?: IQueryIssueCategoryParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IIssueCategory[]> => {
     const url = ISSUE_CATEGORY_PATH.QUERY;
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get(url, { ...config, params });
 
     return response.data;
 };
@@ -31,7 +31,7 @@ export const getIssueCategoryByIdAPI = async (
     const url = generatePath(ISSUE_CATEGORY_PATH.GET_BY_ID, {
         id,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -42,8 +42,8 @@ export const getIssueCategoryByIdAPI = async (
 export const createIssueCategoryAPI = async (
     payload: ICreateIssueCategoryParams,
 ) => {
-    const url = `${REST}`;
-    const response = await post(url, payload);
+    const url = ISSUE_CATEGORY_PATH.QUERY;
+    const response = await jfwAxios.post(url, payload);
 
     return response.data;
 };
@@ -59,7 +59,7 @@ export const updateIssueCategoryAPI = async (
         id,
     });
 
-    const response = await patch(url, payload);
+    const response = await jfwAxios.patch(url, payload);
 
     return response.data;
 };
@@ -72,7 +72,7 @@ export const deleteIssueCategoryAPI = async (id: IdType) => {
         id,
     });
 
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

@@ -8,6 +8,7 @@ const REST_REFERRAL = 'referrals';
 export const USER_PATH = {
     QUERY: `v1/${REST}`,
     GET_BY_ID: `${REST}/:id`,
+    GET_BY_IDS: `${REST}`,
     REGISTER: `${REST}/register`,
     UPDATE_BY_ID: `${REST}/:id`,
     STATISTIC: `${REST}/statistics`,
@@ -29,8 +30,8 @@ export const USER_PATH = {
     },
 
     ROLES: {
-        ASSIGN_TO_USER: `${REST}/:id/${REST_ROLES}`,
-        REMOVE_FROM_USER: `${REST}/:id/${REST_ROLES}`,
+        ASSIGN_TO_USER: `v1/${REST}/:id/${REST_ROLES}`,
+        REMOVE_FROM_USER: `v1/${REST}/:id/${REST_ROLES}`,
     },
 
     AUTH: {
@@ -49,6 +50,6 @@ export const USER_PATH = {
 
     CONFIGURATIONS: {
         GET: `${REST}/:id/${REST_CONFIGURATION}`,
-        CREATE: `${REST}/:id/${REST_CONFIGURATION}`
-    }
+        CREATE: `${REST}/:id/${REST_CONFIGURATION}`,
+    },
 };

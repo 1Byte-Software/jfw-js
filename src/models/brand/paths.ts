@@ -1,11 +1,15 @@
 const REST = 'brands';
 
 export const BRAND_PATH = {
-    QUERY: `${REST}`,
+    QUERY: `v1/${REST}`,
 
     GET_BY_ID: `${REST}/:id`,
     GET_BY_URL: `${REST}/by-url/:brandUrl`,
+    CREATE: `v1/${REST}`,
     UPDATE_BY_ID: `${REST}/:id`,
+
+    CHECK_DOMAIN_EXISTS: `v1/${REST}/check-domain-exists/:domainUrl`,
+    GENERATE_DOMAIN: `v1/${REST}/generate-domain`,
 };
 
 export { REST as REST_BRAND };

@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { TRACKING_EMAIL_ADDRESS_PATH } from './paths';
 import {
     IQueryTrackingEmailAddressParams,
@@ -10,9 +10,9 @@ export const queryTrackingEmailAddressAPI = async (
     params: IQueryTrackingEmailAddressParams,
 ): Promise<HttpResponseList<ITrackingEmailAddress>> => {
     const url = TRACKING_EMAIL_ADDRESS_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
-    return response.data
+    return response.data;
 };

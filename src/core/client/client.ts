@@ -1,8 +1,4 @@
-import axios, {
-    Axios,
-    AxiosError,
-    AxiosResponse
-} from 'axios';
+import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import { THttpError } from '../error';
 import { HttpResponse } from '../query';
 import { BaseUrl, HeaderKey } from './constants';
@@ -11,8 +7,6 @@ import { InitOption } from './types';
 export let jfwAxios: Axios | null = null;
 
 const init = (initOption: InitOption) => {
-    // jfwOption = initOption;
-
     jfwAxios = axios.create({
         baseURL: getBaseURL(initOption.environment),
         headers: {

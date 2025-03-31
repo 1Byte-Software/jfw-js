@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get, post, put, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { COUPON_PATH } from './paths';
@@ -13,12 +13,12 @@ import {
 export const queryCouponAPI = async (
     params: IQueryCouponsParams,
 ): Promise<HttpResponseList<ICoupon>> => {
-    const url = `${REST}`;
-    const response = await get(url, {
+    const url = COUPON_PATH.QUERY;
+    const response = await jfwAxios.get(url, {
         params,
     });
 
-    return response.data
+    return response.data;
 };
 
 /**
@@ -28,7 +28,7 @@ export const getCouponByIdAPI = async (couponId: IdType): Promise<ICoupon> => {
     const url = generatePath(COUPON_PATH.GET_BY_ID, {
         id: couponId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -37,8 +37,8 @@ export const getCouponByIdAPI = async (couponId: IdType): Promise<ICoupon> => {
  * #JFW-72: Thiếu tài liệu api/coupons
  */
 export const createCouponAPI = async (params: ICreateCouponParams) => {
-    const url = `${REST}`;
-    const response = await post(url, params);
+    const url = COUPON_PATH.CREATE;
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -53,7 +53,7 @@ export const updateCouponByIdAPI = async (
     const url = generatePath(COUPON_PATH.UPDATE_BY_ID, {
         id: couponId,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -65,7 +65,7 @@ export const deleteCouponByIdAPI = async (couponId: IdType) => {
     const url = generatePath(COUPON_PATH.DELETE_BY_ID, {
         id: couponId,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

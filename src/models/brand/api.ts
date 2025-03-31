@@ -1,10 +1,16 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../core';
+import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { BRAND_PATH } from './paths';
-import { IBrand, IGetQueryBrandParams, IUpdateBrandParams } from './types';
+import {
+    IBrand,
+    ICreateBrandParams,
+    IGeneratedDomain,
+    IGetQueryBrandParams,
+    IUpdateBrandParams,
+} from './types';
 
 /**
  * List all brands.
@@ -14,7 +20,7 @@ export const queryBrandAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = BRAND_PATH.QUERY;
-    const response = await jfwAxios.get<HttpResponseList<IBrand>>(url, {
+    const response = await jfwAxios.get<HttpResponse<IBrand[]>>(url, {
         ...config,
         params,
     });
@@ -53,6 +59,14 @@ export const getBrandByIdAPI = async (
     return response.data;
 };
 
+export const createBrandAPI = async (data: ICreateBrandParams) => {
+    const url = BRAND_PATH.CREATE;
+
+    const response = await jfwAxios.post<HttpResponse<IBrand>>(url, data);
+
+    return response.data;
+};
+
 export const updateBrandAPI = async (
     id: IdType,
     payload: IUpdateBrandParams,
@@ -63,6 +77,27 @@ export const updateBrandAPI = async (
 
     // #NOT_SURE: HttpResponse<null>
     const response = await jfwAxios.put<HttpResponse<null>>(url, payload);
+
+    return response.data;
+};
+
+export const checkExistDomainUrlAPI = async (
+    domainUrl: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(BRAND_PATH.CHECK_DOMAIN_EXISTS, {
+        domainUrl,
+    });
+
+    const response = await jfwAxios.get<HttpResponse<boolean>>(url, config);
+
+    return response.data;
+};
+
+export const generateDomainAPI = async (config?: AxiosRequestConfig) => {
+    const url = BRAND_PATH.GENERATE_DOMAIN;
+
+    const response = await jfwAxios.get<HttpResponse<IGeneratedDomain>>(url, config);
 
     return response.data;
 };

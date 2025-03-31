@@ -1,7 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
-import { get, post, put, remove } from '../../utils/axiosHelper222';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { PACKAGE_PATH } from './paths';
@@ -35,7 +34,7 @@ export const getPackageByIdAPI = async (id: IdType): Promise<IPackage> => {
     const url = generatePath(PACKAGE_PATH.GET_BY_ID, {
         id,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -45,7 +44,7 @@ export const getPackageByIdAPI = async (id: IdType): Promise<IPackage> => {
  */
 export const createPackageAPI = async (params: ICreatePackageParams) => {
     const url = PACKAGE_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -60,7 +59,7 @@ export const updatePackageAPI = async (
     const url = generatePath(PACKAGE_PATH.UPDATE_BY_ID, {
         id,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -72,7 +71,7 @@ export const deletePackageAPI = async (id: IdType) => {
     const url = generatePath(PACKAGE_PATH.DELETE_BY_ID, {
         id,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };
@@ -88,7 +87,7 @@ export const addFeaturesToPackageAPI = async (
     const url = generatePath(PACKAGE_PATH.FEATURES.ADD_TO_PACKAGE, {
         id: packageId,
     });
-    const response = await post(url, payload);
+    const response = await jfwAxios.post(url, payload);
 
     return response.data;
 };

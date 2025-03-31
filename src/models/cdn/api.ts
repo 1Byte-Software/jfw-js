@@ -1,24 +1,24 @@
 import { AxiosRequestConfig } from 'axios';
+import { jfwAxios } from '../../core/client/client';
+import { CDN_PATH } from './paths';
 import { ICdn } from './types';
-import { post } from '../../utils/axiosHelper222';
+import { HttpResponse } from '../../core';
 
 /**
  * Save the specified the file to the CDN folder with CDN file information.
  */
-export const cdnUploadFileAPI = async (
-    payload: FormData,
-    configArg: AxiosRequestConfig = {
-        headers: {},
-    },
-): Promise<ICdn> => {
+export const uploadFileCDN = async (
+    data: FormData,
+    config?: AxiosRequestConfig,
+): Promise<HttpResponse<ICdn>> => {
     const url = CDN_PATH.UPLOAD_FILE;
 
-    if (!configArg.headers?.['Content-Type'])
-        configArg.headers ?? (configArg.headers = {});
+    if (!config.headers?.['Content-Type'])
+        config.headers ?? (config.headers = {});
 
-    configArg.headers['Content-Type'] = 'multipart/form-data';
+    config.headers['Content-Type'] = 'multipart/form-data';
 
-    const response = await post(url, payload, configArg);
+    const response = await jfwAxios.post(url, data, config);
 
     return response.data;
 };

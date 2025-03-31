@@ -1,16 +1,16 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { IExchangeRate } from './types';
+import { AxiosRequestConfig } from 'axios';
+import { jfwAxios } from '../../core/client/client';
 import { EXCHANGE_RATE_PATH } from './paths';
-import { get } from '../../utils/axiosHelper222';
+import { IExchangeRate } from './types';
 
 /**
  * Gets all exchange rate in the system.
  */
 export const getExchangeRateAPI = async (
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IExchangeRate[]> => {
     const url = EXCHANGE_RATE_PATH.GET;
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get(url, config);
 
     return response.data;
 };

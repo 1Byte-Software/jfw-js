@@ -57,7 +57,7 @@ export const getUserByIdsAPI = async (
     path: string,
     config?: AxiosRequestConfig,
 ) => {
-    const url = `${REST}?${path}`;
+    const url = `${USER_PATH.GET_BY_IDS}?${path}`;
     const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
 
     return response.data;
@@ -227,7 +227,11 @@ export const registerAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = USER_PATH.REGISTER;
-    const response = await jfwAxios.post(url, data, config);
+    const response = await jfwAxios.post<HttpResponse<string>>(
+        url,
+        data,
+        config,
+    );
     return response.data;
 };
 
@@ -294,14 +298,22 @@ export const updateUserTypeAPI = async (
  */
 export const assignRolesToUserAPI = async (
     userId: IdType,
-    params: string,
+    roleIds: IdType[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.ROLES.ASSIGN_TO_USER, {
         id: userId,
     });
 
-    const response = await jfwAxios.patch(`${url}?${params}`, config);
+    const response = await jfwAxios.patch<HttpResponse<boolean>>(url, null, {
+        params: {
+            roleIds,
+        },
+        paramsSerializer: {
+            indexes: true, // use brackets with indexes
+        },
+        ...config,
+    });
 
     return response.data;
 };
@@ -311,13 +323,21 @@ export const assignRolesToUserAPI = async (
  */
 export const revokeRolesFromUserAPI = async (
     userId: IdType,
-    params: string,
+    roleIds: IdType[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.ROLES.REMOVE_FROM_USER, {
         id: userId,
     });
-    const response = await jfwAxios.delete(`${url}?${params}`, config);
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
+        params: {
+            roleIds,
+        },
+        paramsSerializer: {
+            indexes: true, // use brackets with indexes
+        },
+        ...config,
+    });
 
     return response.data;
 };

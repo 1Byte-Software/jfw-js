@@ -129,7 +129,7 @@ export const getDeviceByCode = async (
 //     params: IStatisticCommonParams,
 // ): Promise<IStatistic[]> => {
 //     const url = `${REST}/${STATISTIC}`;
-//     const response = await get(url, {
+//     const response = await jfwAxios.get(url, {
 //         params,
 //     });
 

@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get, post, put, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { SUBSCRIPTION_TYPE_PATH } from './paths';
@@ -18,10 +18,10 @@ const REST = 'subscription-types';
 export const querySubscriptionTypeAPI = async (
     params?: IQuerySubscriptionTypeParams,
 ): Promise<HttpResponseList<ISubscriptionType>> => {
-    const url = `${REST}`;
-    const response = await get(url, { params });
+    const url = SUBSCRIPTION_TYPE_PATH.QUERY;
+    const response = await jfwAxios.get(url, { params });
 
-    return response.data
+    return response.data;
 };
 
 /**
@@ -33,7 +33,7 @@ export const getSubscriptionTypeByIdAPI = async (
     const url = generatePath(SUBSCRIPTION_TYPE_PATH.GET_BY_ID, {
         id: subscriptionTypeId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -44,8 +44,8 @@ export const getSubscriptionTypeByIdAPI = async (
 export const createSubscriptionTypeAPI = async (
     params: ICreateSubscriptionTypeParams,
 ) => {
-    const url = `${REST}`;
-    const response = await post(url, params);
+    const url = SUBSCRIPTION_TYPE_PATH.CREATE;
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -60,7 +60,7 @@ export const updateSubscriptionTypeAPI = async (
     const url = generatePath(SUBSCRIPTION_TYPE_PATH.UPDATE_BY_ID, {
         id: subscriptionTypeId,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -72,7 +72,7 @@ export const deleteSubscriptionTypeAPI = async (subscriptionTypeId: IdType) => {
     const url = generatePath(SUBSCRIPTION_TYPE_PATH.DELETE_BY_ID, {
         id: subscriptionTypeId,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

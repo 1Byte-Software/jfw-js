@@ -1,6 +1,6 @@
-import { RawAxiosRequestHeaders } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { HttpResponseList } from '../../core';
-import { get, patch, post, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { ISSUE_PATH } from './paths';
@@ -16,12 +16,12 @@ import {
  */
 export const queryIssueAPI = async (
     params?: IQueryIssueParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<HttpResponseList<IIssue>> => {
     const url = ISSUE_PATH.QUERY;
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get(url, { ...config, params });
 
-    return response.data
+    return response.data;
 };
 
 /**
@@ -29,11 +29,11 @@ export const queryIssueAPI = async (
  */
 export const createIssueAPI = async (
     params: ICreateIssueParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = ISSUE_PATH.CREATE;
 
-    return await post(url, params, null, userHeaders);
+    return await jfwAxios.post(url, params, config);
 };
 
 /**
@@ -41,13 +41,13 @@ export const createIssueAPI = async (
  */
 export const deleteIssueByIdAPI = async (
     id: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ISSUE_PATH.DELETE_BY_ID, {
         id,
     });
 
-    return await remove(url, userHeaders);
+    return await jfwAxios.delete(url, config);
 };
 
 /**
@@ -56,10 +56,10 @@ export const deleteIssueByIdAPI = async (
  */
 export const getIssueByIdsAPI = async (
     params: string,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<HttpResponseList<IIssue>> => {
     const url = `${ISSUE_PATH.GET_BY_LIST}?${params}`;
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get(url, config);
 
     return response.data;
 };
@@ -69,12 +69,12 @@ export const getIssueByIdsAPI = async (
  */
 export const getIssueChildrenAPI = async (
     id: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IIssue[]> => {
     const url = generatePath(ISSUE_PATH.GET_CHILDREN, {
         id,
     });
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get(url, config);
 
     return response.data;
 };
@@ -86,7 +86,7 @@ export const getIssueByIdAPI = async (id: IdType): Promise<IIssue> => {
     const url = generatePath(ISSUE_PATH.GET_BY_ID, {
         id,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -102,7 +102,7 @@ export const updateIssueByIdAPI = async (
         id,
     });
 
-    const response = await patch(url, params);
+    const response = await jfwAxios.patch(url, params);
 
     return response.data;
 };

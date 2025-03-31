@@ -1,5 +1,5 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get, remove } from '../../utils/axiosHelper222';
+import { AxiosRequestConfig } from 'axios';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { INVOICE_PATH } from './paths';
@@ -7,10 +7,10 @@ import { IInvoice, IQueryInvoiceParams } from './types';
 
 export const queryInvoiceAPI = async (
     params?: IQueryInvoiceParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IInvoice[]> => {
-    const url = `${REST}`;
-    const response = await get(url, { params }, userHeaders);
+    const url = INVOICE_PATH.QUERY;
+    const response = await jfwAxios.get(url, { ...config, params });
 
     return response.data;
 };
@@ -20,13 +20,13 @@ export const queryInvoiceAPI = async (
  */
 export const getInvoiceByIdAPI = async (
     id: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(INVOICE_PATH.GET_BY_ID, {
         id,
     });
 
-    return await get(url, null, userHeaders);
+    return await jfwAxios.get(url, config);
 };
 
 /**
@@ -34,13 +34,13 @@ export const getInvoiceByIdAPI = async (
  */
 export const deleteInvoiceByIdAPI = async (
     id: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(INVOICE_PATH.DELETE_BY_ID, {
         id,
     });
 
-    return await remove(url, userHeaders);
+    return await jfwAxios.delete(url, config);
 };
 
 /**
@@ -48,18 +48,15 @@ export const deleteInvoiceByIdAPI = async (
  */
 export const exportInvoiceAPI = async (
     id: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(INVOICE_PATH.EXPORT, {
         id,
     });
-    const response = await get(
-        url,
-        {
-            responseType: 'blob',
-        },
-        userHeaders,
-    );
+    const response = await jfwAxios.get(url, {
+        ...config,
+        responseType: 'blob',
+    });
 
     return response;
 };

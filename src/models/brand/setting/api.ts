@@ -1,4 +1,4 @@
-import { put } from '../../../utils/axiosHelper222';
+import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { BRAND_SETTING_PATH } from './paths';
@@ -15,7 +15,7 @@ export const updateBrandSettingsAPI = async (
         id,
     });
 
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };

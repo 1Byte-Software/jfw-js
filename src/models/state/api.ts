@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { STATE_PATH } from './paths';
@@ -12,7 +12,7 @@ export const queryStateAPI = async (
     params?: IQueryStateParams,
 ): Promise<HttpResponseList<IState>> => {
     const url = STATE_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -26,7 +26,7 @@ export const getStateByIdAPI = async (stateId: IdType): Promise<IState> => {
     const url = generatePath(STATE_PATH.GET_BY_ID, {
         id: stateId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };

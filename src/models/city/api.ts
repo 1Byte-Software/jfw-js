@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { CITY_PATH } from './paths';
@@ -12,7 +12,7 @@ export const queryCityAPI = async (
     params?: IQueryCityParams,
 ): Promise<HttpResponseList<ICity>> => {
     const url = CITY_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -26,7 +26,7 @@ export const getCityByIdAPI = async (cityId: IdType): Promise<ICity> => {
     const url = generatePath(CITY_PATH.GET_BY_ID, {
         id: cityId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };

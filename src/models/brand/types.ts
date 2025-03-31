@@ -11,6 +11,7 @@ export interface IBrand extends IBaseObject {
     setting: IBrandSetting;
 
     code: string;
+    abbr: string;
 
     name: string;
     description: string;
@@ -69,6 +70,27 @@ export interface IGetQueryBrandParams extends IPageable {
     titlePage?: string;
 }
 
+export interface IGeneratedDomain {
+    rootDomain: string;
+    subDomain: string;
+    fullDomain: string
+}
+
+export interface ICreateBrandParams {
+    name: string;
+    abbr: string;
+    description?: string | null;
+
+    profile: {
+        faviconUrl?: string | null;
+        logoUrl?: string | null;
+        slogan?: string | null;
+    };
+
+    setting: {
+        domain: string;
+    };
+}
 export interface IUpdateBrandParams extends IBrand {}
 
 //#endregion

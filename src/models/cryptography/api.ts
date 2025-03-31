@@ -1,4 +1,4 @@
-import { post } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { CRYPTOGRAPHY_PATH } from './paths';
 import { IDecryptParams, IEncryptParams } from './types';
 
@@ -7,7 +7,7 @@ import { IDecryptParams, IEncryptParams } from './types';
  */
 export const encryptAPI = async (params: IEncryptParams): Promise<string> => {
     const url = CRYPTOGRAPHY_PATH.ENCRYPT;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
     return response.data;
 };
 
@@ -16,6 +16,6 @@ export const encryptAPI = async (params: IEncryptParams): Promise<string> => {
  */
 export const decryptAPI = async (params: IDecryptParams): Promise<string> => {
     const url = CRYPTOGRAPHY_PATH.DECRYPT;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
     return response.data;
 };

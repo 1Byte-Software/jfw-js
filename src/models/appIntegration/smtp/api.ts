@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../../core';
-import { get, post, put, remove } from '../../../utils/axiosHelper222';
+import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { INTEGRATION_SMTP_PATH } from './paths';
@@ -18,7 +18,7 @@ export const queryIntegrationSMTPAPI = async (
 ): Promise<HttpResponseList<IIntegrationSMTP>> => {
     const url = INTEGRATION_SMTP_PATH.QUERY;
 
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -34,7 +34,7 @@ export const getIntegrationSMTPByIdAPI = async (
     const url = generatePath(INTEGRATION_SMTP_PATH.GET_BY_ID, {
         id: appIntegrationSMTPId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -46,7 +46,7 @@ export const createIntegrationSMTPAPI = async (
     params: ICreateIntegrationSMTPParams,
 ) => {
     const url = INTEGRATION_SMTP_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -61,7 +61,7 @@ export const updateIntegrationSMTPByIdAPI = async (
     const url = generatePath(INTEGRATION_SMTP_PATH.UPDATE_BY_ID, {
         id: appIntegrationSMTPId,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -75,7 +75,7 @@ export const deleteIntegrationSMTPAPI = async (
     const url = generatePath(INTEGRATION_SMTP_PATH.DELETE_BY_ID, {
         id: appIntegrationSMTPId,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

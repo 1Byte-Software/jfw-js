@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../../core';
-import { get, post, put, remove } from '../../../utils/axiosHelper222';
+import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { INTEGRATION_PAYMENT_GATEWAY_PATH } from './paths';
@@ -18,7 +18,7 @@ export const queryIntegrationPaymentGatewayAPI = async (
 ): Promise<HttpResponseList<IIntegrationPaymentGateway>> => {
     const url = INTEGRATION_PAYMENT_GATEWAY_PATH.QUERY;
 
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -34,7 +34,7 @@ export const getIntegrationPaymentGatewayByIdAPI = async (
     const url = generatePath(INTEGRATION_PAYMENT_GATEWAY_PATH.GET_BY_ID, {
         id: appIntegrationPaymentGatewayId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -46,7 +46,7 @@ export const createIntegrationPaymentGatewayAPI = async (
     params: ICreateIntegrationPaymentGatewayParams,
 ) => {
     const url = INTEGRATION_PAYMENT_GATEWAY_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -61,7 +61,7 @@ export const updateIntegrationPaymentGatewayByIdAPI = async (
     const url = generatePath(INTEGRATION_PAYMENT_GATEWAY_PATH.UPDATE_BY_ID, {
         id: appIntegrationPaymentGatewayId,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -75,7 +75,7 @@ export const deleteIntegrationPaymentGatewayAPI = async (
     const url = generatePath(INTEGRATION_PAYMENT_GATEWAY_PATH.DELETE_BY_ID, {
         id: appIntegrationPaymentGatewayId,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

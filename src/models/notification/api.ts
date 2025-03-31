@@ -1,6 +1,6 @@
-import { RawAxiosRequestHeaders } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import { HttpResponseList } from '../../core';
-import { get, put, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { NOTIFICATION_PATH } from './paths';
@@ -11,12 +11,12 @@ import { INotification, IQueryNotificationParams } from './types';
  */
 export const queryNotificationAPI = async (
     params: IQueryNotificationParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<HttpResponseList<INotification>> => {
     const url = NOTIFICATION_PATH.QUERY;
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get(url, { ...config, params });
 
-    return response.data
+    return response.data;
 };
 
 /**
@@ -25,22 +25,18 @@ export const queryNotificationAPI = async (
 export const updateNotificationStatusAPI = async (
     trackingNotificationId: IdType,
     status: string,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(NOTIFICATION_PATH.UPDATE_STATUS, {
         trackingNotificationId,
     });
 
-    const response = await put(
-        url,
-        null,
-        {
-            params: {
-                status,
-            },
+    const response = await jfwAxios.put(url, null, {
+        ...config,
+        params: {
+            status,
         },
-        userHeaders,
-    );
+    });
     return response.data;
 };
 
@@ -49,13 +45,13 @@ export const updateNotificationStatusAPI = async (
  */
 export const deleteNotificationAPI = async (
     trackingNotificationId: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(NOTIFICATION_PATH.DELETE_BY_ID, {
         trackingNotificationId,
     });
 
-    const response = await remove(url, userHeaders);
+    const response = await jfwAxios.delete(url, config);
     return response.data;
 };
 
@@ -64,18 +60,17 @@ export const deleteNotificationAPI = async (
  */
 export const updateStatusAllNotificationAPI = async (
     status: string,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = NOTIFICATION_PATH.UPDATE_ALL_STATUS;
-    const response = await put(
+    const response = await jfwAxios.put(
         url,
         {
             params: {
                 status,
             },
         },
-        null,
-        userHeaders,
+        config,
     );
 
     return response.data;

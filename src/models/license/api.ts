@@ -1,6 +1,6 @@
-import { RawAxiosRequestHeaders } from 'axios';
+import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
 import { HttpResponseList } from '../../core';
-import { get, post, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { LICENSE_PATH } from './paths';
@@ -22,18 +22,18 @@ export const queryLicenseAPI = async (
     params: IQueryLicenseParams,
 ): Promise<HttpResponseList<ILicense>> => {
     const url = LICENSE_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
-    return response.data
+    return response.data;
 };
 
 export const getLicenseByIdAPI = async (id: IdType): Promise<ILicense> => {
     const url = generatePath(LICENSE_PATH.GET_BY_ID, {
         id,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -44,7 +44,7 @@ export const getLicenseByIdAPI = async (id: IdType): Promise<ILicense> => {
 export const createLicenseAPI = async (payload: ICreateLicenseParams) => {
     const url = LICENSE_PATH.CREATE;
 
-    const response = await post(url, payload);
+    const response = await jfwAxios.post(url, payload);
     return response.data;
 };
 
@@ -53,7 +53,7 @@ export const deleteLicensesAPI = async (id: IdType) => {
         id,
     });
 
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
     return response.data;
 };
 
@@ -65,7 +65,7 @@ export const generateLicenseKeyAPI = async (
 ): Promise<string> => {
     const url = LICENSE_PATH.GENERATE_KEY;
 
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -79,7 +79,7 @@ export const purchaseLicenseByCheckoutLinkAPI = async (
     payload: IPurchaseLicenseCheckoutLinkParams,
 ): Promise<string> => {
     const url = LICENSE_PATH.PURCHASE.CHECKOUT_LINK;
-    const response = await post(url, payload);
+    const response = await jfwAxios.post(url, payload);
     return response.data;
 };
 
@@ -92,7 +92,7 @@ export const purchaseLicenseWalletAPI = async (
     const url = LICENSE_PATH.PURCHASE.WALLET;
 
     const { walletId, ...restParams } = params;
-    const response = await post(url, restParams, {
+    const response = await jfwAxios.post(url, restParams, {
         params: {
             walletId,
         },
@@ -106,7 +106,7 @@ export const purchaseLicenseWalletAPI = async (
 export const getCountLicenseAPI = async (): Promise<number> => {
     const url = LICENSE_PATH.GET_COUNT;
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -118,7 +118,7 @@ export const getLicenseStatisticAPI = async (
     params: IGetLicenseStatisticParams,
 ): Promise<ILicenseStatistic> => {
     const url = LICENSE_PATH.STATISTIC.PERCENTAGE_USED;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -130,19 +130,16 @@ export const getLicenseStatisticAPI = async (
  */
 export const checkLicenseAPI = async (
     licenseKey: string,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.CHECK;
 
-    return await get(
-        url,
-        {
-            params: {
-                licenseKey,
-            },
+    return await jfwAxios.get(url, {
+        ...config,
+        params: {
+            licenseKey,
         },
-        userHeaders,
-    );
+    });
 };
 
 /**
@@ -150,20 +147,16 @@ export const checkLicenseAPI = async (
  */
 export const applyLicenseAPI = async (
     licenseKey: string,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.APPLY;
 
-    return await post(
-        url,
-        null,
-        {
-            params: {
-                licenseKey,
-            },
+    return await jfwAxios.post(url, null, {
+        ...config,
+        params: {
+            licenseKey,
         },
-        userHeaders,
-    );
+    });
 };
 
 /**

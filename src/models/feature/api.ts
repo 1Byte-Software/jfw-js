@@ -1,4 +1,4 @@
-import { get, patch, post, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { FEATURE_PATH } from './paths';
@@ -15,8 +15,8 @@ import {
 export const queryFeatureAPI = async (
     params?: IQueryFeatureParams,
 ): Promise<IFeature[]> => {
-    const url = `${REST}`;
-    const response = await get(url, {
+    const url = FEATURE_PATH.QUERY;
+    const response = await jfwAxios.get(url, {
         params,
     });
     return response.data;
@@ -30,7 +30,7 @@ export const getFeatureByIdAPI = async (id: IdType): Promise<IFeature> => {
         id,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
     return response.data;
 };
 
@@ -38,9 +38,9 @@ export const getFeatureByIdAPI = async (id: IdType): Promise<IFeature> => {
  * Adds a new feature.
  */
 export const createFeatureAPI = async (payload: ICreateFeatureParams) => {
-    const url = `${REST}`;
+    const url = FEATURE_PATH.CREATE;
 
-    const response = await post(url, payload);
+    const response = await jfwAxios.post(url, payload);
 
     return response.data;
 };
@@ -56,7 +56,7 @@ export const updateFeatureByIdAPI = async (
         id,
     });
 
-    const response = await patch(url, payload);
+    const response = await jfwAxios.patch(url, payload);
 
     return response.data;
 };
@@ -69,7 +69,7 @@ export const deleteFeatureByIdAPI = async (id: IdType) => {
         id,
     });
 
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

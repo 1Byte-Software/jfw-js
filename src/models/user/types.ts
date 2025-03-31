@@ -1,3 +1,4 @@
+import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { ILanguage } from '../language';
 import { IPackage } from '../packages';
@@ -56,14 +57,28 @@ export interface IReferee {
 }
 
 //#region API types
-export interface IQueryUserParams {
+export interface IQueryUserParams extends IPageable, ISortable {
+    roleId?: IdType;
+    code?: string;
+    username?: string;
+    userType?: string;
+    isEmailAddressVerified?: boolean;
+    isUserVerified?: boolean;
+    testMode?: boolean;
+    status?: string;
+    isSystem?: boolean;
+    firstName?: string;
+    lastName?: string;
+    nickName?: string;
+    avatar?: string;
+    emailAddress?: string;
+    phoneNumber?: string;
+    keywords?: string;
     packageId?: IdType;
     languageCode?: string;
-    loginName?: string;
-    userId?: IdType;
-    username?: string;
-    status?: string;
-    testMode?: boolean;
+    timeZoneId?: string;
+    trackingLevel?: number;
+    referralCode?: string;
 }
 
 export interface IGetUserInfoByUsernamePath {
@@ -101,12 +116,14 @@ export interface IInitialSignUpValues {
 }
 export interface IRegisterParams {
     username: string;
+    phoneNumber?: string | null;
     password: string;
-    emailAddress: string;
-    referralCode?: string;
-    timeZoneId?: string;
-    languageCode?: string;
-    brandUrl?: string;
+    emailAddress?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    nickName?: string | null;
+    referralCode?: string | null;
+    timeZoneId?: IdType | null;
 }
 export interface IForgotPasswordParams {
     emailAddress: string;

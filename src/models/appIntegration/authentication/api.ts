@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { ListData } from '../../../core';
-import { get, post, put, remove } from '../../../utils/axiosHelper222';
+import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { INTEGRATION_AUTHENTICATION_PATH } from './paths';
@@ -20,15 +20,9 @@ export const queryIntegrationAuthenticationAPI = async (
     const url = INTEGRATION_AUTHENTICATION_PATH.QUERY;
 
     const response: AxiosResponse<ListData<IIntegrationAuthentication>> =
-        await get(url, {
+        await jfwAxios.get(url, {
             params,
         });
-
-    try {
-        const a: AxiosResponse<any, any> = await axios.get(url);
-    } catch (err) {
-        console.debug('first', err);
-    }
 
     return response;
 };
@@ -43,7 +37,8 @@ export const getIntegrationAuthenticationByIdAPI = async (
         id: appIntegrationAuthenticationId,
     });
 
-    const response: AxiosResponse<IIntegrationAuthentication> = await get(url);
+    const response: AxiosResponse<IIntegrationAuthentication> =
+        await jfwAxios.get(url);
 
     return response;
 };
@@ -55,7 +50,7 @@ export const createIntegrationAuthenticationAPI = async (
     params: ICreateIntegrationAuthenticationParams,
 ) => {
     const url = INTEGRATION_AUTHENTICATION_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -70,7 +65,7 @@ export const updateIntegrationAuthenticationByIdAPI = async (
     const url = generatePath(INTEGRATION_AUTHENTICATION_PATH.UPDATE_BY_ID, {
         id: appIntegrationAuthenticationId,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -84,7 +79,7 @@ export const deleteIntegrationAuthenticationAPI = async (
     const url = generatePath(INTEGRATION_AUTHENTICATION_PATH.DELETE_BY_ID, {
         id: appIntegrationAuthenticationId,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

@@ -1,5 +1,5 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get, post, put, remove } from '../../utils/axiosHelper222';
+import { AxiosRequestConfig } from 'axios';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { CONFIGURATION_PATH } from './paths';
@@ -18,7 +18,7 @@ export const queryConfigurationAPI = async (
 ): Promise<IConfiguration[]> => {
     const url = CONFIGURATION_PATH.QUERY;
 
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -32,7 +32,7 @@ export const createConfigurationAPI = async (
     payload: ICreateConfigurationParams,
 ) => {
     const url = CONFIGURATION_PATH.CREATE;
-    const response = await post(url, payload);
+    const response = await jfwAxios.post(url, payload);
 
     return response.data;
 };
@@ -43,13 +43,13 @@ export const createConfigurationAPI = async (
 export const updateConfigurationAPI = async (
     configurationId: IdType,
     params: IUpdateConfigurationParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(CONFIGURATION_PATH.UPDATE_BY_ID, {
         id: configurationId,
     });
 
-    return await put(url, params, null, userHeaders);
+    return await jfwAxios.put(url, params, config);
 };
 
 /**
@@ -60,7 +60,7 @@ export const deleteConfigurationAPI = async (configurationId: IdType) => {
         id: configurationId,
     });
 
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

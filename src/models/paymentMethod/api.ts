@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get, post, put, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { PAYMENT_METHOD_PATH } from './paths';
@@ -17,7 +17,7 @@ export const queryPaymentMethodAPI = async (
     params: IQueryPaymentMethodParams,
 ): Promise<HttpResponseList<IPaymentMethod>> => {
     const url = PAYMENT_METHOD_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -34,7 +34,7 @@ export const getPaymentMethodByIdAPI = async (
         id: paymentMethodId,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -47,7 +47,7 @@ export const createPaymentMethodAPI = async (
 ) => {
     const url = PAYMENT_METHOD_PATH.CREATE;
 
-    return await post(url, params);
+    return await jfwAxios.post(url, params);
 };
 
 /**
@@ -61,7 +61,7 @@ export const updatePaymentMethodAPI = async (
         id: paymentMethodId,
     });
 
-    return await put(url, payload);
+    return await jfwAxios.put(url, payload);
 };
 
 /**
@@ -72,5 +72,5 @@ export const deletePaymentMethodAPI = async (paymentMethodId: IdType) => {
         id: paymentMethodId,
     });
 
-    return await remove(url);
+    return await jfwAxios.delete(url);
 };

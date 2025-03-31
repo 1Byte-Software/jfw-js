@@ -1,4 +1,4 @@
-import { get, post, put, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { COMMISSION_RATE_PATH } from './paths';
@@ -18,7 +18,7 @@ export const queryCommissionRateAPI = async (
 ): Promise<ICommissionRate[]> => {
     const url = COMMISSION_RATE_PATH.QUERY;
 
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -31,9 +31,9 @@ export const queryCommissionRateAPI = async (
 export const getCommissionDiscountAPI = async (
     params?: IGetDiscountCommissionDiscountParams,
 ): Promise<number> => {
-    const url = `${REST}/get-discount`;
+    const url = COMMISSION_RATE_PATH.GET_DISCOUNT;
 
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -49,7 +49,7 @@ export const getCommissionRateByIdAPI = async (
     const url = generatePath(COMMISSION_RATE_PATH.GET_BY_ID, {
         id: commissionRateId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -61,7 +61,7 @@ export const createCommissionRateAPI = async (
     params?: ICreateCommissionRateParams,
 ) => {
     const url = COMMISSION_RATE_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -76,7 +76,7 @@ export const updateCommissionRateByIdAPI = async (
     const url = generatePath(COMMISSION_RATE_PATH.UPDATE_BY_ID, {
         id: commissionRateId,
     });
-    const response = await put(url, params);
+    const response = await jfwAxios.put(url, params);
 
     return response.data;
 };
@@ -89,7 +89,7 @@ export const deleteCommissionRateByIdAPI = async (commissionRateId: IdType) => {
         id: commissionRateId,
     });
 
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

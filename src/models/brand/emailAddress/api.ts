@@ -1,5 +1,5 @@
-import { AxiosHeaders } from 'axios';
-import { get, put } from '../../../utils/axiosHelper222';
+import { AxiosRequestConfig } from 'axios';
+import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { BRAND_PROFILE_PATH } from './paths';
@@ -10,13 +10,13 @@ import { IBrandEmailAddress, IUpdateEmailAddressParams } from './types';
  */
 export const getBrandEmailAddressAPI = async (
     brandId: IdType,
-    userHeaders?: AxiosHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IBrandEmailAddress> => {
     const url = generatePath(BRAND_PROFILE_PATH.GET, {
         id: brandId,
     });
 
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get(url, config);
 
     return response.data;
 };
@@ -32,7 +32,7 @@ export const updateBrandEmailAddressAPI = async (
         id: brandId,
     });
 
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };

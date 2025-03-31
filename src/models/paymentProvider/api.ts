@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get, post, put, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { PAYMENT_PROVIDER_PATH } from './paths';
@@ -17,7 +17,7 @@ export const queryPaymentProviderAPI = async (
     params?: IQueryPaymentProviderParams,
 ): Promise<HttpResponseList<IPaymentProvider>> => {
     const url = PAYMENT_PROVIDER_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -34,7 +34,7 @@ export const getPaymentProviderByIdAPI = async (
         id: paymentProviderId,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -47,7 +47,7 @@ export const createPaymentProviderAPI = async (
 ) => {
     const url = PAYMENT_PROVIDER_PATH.CREATE;
 
-    return await post(url, params);
+    return await jfwAxios.post(url, params);
 };
 
 /**
@@ -61,7 +61,7 @@ export const updatePaymentProviderAPI = async (
         id: paymentProviderId,
     });
 
-    return await put(url, payload);
+    return await jfwAxios.put(url, payload);
 };
 
 /**
@@ -72,5 +72,5 @@ export const deletePaymentProviderAPI = async (paymentProviderId: IdType) => {
         id: paymentProviderId,
     });
 
-    return await remove(url);
+    return await jfwAxios.delete(url);
 };

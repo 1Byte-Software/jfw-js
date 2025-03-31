@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get, post } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { TRACKING_ACTIVITY_PATH } from './paths';
@@ -17,11 +17,11 @@ export const queryTrackingActivityAPI = async (
 ): Promise<HttpResponseList<ITrackingActivity>> => {
     const url = TRACKING_ACTIVITY_PATH.QUERY;
 
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
-    return response.data
+    return response.data;
 };
 
 /**
@@ -33,7 +33,7 @@ export const getTrackingActivityByIdAPI = async (
     const url = generatePath(TRACKING_ACTIVITY_PATH.GET_BY_ID, {
         id: trackingActivityId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -45,6 +45,6 @@ export const createTrackingActivityAPI = async (
     params: ICreateTrackingActivityParams,
 ) => {
     const url = TRACKING_ACTIVITY_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
     return response.data;
 };

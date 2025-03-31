@@ -1,5 +1,5 @@
 import { HttpResponseList } from '../../core';
-import { get, post, put, remove } from '../../utils/axiosHelper222';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { EMAIL_ADDRESS_PATTERN_PATH } from './paths';
@@ -21,7 +21,7 @@ export const queryEmailAddressPatternAPI = async (
     params: IQueryEmailAddressPatternParams,
 ): Promise<HttpResponseList<IEmailAddressPattern>> => {
     const url = EMAIL_ADDRESS_PATTERN_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -37,7 +37,7 @@ export const getEmailAddressPatternByIdAPI = async (
     const url = generatePath(EMAIL_ADDRESS_PATTERN_PATH.GET_BY_ID, {
         id,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -49,7 +49,7 @@ export const createEmailAddressPatternAPI = async (
     params: ICreateEmailAddressPatternParams,
 ) => {
     const url = EMAIL_ADDRESS_PATTERN_PATH.CREATE;
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -64,7 +64,7 @@ export const updateEmailAddressPatternAPI = async (
     const url = generatePath(EMAIL_ADDRESS_PATTERN_PATH.UPDATE_BY_ID, {
         id,
     });
-    const response = await put(url, params);
+    const response = await jfwAxios.put(url, params);
 
     return response.data;
 };
@@ -76,7 +76,7 @@ export const deleteEmailAddressPatternByIdAPI = async (id: IdType) => {
     const url = generatePath(EMAIL_ADDRESS_PATTERN_PATH.DELETE_BY_ID, {
         id,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };
@@ -87,7 +87,7 @@ export const deleteEmailAddressPatternByIdAPI = async (id: IdType) => {
 export const getEmailAddressPatternPlaceholderKeyAPI =
     async (): Promise<IEmailAddressPatternPlaceholderKey> => {
         const url = `${REST}/${PLACEHOLDER_KEYS}`;
-        const response = await get(url);
+        const response = await jfwAxios.get(url);
 
         return response.data;
     };
