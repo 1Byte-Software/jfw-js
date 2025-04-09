@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { IdType } from '../base';
-import { IPermission } from '../permission';
+import { RoleType } from './constants';
 
 export interface IRole {
     id: IdType;
@@ -14,7 +14,7 @@ export interface IRole {
     tags: string | null;
     permissions: string[];
     isSystem: boolean;
-    type?: 'None' | 'All' | 'BuiltIn' | 'Custom';
+    type?: RoleType;
     // fullPermissions?: IPermission[];
 }
 
