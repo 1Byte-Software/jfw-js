@@ -17,3 +17,10 @@ export const PERMISSION = {
         view: 'USER.VIEW',
     },
 };
+
+export enum PermissionType {
+    All = 'All',
+    Custom = 'Custom',
+    BuiltIn = 'BuiltIn',
+    None = 'None',
+}

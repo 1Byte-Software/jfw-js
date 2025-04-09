@@ -1,5 +1,6 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IdType } from '../base';
+import { PermissionType } from './constants';
 
 export interface IPermission {
     id: IdType;
@@ -12,7 +13,7 @@ export interface IPermission {
     name: string;
     description: string;
     tags: string | null;
-    type?: 'None' | 'All' | 'BuiltIn' | 'Custom';
+    type?: PermissionType;
     isSystem: boolean;
 }
 
@@ -25,7 +26,7 @@ export interface IQueryPermissionParams extends IPageable, ISortable {
     name?: string;
     description?: string | null;
     tags?: string | null;
-    type?: string;
+    type?: PermissionType;
 }
 
 export interface ICreatePermissionParams {
