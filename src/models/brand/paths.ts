@@ -4,7 +4,8 @@ export const BRAND_PATH = {
     QUERY: `v1/${REST}`,
 
     GET_BY_ID: `${REST}/:id`,
-    GET_BY_URL: `${REST}/by-url/:brandUrl`,
+    GET_BY_URL: `v1/${REST}/by-url`,
+
     CREATE: `v1/${REST}`,
     UPDATE_BY_ID: `${REST}/:id`,
 

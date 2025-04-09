@@ -1,17 +1,21 @@
 import { IPageable } from '../../core';
 import { IBaseObject } from '../base';
 import { IdType } from '../base';
+import { BrandStatus } from './constants';
+import { IBrandDomain } from './domain';
 import { IBrandProfile } from './profile';
 import { IBrandSetting } from './setting';
 
 export interface IBrand extends IBaseObject {
     parentId?: IdType;
 
+    domains: IBrandDomain[];
     profile: IBrandProfile;
     setting: IBrandSetting;
 
     code: string;
     abbr: string;
+    isSystem: boolean;
 
     name: string;
     description: string;
@@ -24,6 +28,8 @@ export interface IGetBrandDetailPath {
 }
 
 export interface IGetQueryBrandParams extends IPageable {
+    keywords?: string;
+
     parentBrandId?: IdType;
 
     /**
@@ -68,12 +74,13 @@ export interface IGetQueryBrandParams extends IPageable {
     logoUrl?: string;
     faviconUrl?: string;
     titlePage?: string;
+    status?: BrandStatus;
 }
 
 export interface IGeneratedDomain {
     rootDomain: string;
     subDomain: string;
-    fullDomain: string
+    fullDomain: string;
 }
 
 export interface ICreateBrandParams {

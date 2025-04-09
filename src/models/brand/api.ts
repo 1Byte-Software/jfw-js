@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse } from '../../core';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
@@ -20,7 +20,7 @@ export const queryBrandAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = BRAND_PATH.QUERY;
-    const response = await jfwAxios.get<HttpResponse<IBrand[]>>(url, {
+    const response = await jfwAxios.get<HttpResponseList<IBrand>>(url, {
         ...config,
         params,
     });
@@ -31,13 +31,8 @@ export const queryBrandAPI = async (
 /**
  * Gets brand by the given brand url.
  */
-export const getBrandByUrlAPI = async (
-    brandUrl: string,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(BRAND_PATH.GET_BY_URL, {
-        brandUrl,
-    });
+export const getBrandByUrlAPI = async (config?: AxiosRequestConfig) => {
+    const url = BRAND_PATH.GET_BY_URL;
 
     const response = await jfwAxios.get<HttpResponse<IBrand>>(url, config);
 
@@ -97,7 +92,10 @@ export const checkExistDomainUrlAPI = async (
 export const generateDomainAPI = async (config?: AxiosRequestConfig) => {
     const url = BRAND_PATH.GENERATE_DOMAIN;
 
-    const response = await jfwAxios.get<HttpResponse<IGeneratedDomain>>(url, config);
+    const response = await jfwAxios.get<HttpResponse<IGeneratedDomain>>(
+        url,
+        config,
+    );
 
     return response.data;
 };
