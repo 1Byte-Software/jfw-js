@@ -1,6 +1,7 @@
 import { IBaseFilter, IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
 import { IUser } from '../user';
+import { DeviceStatus } from './constants';
 
 export interface IDevice extends IBaseObject {
     userId: IdType;
@@ -36,6 +37,7 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
 
     userId?: IdType;
 
+    keywords?: string;
     deviceToken?: string;
     deviceSession?: string;
     type?: number;
@@ -44,7 +46,7 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
     session?: string;
     isMobile?: boolean;
     tags?: string;
-    status?: number;
+    status?: DeviceStatus;
     isDefault?: boolean;
     testMode?: boolean;
     phoneNumber?: string;
@@ -59,4 +61,9 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
     timeZoneId?: string;
     isPagination?: boolean;
 }
+
+export interface ICreateDeviceParams {};
+export interface IUpdateDeviceParams {};
+
+
 //#endregion

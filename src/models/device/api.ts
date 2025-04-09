@@ -4,13 +4,19 @@ import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { DEVICE_PATH } from './paths';
-import { ICheckUserAccessParams, IDevice, IQueryDeviceParams } from './types';
+import {
+    ICheckUserAccessParams,
+    ICreateDeviceParams,
+    IDevice,
+    IQueryDeviceParams,
+    IUpdateDeviceParams,
+} from './types';
 
 /**
  * Gets the list off all devices by the given filter.
  */
 export const queryDeviceAPI = async (
-    params: IQueryDeviceParams,
+    params?: IQueryDeviceParams,
     config?: AxiosRequestConfig,
 ): Promise<HttpResponseList<IDevice>> => {
     const url = DEVICE_PATH.QUERY;
@@ -26,7 +32,10 @@ export const queryDeviceAPI = async (
  * Adds a new device to the user.
  * @feature Will make in feature
  */
-export const createDeviceAPI = async (config?: AxiosRequestConfig) => {
+export const createDeviceAPI = async (
+    params?: ICreateDeviceParams,
+    config?: AxiosRequestConfig,
+) => {
     const url = DEVICE_PATH.CREATE;
 };
 
@@ -43,7 +52,7 @@ export const getDeviceByIdAPI = async (
 
     const response = await jfwAxios.get<HttpResponse<IDevice>>(url, config);
 
-    return response;
+    return response.data;
 };
 
 /**
@@ -64,13 +73,18 @@ export const deleteDeviceByIdAPI = async (
  * Updates the device data.
  * @feature Will make in feature
  */
-export const updateDeviceById = (
+export const updateDeviceByIdAPI = async (
     deviceId: IdType,
+    payload: IUpdateDeviceParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(DEVICE_PATH.UPDATE_BY_ID, {
         id: deviceId,
     });
+
+    const response = await jfwAxios.put(url, payload, config);
+
+    return response.data;
 };
 
 /**
