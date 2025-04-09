@@ -21,6 +21,7 @@ export const USER_PATH = {
     FORGOT_PASSWORD: `${REST}/forgot-password`,
     RESET_PASSWORD: `${REST}/reset-password`,
     UPDATE_TYPE: `v1/${REST}/:userCode/type/:type`,
+    CHECK_AUTH_KEY_AVAILABLE: `v1/${REST}/check-auth-key-available`,
 
     GET_REFEREE: `v1/${REST}/:id/referees`,
 

@@ -17,13 +17,14 @@ import {
     IAuthenticationByGoogleParams,
     IAuthenticationParams,
     IChangePasswordParams,
+    ICheckAuthKeyAvailableParams,
     IForgotPasswordParams,
     IGetUserConfigurationParams,
     IQueryUserParams,
     IReferee,
     IRegisterParams,
     IResetPasswordParams,
-    IUpdateProfileParams,
+    IUpdateUserParams,
     IUpdateUserTypeParams,
     IUser,
 } from './types';
@@ -96,7 +97,7 @@ export const getUserByIdAPI = async (
  */
 export const updateUserByIdAPI = async (
     userId: IdType,
-    data: IUpdateProfileParams,
+    data: IUpdateUserParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.UPDATE_BY_ID, {
@@ -387,6 +388,24 @@ export const authenticateByEmailAddressAPI = async (
     const url = USER_PATH.AUTH.BY_EMAIL_ADDRESS;
 
     const response = await jfwAxios.post<HttpResponse<null>>(url, data, config);
+
+    return response.data;
+};
+
+/**
+ * Check auth key available
+ */
+export const checkAuthKeyAvailableAPI = async (
+    data: ICheckAuthKeyAvailableParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.CHECK_AUTH_KEY_AVAILABLE;
+
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };

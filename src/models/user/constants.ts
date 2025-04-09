@@ -33,3 +33,11 @@ export const USER_TYPE_OPTIONS = [
         label: 'End User',
     },
 ];
+
+export enum UserStatus {
+    Inactive = 'Inactive',
+    Active = 'Active',
+    Suspended = 'Suspended',
+    Locked = 'Locked',
+    Deleted = 'Deleted'
+}

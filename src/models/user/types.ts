@@ -42,7 +42,7 @@ export interface IUser {
     roles: IRole[];
     language?: ILanguage;
     timeZone?: ITimezone;
-    package?: IPackage;
+    package?: string; // #CONFIRM: Return package type is string or IPackage ?
     type: string;
     status: number;
     testMode?: boolean;
@@ -84,7 +84,7 @@ export interface IQueryUserParams extends IPageable, ISortable {
 export interface IGetUserInfoByUsernamePath {
     username: string;
 }
-export interface IUpdateProfileParams {
+export interface IUpdateUserParams {
     username: string;
     emailAddress?: string;
     firstName?: string;
@@ -92,11 +92,12 @@ export interface IUpdateProfileParams {
     lastName?: string;
     website?: string;
     nickName?: string;
-    avatar?: File | string;
+    avatar?: string;
     bio?: string;
     languageCode?: string;
     timeZoneId?: IdType;
 }
+
 export interface IGetUserConfigurationParams {
     code: string;
 }
@@ -164,5 +165,9 @@ export interface IAuthenticateByEmailAddressParams {
     emailAddress: string;
     callbackUrl: string;
     returnUrl: string;
+}
+
+export interface ICheckAuthKeyAvailableParams {
+    authKey: string;
 }
 //#endregion
