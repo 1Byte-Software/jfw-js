@@ -10,17 +10,19 @@ import {
     IAssignRoleForUserInOrganizationData,
     IAssignRoleForUserInOrganizationParams,
     ICreateOrganizationParams,
-    IListOrganizationParams,
-    IListUsersOfOrganizationParams,
+    IGetOrganizationParams,
+    IGetUsersOfOrganizationParams,
     IOrganization,
     IOrganizationUser,
     IRemoveUserInOrganizationParams,
     IUpdateOrganizationParams,
-    IUpdateUserStatusInOrganizationParams,
+    IUpdateUserStatusInOrganizationParams
 } from './types';
 
 /**
  * Adds a new user to the organization.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/add-a-user-in-an-organization}
  */
 export const addNewUserToOrganizationAPI = async (
     params: IAddNewUserToOrganizationParams,
@@ -43,6 +45,8 @@ export const addNewUserToOrganizationAPI = async (
 
 /**
  * Add a new user to the organization system by the given user id based on the default language.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/adds-a-user-for-default-language-code-organization}
  */
 export const addUserForDefaultLanguageCodeOrganizationSystem = async (
     params: IAddUserForDefaultLanguageCodeOrganizationSystemParams,
@@ -69,6 +73,8 @@ export const addUserForDefaultLanguageCodeOrganizationSystem = async (
 
 /**
  * Assign a role to the user in the organization.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/assign-role-for-a-user-in-an-organization}
  */
 export const assignRoleForUserInOrganization = async (
     params: IAssignRoleForUserInOrganizationParams,
@@ -92,6 +98,8 @@ export const assignRoleForUserInOrganization = async (
 
 /**
  * Creates a new organization.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/create-an-organization}
  */
 export const createOrganizationAPI = async (
     data: ICreateOrganizationParams,
@@ -109,6 +117,8 @@ export const createOrganizationAPI = async (
 
 /**
  * Deletes an organization by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/delete-an-organization}
  */
 export const deleteOrganizationAPI = async (
     id: IdType,
@@ -124,6 +134,8 @@ export const deleteOrganizationAPI = async (
 
 /**
  * Gets an organization by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/get-an-organization}
  */
 export const getOrganizationAPI = async (
     id: IdType,
@@ -142,12 +154,14 @@ export const getOrganizationAPI = async (
 
 /**
  * Gets the list of organizations.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/list-organizations}
  */
-export const listOrganizationsAPI = async (
-    params: IListOrganizationParams,
+export const getOrganizationsAPI = async (
+    params: IGetOrganizationParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = ORGANIZATION_PATH.LIST;
+    const url = ORGANIZATION_PATH.GET;
 
     const response = await jfwAxios.get<HttpResponseList<IOrganization>>(url, {
         params,
@@ -159,14 +173,16 @@ export const listOrganizationsAPI = async (
 
 /**
  * List all the users in organization.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/list-users-of-an-organization}
  */
-export const listUsersOfOrganizationAPI = async (
-    params?: IListUsersOfOrganizationParams,
+export const getUsersOfOrganizationAPI = async (
+    params?: IGetUsersOfOrganizationParams,
     config?: AxiosRequestConfig,
 ) => {
     const { organizationId, ...restParams } = params;
 
-    const url = generatePath(ORGANIZATION_PATH.USERS.LIST, {
+    const url = generatePath(ORGANIZATION_PATH.USERS.GET, {
         id: organizationId,
     });
     const response = await jfwAxios.get<HttpResponse<IOrganizationUser>>(url, {
@@ -179,6 +195,8 @@ export const listUsersOfOrganizationAPI = async (
 
 /**
  * Remove an organization member.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/remove-a-user-in-an-organization}
  */
 export const removeUserInOrganizationAPI = async (
     params: IRemoveUserInOrganizationParams,
@@ -198,6 +216,8 @@ export const removeUserInOrganizationAPI = async (
 
 /**
  * Updates an organization by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/updates-an-organization}
  */
 export const updateOrganizationAPI = async (
     id: IdType,
@@ -218,6 +238,8 @@ export const updateOrganizationAPI = async (
 
 /**
  * Update a user status in an organization
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/updates-users-status-in-an-organization}
  */
 export const updateUserStatusInOrganizationAPI = async (
     params: IUpdateUserStatusInOrganizationParams,

@@ -33,7 +33,7 @@ export interface IOrganizationUser {
 }
 
 //#region API types
-export interface IListOrganizationParams extends IPageable {
+export interface IGetOrganizationParams extends IPageable {
     userId?: string;
     languageCode?: string;
     name?: string;
@@ -79,7 +79,7 @@ export interface IAssignRoleForUserInOrganizationData {
     userId: IdType;
 }
 
-export interface IListUsersOfOrganizationParams extends IPageable, ISortable {
+export interface IGetUsersOfOrganizationParams extends IPageable, ISortable {
     organizationId: IdType;
 
     status?: string;

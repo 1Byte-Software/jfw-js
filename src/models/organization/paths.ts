@@ -2,7 +2,7 @@ const REST = 'organizations';
 const REST_USER = 'users';
 
 export const ORGANIZATION_PATH = {
-    LIST: `${REST}`,
+    GET: `${REST}`,
     CREATE: `${REST}`,
 
     GET_BY_ID: `${REST}/:id`,
@@ -12,7 +12,7 @@ export const ORGANIZATION_PATH = {
     ASSIGN_ROLE_USERS: `${REST}/:id/assign-role-users`,
 
     USERS: {
-        LIST: `${REST}/:id/${REST_USER}`,
+        GET: `${REST}/:id/${REST_USER}`,
         ADD_TO_ORGANIZATION: `${REST}/:id/${REST_USER}/:userId`,
         ADD_FOR_DEFAULT_LANGUAGE_CODE_ORGANIZATION_SYSTEM: `${REST}/${REST_USER}/:userId`,
 
