@@ -10,6 +10,9 @@ import {
     IUpdateCouponParams,
 } from './types';
 
+/**
+ * Gets all coupons get
+ */
 export const queryCouponAPI = async (
     params: IQueryCouponsParams,
 ): Promise<HttpResponseList<ICoupon>> => {
@@ -22,7 +25,7 @@ export const queryCouponAPI = async (
 };
 
 /**
- * #JFW-72: Thiếu tài liệu api/coupons
+ * Gets a coupon by the given id.
  */
 export const getCouponByIdAPI = async (couponId: IdType): Promise<ICoupon> => {
     const url = generatePath(COUPON_PATH.GET_BY_ID, {
@@ -34,7 +37,7 @@ export const getCouponByIdAPI = async (couponId: IdType): Promise<ICoupon> => {
 };
 
 /**
- * #JFW-72: Thiếu tài liệu api/coupons
+ * Creates a new coupon.
  */
 export const createCouponAPI = async (params: ICreateCouponParams) => {
     const url = COUPON_PATH.CREATE;
@@ -44,7 +47,7 @@ export const createCouponAPI = async (params: ICreateCouponParams) => {
 };
 
 /**
- * #JFW-72: Thiếu tài liệu api/coupons
+ * Updates a coupon by the given id.
  */
 export const updateCouponByIdAPI = async (
     couponId: IdType,
@@ -59,7 +62,7 @@ export const updateCouponByIdAPI = async (
 };
 
 /**
- * #JFW-72: Thiếu tài liệu api/coupons
+ * Deletes a coupon by the given id.
  */
 export const deleteCouponByIdAPI = async (couponId: IdType) => {
     const url = generatePath(COUPON_PATH.DELETE_BY_ID, {

@@ -1,5 +1,6 @@
 import { IPageable } from '../../core';
 import { DateType, IdType } from '../base';
+import { CouponStatus } from './constants';
 
 export interface ICoupon {
     id: IdType;
@@ -8,12 +9,13 @@ export interface ICoupon {
     description: string;
     percentage: number;
     quantity?: number;
-    status: string;
+    status: CouponStatus;
     createdDate: DateType;
     startDate: DateType;
     endDate: DateType;
     autoApplyToPrice: boolean;
 }
+
 //#region API types
 export interface IQueryCouponsParams extends IPageable {
     startDate?: string;
@@ -34,5 +36,4 @@ export interface ICreateCouponParams {
 }
 
 export type IUpdateCouponParams = ICreateCouponParams;
-
 //#endregion
