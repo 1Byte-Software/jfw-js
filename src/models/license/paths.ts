@@ -15,6 +15,7 @@ export const LICENSE_PATH = {
     GET_BY_ID: `v1/${REST}/:id`,
     DELETE_BY_ID: `v1/${REST}/:id`,
 
+    // #WILL_DELETE
     EXPORT: `v1/${REST}/:id/export`,
 
     PURCHASE: {

@@ -60,7 +60,7 @@ export interface IApplyLicenseToGivenUserParams {
     userId: IdType;
 }
 
-export interface IQueryLicenseParams {
+export interface IQueryLicensesParams {
     brandId?: IdType;
     packageId?: IdType;
     usedBy?: IdType;
@@ -95,9 +95,9 @@ export interface IApplyLicenseForUserParams {
     userCode: string;
 }
 export interface IGenerateLicenseKeyParams {
-    brandId: string;
-    packageId: string;
-    subscriptionTypeId: string;
+    packageId: IdType;
+    subscriptionTypeId: IdType;
+    startDate?: DateType;
 }
 export interface IPurchaseLicenseParams {
     packageId: string;
@@ -110,19 +110,19 @@ export interface IPurchaseLicenseParams {
     quantity: number;
 }
 
-export interface IPurchaseLicenseCheckoutLinkParams
+export interface IPurchaseToAddLicensesByCheckoutLinkParams
     extends IPurchaseLicenseParams {
     returnUrl: string;
     cancelUrl: string;
 }
 
-export interface IPurchaseLicenseWalletParams extends IPurchaseLicenseParams {
+export interface IPurchaseToAddLicensesByWalletParams extends IPurchaseLicenseParams {
     walletId: IdType;
     brandCode: string;
     userCode: string;
 }
 
-export interface IGetLicenseStatisticParams {
+export interface IStatisticsPercentageLicensesUsedParams {
     userId: string;
     startDate?: DateType;
     endDate?: DateType;

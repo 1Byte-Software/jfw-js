@@ -9,18 +9,20 @@ import {
     IApplyLicenseToLoginNameParams,
     ICreateLicenseParams,
     IGenerateLicenseKeyParams,
-    IGetLicenseStatisticParams,
     ILicense,
     ILicenseStatistic,
-    IPurchaseLicenseCheckoutLinkParams,
-    IPurchaseLicenseWalletParams,
-    IQueryLicenseParams,
+    IPurchaseToAddLicensesByCheckoutLinkParams,
+    IPurchaseToAddLicensesByWalletParams,
+    IQueryLicensesParams,
+    IStatisticsPercentageLicensesUsedParams,
 } from './types';
 
 /**
  * Applies a license to the logged user.
  * After applying the license, the user will be able to use the features of the license.
  * And send the email to the user to notify the license is applied.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/applies-a-license-to-the-logged-user}
  */
 export const applyLicenseToLoggedUserAPI = async (
     licenseKey: string,
@@ -40,6 +42,8 @@ export const applyLicenseToLoggedUserAPI = async (
  * Applies a license key for the given login name.
  * After applying the license, the user will be able to use the features of the license.
  * And send the email to the user to notify the license is applied.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/applies-a-license-to-the-given-login-name}
  */
 export const applyLicenseToLoginNameAPI = async (
     params: IApplyLicenseToLoginNameParams,
@@ -57,6 +61,8 @@ export const applyLicenseToLoginNameAPI = async (
  * Applies a license key for the given user id.
  * After applying the license, the user will be able to use the features of the license.
  * And send the email to the user to notify the license is applied.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/applies-a-license-to-the-given-a-user}
  */
 export const applyLicenseToGivenUserAPI = async (
     params: IApplyLicenseToGivenUserParams,
@@ -72,6 +78,8 @@ export const applyLicenseToGivenUserAPI = async (
 
 /**
  * Checks the license status for the given license key.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/checks-a-license}
  */
 export const checkLicenseKeyAPI = async (
     licenseKey: string,
@@ -90,7 +98,9 @@ export const checkLicenseKeyAPI = async (
 };
 
 /**
- * Create a new license from the given data.
+ * Create a new license.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/create-the-licenses}
  */
 export const createLicenseAPI = async (payload: ICreateLicenseParams) => {
     const url = LICENSE_PATH.CREATE;
@@ -102,6 +112,8 @@ export const createLicenseAPI = async (payload: ICreateLicenseParams) => {
 
 /**
  * Counts the number of licenses created by each user.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/count-licenses-created}
  */
 export const countLicenseCreatedAPI = async () => {
     const url = LICENSE_PATH.COUNT_LICENSES_CREATED;
@@ -113,6 +125,8 @@ export const countLicenseCreatedAPI = async () => {
 
 /**
  * Deletes a license.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/delete-a-license}
  */
 export const deleteLicenseAPI = async (id: IdType) => {
     const url = generatePath(LICENSE_PATH.DELETE_BY_ID, {
@@ -125,10 +139,12 @@ export const deleteLicenseAPI = async (id: IdType) => {
 };
 
 /**
- * Gets the list of the license.
+ * Gets the list of the licenses.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/get-licenses}
  */
 export const getLicensesAPI = async (
-    params: IQueryLicenseParams,
+    params: IQueryLicensesParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.GET;
@@ -141,7 +157,9 @@ export const getLicensesAPI = async (
 };
 
 /**
- * Gets the license by id.
+ * Get a license.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/get-a-license}
  */
 export const getLicenseAPI = async (
     id: IdType,
@@ -157,6 +175,8 @@ export const getLicenseAPI = async (
 
 /**
  * Generate the license key, but this license does not store in the database.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/generate-key}
  */
 export const generateLicenseKeyAPI = async (
     params: IGenerateLicenseKeyParams,
@@ -174,9 +194,11 @@ export const generateLicenseKeyAPI = async (
 
 /**
  * Generate the checkout link to purchase the license.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/purchase-to-add-licenses-by-checkout-link}
  */
-export const purchaseLicenseByCheckoutLinkAPI = async (
-    payload: IPurchaseLicenseCheckoutLinkParams,
+export const purchaseToAddLicensesByCheckoutLinkAPI = async (
+    payload: IPurchaseToAddLicensesByCheckoutLinkParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.PURCHASE.CHECKOUT_LINK;
@@ -192,9 +214,11 @@ export const purchaseLicenseByCheckoutLinkAPI = async (
 
 /**
  * Purchase to add license by the user's wallet.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/purchase-to-add-licenses-by-user-wallet}
  */
-export const purchaseLicenseWalletAPI = async (
-    params: IPurchaseLicenseWalletParams,
+export const purchaseToAddLicensesByWalletAPI = async (
+    params: IPurchaseToAddLicensesByWalletParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.PURCHASE.WALLET;
@@ -215,9 +239,11 @@ export const purchaseLicenseWalletAPI = async (
 
 /**
  * Statistics the percentage licenses used.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/statistics-the-percentage-licenses-used}
  */
-export const getLicenseStatisticAPI = async (
-    params: IGetLicenseStatisticParams,
+export const statisticsPercentageLicensesUsedAPI = async (
+    params: IStatisticsPercentageLicensesUsedParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.STATISTIC.PERCENTAGE_USED;
@@ -226,5 +252,5 @@ export const getLicenseStatisticAPI = async (
         ...config,
     });
 
-    return response.data;   
+    return response.data;
 };
