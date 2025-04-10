@@ -50,6 +50,16 @@ export interface ILicenseStatistic {
     unavailableQuantity: number;
 }
 //#region API types
+export interface IApplyLicenseToLoginNameParams {
+    licenseKey: string;
+    loginName: string;
+}
+
+export interface IApplyLicenseToGivenUserParams {
+    licenseKey: string;
+    userId: IdType;
+}
+
 export interface IQueryLicenseParams {
     brandId?: IdType;
     packageId?: IdType;
