@@ -17,7 +17,7 @@ import {
 } from './types';
 
 /**
- * JFW-49: Thiếu tài liệu GET: api/organizations
+ * Gets the list of organizations.
  */
 export const queryOrganizationAPI = async (
     params: IQueryOrganizationParams,
@@ -72,7 +72,7 @@ export const uploadFileToOrganizationAPI = async (
 };
 
 /**
- * #JFW-51: Thiếu tài liệu POST: /api/organizations/{organizationId}/users/{userId}
+ * Adds a new user to the organization.
  */
 export const addUserToOrganizationAPI = async (
     params: IAddUserToOrganizationParams,
@@ -157,9 +157,9 @@ export const createOrganizationAPI = async (
 };
 
 /**
- * #JFW-53: Thiếu tài liệu UPDATE: api/organizations/:id
+ * Updates an organization by the given id.
  */
-export const updateOrganizationAPI = async (
+export const updateOrganizationByIdAPI = async (
     id: IdType,
     data: IUpdateOrganizationParams,
     config?: AxiosRequestConfig,
@@ -173,7 +173,7 @@ export const updateOrganizationAPI = async (
 };
 
 /**
- * #JFW-54: Thiếu tài liệu UPDATE: api/organizations/:id
+ * Deletes an organization by the given id.
  */
 export const deleteOrganizationAPI = async (
     id: IdType,
