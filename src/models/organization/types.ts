@@ -29,10 +29,11 @@ export interface IOrganizationUser {
     joinedDate: DateType;
     statusUser: string;
     user: IUser;
+    roleCode: string;
 }
 
 //#region API types
-export interface IQueryOrganizationParams extends IPageable {
+export interface IListOrganizationParams extends IPageable {
     userId?: string;
     languageCode?: string;
     name?: string;
@@ -59,12 +60,26 @@ export interface IRemoveUserInOrganizationParams {
     organizationId: IdType;
     userId: IdType;
 }
-export interface IAddUserToOrganizationParams {
+export interface IAddNewUserToOrganizationParams {
     organizationId: IdType;
     userId: IdType;
 }
 
-export interface IQueryUsersOfOrganizationParams extends IPageable, ISortable {
+export interface IAddUserForDefaultLanguageCodeOrganizationSystemParams {
+    userId: IdType;
+    languageCode: string;
+}
+
+export interface IAssignRoleForUserInOrganizationParams {
+    organizationId: IdType;
+}
+
+export interface IAssignRoleForUserInOrganizationData {
+    roleId: IdType;
+    userId: IdType;
+}
+
+export interface IListUsersOfOrganizationParams extends IPageable, ISortable {
     organizationId: IdType;
 
     status?: string;
