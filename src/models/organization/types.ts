@@ -3,6 +3,7 @@ import { IPageable, ISortable } from '../../core';
 import { IMedia } from '../cdn';
 import { ILanguage } from '../language';
 import { IUser } from '../user';
+import { OrganizationUserStatus } from './constants';
 
 export interface IOrganization {
     avatar?: string;
@@ -51,9 +52,11 @@ export interface IGetOrganizationDetailPath {
 
 export interface IUpdateUserStatusInOrganizationParams {
     organizationId: IdType;
-    userId: IdType;
+}
 
-    status: string;
+export interface IUpdateUserStatusInOrganizationData {
+    userIds: IdType[];
+    status: OrganizationUserStatus;
 }
 
 export interface IRemoveUserInOrganizationParams {

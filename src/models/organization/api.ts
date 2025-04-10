@@ -16,7 +16,8 @@ import {
     IOrganizationUser,
     IRemoveUserInOrganizationParams,
     IUpdateOrganizationParams,
-    IUpdateUserStatusInOrganizationParams
+    IUpdateUserStatusInOrganizationData,
+    IUpdateUserStatusInOrganizationParams,
 } from './types';
 
 /**
@@ -243,18 +244,19 @@ export const updateOrganizationAPI = async (
  */
 export const updateUserStatusInOrganizationAPI = async (
     params: IUpdateUserStatusInOrganizationParams,
+    data: IUpdateUserStatusInOrganizationData,
     config?: AxiosRequestConfig,
 ) => {
-    const { userId, organizationId, ...restParams } = params;
-    const url = generatePath(ORGANIZATION_PATH.USERS.UPDATE_STATUS_BY_ID, {
+    const { organizationId } = params;
+    const url = generatePath(ORGANIZATION_PATH.USERS.UPDATE_STATUS, {
         id: organizationId,
-        userId,
     });
 
-    const response = await jfwAxios.patch<HttpResponse<boolean>>(url, null, {
-        ...config,
-        params: restParams,
-    });
+    const response = await jfwAxios.patch<HttpResponse<boolean>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };

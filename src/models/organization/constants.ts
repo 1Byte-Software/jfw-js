@@ -1,9 +1,13 @@
-// Define an object to represent different status of organization's users.
+/**
+ * Define an object to represent different status of organization's users.
+ */
 export enum OrganizationUserStatus {
+    Waiting = 'Waiting',
+    Pending = 'Pending',
+    Joined = 'Joined',
     Banned = 'Banned',
     Leave = 'Leave',
-    Deny = 'Denied',
-    Waiting = 'Pending',
-    Joined = 'Joined',
-    UnJoin = null,
+    Left = 'Left',
+    Denied = 'Denied',
+    Deny = 'Deny',
 }
