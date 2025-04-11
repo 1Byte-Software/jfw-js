@@ -1,8 +1,9 @@
-import { IPageable } from '../../core';
+import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
 import { IMedia } from '../cdn';
 import { IIssueCategory } from '../issueCategory';
 import { IIssueReaction } from '../issueReaction';
+import { IssueReactionStatus, IssueReactionType } from './constants';
 
 export interface IIssue extends IBaseObject {
     parentId?: IdType;
@@ -39,26 +40,47 @@ export interface IUserIssue {
 }
 
 //#region API types
-export interface IQueryIssueParams extends IPageable {
-    refId?: number;
-    refObject?: string;
-    id?: string;
-    brandCode?: string;
+export interface IGetIssuesParams extends IPageable, ISortable {
+    onlyParent?: boolean;
+    userId?: IdType;
+    deviceId?: IdType;
+    assigneeId?: IdType;
+    issueTypeId?: IdType;
+    parentId?: IdType;
     name?: string;
-    issueTypeId?: string;
+    description?: string;
+    refType?: number;
+    refObject?: string;
+    refId?: IdType;
+    content?: string;
+    issueCc?: string;
+    tags?: string;
+    status?: string;
+    organizationCodes?: string[];
 }
 
-export interface ICreateIssueParams {
-    parentId?: IdType;
-    refId?: number;
-
-    issueTypeCode?: string;
+export interface ICreateIssueData {
+    issueCategoryId?: IdType | null;
+    parentId?: IdType | null;
 
     content: string;
-    refObject?: string;
-    priority?: string;
+    refId?: number;
+    refObject?: string | null;
+    refType?: string | null;
+    assigneeId?: IdType | null;
+    priority?: string | null;
+    name?: string | null;
+    description?: string | null;
+    issueCc?: string | null;
+    tags?: string | null;
 }
 
-export type IUpdateIssueParams = ICreateIssueParams;
+export type IUpdateIssueData = ICreateIssueData;
+
+export interface ICreateIssueReactionData {
+    issueId: IdType;
+    issueReactionType: IssueReactionType;
+    status: IssueReactionStatus;
+}
 
 //#endregion

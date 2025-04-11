@@ -1,108 +1,183 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponseList } from '../../core';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { ISSUE_PATH } from './paths';
 import {
-    ICreateIssueParams,
+    ICreateIssueData,
+    ICreateIssueReactionData,
+    IGetIssuesParams,
     IIssue,
-    IQueryIssueParams,
-    IUpdateIssueParams,
+    IUpdateIssueData,
 } from './types';
 
 /**
- * Gets the list of issues.
- */
-export const queryIssueAPI = async (
-    params?: IQueryIssueParams,
-    config?: AxiosRequestConfig,
-): Promise<HttpResponseList<IIssue>> => {
-    const url = ISSUE_PATH.QUERY;
-    const response = await jfwAxios.get(url, { ...config, params });
-
-    return response.data;
-};
-
-/**
  * Creates a new issue.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/create-an-issue}
  */
 export const createIssueAPI = async (
-    params: ICreateIssueParams,
+    data: ICreateIssueData,
     config?: AxiosRequestConfig,
 ) => {
-    const url = ISSUE_PATH.CREATE;
+    const url = ISSUE_PATH.CREATE_ISSUE;
 
-    return await jfwAxios.post(url, params, config);
+    const response = await jfwAxios.post<HttpResponse<IIssue>>(
+        url,
+        data,
+        config,
+    );
+
+    return response.data;
 };
 
 /**
- * Deletes a issue by ID.
+ * Create an issue reaction
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/create-an-issue-reaction}
  */
-export const deleteIssueByIdAPI = async (
+export const createIssueReactionAPI = async (
+    data: ICreateIssueReactionData,
+    config?: AxiosRequestConfig,
+) => {
+    const url = ISSUE_PATH.CREATE_ISSUE_REACTION;
+
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
+        url,
+        data,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * Deletes an issue by id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/delete-an-issue}
+ */
+export const deleteIssueAPI = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(ISSUE_PATH.DELETE_BY_ID, {
+    const url = generatePath(ISSUE_PATH.DELETE_ISSUE, {
         id,
     });
 
-    return await jfwAxios.delete(url, config);
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+
+    return response.data;
 };
 
 /**
- * #JFW-43: Sửa lại getIssueByIds trong jfw-js
- * Gets the list of issues. The maximum number of issues is 100.
+ * Deletes an issue reaction by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/delete-an-issue-reaction}
  */
-export const getIssueByIdsAPI = async (
-    params: string,
+export const deleteIssueReactionAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(ISSUE_PATH.DELETE_ISSUE_REACTION, {
+        id,
+    });
+
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Gets the list of issues.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/get-issues}
+ */
+export const getIssuesAPI = async (
+    params?: IGetIssuesParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = ISSUE_PATH.GET_ISSUES;
+    const response = await jfwAxios.get<HttpResponseList<IIssue>>(url, {
+        params,
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * Gets an issue by id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/get-an-issue}
+ */
+export const getIssueByIdAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(ISSUE_PATH.GET_ISSUE, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<IIssue>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Gets the list of issues. The maximum number of issues is 100.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/get-issues-by-list-id}
+ */
+export const getIssuesByListIdAPI = async (
+    ids: IdType[],
     config?: AxiosRequestConfig,
 ): Promise<HttpResponseList<IIssue>> => {
-    const url = `${ISSUE_PATH.GET_BY_LIST}?${params}`;
-    const response = await jfwAxios.get(url, config);
+    const url = ISSUE_PATH.GET_ISSUES_BY_LIST_ID;
+    const response = await jfwAxios.get(url, {
+        params: {
+            ids,
+        },
+        paramsSerializer: {
+            indexes: true,
+        },
+        ...config,
+    });
 
     return response.data;
 };
 
 /**
- * Gets the children of a issue by ID.
+ * Get the children of a issue by id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/get-children-issues}
  */
-export const getIssueChildrenAPI = async (
+export const getChildrenIssuesAPI = async (
     id: IdType,
     config?: AxiosRequestConfig,
-): Promise<IIssue[]> => {
-    const url = generatePath(ISSUE_PATH.GET_CHILDREN, {
-        id,
-    });
-    const response = await jfwAxios.get(url, config);
-
-    return response.data;
-};
-
-/**
- * Gets an issue by ID.
- */
-export const getIssueByIdAPI = async (id: IdType): Promise<IIssue> => {
-    const url = generatePath(ISSUE_PATH.GET_BY_ID, {
-        id,
-    });
-    const response = await jfwAxios.get(url);
-
-    return response.data;
-};
-
-/**
- * #JFW-45: Thiếu tài liệu PATCH: api/issues/{id}
- */
-export const updateIssueByIdAPI = async (
-    id: IdType,
-    params: IUpdateIssueParams,
 ) => {
-    const url = generatePath(ISSUE_PATH.UPDATE_BY_ID, {
+    const url = generatePath(ISSUE_PATH.GET_CHILDREN_ISSUES, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<IIssue[]>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Update an issue by id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/update-an-issue}
+ */
+export const updateIssueAPI = async (
+    id: IdType,
+    data: IUpdateIssueData,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(ISSUE_PATH.UPDATE_ISSUE, {
         id,
     });
 
-    const response = await jfwAxios.patch(url, params);
+    const response = await jfwAxios.patch<HttpResponse<IIssue>>(url, data, config);
 
     return response.data;
 };
