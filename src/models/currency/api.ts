@@ -4,12 +4,21 @@ import { jfwAxios } from '../../core/client/client';
 import { CURRENCY_PATH } from './paths';
 import { ICurrency, IQueryCurrencyParams } from './types';
 
-export const queryCurrencyAPI = async (
+/**
+ * Gets a list of all currencies in the system.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-currencies}
+ */
+export const getCurrenciesAPI = async (
     params: IQueryCurrencyParams,
     config?: AxiosRequestConfig,
-): Promise<HttpResponseList<ICurrency>> => {
-    const url = CURRENCY_PATH.QUERY;
-    const response = await jfwAxios.get(url, { ...config, params });
+) => {
+    const url = CURRENCY_PATH.GET_CURRENCIES;
+
+    const response = await jfwAxios.get<HttpResponseList<ICurrency>>(url, {
+        ...config,
+        params,
+    });
 
     return response.data;
 };
