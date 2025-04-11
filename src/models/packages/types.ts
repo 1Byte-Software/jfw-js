@@ -19,7 +19,7 @@ export interface IPackage extends IBaseObject {
 }
 
 //#region API types
-export interface IQueryPackageParams {
+export interface IGetPackagesParams {
     priceId?: IdType;
 
     code?: string;
@@ -31,7 +31,7 @@ export interface IQueryPackageParams {
 export interface IGetPackageByIdRequestPath {
     packageId: string;
 }
-export interface ICreatePackageParams {
+export interface ICreatePackageData {
     code?: string;
     name?: string;
     image?: string;
@@ -42,9 +42,13 @@ export interface ICreatePackageParams {
     zOrder?: number | null;
 }
 
-export type IUpdatePackageParams = ICreatePackageParams;
+export type IUpdatePackageData = ICreatePackageData;
 
-export interface IAddFeaturesToPackageParams {
+export interface IGetPricesFromPackageParams {
+    packageId: IdType;
+}
+
+export interface IAddFeaturesToPackageData {
     featureId: IdType;
     value: number;
 }

@@ -1,19 +1,15 @@
 const REST = 'packages';
 const REST_FEATURE = 'features';
+const REST_PRICE = 'prices';
 
 export const PACKAGE_PATH = {
-    QUERY: `${REST}`,
+    ADD_FEATURE_TO_PACKAGE: `${REST}/:id/${REST_FEATURE}`,
+    CREATE_PACKAGE: `${REST}`,
+    DELETE_PACKAGE: `${REST}/:id`,
 
-    CREATE: `${REST}`,
-    GET_BY_ID: `${REST}/:id`,
-    UPDATE_BY_ID: `${REST}/:id`,
-
-    DELETE_BY_ID: `${REST}/:id`,
-    GET_PRICE: `${REST}/:id/prices`,
-
-    FEATURES: {
-        QUERY: `${REST}/:id/${REST_FEATURE}`,
-        ADD_TO_PACKAGE: `${REST}/:id/${REST_FEATURE}`,
-        DELETE_BY_LIST: `${REST}/:id/${REST_FEATURE}`,
-    },
+    GET_PACKAGE: `${REST}/:id`,
+    GET_PACKAGES: `${REST}`,
+    GET_PRICES_FROM_PACKAGE: `${REST}/:id/${REST_PRICE}`,
+    UPDATE_PACKAGE: `${REST}/:id`,
+    REMOVE_FEATURES_FROM_PACKAGE: `${REST}/:id/${REST_FEATURE}`,
 };
