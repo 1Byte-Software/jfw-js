@@ -1,33 +1,24 @@
-import { HttpResponseList } from '../../core';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
-import { generatePath } from '../../utils/path';
-import { IdType } from '../base';
 import { COUNTRY_PATH } from './paths';
 import { ICountry, IQueryCountryParams } from './types';
 
 /**
- * #JFW-71: Thiếu tài liệu api/countries
+ * List all countries by the given filter.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-countries}
  */
-export const queryCountryAPI = async (
+export const getCountriesAPI = async (
     params?: IQueryCountryParams,
-): Promise<HttpResponseList<ICountry>> => {
-    const url = COUNTRY_PATH.QUERY;
-    const response = await jfwAxios.get(url, {
-        params,
-    });
-    return response.data
-};
+    config?: AxiosRequestConfig,
+) => {
+    const url = COUNTRY_PATH.GET_COUNTRIES;
 
-/**
- * #JFW-71: Thiếu tài liệu api/countries
- */
-export const getCountryByIdAPI = async (
-    countryId: IdType,
-): Promise<ICountry> => {
-    const url = generatePath(COUNTRY_PATH.GET_BY_ID, {
-        id: countryId,
+    const response = await jfwAxios.get<HttpResponse<ICountry[]>>(url, {
+        params,
+        ...config,
     });
-    const response = await jfwAxios.get(url);
 
     return response.data;
 };
