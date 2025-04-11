@@ -1,4 +1,4 @@
-import { HttpResponse, IStatistic, IStatisticCommonParams } from '../../core';
+import { HttpResponse, IStatisticCommon, IStatisticCommonParams } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
@@ -58,7 +58,7 @@ export const getPaymentDashboardAPI = async (
  */
 export const getPaymentStatisticAPI = async (
     params: IStatisticCommonParams,
-): Promise<IStatistic[]> => {
+): Promise<IStatisticCommon[]> => {
     const url = PAYMENT_PATH.GET_STATISTIC;
     const response = await jfwAxios.get(url, {
         params,
