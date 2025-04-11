@@ -1,5 +1,5 @@
 const REST = 'timezones';
 
 export const TIMEZONE_PATH = {
-    GET: `${REST}`,
+    GET_TIMEZONES: `${REST}`,
 };

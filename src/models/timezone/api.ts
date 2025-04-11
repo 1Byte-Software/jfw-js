@@ -6,12 +6,15 @@ import { IGetTimezoneParams, ITimezone } from './types';
 
 /**
  * List all time zones.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/time-zones}
  */
-export const getTimezoneAPI = async (
+export const getTimezonesAPI = async (
     params?: IGetTimezoneParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = TIMEZONE_PATH.GET;
+    const url = TIMEZONE_PATH.GET_TIMEZONES;
+    
     const response = await jfwAxios.get<HttpResponse<ITimezone[]>>(url, {
         ...config,
         params,
