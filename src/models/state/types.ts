@@ -9,10 +9,10 @@ export interface IState {
     createdDate: DateType;
 }
 //#region API types
-export interface IQueryStateParams {
-    name?: string;
-    countryCode?: string;
-    stateCode?: string;
+export interface IGetStatesParams {
+    // name?: string;
+    // countryCode?: string;
+    // stateCode?: string;
 }
 
 //#endregion

@@ -1,32 +1,23 @@
+import { AxiosRequestConfig } from 'axios';
 import { HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
-import { generatePath } from '../../utils/path';
-import { IdType } from '../base';
 import { STATE_PATH } from './paths';
-import { IQueryStateParams, IState } from './types';
+import { IGetStatesParams, IState } from './types';
 
 /**
- * #JFW-76: Thiếu tài liệu api/states
+ * Gets a list of all states.
+ * 
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/states}
  */
-export const queryStateAPI = async (
-    params?: IQueryStateParams,
+export const getStatesAPI = async (
+    params?: IGetStatesParams,
+    config?: AxiosRequestConfig,
 ): Promise<HttpResponseList<IState>> => {
-    const url = STATE_PATH.QUERY;
+    const url = STATE_PATH.GET_STATES;
     const response = await jfwAxios.get(url, {
         params,
+        ...config,
     });
-
-    return response.data
-};
-
-/**
- * #JFW-76: Thiếu tài liệu api/states
- */
-export const getStateByIdAPI = async (stateId: IdType): Promise<IState> => {
-    const url = generatePath(STATE_PATH.GET_BY_ID, {
-        id: stateId,
-    });
-    const response = await jfwAxios.get(url);
 
     return response.data;
 };
