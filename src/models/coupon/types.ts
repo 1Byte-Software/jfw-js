@@ -23,7 +23,7 @@ export interface IQueryCouponsParams extends IPageable {
     code?: string;
     status?: string;
 }
-export interface ICreateCouponParams {
+export interface ICreateCouponData {
     name: string;
     code: string;
     description?: string;
@@ -35,5 +35,5 @@ export interface ICreateCouponParams {
     status: string;
 }
 
-export type IUpdateCouponParams = ICreateCouponParams;
+export type IUpdateCouponData = ICreateCouponData;
 //#endregion

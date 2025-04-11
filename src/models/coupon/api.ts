@@ -1,74 +1,104 @@
-import { HttpResponseList } from '../../core';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { COUPON_PATH } from './paths';
 import {
     ICoupon,
-    ICreateCouponParams,
+    ICreateCouponData,
     IQueryCouponsParams,
-    IUpdateCouponParams,
+    IUpdateCouponData,
 } from './types';
 
 /**
- * Gets all coupons get
- */
-export const queryCouponAPI = async (
-    params: IQueryCouponsParams,
-): Promise<HttpResponseList<ICoupon>> => {
-    const url = COUPON_PATH.QUERY;
-    const response = await jfwAxios.get(url, {
-        params,
-    });
-
-    return response.data;
-};
-
-/**
- * Gets a coupon by the given id.
- */
-export const getCouponByIdAPI = async (couponId: IdType): Promise<ICoupon> => {
-    const url = generatePath(COUPON_PATH.GET_BY_ID, {
-        id: couponId,
-    });
-    const response = await jfwAxios.get(url);
-
-    return response.data;
-};
-
-/**
  * Creates a new coupon.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/create-a-coupon}
  */
-export const createCouponAPI = async (params: ICreateCouponParams) => {
-    const url = COUPON_PATH.CREATE;
-    const response = await jfwAxios.post(url, params);
-
-    return response.data;
-};
-
-/**
- * Updates a coupon by the given id.
- */
-export const updateCouponByIdAPI = async (
-    couponId: IdType,
-    payload: IUpdateCouponParams,
+export const createCouponAPI = async (
+    data: ICreateCouponData,
+    config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(COUPON_PATH.UPDATE_BY_ID, {
-        id: couponId,
-    });
-    const response = await jfwAxios.put(url, payload);
+    const url = COUPON_PATH.CREATE_COUPON;
+
+    const response = await jfwAxios.post<HttpResponse<ICoupon>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };
 
 /**
  * Deletes a coupon by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/delete-a-coupon}
  */
-export const deleteCouponByIdAPI = async (couponId: IdType) => {
-    const url = generatePath(COUPON_PATH.DELETE_BY_ID, {
+export const deleteCouponAPI = async (
+    couponId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(COUPON_PATH.DELETE_COUPON, {
         id: couponId,
     });
-    const response = await jfwAxios.delete(url);
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Gets a coupon by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/get-a-coupon}
+ */
+export const getCouponAPI = async (
+    couponId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(COUPON_PATH.GET_COUPON, {
+        id: couponId,
+    });
+    const response = await jfwAxios.get<HttpResponse<ICoupon>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Gets all coupons
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/get-coupons}
+ */
+export const getCouponsAPI = async (
+    params: IQueryCouponsParams,
+    config?: AxiosRequestConfig,
+): Promise<HttpResponseList<ICoupon>> => {
+    const url = COUPON_PATH.GET_COUPONS;
+
+    const response = await jfwAxios.get<HttpResponseList<ICoupon>>(url, {
+        params,
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * Updates a coupon by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/update-a-coupon}
+ */
+export const updateCouponByIdAPI = async (
+    couponId: IdType,
+    data: IUpdateCouponData,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(COUPON_PATH.UPDATE_COUPON, {
+        id: couponId,
+    });
+
+    const response = await jfwAxios.put<ICoupon>(url, data, config);
 
     return response.data;
 };
