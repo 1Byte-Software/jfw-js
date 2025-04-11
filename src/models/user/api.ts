@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import {
     HttpResponse,
     HttpResponseList,
-    IStatistic,
+    IStatisticCommon,
     IStatisticCommonParams,
 } from '../../core';
 import { jfwAxios } from '../../core/client/client';
@@ -269,7 +269,7 @@ export const getUserStatisticAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = USER_PATH.STATISTIC;
-    const response = await jfwAxios.get<HttpResponse<IStatistic[]>>(url, {
+    const response = await jfwAxios.get<HttpResponse<IStatisticCommon[]>>(url, {
         ...config,
         params,
     });
