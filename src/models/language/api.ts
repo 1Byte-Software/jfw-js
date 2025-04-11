@@ -5,10 +5,14 @@ import { LANGUAGE_PATH } from './paths';
 import { ILanguage } from './types';
 
 /**
- * Gets languages
+ * The Languages API provides access to a list of supported languages in the system. This API allows clients to retrieve language data efficiently for localization purposes.
+ * 
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/languages}
  */
-export const queryLanguageAPI = async (config?: AxiosRequestConfig) => {
-    const url = LANGUAGE_PATH.QUERY;
+export const getLanguagesAPI = async (config?: AxiosRequestConfig) => {
+    const url = LANGUAGE_PATH.GET_LANGUAGES;
+
     const response = await jfwAxios.get<HttpResponse<ILanguage[]>>(url, config);
+
     return response.data;
 };
