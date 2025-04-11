@@ -27,7 +27,7 @@ export interface IDevice extends IBaseObject {
 }
 
 //#region API types
-export interface ICheckUserAccessParams {
+export interface ICheckUserAccessDeviceParams {
     userId: IdType;
     deviceCode: string;
 }
@@ -62,8 +62,8 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
     isPagination?: boolean;
 }
 
-export interface ICreateDeviceParams {};
-export interface IUpdateDeviceParams {};
+export interface ICreateDeviceData {};
+export interface IUpdateDeviceData {};
 
 
 //#endregion

@@ -1,26 +1,34 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../core';
+import {
+    HttpResponse,
+    HttpResponseList,
+    IStatisticCommon,
+    IStatisticCommonParams,
+} from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { DEVICE_PATH } from './paths';
 import {
-    ICheckUserAccessParams,
-    ICreateDeviceParams,
+    ICheckUserAccessDeviceParams,
+    ICreateDeviceData,
     IDevice,
     IQueryDeviceParams,
-    IUpdateDeviceParams,
+    IUpdateDeviceData,
 } from './types';
 
 /**
- * Gets the list off all devices by the given filter.
+ * Checks the user can access the specified device code.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/check-user-access-device}
  */
-export const queryDeviceAPI = async (
-    params?: IQueryDeviceParams,
+export const checkUserAccessDeviceAPI = async (
+    params: ICheckUserAccessDeviceParams,
     config?: AxiosRequestConfig,
-): Promise<HttpResponseList<IDevice>> => {
-    const url = DEVICE_PATH.QUERY;
-    const response = await jfwAxios.get(url, {
+) => {
+    const url = DEVICE_PATH.CHECK_USER_ACCESS_DEVICE;
+
+    const response = await jfwAxios.get<HttpResponse<null>>(url, {
         ...config,
         params,
     });
@@ -30,23 +38,50 @@ export const queryDeviceAPI = async (
 
 /**
  * Adds a new device to the user.
- * @feature Will make in feature
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/create-a-device}
  */
 export const createDeviceAPI = async (
-    params?: ICreateDeviceParams,
+    data?: ICreateDeviceData,
     config?: AxiosRequestConfig,
 ) => {
-    const url = DEVICE_PATH.CREATE;
+    const url = DEVICE_PATH.CREATE_DEVICE;
+
+    const response = await jfwAxios.post<HttpResponse<IDevice>>(
+        url,
+        data,
+        config,
+    );
+
+    return response.data;
 };
 
 /**
- * Gets a device data by the specified ID.
+ * Delete a device by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/delete-a-device}
  */
-export const getDeviceByIdAPI = async (
+export const deleteDeviceAPI = async (
     deviceId: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(DEVICE_PATH.GET_BY_ID, {
+    const url = generatePath(DEVICE_PATH.DELETE_DEVICE, {
+        id: deviceId,
+    });
+
+    return await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+};
+
+/**
+ * Gets a device by the given id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-a-device}
+ */
+export const getDeviceAPI = async (
+    deviceId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(DEVICE_PATH.GET_DEVICE, {
         id: deviceId,
     });
 
@@ -56,48 +91,48 @@ export const getDeviceByIdAPI = async (
 };
 
 /**
- * Delete a device by data ID.
+ * Get the current device of the user authenticated.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-current-device-access}
  */
-export const deleteDeviceByIdAPI = async (
-    deviceId: IdType,
+export const getCurrentDeviceOfUserAuthorizedAPI = async (
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(DEVICE_PATH.DELETE_BY_ID, {
-        id: deviceId,
-    });
+    const url = DEVICE_PATH.GET_CURRENT_DEVICE_OF_USER_AUTHORIZED;
 
-    return await jfwAxios.delete(url, config);
-};
-
-/**
- * Updates the device data.
- * @feature Will make in feature
- */
-export const updateDeviceByIdAPI = async (
-    deviceId: IdType,
-    payload: IUpdateDeviceParams,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(DEVICE_PATH.UPDATE_BY_ID, {
-        id: deviceId,
-    });
-
-    const response = await jfwAxios.put(url, payload, config);
+    const response = await jfwAxios.get<HttpResponse<IDevice>>(url, config);
 
     return response.data;
 };
 
 /**
- * Check the user can access the specified device code.
+ * Gets the list of all devices by the given filter.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-devices}
  */
-export const checkUserAccessAPI = async (
-    params: ICheckUserAccessParams,
+export const getDevicesAPI = async (
+    params?: IQueryDeviceParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = DEVICE_PATH.CHECK_USER_ACCESS;
+    const url = DEVICE_PATH.GET_DEVICES;
 
-    const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
+    const response = await jfwAxios.get<HttpResponseList<IDevice>>(url, {
+        params,
         ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * Statistics devices data.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/statistics}
+ */
+export const deviceStatisticAPI = async (params: IStatisticCommonParams) => {
+    const url = DEVICE_PATH.STATISTICS;
+
+    const response = await jfwAxios.get<HttpResponse<IStatisticCommon[]>>(url, {
         params,
     });
 
@@ -105,47 +140,20 @@ export const checkUserAccessAPI = async (
 };
 
 /**
- * Gets list of devices by list of ids.
- * @feature Will make in feature
+ * Updates the device data.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/update-a-device}
  */
-export const getDevicesByIds = async (
-    deviceIds: IdType[],
+export const updateDeviceAPI = async (
+    deviceId: IdType,
+    data: IUpdateDeviceData,
     config?: AxiosRequestConfig,
 ) => {
-    const url = DEVICE_PATH.GET_BY_LIST_ID;
-};
-
-/**
- * Gets the current device information.
- * @feature Will make in the feature
- */
-export const getDeviceCurrent = async (config?: AxiosRequestConfig) => {
-    const url = DEVICE_PATH.GET_CURRENT;
-};
-
-/**
- * Gets the device data by specified code.
- * @feature Will make in the feature
- */
-export const getDeviceByCode = async (
-    deviceCode: string,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(DEVICE_PATH.GET_BY_CODE, {
-        code: deviceCode,
+    const url = generatePath(DEVICE_PATH.UPDATE_DEVICE, {
+        id: deviceId,
     });
+
+    const response = await jfwAxios.put(url, data, config);
+
+    return response.data;
 };
-
-/**
- * #JFW-36: Bổ sung type hoàn chỉnh cho các đối tượng trong jfw-js
- */
-// export const deviceStatisticAPI = async (
-//     params: IStatisticCommonParams,
-// ): Promise<IStatistic[]> => {
-//     const url = `${REST}/${STATISTIC}`;
-//     const response = await jfwAxios.get(url, {
-//         params,
-//     });
-
-//     return response.data;
-// };
