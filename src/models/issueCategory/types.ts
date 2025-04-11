@@ -14,11 +14,18 @@ export interface IIssueCategory extends IBaseObject {
 
 //#region API types
 export interface IQueryIssueCategoryParams extends IPageable {
+    groupCode?: string;
     code?: string;
-    brandCode?: string;
+    name?: string;
+    description?: string;
+    suggestionUrl?: string;
+    tags?: string;
+    zOrder?: number;
+    status?: string;
+    isSystem?: boolean;
 }
 
-export interface ICreateIssueCategoryParams {
+export interface ICreateIssueCategoryData {
     brandId: IdType;
 
     code: string;
@@ -30,5 +37,5 @@ export interface ICreateIssueCategoryParams {
     tags?: string;
 }
 
-export type IUpdateIssueCategoryParams = ICreateIssueCategoryParams;
+export type IUpdateIssueCategoryData = ICreateIssueCategoryData;
 //#endregion
