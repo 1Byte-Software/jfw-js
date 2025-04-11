@@ -1,50 +1,48 @@
-import { HttpResponseList } from '../../core';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { TRACKING_ACTIVITY_PATH } from './paths';
-import {
-    ICreateTrackingActivityParams,
-    IQueryTrackingActivityParams,
-    ITrackingActivity,
-} from './types';
+import { IQueryTrackingActivityParams, ITrackingActivity } from './types';
 
 /**
  * Gets the activities by the specified filter.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/tracking-activities/get-activities}
  */
-export const queryTrackingActivityAPI = async (
+export const getTrackingActivitiesAPI = async (
     params?: IQueryTrackingActivityParams,
-): Promise<HttpResponseList<ITrackingActivity>> => {
-    const url = TRACKING_ACTIVITY_PATH.QUERY;
-
-    const response = await jfwAxios.get(url, {
-        params,
-    });
-
-    return response.data;
-};
-
-/**
- * Gets the activity by the id.
- */
-export const getTrackingActivityByIdAPI = async (
-    trackingActivityId: IdType,
-): Promise<ITrackingActivity> => {
-    const url = generatePath(TRACKING_ACTIVITY_PATH.GET_BY_ID, {
-        id: trackingActivityId,
-    });
-    const response = await jfwAxios.get(url);
-
-    return response.data;
-};
-
-/**
- * #JFW-81: Thiếu tài liệu POST: api/tracking-activities
- */
-export const createTrackingActivityAPI = async (
-    params: ICreateTrackingActivityParams,
+    config?: AxiosRequestConfig,
 ) => {
-    const url = TRACKING_ACTIVITY_PATH.CREATE;
-    const response = await jfwAxios.post(url, params);
+    const url = TRACKING_ACTIVITY_PATH.GET_ACTIVITIES;
+
+    const response = await jfwAxios.get<HttpResponseList<ITrackingActivity>>(
+        url,
+        {
+            params,
+            ...config,
+        },
+    );
+
+    return response.data;
+};
+
+/**
+ * Get a tracking activity by the given id.
+ */
+export const getTrackingActivityAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(TRACKING_ACTIVITY_PATH.GET_ACTIVITY, {
+        id,
+    });
+
+    const response = await jfwAxios.get<HttpResponse<ITrackingActivity>>(
+        url,
+        config,
+    );
+
     return response.data;
 };
