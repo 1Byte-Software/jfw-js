@@ -1,9 +1,8 @@
 const REST = 'invoices';
 
 export const INVOICE_PATH = {
-    QUERY: `${REST}`,
-    GET_BY_ID: `${REST}/:id`,
-    DELETE_BY_ID: `${REST}/:id`,
-
-    EXPORT: `${REST}/:id/export`,
+    GET_INVOICES: `${REST}`,
+    GET_INVOICE: `${REST}/:id`,
+    DELETE_INVOICE: `${REST}/:id`,
+    EXPORT_INVOICE: `${REST}/:id/export`,
 };

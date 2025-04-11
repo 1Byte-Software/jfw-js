@@ -19,7 +19,7 @@ export interface IInvoicePayment {
 }
 
 //#region API types
-export interface IQueryInvoiceParams extends IPageable, ISortable {
+export interface IGetInvoicesParams extends IPageable, ISortable {
     userId?: IdType;
     packageId?: IdType;
     subscriptionTypeId?: IdType;
