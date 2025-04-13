@@ -1,17 +1,12 @@
 import { DateType, IdType } from '../base';
 
 export interface ICity {
-    id: IdType;
-    name: string;
     countryCode: string;
     stateCode: string;
-    createdDate: DateType;
+    name: string;
+    tags: string | null;
 }
 //#region API types
-export interface IQueryCityParams {
-    name?: string;
-    countryCode?: string;
-    stateCode?: string;
-}
+export interface IGetCitiesParams {}
 
 //#endregion
