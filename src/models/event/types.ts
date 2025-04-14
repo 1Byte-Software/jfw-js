@@ -21,6 +21,7 @@ export interface IEvent extends IBaseObject {
 
 //#region API types
 export interface IGetEventsParams extends IPageable, ISortable {
+    keywords?: string;
     groupCodeName?: string;
     code?: string;
     name?: string;

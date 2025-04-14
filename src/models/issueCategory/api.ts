@@ -6,8 +6,8 @@ import { IdType } from '../base';
 import { ISSUE_CATEGORY_PATH } from './paths';
 import {
     ICreateIssueCategoryData,
-    IIssueCategory,
-    IQueryIssueCategoryParams
+    IGetIssueCategoriesParams,
+    IIssueCategory
 } from './types';
 
 /**
@@ -53,7 +53,7 @@ export const deleteIssueCategoryAPI = async (
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/get-issue-categories}
  */
 export const getIssueCategoriesAPI = async (
-    params?: IQueryIssueCategoryParams,
+    params?: IGetIssueCategoriesParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = ISSUE_CATEGORY_PATH.GET_ISSUE_CATEGORIES;

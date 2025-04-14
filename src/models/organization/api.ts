@@ -9,15 +9,15 @@ import {
     IAddUserForDefaultLanguageCodeOrganizationSystemParams,
     IAssignRoleForUserInOrganizationData,
     IAssignRoleForUserInOrganizationParams,
-    ICreateOrganizationParams,
+    ICreateOrganizationData,
     IGetOrganizationParams,
     IGetUsersOfOrganizationParams,
     IOrganization,
     IOrganizationUser,
     IRemoveUserInOrganizationParams,
-    IUpdateOrganizationParams,
+    IUpdateOrganizationData,
     IUpdateUserStatusInOrganizationData,
-    IUpdateUserStatusInOrganizationParams,
+    IUpdateUserStatusInOrganizationParams
 } from './types';
 
 /**
@@ -103,7 +103,7 @@ export const assignRoleForUserInOrganization = async (
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/create-an-organization}
  */
 export const createOrganizationAPI = async (
-    data: ICreateOrganizationParams,
+    data: ICreateOrganizationData,
     config?: AxiosRequestConfig,
 ) => {
     const url = ORGANIZATION_PATH.CREATE;
@@ -222,7 +222,7 @@ export const removeUserInOrganizationAPI = async (
  */
 export const updateOrganizationAPI = async (
     id: IdType,
-    data: IUpdateOrganizationParams,
+    data: IUpdateOrganizationData,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ORGANIZATION_PATH.UPDATE_BY_ID, {

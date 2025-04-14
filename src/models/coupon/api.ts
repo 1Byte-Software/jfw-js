@@ -7,7 +7,7 @@ import { COUPON_PATH } from './paths';
 import {
     ICoupon,
     ICreateCouponData,
-    IQueryCouponsParams,
+    IGetCouponsParams,
     IUpdateCouponData,
 } from './types';
 
@@ -71,7 +71,7 @@ export const getCouponAPI = async (
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/get-coupons}
  */
 export const getCouponsAPI = async (
-    params: IQueryCouponsParams,
+    params: IGetCouponsParams,
     config?: AxiosRequestConfig,
 ): Promise<HttpResponseList<ICoupon>> => {
     const url = COUPON_PATH.GET_COUPONS;
@@ -89,7 +89,7 @@ export const getCouponsAPI = async (
  *
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/update-a-coupon}
  */
-export const updateCouponByIdAPI = async (
+export const updateCouponAPI = async (
     couponId: IdType,
     data: IUpdateCouponData,
     config?: AxiosRequestConfig,
@@ -98,7 +98,11 @@ export const updateCouponByIdAPI = async (
         id: couponId,
     });
 
-    const response = await jfwAxios.put<ICoupon>(url, data, config);
+    const response = await jfwAxios.put<HttpResponse<ICoupon>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };

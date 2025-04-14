@@ -35,6 +35,7 @@ export interface IOrganizationUser {
 
 //#region API types
 export interface IGetOrganizationParams extends IPageable {
+    keywords?: string;
     userId?: string;
     languageCode?: string;
     name?: string;
@@ -87,7 +88,7 @@ export interface IGetUsersOfOrganizationParams extends IPageable, ISortable {
 
     status?: string;
 }
-export interface ICreateOrganizationParams {
+export interface ICreateOrganizationData {
     countryCode?: string;
     languageCode?: string;
     name: string;
@@ -98,5 +99,5 @@ export interface ICreateOrganizationParams {
     status?: string;
 }
 
-export type IUpdateOrganizationParams = ICreateOrganizationParams;
+export type IUpdateOrganizationData = ICreateOrganizationData;
 //#endregion

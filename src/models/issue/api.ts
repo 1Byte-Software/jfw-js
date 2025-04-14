@@ -111,7 +111,7 @@ export const getIssuesAPI = async (
  *
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/get-an-issue}
  */
-export const getIssueByIdAPI = async (
+export const getIssueAPI = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {

@@ -1,3 +1,8 @@
+export enum IssueStatus {
+    Active = 'Active',
+    Inactive = 'Inactive',
+}
+
 export enum IssuePriority {
     Low = 'Low',
     Medium = 'Medium',

@@ -24,9 +24,9 @@ import {
     IReferee,
     IRegisterParams,
     IResetPasswordParams,
-    IUpdateUserParams,
+    IUpdateUserData,
     IUpdateUserTypeParams,
-    IUser,
+    IUser
 } from './types';
 
 /**
@@ -97,7 +97,7 @@ export const getUserByIdAPI = async (
  */
 export const updateUserByIdAPI = async (
     userId: IdType,
-    data: IUpdateUserParams,
+    data: IUpdateUserData,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.UPDATE_BY_ID, {

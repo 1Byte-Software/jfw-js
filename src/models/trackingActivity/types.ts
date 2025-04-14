@@ -20,25 +20,22 @@ export interface ITrackingActivity {
     trackingEvent?: ITrackingEvent;
 }
 //#region API types
-export interface IGetListTrackingActivitiesParams extends IPageable, ISortable {
-    userId?: IdType;
+export interface IGetTrackingActivitiesParams extends IPageable, ISortable {
+    keywords?: string;
+    browserName?: string;
+    browserVersion?: string;
+    description?: string;
+    deviceId?: null;
+    ipAddress?: string;
+    latitude?: number;
+    location?: string;
+    longitude?: number;
+    os?: string;
+    requestFromMobile?: boolean;
     trackingEventId?: IdType;
-}
-export interface IQueryTrackingActivityParams {
-    browserName: string;
-    browserVersion: string;
-    description: string;
-    deviceId: null;
-    ipAddress: string;
-    latitude: number;
-    location: string;
-    longitude: number;
-    os: string;
-    requestFromMobile: boolean;
-    trackingEventId: IdType;
-    url: string;
-    userAgent: string;
-    userId: IdType;
+    url?: string;
+    userAgent?: string;
+    userId?: IdType;
 }
 
 export interface ICreateTrackingActivityParams {

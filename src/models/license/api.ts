@@ -7,14 +7,14 @@ import { LICENSE_PATH } from './paths';
 import {
     IApplyLicenseToGivenUserParams,
     IApplyLicenseToLoginNameParams,
-    ICreateLicenseParams,
+    ICreateLicenseData,
     IGenerateLicenseKeyParams,
+    IGetLicensesParams,
     ILicense,
     ILicenseStatistic,
     IPurchaseToAddLicensesByCheckoutLinkParams,
     IPurchaseToAddLicensesByWalletParams,
-    IQueryLicensesParams,
-    IStatisticsPercentageLicensesUsedParams,
+    IStatisticsPercentageLicensesUsedParams
 } from './types';
 
 /**
@@ -102,7 +102,7 @@ export const checkLicenseKeyAPI = async (
  *
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/create-the-licenses}
  */
-export const createLicenseAPI = async (payload: ICreateLicenseParams) => {
+export const createLicenseAPI = async (payload: ICreateLicenseData) => {
     const url = LICENSE_PATH.CREATE;
 
     const response = await jfwAxios.post<HttpResponse<number>>(url, payload);
@@ -144,7 +144,7 @@ export const deleteLicenseAPI = async (id: IdType) => {
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/get-licenses}
  */
 export const getLicensesAPI = async (
-    params: IQueryLicensesParams,
+    params: IGetLicensesParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.GET;

@@ -84,18 +84,19 @@ export interface IQueryUserParams extends IPageable, ISortable {
 export interface IGetUserInfoByUsernamePath {
     username: string;
 }
-export interface IUpdateUserParams {
-    username: string;
-    emailAddress?: string;
-    firstName?: string;
-    phoneNumber1?: string;
-    lastName?: string;
-    website?: string;
-    nickName?: string;
-    avatar?: string;
-    bio?: string;
-    languageCode?: string;
-    timeZoneId?: IdType;
+export interface IUpdateUserData {
+    username?: string | null;
+    emailAddress?: string | null;
+    nickName?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    languageCode?: string | null;
+    timeZoneId?: IdType | null;
+    phoneNumber?: string | null;
+    phoneNumber1?: string | null;
+    avatar?: string | null;
+    bio?: string | null;
+    website?: string | null;
 }
 
 export interface IGetUserConfigurationParams {

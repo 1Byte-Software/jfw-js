@@ -1,3 +1,8 @@
+export enum OrganizationStatus {
+    Active = 'Active',
+    Inactive = 'Inactive',
+}
+
 /**
  * Define an object to represent different status of organization's users.
  */

@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponseList } from '../../core';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { STATE_PATH } from './paths';
 import { IGetStatesParams, IState } from './types';
@@ -12,7 +12,7 @@ import { IGetStatesParams, IState } from './types';
 export const getStatesAPI = async (
     params?: IGetStatesParams,
     config?: AxiosRequestConfig,
-): Promise<HttpResponseList<IState>> => {
+): Promise<HttpResponse<IState[]>> => {
     const url = STATE_PATH.GET_STATES;
     const response = await jfwAxios.get(url, {
         params,

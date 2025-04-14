@@ -62,8 +62,27 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
     isPagination?: boolean;
 }
 
-export interface ICreateDeviceData {};
-export interface IUpdateDeviceData {};
+export interface ICreateDeviceData {
+    userId?: IdType | null;
+    type?: number | null;
+    code?: string | null;
+    token?: string | null;
+    session?: string | null;
+    isMobileApp?: boolean;
+    tags?: string | null;
+    status?: DeviceStatus;
+    isDefault?: boolean | null;
+    testMode?: boolean | null;
+    name?: string | null;
+    phoneNumber?: string | null;
+    osDevice?: string | null;
+    appVersionNumber?: string | null;
+    iccid?: string | null;
+    imsi?: string | null;
+    imei?: string | null;
+    simCardInfo?: string | null;
+}
 
+export type IUpdateDeviceData = ICreateDeviceData; 
 
 //#endregion

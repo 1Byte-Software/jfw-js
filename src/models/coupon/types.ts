@@ -17,7 +17,8 @@ export interface ICoupon {
 }
 
 //#region API types
-export interface IQueryCouponsParams extends IPageable {
+export interface IGetCouponsParams extends IPageable {
+    keywords?: string;
     startDate?: string;
     endDate?: string;
     code?: string;

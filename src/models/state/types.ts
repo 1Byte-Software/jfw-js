@@ -1,12 +1,9 @@
-import { DateType, IdType } from '../base';
-
 export interface IState {
-    id: IdType;
     code: string;
     name: string;
     countryCode: string;
-    stateType: string;
-    createdDate: DateType;
+    administrativeDivision: string;
+    tags: string;
 }
 //#region API types
 export interface IGetStatesParams {

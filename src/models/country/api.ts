@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse } from '../../core';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { COUNTRY_PATH } from './paths';
-import { ICountry, IQueryCountryParams } from './types';
+import { ICountry, IGetCountriesParams } from './types';
 
 /**
  * List all countries by the given filter.
@@ -10,12 +10,12 @@ import { ICountry, IQueryCountryParams } from './types';
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-countries}
  */
 export const getCountriesAPI = async (
-    params?: IQueryCountryParams,
+    params?: IGetCountriesParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = COUNTRY_PATH.GET_COUNTRIES;
 
-    const response = await jfwAxios.get<HttpResponse<ICountry[]>>(url, {
+    const response = await jfwAxios.get<HttpResponseList<ICountry>>(url, {
         params,
         ...config,
     });

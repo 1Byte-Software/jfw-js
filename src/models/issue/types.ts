@@ -2,27 +2,35 @@ import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
 import { IMedia } from '../cdn';
 import { IIssueCategory } from '../issueCategory';
-import { IIssueReaction } from '../issueReaction';
 import { IssueReactionStatus, IssueReactionType } from './constants';
 
 export interface IIssue extends IBaseObject {
+    assigneeUserId?: IdType;
     parentId?: IdType;
+    name: string;
+    description?: string;
+    refType: number;
+    refObject: string;
     refId: number;
-
+    content: string;
+    issueCc?: string;
+    issueTypeCode?: string | null;
+    issueCategoryCode?: string;
+    issueTypeName?: string | null;
+    issueCategoryName?: string;
+    priority?: string;
+    tags?: string;
+    status?: string;
     medias: IMedia[];
     children: IIssue[];
+    childrenCount: number;
     reactions: IIssueReaction[];
     user: IUserIssue;
-    listChildren?: IIssue[];
-    parent?: IIssue;
-    issueType?: IIssueCategory;
+}
 
-    content: string;
-    refObject: string;
-    refType: number;
-    childrenCount: number;
-    issueTypeCode?: string;
-    description?: string;
+export interface IIssueReaction {
+    id: IdType;
+    userId: IdType;
 }
 
 export interface IUserIssue {
@@ -34,13 +42,14 @@ export interface IUserIssue {
 
     avatar?: string;
     nickName: string;
-    firstName?: string;
-    lastName?: string;
+    emailAddress: string;
     roles: string[];
 }
 
 //#region API types
 export interface IGetIssuesParams extends IPageable, ISortable {
+    keywords?: string;
+
     onlyParent?: boolean;
     userId?: IdType;
     deviceId?: IdType;

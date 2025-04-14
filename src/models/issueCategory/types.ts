@@ -13,7 +13,7 @@ export interface IIssueCategory extends IBaseObject {
 }
 
 //#region API types
-export interface IQueryIssueCategoryParams extends IPageable {
+export interface IGetIssueCategoriesParams extends IPageable {
     groupCode?: string;
     code?: string;
     name?: string;

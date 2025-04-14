@@ -4,7 +4,7 @@ import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { TRACKING_ACTIVITY_PATH } from './paths';
-import { IQueryTrackingActivityParams, ITrackingActivity } from './types';
+import { IGetTrackingActivitiesParams, ITrackingActivity } from './types';
 
 /**
  * Gets the activities by the specified filter.
@@ -12,7 +12,7 @@ import { IQueryTrackingActivityParams, ITrackingActivity } from './types';
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/tracking-activities/get-activities}
  */
 export const getTrackingActivitiesAPI = async (
-    params?: IQueryTrackingActivityParams,
+    params?: IGetTrackingActivitiesParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = TRACKING_ACTIVITY_PATH.GET_ACTIVITIES;
@@ -30,6 +30,8 @@ export const getTrackingActivitiesAPI = async (
 
 /**
  * Get a tracking activity by the given id.
+ * 
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/tracking-activities/get-a-activity}
  */
 export const getTrackingActivityAPI = async (
     id: IdType,

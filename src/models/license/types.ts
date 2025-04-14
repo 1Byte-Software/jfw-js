@@ -1,23 +1,21 @@
-import { IBaseObject, DateType, IdType } from '../base';
-import { IPackage } from '../packages';
-import { IUser } from '../user';
+import { IPageable, ISortable } from '../../core';
+import { DateType, IBaseObject, IdType } from '../base';
+import { LicenseStatus, LicenseType } from './constants';
 
 export interface ILicense extends IBaseObject {
-    usedByUserId: IdType;
     packageId: IdType;
     subscriptionTypeId: IdType;
-
-    user?: IUser;
-    package?: IPackage;
-
     code: string;
-
-    amount: number;
-    isReadyToUse: boolean;
+    type: LicenseType;
+    description: string;
     startDate: DateType;
-    isUsed?: boolean;
     endDate: DateType;
+    tags: string;
+    status: LicenseStatus;
+    usedByUserId: IdType;
     usedDate: DateType;
+    testMode: boolean;
+    modifiedDate: DateType;
 }
 
 export interface IPriceInfoDetails {
@@ -60,7 +58,8 @@ export interface IApplyLicenseToGivenUserParams {
     userId: IdType;
 }
 
-export interface IQueryLicensesParams {
+export interface IGetLicensesParams extends IPageable, ISortable {
+    keywords?: string;
     brandId?: IdType;
     packageId?: IdType;
     usedBy?: IdType;
@@ -72,18 +71,22 @@ export interface IQueryLicensesParams {
     endDate?: DateType;
     isUsed?: boolean;
     testMode?: boolean;
+    status?: LicenseStatus;
 }
 
-export interface ICreateLicenseParams {
-    brandCode: string;
-    packageId: string;
-    subscriptionTypeId: string;
-    key?: string;
-    startDate: DateType;
-    endDate: DateType;
-    description?: string;
-    tags?: string;
-    testMode: boolean;
+export interface ICreateLicenseData {
+    packageId?: IdType | null;
+    subscriptionTypeId?: IdType | null;
+    type?: LicenseType;
+    key?: string | null;
+    startDate?: DateType;
+    endDate?: DateType;
+    description?: string | null;
+    tags?: string | null;
+    testMode?: boolean | null;
+    quantity?: number;
+    isOneQuantity?: boolean;
+    userCode?: string | null;
 }
 
 export interface IMutateLicenseParams {
@@ -116,7 +119,8 @@ export interface IPurchaseToAddLicensesByCheckoutLinkParams
     cancelUrl: string;
 }
 
-export interface IPurchaseToAddLicensesByWalletParams extends IPurchaseLicenseParams {
+export interface IPurchaseToAddLicensesByWalletParams
+    extends IPurchaseLicenseParams {
     walletId: IdType;
     brandCode: string;
     userCode: string;
