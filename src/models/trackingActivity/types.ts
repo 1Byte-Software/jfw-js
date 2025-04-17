@@ -1,13 +1,15 @@
-import { DateType, IdType } from '../base';
 import { IPageable, ISortable } from '../../core';
-import { ITrackingEvent } from '../trackingEvent';
-import { IUser } from '../user';
+import { DateType, IdType } from '../base';
+import { IEvent } from '../event';
+import { IBaseUser } from '../user';
 
 export interface ITrackingActivity {
     id: IdType;
     userId: IdType;
     createdDate: DateType;
     description: string;
+    deviceId: IdType;
+    event: IEvent;
     longitude: number;
     latitude: number;
     location: string;
@@ -15,9 +17,8 @@ export interface ITrackingActivity {
     os: string;
     ipAddress: string;
     url: string;
-    trackingEventId: IdType;
-    user?: IUser;
-    trackingEvent?: ITrackingEvent;
+    eventId: IdType;
+    user: IBaseUser;
 }
 //#region API types
 export interface IGetTrackingActivitiesParams extends IPageable, ISortable {
@@ -32,7 +33,7 @@ export interface IGetTrackingActivitiesParams extends IPageable, ISortable {
     longitude?: number;
     os?: string;
     requestFromMobile?: boolean;
-    trackingEventId?: IdType;
+    eventId?: IdType;
     url?: string;
     userAgent?: string;
     userId?: IdType;
@@ -49,7 +50,7 @@ export interface ICreateTrackingActivityParams {
     longitude: number;
     os: string;
     requestFromMobile: boolean;
-    trackingEventId: IdType;
+    eventId: IdType;
     url: string;
     userAgent: string;
     userId: IdType;

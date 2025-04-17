@@ -4,6 +4,7 @@ const REST_PASSWORDLESS = 'passwordless';
 const REST_ROLES = 'roles';
 const REST_CONFIGURATION = 'configuration';
 const REST_REFERRAL = 'referrals';
+const REST_DEVICE = 'devices';
 
 export const USER_PATH = {
     QUERY: `v1/${REST}`,
@@ -13,7 +14,9 @@ export const USER_PATH = {
     UPDATE_BY_ID: `${REST}/:id`,
     STATISTIC: `${REST}/statistics`,
 
-    VERIFY_EMAIL: `${REST}/:userId/email/verify/send`,
+    VERIFY_USER_EMAIL_ADDRESS: `v1/${REST}/:userId/email-address/verify/send`,
+    ACTIVE_USER_EMAIL_ADDRESS: `v1/${REST}/email-address/active/`,
+
     DELETE_BY_ID: `${REST}/:id`,
     GET_ME: `v1/${REST}/me`,
     GET_BY_USERNAME: `${REST}/by-username/:username`,
@@ -53,4 +56,6 @@ export const USER_PATH = {
         GET: `${REST}/:id/${REST_CONFIGURATION}`,
         CREATE: `${REST}/:id/${REST_CONFIGURATION}`,
     },
+
+    GET_DEVICES_FROM_USER: `v1/${REST}/:userId/${REST_DEVICE}`,
 };

@@ -1,13 +1,13 @@
 import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
 import { ICountry } from '../country';
-import { ITrackingEvent } from '../trackingEvent';
+import { IEvent } from '../event';
 
 export interface IEmailAddressPattern extends IBaseObject {
     countryId: IdType;
     country?: ICountry;
-    trackingEventId: IdType;
-    trackingEvent?: ITrackingEvent;
+    eventId: IdType;
+    event?: IEvent;
 
     subject: string;
     emailContent: string;
@@ -15,7 +15,7 @@ export interface IEmailAddressPattern extends IBaseObject {
 
 //#region API types
 export interface IQueryEmailAddressPatternParams extends IPageable, ISortable {
-    trackingEventId?: IdType;
+    eventId?: IdType;
     countryCode?: IdType;
 
     subject?: string;

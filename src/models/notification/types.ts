@@ -48,8 +48,6 @@ export interface IPushNotificationDataMessageByGivenDeviceCodeParams {
 }
 
 export interface IPushNotificationDataMessageByTokensParams {
-    title: string;
-    body: string;
     deviceTokens: string[];
 }
 

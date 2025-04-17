@@ -1,9 +1,19 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { ILanguage } from '../language';
-import { IPackage } from '../packages';
 import { IRole } from '../role';
 import { ITimezone } from '../timezone';
+
+export interface IBaseUser {
+    id: IdType;
+    packageId: IdType;
+
+    avatar?: string;
+    code: string;
+    emailAddress: string;
+    nickName: string;
+    packageCode: string;
+}
 
 export interface IUser {
     username: string;

@@ -1,20 +1,20 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../core';
+import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { STATE_PATH } from './paths';
 import { IGetStatesParams, IState } from './types';
 
 /**
  * Gets a list of all states.
- * 
+ *
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/states}
  */
 export const getStatesAPI = async (
     params?: IGetStatesParams,
     config?: AxiosRequestConfig,
-): Promise<HttpResponse<IState[]>> => {
+) => {
     const url = STATE_PATH.GET_STATES;
-    const response = await jfwAxios.get(url, {
+    const response = await jfwAxios.get<HttpResponse<IState[]>>(url, {
         params,
         ...config,
     });

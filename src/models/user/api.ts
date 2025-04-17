@@ -9,6 +9,7 @@ import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { IConfiguration, ICreateConfigurationParams } from '../configuration';
+import { IDevice } from '../device';
 import { USER_PATH } from './paths';
 import {
     IApplyReferralCodeParams,
@@ -26,7 +27,7 @@ import {
     IResetPasswordParams,
     IUpdateUserData,
     IUpdateUserTypeParams,
-    IUser
+    IUser,
 } from './types';
 
 /**
@@ -373,8 +374,6 @@ export const authenticateAPI = async (
         config,
     );
 
-    console.debug('response', response);
-
     return response.data;
 };
 
@@ -404,6 +403,67 @@ export const checkAuthKeyAvailableAPI = async (
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
         data,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * Get devices from a user.
+ */
+export const getDevicesFromUserAPI = async (
+    userId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.GET_DEVICES_FROM_USER, {
+        userId,
+    });
+
+    const response = await jfwAxios.get<HttpResponse<IDevice[]>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Sends the email to verify user's email address.
+ * The email will contain a link to verify the email address.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#api-v1-users-userid-email-address-verify-send}
+ */
+export const verifyUserEmailAddressAPI = async (
+    userId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.VERIFY_USER_EMAIL_ADDRESS, {
+        userId,
+    });
+
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * Actives the user email address.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#api-v1-users-email-address-active-token}
+ */
+export const activeUserEmailAddressAPI = async (
+    token: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.ACTIVE_USER_EMAIL_ADDRESS;
+
+    const response = await jfwAxios.put<HttpResponse<boolean>>(
+        url,
+        {
+            token
+        },
         config,
     );
 

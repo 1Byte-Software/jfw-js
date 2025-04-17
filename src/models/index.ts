@@ -34,7 +34,6 @@ export * from './subscriptionType';
 export * from './timezone';
 export * from './trackingActivity';
 export * from './trackingEmailAddress';
-export * from './trackingEvent';
 export * from './user';
 export * from './wallet';
 export * from './walletEarningEvent';

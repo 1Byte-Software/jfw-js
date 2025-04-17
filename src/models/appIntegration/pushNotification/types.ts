@@ -1,51 +1,56 @@
-import { IdType } from '../../base';
+import { DateType, IdType } from '../../base';
+import { IAppIntegration } from '../types';
 
-export interface IIntegrationPushNotification {
+export interface IAppIntegrationPushNotification {
+    appIntegration: IAppIntegration;
     code: string;
-    name: string;
-    projectId: string;
+    name?: string | null;
+    projectId: IdType;
     clientEmail: string;
-    clientId: string;
+    clientId?: string | null;
     privateKey: string;
-    authUrl: string;
-    tokenUrl: string;
-    authProviderX509CertUrl: string;
-    clientX509CertUrl: string;
-    universeDomain: string;
-    apiKey: string;
-    authDomain: string;
-    storageBucket: string;
-    messagingSenderId: string;
-    appId: string;
-    measurementId: string;
+    authUrl?: string | null;
+    tokenUrl?: string | null;
+    authProviderX509CertUrl?: string | null;
+    clientX509CertUrl?: string | null;
+    universeDomain?: string | null;
+    apiKey?: string | null;
+    authDomain?: string | null;
+    storageBucket?: string | null;
+    messagingSenderId?: string | null;
+    appId: IdType;
+    measurementId?: string | null;
     vapidKey: string;
     id: IdType;
-}
-
-export interface IFirebaseSettings {
-    apiKey: string;
-    authDomain: string;
-    projectId: string;
-    storageBucket: string;
-    messagingSenderId: string;
-    appId: string;
-    measurementId: string;
+    createdDate: DateType;
 }
 
 //#region API types
-export interface IQueryIntegrationPushNotificationParams {}
+export interface IGetAppIntegrationPushNotificationParams {}
 
-export interface ICreateIntegrationPushNotificationParams {
-    name: string;
-    description?: string;
-    smtpHost: string;
-    smtpPort: number;
-    smtpUsername: string;
-    useTls?: boolean;
-    isDefault?: boolean;
+export interface ICreateAppIntegrationPushNotificationData {
+    appIntegrationId: IdType;
+    code: string;
+    name?: string | null;
+    projectId: IdType;
+    clientEmail: string;
+    clientId?: string | null;
+    privateKey: string;
+    authUrl?: string | null;
+    tokenUrl?: string | null;
+    authProviderX509CertUrl?: string | null;
+    clientX509CertUrl?: string | null;
+    universeDomain?: string | null;
+    apiKey?: string | null;
+    authDomain?: string | null;
+    storageBucket?: string | null;
+    messagingSenderId?: string | null;
+    appId?: IdType | null;
+    measurementId?: string | null;
+    vapidKey?: string | null;
 }
 
-export type IUpdateIntegrationPushNotificationParams =
-    ICreateIntegrationPushNotificationParams;
+export type IUpdateAppIntegrationPushNotificationData =
+    ICreateAppIntegrationPushNotificationData;
 
 //#endregion

@@ -18,7 +18,7 @@ import {
 /**
  * Deletes tracking notification with id.
  *
- * @see {@link }
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/delete-a-notification}
  */
 export const deleteNotificationAPI = async (
     trackingNotificationId: IdType,
@@ -85,7 +85,7 @@ export const pushNotificationMessageForTokensAPI = async (
 
     const response = await jfwAxios.post<
         HttpResponse<IPushNotificationResponse>
-    >(url, null, { ...params, ...config });
+    >(url, null, { params, ...config });
 
     return response.data;
 };
@@ -105,7 +105,7 @@ export const pushNotificationDataMessageByGivenDeviceCodesAPI = async (
 
     const response = await jfwAxios.post<
         HttpResponse<IPushNotificationResponse>
-    >(url, data, { ...params, ...config });
+    >(url, data, { params, ...config });
 
     return response.data;
 };
@@ -124,7 +124,13 @@ export const pushNotificationDataMessageByTokensAPI = async (
 
     const response = await jfwAxios.post<
         HttpResponse<IPushNotificationResponse>
-    >(url, data, { ...params, ...config });
+    >(url, data, {
+        params,
+        paramsSerializer: {
+            indexes: true, // use brackets with indexes
+        },
+        ...config,
+    });
 
     return response.data;
 };
@@ -143,7 +149,13 @@ export const pushNotificationDataMessageByDevicesAPI = async (
 
     const response = await jfwAxios.post<
         HttpResponse<IPushNotificationResponse>
-    >(url, data, { ...params, ...config });
+    >(url, data, {
+        params,
+        paramsSerializer: {
+            indexes: true, // use brackets with indexes
+        },
+        ...config,
+    });
 
     return response.data;
 };
