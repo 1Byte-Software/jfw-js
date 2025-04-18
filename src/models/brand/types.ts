@@ -88,15 +88,13 @@ export interface ICreateBrandParams {
     abbr: string;
     description?: string | null;
 
-    profile: {
-        faviconUrl?: string | null;
-        logoUrl?: string | null;
-        slogan?: string | null;
-    };
+    profile: Pick<IBrandProfile, 'faviconUrl' | 'logoUrl' | 'slogan'>;
 
     setting: {
         domain: string;
     };
+
+    // setting: Pick<IBrandSetting, 'domain'>;
 }
 export interface IUpdateBrandParams extends IBrand {}
 

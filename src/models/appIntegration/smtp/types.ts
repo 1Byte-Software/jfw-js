@@ -16,13 +16,15 @@ export interface IIntegrationSMTP {
 export interface IQueryIntegrationSMTPParams {}
 
 export interface ICreateIntegrationSMTPParams {
-    name: string;
-    description?: string;
-    smtpHost: string;
-    smtpPort: number;
-    smtpUsername: string;
-    useTls?: boolean;
-    isDefault?: boolean;
+    type?: number | null;
+    name?: string | null;
+    host: string;
+    port: number;
+    username: string;
+    password: string;
+    useTls?: boolean | null;
+    isDefault?: boolean | null;
+    description?: string | null;
 }
 
 export type IUpdateIntegrationSMTPParams = ICreateIntegrationSMTPParams;

@@ -8,7 +8,7 @@ import { ICity, IGetCitiesParams } from './types';
  *
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cities}
  */
-export const queryCityAPI = async (params?: IGetCitiesParams) => {
+export const getCitiesAPI = async (params?: IGetCitiesParams) => {
     const url = CITY_PATH.QUERY;
     const response = await jfwAxios.get<HttpResponse<ICity[]>>(url, {
         params,

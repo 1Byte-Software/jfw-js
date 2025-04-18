@@ -1,4 +1,3 @@
-import { DateType, IdType } from '../base';
 
 export interface ICity {
     countryCode: string;
