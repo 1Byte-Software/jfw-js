@@ -1,5 +1,5 @@
 import { IdType } from '../base';
-import { AppIntegrationType } from './constants';
+import { AppIntegrationStatus, AppIntegrationType } from './constants';
 
 export interface IAppIntegration {
     type: string;
@@ -7,7 +7,7 @@ export interface IAppIntegration {
     domain: string;
     description: string;
     logoUrl: string;
-    status: string;
+    status: AppIntegrationStatus;
     id: IdType;
     createdDate: string;
 }

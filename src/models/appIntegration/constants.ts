@@ -6,3 +6,8 @@ export enum AppIntegrationType {
     PushNotification = 'PushNotification',
     Payment = 'Payment'
 }
+
+export enum AppIntegrationStatus {
+    Active = 'Active',
+    Inactive = 'Inactive'
+}
