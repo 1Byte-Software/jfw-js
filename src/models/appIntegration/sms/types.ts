@@ -12,7 +12,6 @@ export interface IAppIntegrationSMS {
     description?: string | null;
     status: AppIntegrationSMSStatus;
     isDefault: boolean;
-
     createdDate: DateType;
 }
 
