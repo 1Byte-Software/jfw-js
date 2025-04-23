@@ -1,4 +1,4 @@
-import { IBaseObject } from '../../base';
+import { DateType, IBaseObject } from '../../base';
 import { BrandDomainType } from './constants';
 
 export interface IBrandDomain extends IBaseObject {
@@ -9,6 +9,7 @@ export interface IBrandDomain extends IBaseObject {
     type: BrandDomainType;
     verified: boolean;
     verifiedDate: Date | null;
+    createdDate: DateType;
 }
 
 //#region API types
