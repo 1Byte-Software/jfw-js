@@ -16,12 +16,12 @@ export interface IAppIntegrationAuthentication {
     /**
      * The code of the app integration.
      */
-    code: string | null;
+    code: string;
 
     /**
      * The name of the app integration.
      */
-    name: string | null;
+    name: string;
 
     /**
      * The project Id of the app integration.
@@ -104,12 +104,12 @@ export interface ICreateAppIntegrationAuthenticationData {
     /**
      * The code of the app integration.
      */
-    code?: string | null;
+    code: string;
 
     /**
      * The name of the app integration.
      */
-    name?: string | null;
+    name: string;
 
     /**
      * The project Id of the app integration.

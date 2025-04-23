@@ -14,6 +14,7 @@ export interface IAppIntegration {
 
 //#region API types
 export interface IGetAppIntegrationsParams {
-    type?: AppIntegrationType
+    keywords?: string;
+    type?: AppIntegrationType;
 }
 //#endregion

@@ -85,7 +85,13 @@ export const pushNotificationMessageForTokensAPI = async (
 
     const response = await jfwAxios.post<
         HttpResponse<IPushNotificationResponse>
-    >(url, null, { params, ...config });
+    >(url, null, {
+        params,
+        paramsSerializer: {
+            indexes: true, // use brackets with indexes
+        },
+        ...config,
+    });
 
     return response.data;
 };

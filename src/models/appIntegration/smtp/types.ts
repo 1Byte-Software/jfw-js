@@ -2,24 +2,86 @@ import { DateType, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationSMTPStatus } from './constants';
 
+/**
+ * The response data transfer object representing an SMTP integration configuration.
+ *
+ * This DTO is returned from the backend when retrieving or managing email delivery configurations
+ * via SMTP providers such as Gmail, SendGrid, or custom mail servers.
+ */
 export interface IAppIntegrationSMTP {
+    /**
+     * The unique identifier of this SMTP integration.
+     */
     id: IdType;
+
+    /**
+     * The app integration that this SMTP configuration is associated with.
+     */
     appIntegration: IAppIntegration;
+
+    /**
+     * The name of the SMTP configuration.
+     */
     name: string;
+
+    /**
+     * The SMTP server hostname or IP address.
+     * Example: smtp.gmail.com
+     */
     host: string;
+
+    /**
+     * The port used to connect to the SMTP server.
+     * Common ports: 587 (TLS), 465 (SSL), 25 (non-secure).
+     */
     port: number;
+
+    /**
+     * The username or email address used for SMTP authentication.
+     */
     username: string;
+
+    /**
+     * The password or app-specific token used for SMTP authentication.
+     */
     password: string;
+
+    /**
+     * Indicates whether the SMTP connection uses TLS (Transport Layer Security).
+     * For secure email delivery, this should be set to true.
+     */
     useTls: boolean;
+
+    /**
+     * Flag indicating whether this SMTP configuration is the default one.
+     * Used when sending emails without explicitly selecting a config.
+     */
     isDefault: boolean;
+
+    /**
+     * A short description of the SMTP integration.
+     * Useful for distinguishing between different mail server configurations.
+     */
     description?: string | null;
+
+    /**
+     * The current status of the SMTP integration.
+     * Available options: 0 - Inactive, 1 - Active.
+     */
     status: AppIntegrationSMTPStatus;
+
+    /**
+     * The timestamp representing when this SMTP configuration was created.
+     */
     createdDate: DateType;
 }
 
 //#region API types
 export interface IGetAppIntegrationSMTPsParams {}
 
+/**
+ * The request data transfer object for the SMS integration.
+ */
 export interface ICreateAppIntegrationSMTPData {
     /**
      * The type of the SMTP integration.
@@ -29,7 +91,7 @@ export interface ICreateAppIntegrationSMTPData {
     /**
      * The name of the SMTP integration.
      */
-    name?: string | null;
+    name: string;
 
     /**
      * The host of the SMTP integration.
@@ -72,6 +134,9 @@ export interface ICreateAppIntegrationSMTPData {
     description?: string | null;
 }
 
+/**
+ * The request data transfer object for the SMS integration.
+ */
 export type IUpdateAppIntegrationSMTPData = ICreateAppIntegrationSMTPData;
 
 export interface ISendTestEmailData {

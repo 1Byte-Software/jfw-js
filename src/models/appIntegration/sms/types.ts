@@ -2,22 +2,76 @@ import { DateType, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationSMSStatus } from './constants';
 
+/**
+ * The response data transfer object representing an SMS integration configuration.
+ *
+ * This DTO is used when retrieving or displaying SMS gateway configurations
+ * (e.g., Twilio, Vonage, or other providers) linked to a specific app integration.
+ */
 export interface IAppIntegrationSMS {
+    /**
+     * The unique identifier of the SMS integration.
+     */
     id: IdType;
+
+    /**
+     * The app integration that this SMS configuration is associated with.
+     */
     appIntegration: IAppIntegration;
+
+    /**
+     * The name of the SMS integration.
+     * Example: "Twilio - Production".
+     */
     name: string;
+
+    /**
+     * The username or identifier used to authenticate with the SMS provider.
+     * For Twilio: This is typically the Account SID.
+     */
     username: string;
+
+    /**
+     * The password or secret token used for authentication.
+     * For Twilio: This is typically the Auth Token.
+     */
     password: string;
+
+    /**
+     * The sender's phone number configured in the SMS gateway.
+     * Must follow E.164 format (e.g., +1234567890).
+     */
     phoneNumber: string;
+
+    /**
+     * A short description to identify this SMS integration.
+     * Useful when managing multiple provider configurations.
+     */
     description?: string | null;
+
+    /**
+     * Indicates the current status of the integration.
+     * Available values: 0 - Inactive, 1 - Active.
+     */
     status: AppIntegrationSMSStatus;
+
+    /**
+     * Flag indicating whether this integration is the default configuration.
+     * Default is false.
+     */
     isDefault: boolean;
+
+    /**
+     * The timestamp indicating when this integration was created.
+     */
     createdDate: DateType;
 }
-
 //#region API types
 export interface IGetAppIntegrationSMSParams {}
 
+/**
+ * Provides a data transfer object for the SMS integration which is used for command requests.
+ */
 export interface ICreateAppIntegrationSMSData {
     /**
      * The app integration provider ID of the SMS.
@@ -60,6 +114,9 @@ export interface ICreateAppIntegrationSMSData {
     isDefault?: boolean;
 }
 
+/**
+ * Provides a data transfer object for the SMS integration which is used for command requests.
+ */
 export type IUpdateAppIntegrationSMSData = ICreateAppIntegrationSMSData;
 
 /**

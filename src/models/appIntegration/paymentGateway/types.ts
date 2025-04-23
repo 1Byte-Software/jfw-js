@@ -2,29 +2,116 @@ import { DateType, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationPaymentGatewayStatus } from './constants';
 
+/**
+ * The response data transfer object representing a payment gateway integration,
+ * as returned from the backend after creation or when fetching existing configurations.
+ *
+ * This includes all relevant credentials and links required to handle payment workflows
+ * through third-party providers like PayPal or Stripe.
+ */
 export interface IAppIntegrationPaymentGateway {
+    /**
+     * The unique identifier of this payment gateway integration.
+     */
     id: IdType;
+
+    /**
+     * The app integration that this payment gateway belongs to.
+     */
     appIntegration: IAppIntegration;
+
+    /**
+     * The name of the payment gateway integration.
+     */
     name: string;
+
+    /**
+     * The IPN (Instant Payment Notification) listener link of the payment gateway.
+     * For PayPal: Used for receiving payment status updates.
+     * For Stripe: This would be your webhook URL for payment events.
+     */
     ipnListenerLink: string;
+
+    /**
+     * The fallback link used when an unauthenticated user cancels the payment.
+     * For PayPal/Stripe: Redirect URL when session is lost or user isn't logged in.
+     */
     cancelLinkWithoutLogin?: string | null;
+
+    /**
+     * The cancel link of the payment gateway.
+     * Redirects users here when they cancel the payment.
+     * For PayPal: Used as `cancel_url`.
+     * For Stripe: Used as `cancel_url` in Checkout sessions.
+     */
     cancelLink: string;
+
+    /**
+     * The return link of the payment gateway.
+     * Redirects users here after a successful payment.
+     * For PayPal: Used as `return_url`.
+     * For Stripe: Used as `success_url` in Checkout sessions.
+     */
     returnLink: string;
+
+    /**
+     * The public key used to authenticate with the payment provider.
+     * For PayPal: This is the Client ID.
+     * For Stripe: This is the Publishable key.
+     */
     publicKey: string;
+
+    /**
+     * The private key used to authenticate with the payment provider.
+     * For PayPal: This is the Client Secret.
+     * For Stripe: This is the Secret Key.
+     */
     privateKey: string;
+
+    /**
+     * A human-readable description of the payment gateway.
+     * Used internally for context or in dashboards.
+     */
     description?: string | null;
+
+    /**
+     * Additional notes for internal use regarding the integration.
+     */
     notes?: string | null;
+
+    /**
+     * Flag indicating whether this payment gateway is the default one.
+     */
     isDefault: boolean;
+
+    /**
+     * Indicates whether the payment gateway is running in test/sandbox mode.
+     * Default is `false` (production).
+     * For PayPal: Uses sandbox endpoint.
+     * For Stripe: Uses test keys and test endpoints.
+     */
     testMode?: boolean | null;
+
+    /**
+     * The current status of the payment gateway integration.
+     * e.g., Active or Inactive.
+     */
     status: AppIntegrationPaymentGatewayStatus;
+
+    /**
+     * The date and time the payment gateway integration was created.
+     */
     createdDate: DateType;
 }
 
+/**
+ * This class represents the Checkout Payment Request PayPal Data Transfer Object.
+ */
 export interface IAppIntegrationPaymentGatewayProduct {
     /**
      * The name of the item.
      */
-    name?: string | null;
+    name: string;
 
     /**
      * The description of the item.
@@ -67,6 +154,9 @@ export interface IAppIntegrationPaymentGatewayProduct {
 //#region API types
 export interface IGetAppIntegrationPaymentGatewaysWithBrandParams {}
 
+/**
+ * The request data transfer object for the payment gateway integration. This DTO is used when creating or updating an integration with payment providers like PayPal and Stripe.
+ */
 export interface ICreateAppIntegrationPaymentGatewayData {
     /**
      * The app integration id of the payment gateway.
@@ -76,7 +166,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
     /**
      * The name of the payment gateway integration.
      */
-    name?: string | null;
+    name: string;
 
     /**
      * The IPN (Instant Payment Notification) listener link of the payment gateway.
@@ -152,6 +242,9 @@ export interface ICreateAppIntegrationPaymentGatewayData {
     testMode?: boolean | null;
 }
 
+/**
+ * The request data transfer object for the payment gateway integration. This DTO is used when creating or updating an integration with payment providers like PayPal and Stripe.
+ */
 export type IUpdateAppIntegrationPaymentGatewayData =
     ICreateAppIntegrationPaymentGatewayData;
 
