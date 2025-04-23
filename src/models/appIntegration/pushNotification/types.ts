@@ -36,7 +36,7 @@ export interface IAppIntegrationPushNotification {
      * The client ID provided by the push notification service (e.g., Firebase).
      * This field is optional and may be null.
      */
-    clientId?: string | null;
+    clientId: string | null;
 
     /**
      * The private key used for authentication with the push notification service.
@@ -47,79 +47,78 @@ export interface IAppIntegrationPushNotification {
      * The authentication URL used by the push notification provider.
      * Optional and nullable.
      */
-    authUrl?: string | null;
+    authUrl: string | null;
 
     /**
      * The token URL for retrieving access tokens from the provider.
      * Optional and nullable.
      */
-    tokenUrl?: string | null;
+    tokenUrl: string | null;
 
     /**
      * The authentication provider's X.509 certificate URL.
      * Optional and nullable.
      */
-    authProviderX509CertUrl?: string | null;
+    authProviderX509CertUrl: string | null;
 
     /**
      * The client X.509 certificate URL.
      * Optional and nullable.
      */
-    clientX509CertUrl?: string | null;
+    clientX509CertUrl: string | null;
 
     /**
      * The universe domain for the push notification provider.
      * Optional and nullable.
      */
-    universeDomain?: string | null;
+    universeDomain: string | null;
 
     /**
      * The API key used to authenticate requests to the push notification service.
      * Optional and nullable.
      */
-    apiKey?: string | null;
+    apiKey: string | null;
 
     /**
      * The authentication domain (e.g., Firebase Auth domain).
      * Optional and nullable.
      */
-    authDomain?: string | null;
+    authDomain: string | null;
 
     /**
      * The storage bucket used by the push notification service.
      * Optional and nullable.
      */
-    storageBucket?: string | null;
+    storageBucket: string | null;
 
     /**
      * The messaging sender ID for the push notification provider.
      * Optional and nullable.
      */
-    messagingSenderId?: string | null;
+    messagingSenderId: string | null;
 
     /**
      * The application ID. If using Firebase, this can be derived from the project ID.
      * Optional and nullable.
      */
-    appId?: string | null;
+    appId: string | null;
 
     /**
      * The measurement ID used for analytics tracking.
      * Optional and nullable.
      */
-    measurementId?: string | null;
+    measurementId: string | null;
 
     /**
      * The VAPID key used for web push notifications.
      * Optional and nullable.
      */
-    vapidKey?: string | null;
+    vapidKey: string | null;
 
     /**
      * Indicates whether this integration is the default.
-     * Optional and nullable. Defaults to `false` if not specified.
      */
-    isDefault?: boolean | null;
+    isDefault: boolean;
 
     /**
      * The unique identifier of this integration record.

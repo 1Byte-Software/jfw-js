@@ -62,7 +62,7 @@ export interface IAppIntegrationSMTP {
      * A short description of the SMTP integration.
      * Useful for distinguishing between different mail server configurations.
      */
-    description?: string | null;
+    description: string | null;
 
     /**
      * The current status of the SMTP integration.

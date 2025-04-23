@@ -47,7 +47,7 @@ export interface IAppIntegrationSMS {
      * A short description to identify this SMS integration.
      * Useful when managing multiple provider configurations.
      */
-    description?: string | null;
+    description: string | null;
 
     /**
      * Indicates the current status of the integration.

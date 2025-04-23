@@ -89,6 +89,9 @@ export interface IAppIntegrationAuthentication {
      */
     isDefault: boolean;
 
+    /**
+     * The timestamp when this integration was created.
+     */
     createdDate: DateType;
 }
 

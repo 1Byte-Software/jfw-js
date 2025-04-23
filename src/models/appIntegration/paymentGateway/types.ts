@@ -36,7 +36,7 @@ export interface IAppIntegrationPaymentGateway {
      * The fallback link used when an unauthenticated user cancels the payment.
      * For PayPal/Stripe: Redirect URL when session is lost or user isn't logged in.
      */
-    cancelLinkWithoutLogin?: string | null;
+    cancelLinkWithoutLogin: string | null;
 
     /**
      * The cancel link of the payment gateway.
@@ -72,12 +72,12 @@ export interface IAppIntegrationPaymentGateway {
      * A human-readable description of the payment gateway.
      * Used internally for context or in dashboards.
      */
-    description?: string | null;
+    description: string | null;
 
     /**
      * Additional notes for internal use regarding the integration.
      */
-    notes?: string | null;
+    notes: string | null;
 
     /**
      * Flag indicating whether this payment gateway is the default one.
@@ -90,7 +90,7 @@ export interface IAppIntegrationPaymentGateway {
      * For PayPal: Uses sandbox endpoint.
      * For Stripe: Uses test keys and test endpoints.
      */
-    testMode?: boolean | null;
+    testMode: boolean | null;
 
     /**
      * The current status of the payment gateway integration.
