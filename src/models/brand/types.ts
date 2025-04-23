@@ -57,14 +57,7 @@ export interface IGetQueryBrandParams extends IPageable {
     systemAdminEmails?: string;
     bccNotificationEmails?: string;
     productWebsite?: string;
-    productName?: string;
     productAlias?: string;
-    productPrefixName?: string;
-    websiteCPanel?: string;
-    websiteAdminTool?: string;
-    websiteAdminTool2?: string;
-    websiteAdminTool3?: string;
-    websiteProtocol?: string;
     domainWhiteList?: string;
     googleAnalyticsAccount?: string;
     cdnUrl?: string;
