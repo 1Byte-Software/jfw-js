@@ -18,9 +18,19 @@ export interface IBrandEmailAddress extends IBaseObject {
 }
 
 //#region API types
-export type IUpdateEmailAddressParams = Omit<
-    IBrandEmailAddress,
-    'brandId' | 'id'
->;
+export interface IUpdateEmailAddressData {
+    supportEmail?: string | null;
+    supportTitleEmail?: string | null;
+    systemEmail?: string | null;
+    systemTitleEmail?: string | null;
+    loginNotificationEmail?: string | null;
+    purchaseNotificationEmail?: string | null;
+    orderNotificationEmail?: string | null;
+    chargebackNotificationEmail?: string | null;
+    refundNotificationEmail?: string | null;
+    loginNotificationTitleEmail?: string | null;
+    maintenanceTeamEmail?: string | null;
+    developerTeamEmail?: string | null;
+}
 
 //#endregion

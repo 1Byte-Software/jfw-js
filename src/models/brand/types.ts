@@ -76,7 +76,7 @@ export interface IGeneratedDomain {
     fullDomain: string;
 }
 
-export interface ICreateBrandParams {
+export interface ICreateBrandData {
     name: string;
     abbr: string;
     description?: string | null;
@@ -93,6 +93,26 @@ export interface ICreateBrandParams {
 
     // setting: Pick<IBrandSetting, 'domain'>;
 }
-export interface IUpdateBrandParams extends IBrand {}
+export interface IUpdateBrandData {
+    /**
+     * The code of the Brand.
+     */
+    code: string;
+
+    /**
+     * The name of the Brand.
+     */
+    name: string;
+
+    /**
+     * This is the abbreviation of the Brand.
+     */
+    abbr: string;
+
+    /**
+     * The description of the Brand.
+     */
+    description?: string | null;
+}
 
 //#endregion
