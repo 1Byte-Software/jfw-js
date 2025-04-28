@@ -1,38 +1,72 @@
-import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IdType } from '../base';
+import { ResourceTypeType } from './constants';
 
 export interface IResourceType {
     id: IdType;
-    parentBrandId: IdType;
-
-    code: string;
-
+    parentBrandId: IdType | null;
     guid: string;
+    code: string;
     name: string;
     description: string;
     tags: string | null;
-    isSystem: boolean;
-    createdDate: DateType;
+    type: ResourceTypeType;
 }
 
 //#region API types
-export interface IQueryResourceTypeParams extends IPageable, ISortable {
-    resourceTypeId?: IdType;
-    parentBrandId?: IdType | null;
+export interface IGetResourceTypesParams {
+    /** Filter by code */
     code?: string;
+
+    /** Filter by name */
     name?: string;
-    description?: string | null;
-    tags?: string | null;
+
+    /** Filter by tags */
+    tags?: string;
+
+    /** Filter by description */
+    description?: string;
+
+    /**
+     * The param type to apply filter.
+     */
+    type?: ResourceTypeType;
+
+    /** Filter by keywords */
+    keywords?: string;
 }
 
-export interface ICreateResourceTypeParams {
-    resourceTypeId: IdType;
-    parentBrandId?: IdType | null;
+/**
+ * This class represents the ResourceType data transfer object for command requests.
+ */
+export interface ICreateResourceTypeData {
+    /**
+     * The ResourceType code.
+     */
     code: string;
+
+    /**
+     * The name of the ResourceType.
+     */
     name: string;
+
+    /**
+     * The description of the ResourceType.
+     */
     description?: string | null;
+
+    /**
+     * The tags of the ResourceType.
+     */
     tags?: string | null;
+
+    /**
+     * #NOTE: Not in the document yet
+     */
+    parentBrandId?: IdType | null;
 }
 
-export type IUpdateResourceTypeParams = ICreateResourceTypeParams;
+/**
+ * This class represents the ResourceType data transfer object for command requests.
+ */
+export type IUpdateResourceTypeData = ICreateResourceTypeData;
 //#endregion
