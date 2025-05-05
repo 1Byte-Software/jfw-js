@@ -4,12 +4,26 @@ import { JFWHttpCode } from '../http';
 
 //#region Query params types
 export interface IPageable {
+    /**
+     * The page size of the pagination.
+     */
     pageSize?: number;
+
+    /**
+     * The page number of the pagination.
+     */
     pageNumber?: number;
 }
 
 export interface ISortable<T = any> {
+    /**
+     * The sort data field of the pagination.
+     */
     sortDataField?: keyof T;
+    
+    /**
+     * The sort order of the pagination.
+     */
     sortOrder?: 'ASC' | 'DESC';
 }
 
