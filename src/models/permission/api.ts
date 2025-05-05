@@ -1,22 +1,22 @@
 import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { IRole } from '../role';
 import { PERMISSION_PATH } from './paths';
 import {
-    ICreatePermissionParams,
+    ICreatePermissionData,
+    IGetPermissionsParams,
     IPermission,
-    IQueryPermissionParams,
-    IUpdatePermissionParams,
+    IUpdatePermissionData,
 } from './types';
-import { HttpResponse, HttpResponseList } from '../../core';
-import { IRole } from '../role';
 
 /**
  * Gets a list of all permissions.
  */
-export const queryPermissionAPI = async (
-    params?: IQueryPermissionParams,
+export const getPermissionsAPI = async (
+    params?: IGetPermissionsParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = PERMISSION_PATH.QUERY;
@@ -32,7 +32,7 @@ export const queryPermissionAPI = async (
 /**
  * Gets a permission
  */
-export const getPermissionByIdAPI = async (
+export const getPermissionAPI = async (
     permissionId: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -48,7 +48,7 @@ export const getPermissionByIdAPI = async (
  * Add a new permission
  */
 export const createPermissionAPI = async (
-    params: ICreatePermissionParams,
+    params: ICreatePermissionData,
     config?: AxiosRequestConfig,
 ) => {
     const url = PERMISSION_PATH.CREATE;
@@ -62,7 +62,7 @@ export const createPermissionAPI = async (
  */
 export const updatePermissionByIdAPI = async (
     permissionId: IdType,
-    payload: IUpdatePermissionParams,
+    payload: IUpdatePermissionData,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PERMISSION_PATH.UPDATE_BY_ID, {

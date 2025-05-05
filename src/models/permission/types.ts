@@ -18,7 +18,7 @@ export interface IPermission {
 }
 
 //#region API types
-export interface IQueryPermissionParams extends IPageable, ISortable {
+export interface IGetPermissionsParams extends IPageable, ISortable {
     keywords?: string;
     resourceTypeId?: IdType;
     parentBrandId?: IdType | null;
@@ -29,7 +29,7 @@ export interface IQueryPermissionParams extends IPageable, ISortable {
     type?: PermissionType;
 }
 
-export interface ICreatePermissionParams {
+export interface ICreatePermissionData {
     resourceTypeId: IdType;
     parentBrandId?: IdType | null;
     code: string;
@@ -38,5 +38,5 @@ export interface ICreatePermissionParams {
     tags?: string | null;
 }
 
-export type IUpdatePermissionParams = ICreatePermissionParams;
+export type IUpdatePermissionData = ICreatePermissionData;
 //#endregion

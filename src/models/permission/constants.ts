@@ -1,4 +1,7 @@
 // Define an object to represent different permissions.
+/**
+ * #NOTE: This code used in vdt-js. Will delete in feature.
+ */
 export const PERMISSION = {
     community: {
         upload: 'COMMUNITY.UPLOAD',
