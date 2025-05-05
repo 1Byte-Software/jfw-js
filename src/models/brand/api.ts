@@ -6,10 +6,10 @@ import { IdType } from '../base';
 import { BRAND_PATH } from './paths';
 import {
     IBrand,
-    ICreateBrandParams,
+    ICreateBrandData,
     IGeneratedDomain,
     IGetQueryBrandParams,
-    IUpdateBrandParams,
+    IUpdateBrandData,
 } from './types';
 
 /**
@@ -54,24 +54,32 @@ export const getBrandByIdAPI = async (
     return response.data;
 };
 
-export const createBrandAPI = async (data: ICreateBrandParams) => {
+export const createBrandAPI = async (
+    data: ICreateBrandData,
+    config?: AxiosRequestConfig,
+) => {
     const url = BRAND_PATH.CREATE;
 
-    const response = await jfwAxios.post<HttpResponse<IBrand>>(url, data);
+    const response = await jfwAxios.post<HttpResponse<IBrand>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };
 
 export const updateBrandAPI = async (
     id: IdType,
-    payload: IUpdateBrandParams,
+    data: IUpdateBrandData,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(BRAND_PATH.UPDATE_BY_ID, {
         id,
     });
 
     // #NOT_SURE: HttpResponse<null>
-    const response = await jfwAxios.put<HttpResponse<null>>(url, payload);
+    const response = await jfwAxios.put<HttpResponse<null>>(url, data, config);
 
     return response.data;
 };

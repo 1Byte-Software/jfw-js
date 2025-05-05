@@ -9,6 +9,9 @@ import { IBrandSetting } from './setting';
 export interface IBrand extends IBaseObject {
     parentId?: IdType;
 
+    /**
+     * @deprecated use getBrandDomainsAPI instead
+     */
     domains: IBrandDomain[];
     profile: IBrandProfile;
     setting: IBrandSetting;

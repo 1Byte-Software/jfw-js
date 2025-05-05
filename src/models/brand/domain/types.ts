@@ -1,3 +1,4 @@
+import { IPageable, ISortable } from '../../../core';
 import { DateType, IBaseObject } from '../../base';
 import { BrandDomainType } from './constants';
 
@@ -13,4 +14,12 @@ export interface IBrandDomain extends IBaseObject {
 }
 
 //#region API types
+export interface IGetBrandDomainsParams extends IPageable, ISortable {
+    type?: BrandDomainType;
+    verified?: boolean;
+    isDefault?: boolean;
+    isPrimary?: boolean;
+    keywords?: string;
+}
+
 //#endregion
