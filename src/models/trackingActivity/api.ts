@@ -30,7 +30,7 @@ export const getTrackingActivitiesAPI = async (
 
 /**
  * Get a tracking activity by the given id.
- * 
+ *
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/tracking-activities/get-a-activity}
  */
 export const getTrackingActivityAPI = async (
