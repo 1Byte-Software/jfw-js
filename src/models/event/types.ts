@@ -1,5 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
+import { ILanguage } from '../language';
 import { EventStatus } from './constants';
 
 export interface IEvent extends IBaseObject {
@@ -17,6 +18,17 @@ export interface IEvent extends IBaseObject {
     status: EventStatus;
 
     isSystem: boolean;
+}
+
+export interface IDefaultEmailTemplate {
+    languageCode: ILanguage['code'];
+    subject: string;
+    body: string;
+}
+
+export interface IDefaultPhoneTemplate {
+    languageCode: ILanguage['code'];
+    content: string;
 }
 
 //#region API types
@@ -39,5 +51,13 @@ export interface IGetEventsEarningWallet {
      */
     type?: string;
 }
+
+export interface IGetEmailTemplateEventsParams {}
+export interface IGetPhoneTemplateEventsParams {}
+
+export interface IGetDefaultEmailTemplateParams {
+    languageCode?: string;
+}
+export type IGetDefaultPhoneTemplateParams = IGetDefaultEmailTemplateParams;
 
 //#endregion
