@@ -1,19 +1,18 @@
-import { DateType, IdType } from '../base';
-import { IPageable, ISortable } from '../../core';
+import { IdType } from "../base";
 
 export interface ITimezone {
+    id: IdType;
     code: string;
     countryCode: string;
-    description: string;
-    displayName?: string;
-    id: IdType;
     name: string;
     value: string;
-    createdDate: DateType;
+    displayName: string;
+    description: string;
 }
 
 //#region API types
 export interface IGetTimezoneParams {
+    keywords?: string;
     name?: string;
     countryCode?: string;
 }

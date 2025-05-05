@@ -1,23 +1,21 @@
-import { IBaseObject, DateType, IdType } from '../base';
-import { IPackage } from '../packages';
-import { IUser } from '../user';
+import { IPageable, ISortable } from '../../core';
+import { DateType, IBaseObject, IdType } from '../base';
+import { LicenseStatus, LicenseType } from './constants';
 
 export interface ILicense extends IBaseObject {
-    usedByUserId: IdType;
     packageId: IdType;
     subscriptionTypeId: IdType;
-
-    user?: IUser;
-    package?: IPackage;
-
     code: string;
-
-    amount: number;
-    isReadyToUse: boolean;
+    type: LicenseType;
+    description: string;
     startDate: DateType;
-    isUsed?: boolean;
     endDate: DateType;
+    tags: string;
+    status: LicenseStatus;
+    usedByUserId: IdType;
     usedDate: DateType;
+    testMode: boolean;
+    modifiedDate: DateType;
 }
 
 export interface IPriceInfoDetails {
@@ -50,7 +48,18 @@ export interface ILicenseStatistic {
     unavailableQuantity: number;
 }
 //#region API types
-export interface IQueryLicenseParams {
+export interface IApplyLicenseToLoginNameParams {
+    licenseKey: string;
+    loginName: string;
+}
+
+export interface IApplyLicenseToGivenUserParams {
+    licenseKey: string;
+    userId: IdType;
+}
+
+export interface IGetLicensesParams extends IPageable, ISortable {
+    keywords?: string;
     brandId?: IdType;
     packageId?: IdType;
     usedBy?: IdType;
@@ -62,18 +71,22 @@ export interface IQueryLicenseParams {
     endDate?: DateType;
     isUsed?: boolean;
     testMode?: boolean;
+    status?: LicenseStatus;
 }
 
-export interface ICreateLicenseParams {
-    brandCode: string;
-    packageId: string;
-    subscriptionTypeId: string;
-    key?: string;
-    startDate: DateType;
-    endDate: DateType;
-    description?: string;
-    tags?: string;
-    testMode: boolean;
+export interface ICreateLicenseData {
+    packageId?: IdType | null;
+    subscriptionTypeId?: IdType | null;
+    type?: LicenseType;
+    key?: string | null;
+    startDate?: DateType;
+    endDate?: DateType;
+    description?: string | null;
+    tags?: string | null;
+    testMode?: boolean | null;
+    quantity?: number;
+    isOneQuantity?: boolean;
+    userCode?: string | null;
 }
 
 export interface IMutateLicenseParams {
@@ -85,9 +98,9 @@ export interface IApplyLicenseForUserParams {
     userCode: string;
 }
 export interface IGenerateLicenseKeyParams {
-    brandId: string;
-    packageId: string;
-    subscriptionTypeId: string;
+    packageId: IdType;
+    subscriptionTypeId: IdType;
+    startDate?: DateType;
 }
 export interface IPurchaseLicenseParams {
     packageId: string;
@@ -100,19 +113,20 @@ export interface IPurchaseLicenseParams {
     quantity: number;
 }
 
-export interface IPurchaseLicenseCheckoutLinkParams
+export interface IPurchaseToAddLicensesByCheckoutLinkParams
     extends IPurchaseLicenseParams {
     returnUrl: string;
     cancelUrl: string;
 }
 
-export interface IPurchaseLicenseWalletParams extends IPurchaseLicenseParams {
+export interface IPurchaseToAddLicensesByWalletParams
+    extends IPurchaseLicenseParams {
     walletId: IdType;
     brandCode: string;
     userCode: string;
 }
 
-export interface IGetLicenseStatisticParams {
+export interface IStatisticsPercentageLicensesUsedParams {
     userId: string;
     startDate?: DateType;
     endDate?: DateType;

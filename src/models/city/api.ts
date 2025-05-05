@@ -1,36 +1,18 @@
-import { get } from '../../utils/axiosHelper';
-import { generatePath } from '../../utils/path';
-import { IdType } from '../base';
-import { IListResponse } from '../base';
+import { HttpResponse, HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { CITY_PATH } from './paths';
-import { ICity, IQueryCityParams } from './types';
+import { ICity, IGetCitiesParams } from './types';
 
 /**
- * #JFW-73: Thiếu tài liệu api/cities
+ * Gets a list of all cities.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cities}
  */
-export const queryCityAPI = async (
-    params?: IQueryCityParams,
-): Promise<IListResponse<ICity>> => {
+export const getCitiesAPI = async (params?: IGetCitiesParams) => {
     const url = CITY_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get<HttpResponseList<ICity>>(url, {
         params,
     });
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
-};
-
-/**
- * #JFW-73: Thiếu tài liệu api/cities
- */
-export const getCityByIdAPI = async (cityId: IdType): Promise<ICity> => {
-    const url = generatePath(CITY_PATH.GET_BY_ID, {
-        id: cityId,
-    });
-    const response = await get(url);
 
     return response.data;
 };

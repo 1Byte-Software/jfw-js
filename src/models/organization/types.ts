@@ -3,6 +3,7 @@ import { IPageable, ISortable } from '../../core';
 import { IMedia } from '../cdn';
 import { ILanguage } from '../language';
 import { IUser } from '../user';
+import { OrganizationUserStatus } from './constants';
 
 export interface IOrganization {
     avatar?: string;
@@ -29,10 +30,12 @@ export interface IOrganizationUser {
     joinedDate: DateType;
     statusUser: string;
     user: IUser;
+    roleCode: string;
 }
 
 //#region API types
-export interface IQueryOrganizationParams extends IPageable {
+export interface IGetOrganizationParams extends IPageable {
+    keywords?: string;
     userId?: string;
     languageCode?: string;
     name?: string;
@@ -50,26 +53,42 @@ export interface IGetOrganizationDetailPath {
 
 export interface IUpdateUserStatusInOrganizationParams {
     organizationId: IdType;
-    userId: IdType;
+}
 
-    status: string;
+export interface IUpdateUserStatusInOrganizationData {
+    userIds: IdType[];
+    status: OrganizationUserStatus;
 }
 
 export interface IRemoveUserInOrganizationParams {
     organizationId: IdType;
     userId: IdType;
 }
-export interface IAddUserToOrganizationParams {
+export interface IAddNewUserToOrganizationParams {
     organizationId: IdType;
     userId: IdType;
 }
 
-export interface IQueryUsersOfOrganizationParams extends IPageable, ISortable {
+export interface IAddUserForDefaultLanguageCodeOrganizationSystemParams {
+    userId: IdType;
+    languageCode: string;
+}
+
+export interface IAssignRoleForUserInOrganizationParams {
+    organizationId: IdType;
+}
+
+export interface IAssignRoleForUserInOrganizationData {
+    roleId: IdType;
+    userId: IdType;
+}
+
+export interface IGetUsersOfOrganizationParams extends IPageable, ISortable {
     organizationId: IdType;
 
     status?: string;
 }
-export interface ICreateOrganizationParams {
+export interface ICreateOrganizationData {
     countryCode?: string;
     languageCode?: string;
     name: string;
@@ -80,5 +99,5 @@ export interface ICreateOrganizationParams {
     status?: string;
 }
 
-export type IUpdateOrganizationParams = ICreateOrganizationParams;
+export type IUpdateOrganizationData = ICreateOrganizationData;
 //#endregion

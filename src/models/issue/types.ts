@@ -1,27 +1,36 @@
-import { IPageable } from '../../core';
+import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
 import { IMedia } from '../cdn';
 import { IIssueCategory } from '../issueCategory';
-import { IIssueReaction } from '../issueReaction';
+import { IssueReactionStatus, IssueReactionType } from './constants';
 
 export interface IIssue extends IBaseObject {
+    assigneeUserId?: IdType;
     parentId?: IdType;
+    name: string;
+    description?: string;
+    refType: number;
+    refObject: string;
     refId: number;
-
+    content: string;
+    issueCc?: string;
+    issueTypeCode?: string | null;
+    issueCategoryCode?: string;
+    issueTypeName?: string | null;
+    issueCategoryName?: string;
+    priority?: string;
+    tags?: string;
+    status?: string;
     medias: IMedia[];
     children: IIssue[];
+    childrenCount: number;
     reactions: IIssueReaction[];
     user: IUserIssue;
-    listChildren?: IIssue[];
-    parent?: IIssue;
-    issueType?: IIssueCategory;
+}
 
-    content: string;
-    refObject: string;
-    refType: number;
-    childrenCount: number;
-    issueTypeCode?: string;
-    description?: string;
+export interface IIssueReaction {
+    id: IdType;
+    userId: IdType;
 }
 
 export interface IUserIssue {
@@ -33,32 +42,54 @@ export interface IUserIssue {
 
     avatar?: string;
     nickName: string;
-    firstName?: string;
-    lastName?: string;
+    emailAddress: string;
     roles: string[];
 }
 
 //#region API types
-export interface IQueryIssueParams extends IPageable {
-    refId?: number;
-    refObject?: string;
-    id?: string;
-    brandCode?: string;
+export interface IGetIssuesParams extends IPageable, ISortable {
+    keywords?: string;
+
+    onlyParent?: boolean;
+    userId?: IdType;
+    deviceId?: IdType;
+    assigneeId?: IdType;
+    issueTypeId?: IdType;
+    parentId?: IdType;
     name?: string;
-    issueTypeId?: string;
+    description?: string;
+    refType?: number;
+    refObject?: string;
+    refId?: IdType;
+    content?: string;
+    issueCc?: string;
+    tags?: string;
+    status?: string;
+    organizationCodes?: string[];
 }
 
-export interface ICreateIssueParams {
-    parentId?: IdType;
-    refId?: number;
-
-    issueTypeCode?: string;
+export interface ICreateIssueData {
+    issueCategoryId?: IdType | null;
+    parentId?: IdType | null;
 
     content: string;
-    refObject?: string;
-    priority?: string;
+    refId?: number;
+    refObject?: string | null;
+    refType?: string | null;
+    assigneeId?: IdType | null;
+    priority?: string | null;
+    name?: string | null;
+    description?: string | null;
+    issueCc?: string | null;
+    tags?: string | null;
 }
 
-export type IUpdateIssueParams = ICreateIssueParams;
+export type IUpdateIssueData = ICreateIssueData;
+
+export interface ICreateIssueReactionData {
+    issueId: IdType;
+    issueReactionType: IssueReactionType;
+    status: IssueReactionStatus;
+}
 
 //#endregion

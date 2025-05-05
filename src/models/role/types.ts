@@ -1,23 +1,30 @@
+import { IPageable, ISortable } from '../../core';
 import { IdType } from '../base';
-import { IPermission } from '../permission';
+import { RoleType } from './constants';
 
 export interface IRole {
     id: IdType;
+    guid: string;
     parentBrandId: IdType;
 
-    guide: string;
     code: string;
+
     name: string;
     description: string;
     tags: string | null;
     permissions: string[];
     isSystem: boolean;
-    fullPermissions?: IPermission[];
+    type?: RoleType;
+    // fullPermissions?: IPermission[];
 }
 
 //#region API types
-export interface IQueryRoleParams {
+export interface IQueryRoleParams extends IPageable, ISortable<IRole> {
+    keywords?: string;
+    code?: string;
     name?: string;
+    description?: string;
+    type?: string;
 }
 
 export interface ICreateRoleParams {

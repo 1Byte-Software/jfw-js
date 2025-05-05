@@ -1,15 +1,29 @@
 import { DateType, IdType } from '../../models';
 import { JFWError } from '../error';
-import { JFW_STATUS_CODE } from '../http';
+import { JFWHttpCode } from '../http';
 
 //#region Query params types
 export interface IPageable {
+    /**
+     * The page size of the pagination.
+     */
     pageSize?: number;
+
+    /**
+     * The page number of the pagination.
+     */
     pageNumber?: number;
 }
 
 export interface ISortable<T = any> {
+    /**
+     * The sort data field of the pagination.
+     */
     sortDataField?: keyof T;
+    
+    /**
+     * The sort order of the pagination.
+     */
     sortOrder?: 'ASC' | 'DESC';
 }
 
@@ -26,15 +40,15 @@ export interface IBaseFilter {
 //#endregion
 
 //#region Query response types
-export interface IResponse<T = any> {
+export interface HttpResponse<T = any> {
     success: boolean;
-    statusCode?: JFW_STATUS_CODE;
+    statusCode?: JFWHttpCode;
     message: string;
     data: T | null;
     errors: JFWError[];
 }
 
-interface IListItemsWithPagination<T = any> {
+export interface ListData<T = any> {
     items: T[];
 
     totalItems: number;
@@ -42,5 +56,5 @@ interface IListItemsWithPagination<T = any> {
     pageSize: number;
 }
 
-export type IResponseList<T = any> = IResponse<IListItemsWithPagination<T>>;
+export type HttpResponseList<T = any> = HttpResponse<ListData<T>>;
 //#endregion

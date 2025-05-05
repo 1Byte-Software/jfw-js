@@ -1,37 +1,24 @@
-import { get } from '../../utils/axiosHelper';
-import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { COUNTRY_PATH } from './paths';
-import { ICountry, IQueryCountryParams } from './types';
+import { ICountry, IGetCountriesParams } from './types';
 
 /**
- * #JFW-71: Thiếu tài liệu api/countries
+ * List all countries by the given filter.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-countries}
  */
-export const queryCountryAPI = async (
-    params?: IQueryCountryParams,
-): Promise<IListResponse<ICountry>> => {
-    const url = COUNTRY_PATH.QUERY;
-    const response = await get(url, {
+export const getCountriesAPI = async (
+    params?: IGetCountriesParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = COUNTRY_PATH.GET_COUNTRIES;
+
+    const response = await jfwAxios.get<HttpResponseList<ICountry>>(url, {
         params,
+        ...config,
     });
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
-};
-
-/**
- * #JFW-71: Thiếu tài liệu api/countries
- */
-export const getCountryByIdAPI = async (
-    countryId: IdType,
-): Promise<ICountry> => {
-    const url = generatePath(COUNTRY_PATH.GET_BY_ID, {
-        id: countryId,
-    });
-    const response = await get(url);
 
     return response.data;
 };

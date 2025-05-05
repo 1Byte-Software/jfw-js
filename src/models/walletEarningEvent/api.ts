@@ -1,4 +1,4 @@
-import { get } from '../../utils/axiosHelper';
+import { jfwAxios } from '../../core/client/client';
 import { WALLET_EARNING_EVENT_PATH } from './paths';
 import { IQueryWalletEarningEventParams, IWalletEarningEvent } from './types';
 
@@ -9,7 +9,7 @@ export const queryWalletEarningEventAPI = async (
     params?: IQueryWalletEarningEventParams,
 ): Promise<IWalletEarningEvent[]> => {
     const url = WALLET_EARNING_EVENT_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 

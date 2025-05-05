@@ -1,15 +1,24 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { ILanguage } from './types';
-import { get } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { LANGUAGE_PATH } from './paths';
+import { IGetLanguagesParams, ILanguage } from './types';
 
 /**
- * Gets languages
+ * The Languages API provides access to a list of supported languages in the system. This API allows clients to retrieve language data efficiently for localization purposes.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/languages}
  */
-export const queryLanguageAPI = async (
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<ILanguage[]> => {
-    const url = LANGUAGE_PATH.QUERY;
-    const response = await get(url, null, userHeaders);
+export const getLanguagesAPI = async (
+    params?: IGetLanguagesParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = LANGUAGE_PATH.GET_LANGUAGES;
+
+    const response = await jfwAxios.get<HttpResponse<ILanguage[]>>(url, {
+        params,
+        ...config,
+    });
+
     return response.data;
 };

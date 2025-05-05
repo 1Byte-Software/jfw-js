@@ -4,15 +4,19 @@ const REST_PASSWORDLESS = 'passwordless';
 const REST_ROLES = 'roles';
 const REST_CONFIGURATION = 'configuration';
 const REST_REFERRAL = 'referrals';
+const REST_DEVICE = 'devices';
 
 export const USER_PATH = {
     QUERY: `v1/${REST}`,
     GET_BY_ID: `${REST}/:id`,
+    GET_BY_IDS: `${REST}`,
     REGISTER: `${REST}/register`,
     UPDATE_BY_ID: `${REST}/:id`,
     STATISTIC: `${REST}/statistics`,
 
-    VERIFY_EMAIL: `${REST}/:userId/email/verify/send`,
+    VERIFY_USER_EMAIL_ADDRESS: `v1/${REST}/:userId/email-address/verify/send`,
+    ACTIVE_USER_EMAIL_ADDRESS: `v1/${REST}/email-address/active/`,
+
     DELETE_BY_ID: `${REST}/:id`,
     GET_ME: `v1/${REST}/me`,
     GET_BY_USERNAME: `${REST}/by-username/:username`,
@@ -20,6 +24,7 @@ export const USER_PATH = {
     FORGOT_PASSWORD: `${REST}/forgot-password`,
     RESET_PASSWORD: `${REST}/reset-password`,
     UPDATE_TYPE: `v1/${REST}/:userCode/type/:type`,
+    CHECK_AUTH_KEY_AVAILABLE: `v1/${REST}/check-auth-key-available`,
 
     GET_REFEREE: `v1/${REST}/:id/referees`,
 
@@ -29,8 +34,8 @@ export const USER_PATH = {
     },
 
     ROLES: {
-        ASSIGN_TO_USER: `${REST}/:id/${REST_ROLES}`,
-        REMOVE_FROM_USER: `${REST}/:id/${REST_ROLES}`,
+        ASSIGN_TO_USER: `v1/${REST}/:id/${REST_ROLES}`,
+        REMOVE_FROM_USER: `v1/${REST}/:id/${REST_ROLES}`,
     },
 
     AUTH: {
@@ -49,6 +54,8 @@ export const USER_PATH = {
 
     CONFIGURATIONS: {
         GET: `${REST}/:id/${REST_CONFIGURATION}`,
-        CREATE: `${REST}/:id/${REST_CONFIGURATION}`
-    }
+        CREATE: `${REST}/:id/${REST_CONFIGURATION}`,
+    },
+
+    GET_DEVICES_FROM_USER: `v1/${REST}/:userId/${REST_DEVICE}`,
 };

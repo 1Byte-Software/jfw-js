@@ -1,16 +1,24 @@
 import { IPageable } from '../../core';
 import { IBaseObject } from '../base';
 import { IdType } from '../base';
+import { BrandStatus } from './constants';
+import { IBrandDomain } from './domain';
 import { IBrandProfile } from './profile';
 import { IBrandSetting } from './setting';
 
 export interface IBrand extends IBaseObject {
     parentId?: IdType;
 
+    /**
+     * @deprecated use getBrandDomainsAPI instead
+     */
+    domains: IBrandDomain[];
     profile: IBrandProfile;
     setting: IBrandSetting;
 
     code: string;
+    abbr: string;
+    isSystem: boolean;
 
     name: string;
     description: string;
@@ -23,6 +31,8 @@ export interface IGetBrandDetailPath {
 }
 
 export interface IGetQueryBrandParams extends IPageable {
+    keywords?: string;
+
     parentBrandId?: IdType;
 
     /**
@@ -50,14 +60,7 @@ export interface IGetQueryBrandParams extends IPageable {
     systemAdminEmails?: string;
     bccNotificationEmails?: string;
     productWebsite?: string;
-    productName?: string;
     productAlias?: string;
-    productPrefixName?: string;
-    websiteCPanel?: string;
-    websiteAdminTool?: string;
-    websiteAdminTool2?: string;
-    websiteAdminTool3?: string;
-    websiteProtocol?: string;
     domainWhiteList?: string;
     googleAnalyticsAccount?: string;
     cdnUrl?: string;
@@ -67,8 +70,52 @@ export interface IGetQueryBrandParams extends IPageable {
     logoUrl?: string;
     faviconUrl?: string;
     titlePage?: string;
+    status?: BrandStatus;
 }
 
-export interface IUpdateBrandParams extends IBrand {}
+export interface IGeneratedDomain {
+    rootDomain: string;
+    subDomain: string;
+    fullDomain: string;
+}
+
+export interface ICreateBrandData {
+    name: string;
+    abbr: string;
+    description?: string | null;
+
+    profile: {
+        faviconUrl?: string | null;
+        logoUrl?: string | null;
+        slogan?: string | null;
+    };
+
+    setting: {
+        domain: string;
+    };
+
+    // setting: Pick<IBrandSetting, 'domain'>;
+}
+export interface IUpdateBrandData {
+    /**
+     * The code of the Brand.
+     */
+    code: string;
+
+    /**
+     * The name of the Brand.
+     */
+    name: string;
+
+    /**
+     * This is the abbreviation of the Brand.
+     */
+    abbr: string;
+
+    /**
+     * The description of the Brand.
+     */
+    description?: string | null;
+}
 
 //#endregion

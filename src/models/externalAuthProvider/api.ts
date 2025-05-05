@@ -1,6 +1,7 @@
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { EXTERNAL_AUTH_PROVIDER_PATH } from './paths';
 import {
     ICreateExternalAuthProviderParams,
@@ -16,17 +17,13 @@ const REST_EXTERNAL = 'external-auth-providers';
  */
 export const queryExternalAuthProviderAPI = async (
     params?: IQueryExternalAuthProviderParams,
-): Promise<IListResponse<IExternalAuthProvider>> => {
+): Promise<HttpResponseList<IExternalAuthProvider>> => {
     const url = `${REST_EXTERNAL}`;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
-    const { items, ...rest } = response.data;
 
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**
@@ -38,7 +35,7 @@ export const getExternalAuthProviderByIdAPI = async (
     const url = generatePath(EXTERNAL_AUTH_PROVIDER_PATH.GET_BY_ID, {
         id: externalAuthProviderId,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -51,7 +48,7 @@ export const createExternalAuthProviderAPI = async (
 ) => {
     const url = EXTERNAL_AUTH_PROVIDER_PATH.CREATE;
 
-    const response = await post(url, params);
+    const response = await jfwAxios.post(url, params);
 
     return response.data;
 };
@@ -67,7 +64,7 @@ export const updateExternalAuthProviderAPI = async (
         id: externalAuthProviderId,
     });
 
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -82,5 +79,5 @@ export const deleteExternalAuthProviderAPI = async (
         id: externalAuthProviderId,
     });
 
-    return await remove(url);
+    return await jfwAxios.delete(url);
 };

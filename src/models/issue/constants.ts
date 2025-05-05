@@ -1,27 +1,26 @@
-// Define an object to represent different priorities of issue.
-export const ISSUE_PRIORITY = {
-    low: 'Low',
-    medium: 'Medium',
-    high: 'High',
-    urgent: 'Urgent',
-};
+export enum IssueStatus {
+    Active = 'Active',
+    Inactive = 'Inactive',
+}
 
-// Define an array of issue's priorities options for selection in a dropdown or similar UI component
-export const ISSUE_PRIORITY_OPTIONS = [
-    {
-        value: ISSUE_PRIORITY.low,
-        label: `Low`,
-    },
-    {
-        value: ISSUE_PRIORITY.medium,
-        label: `Medium`,
-    },
-    {
-        value: ISSUE_PRIORITY.high,
-        label: `High`,
-    },
-    {
-        value: ISSUE_PRIORITY.urgent,
-        label: `Urgent`,
-    },
-];
+export enum IssuePriority {
+    Low = 'Low',
+    Medium = 'Medium',
+    High = 'High',
+    Urgent = 'Urgent',
+}
+
+export enum IssueReactionType {
+    Dislike = 'Dislike',
+    Like = 'Like',
+    Love = 'Love',
+    Care = 'Care',
+    Haha = 'Haha',
+    Wow = 'Wow',
+    Angry = 'Angry',
+}
+
+export enum IssueReactionStatus {
+    Active = 'Active',
+    Inactive = 'Inactive',
+}

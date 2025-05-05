@@ -1,7 +1,7 @@
 const REST = 'exchange-rates';
 
 export const EXCHANGE_RATE_PATH = {
-    GET: `${REST}`,
+    GET_EXCHANGE_RATES: `v1/${REST}`,
 
-    CONVERT: `${REST}/convert`,
+    CONVERT_CURRENCY: `v1/${REST}/convert`,
 };

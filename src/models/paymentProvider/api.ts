@@ -1,26 +1,27 @@
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { PAYMENT_PROVIDER_PATH } from './paths';
-import { ICreatePaymentProviderParams, IPaymentProvider, IQueryPaymentProviderParams, IUpdatePaymentProviderParams } from './types';
+import {
+    ICreatePaymentProviderParams,
+    IPaymentProvider,
+    IQueryPaymentProviderParams,
+    IUpdatePaymentProviderParams,
+} from './types';
 
 /**
  * #VDT-61: Thiếu tài liệu GET, POST, PUT, DELETE: api/payment-providers
  */
 export const queryPaymentProviderAPI = async (
     params?: IQueryPaymentProviderParams,
-): Promise<IListResponse<IPaymentProvider>> => {
+): Promise<HttpResponseList<IPaymentProvider>> => {
     const url = PAYMENT_PROVIDER_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**
@@ -33,7 +34,7 @@ export const getPaymentProviderByIdAPI = async (
         id: paymentProviderId,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -46,7 +47,7 @@ export const createPaymentProviderAPI = async (
 ) => {
     const url = PAYMENT_PROVIDER_PATH.CREATE;
 
-    return await post(url, params);
+    return await jfwAxios.post(url, params);
 };
 
 /**
@@ -60,7 +61,7 @@ export const updatePaymentProviderAPI = async (
         id: paymentProviderId,
     });
 
-    return await put(url, payload);
+    return await jfwAxios.put(url, payload);
 };
 
 /**
@@ -71,5 +72,5 @@ export const deletePaymentProviderAPI = async (paymentProviderId: IdType) => {
         id: paymentProviderId,
     });
 
-    return await remove(url);
+    return await jfwAxios.delete(url);
 };

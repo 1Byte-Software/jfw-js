@@ -1,5 +1,6 @@
-import { AxiosHeaders } from 'axios';
-import { get, post, put, remove } from '../../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../../core';
+import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { BRAND_LINK_PATH } from './paths';
@@ -15,12 +16,12 @@ import {
  */
 export const getBrandLinkAPI = async (
     brandId?: IdType,
-    userHeaders?: AxiosHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IBrandLink[]> => {
     const url = generatePath(BRAND_LINK_PATH.GET_BY_BRAND, {
         id: brandId,
     });
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get(url, config);
 
     return response.data;
 };
@@ -30,14 +31,17 @@ export const getBrandLinkAPI = async (
  */
 export const getBrandLinkByTypeAPI = async (
     params: IGetBrandLinkByTypeParams,
-    userHeaders?: AxiosHeaders,
-): Promise<IBrandLink[]> => {
+    config?: AxiosRequestConfig,
+) => {
     const { brandId, type } = params;
     const url = generatePath(BRAND_LINK_PATH.GET_BY_TYPE, {
         id: brandId,
         type,
     });
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IBrandLink[]>>(url, {
+        ...config,
+        params,
+    });
 
     return response.data;
 };
@@ -47,7 +51,7 @@ export const getBrandLinkByTypeAPI = async (
  */
 export const createBrandLinkAPI = async (payload: ICreateBrandLinkParams) => {
     const url = BRAND_LINK_PATH.CREATE;
-    const response = await post(url, payload);
+    const response = await jfwAxios.post(url, payload);
 
     return response.data;
 };
@@ -62,7 +66,7 @@ export const updateBrandLinkAPI = async (
     const url = generatePath(BRAND_LINK_PATH.UPDATE_BY_ID, {
         id: brandId,
     });
-    const response = await put(url, payload);
+    const response = await jfwAxios.put(url, payload);
 
     return response.data;
 };
@@ -77,7 +81,7 @@ export const getBrandLinkByIdAPI = async (
         id: brandId,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -90,7 +94,7 @@ export const deleteBrandLinkByIdAPI = async (brandId: IdType) => {
         id: brandId,
     });
 
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
 
     return response.data;
 };

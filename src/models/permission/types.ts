@@ -1,8 +1,10 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IdType } from '../base';
+import { PermissionType } from './constants';
 
 export interface IPermission {
     id: IdType;
+    resourceTypeId: IdType;
     parentBrandId: IdType;
 
     code: string;
@@ -11,26 +13,30 @@ export interface IPermission {
     name: string;
     description: string;
     tags: string | null;
+    type?: PermissionType;
     isSystem: boolean;
-    createdDate: DateType;
 }
 
 //#region API types
-export interface IQueryPermissionParams extends IPageable, ISortable {
+export interface IGetPermissionsParams extends IPageable, ISortable {
+    keywords?: string;
+    resourceTypeId?: IdType;
+    parentBrandId?: IdType | null;
     code?: string;
     name?: string;
-    tags?: string;
-    description?: string;
+    description?: string | null;
+    tags?: string | null;
+    type?: PermissionType;
 }
 
-export interface ICreatePermissionParams {
+export interface ICreatePermissionData {
+    resourceTypeId: IdType;
     parentBrandId?: IdType | null;
     code: string;
     name: string;
     description?: string | null;
     tags?: string | null;
-    isSystem?: boolean | null;
 }
 
-export type IUpdatePermissionParams = ICreatePermissionParams;
+export type IUpdatePermissionData = ICreatePermissionData;
 //#endregion

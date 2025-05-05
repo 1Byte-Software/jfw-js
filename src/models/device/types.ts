@@ -1,6 +1,7 @@
 import { IBaseFilter, IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
 import { IUser } from '../user';
+import { DeviceStatus } from './constants';
 
 export interface IDevice extends IBaseObject {
     userId: IdType;
@@ -26,7 +27,7 @@ export interface IDevice extends IBaseObject {
 }
 
 //#region API types
-export interface ICheckUserAccessParams {
+export interface ICheckUserAccessDeviceParams {
     userId: IdType;
     deviceCode: string;
 }
@@ -36,6 +37,7 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
 
     userId?: IdType;
 
+    keywords?: string;
     deviceToken?: string;
     deviceSession?: string;
     type?: number;
@@ -44,7 +46,7 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
     session?: string;
     isMobile?: boolean;
     tags?: string;
-    status?: number;
+    status?: DeviceStatus;
     isDefault?: boolean;
     testMode?: boolean;
     phoneNumber?: string;
@@ -59,4 +61,28 @@ export interface IQueryDeviceParams extends IPageable, ISortable, IBaseFilter {
     timeZoneId?: string;
     isPagination?: boolean;
 }
+
+export interface ICreateDeviceData {
+    userId?: IdType | null;
+    type?: number | null;
+    code?: string | null;
+    token?: string | null;
+    session?: string | null;
+    isMobileApp?: boolean;
+    tags?: string | null;
+    status?: DeviceStatus;
+    isDefault?: boolean | null;
+    testMode?: boolean | null;
+    name?: string | null;
+    phoneNumber?: string | null;
+    osDevice?: string | null;
+    appVersionNumber?: string | null;
+    iccid?: string | null;
+    imsi?: string | null;
+    imei?: string | null;
+    simCardInfo?: string | null;
+}
+
+export type IUpdateDeviceData = ICreateDeviceData; 
+
 //#endregion

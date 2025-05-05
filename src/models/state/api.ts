@@ -1,35 +1,23 @@
-import { get } from '../../utils/axiosHelper';
-import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { STATE_PATH } from './paths';
-import { IQueryStateParams, IState } from './types';
+import { IGetStatesParams, IState } from './types';
 
 /**
- * #JFW-76: Thiếu tài liệu api/states
+ * Gets a list of all states.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/states}
  */
-export const queryStateAPI = async (
-    params?: IQueryStateParams,
-): Promise<IListResponse<IState>> => {
-    const url = STATE_PATH.QUERY;
-    const response = await get(url, {
+export const getStatesAPI = async (
+    params?: IGetStatesParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = STATE_PATH.GET_STATES;
+    const response = await jfwAxios.get<HttpResponse<IState[]>>(url, {
         params,
+        ...config,
     });
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
-};
-
-/**
- * #JFW-76: Thiếu tài liệu api/states
- */
-export const getStateByIdAPI = async (stateId: IdType): Promise<IState> => {
-    const url = generatePath(STATE_PATH.GET_BY_ID, {
-        id: stateId,
-    });
-    const response = await get(url);
 
     return response.data;
 };

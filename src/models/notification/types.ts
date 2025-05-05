@@ -1,5 +1,6 @@
 import { IPageable, ISortable } from '../../core';
-import { IBaseObject } from '../base';
+import { IBaseObject, IdType } from '../base';
+import { NotificationStatus } from './constants';
 
 export interface INotification extends IBaseObject {
     patternCode: string;
@@ -11,7 +12,9 @@ export interface INotification extends IBaseObject {
 }
 
 //#region API types
-export interface IQueryNotificationParams extends IPageable, ISortable {
+export interface IGetNotificationsByUserAuthorizedParams
+    extends IPageable,
+        ISortable {
     countryCode?: string;
     languageCode?: string;
 
@@ -27,7 +30,34 @@ export interface IQueryNotificationParams extends IPageable, ISortable {
     testMode?: boolean;
 
     tags?: string;
-    status?: string;
+    status?: NotificationStatus;
+}
+
+export interface IPushNotificationMessageForTokensParams {
+    title: string;
+    body: string;
+    deviceTokens: string[];
+}
+
+export interface IPushNotificationResponse {
+    countSuccess: number;
+}
+
+export interface IPushNotificationDataMessageByGivenDeviceCodeParams {
+    deviceCodes: string[];
+}
+
+export interface IPushNotificationDataMessageByTokensParams {
+    deviceTokens: string[];
+}
+
+export interface IPushNotificationDataMessageByDevicesParams {
+    deviceIds: IdType[];
+}
+
+export interface IUpdateStatusNotificationParams {
+    notificationIds: IdType[];
+    status: string;
 }
 
 //#endregion

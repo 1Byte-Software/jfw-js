@@ -1,19 +1,27 @@
-import { AxiosHeaders } from 'axios';
-import { IResponse } from '../../core';
-import { get, put } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { BRAND_PATH } from './paths';
-import { IBrand, IGetQueryBrandParams, IUpdateBrandParams } from './types';
+import {
+    IBrand,
+    ICreateBrandData,
+    IGeneratedDomain,
+    IGetQueryBrandParams,
+    IUpdateBrandData,
+} from './types';
 
 /**
  * List all brands.
  */
 export const queryBrandAPI = async (
     params?: IGetQueryBrandParams,
-): Promise<IResponse<IBrand[]>> => {
+    config?: AxiosRequestConfig,
+) => {
     const url = BRAND_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get<HttpResponseList<IBrand>>(url, {
+        ...config,
         params,
     });
 
@@ -23,15 +31,10 @@ export const queryBrandAPI = async (
 /**
  * Gets brand by the given brand url.
  */
-export const getBrandByUrlAPI = async (
-    brandUrl: string,
-    userHeaders?: AxiosHeaders,
-): Promise<IBrand> => {
-    const url = generatePath(BRAND_PATH.GET_BY_URL, {
-        brandUrl,
-    });
+export const getBrandByUrlAPI = async (config?: AxiosRequestConfig) => {
+    const url = BRAND_PATH.GET_BY_URL;
 
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IBrand>>(url, config);
 
     return response.data;
 };
@@ -39,24 +42,68 @@ export const getBrandByUrlAPI = async (
 /**
  * Gets brand by the given brand id.
  */
-export const getBrandByIdAPI = async (id: IdType): Promise<IBrand> => {
+export const getBrandByIdAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
     const url = generatePath(BRAND_PATH.GET_BY_ID, {
         id,
     });
-    const response = await get(url);
+    const response = await jfwAxios.get<HttpResponse<IBrand>>(url, config);
+
+    return response.data;
+};
+
+export const createBrandAPI = async (
+    data: ICreateBrandData,
+    config?: AxiosRequestConfig,
+) => {
+    const url = BRAND_PATH.CREATE;
+
+    const response = await jfwAxios.post<HttpResponse<IBrand>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };
 
 export const updateBrandAPI = async (
     id: IdType,
-    payload: IUpdateBrandParams,
+    data: IUpdateBrandData,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(BRAND_PATH.UPDATE_BY_ID, {
         id,
     });
 
-    const response = await put(url, payload);
+    // #NOT_SURE: HttpResponse<null>
+    const response = await jfwAxios.put<HttpResponse<null>>(url, data, config);
+
+    return response.data;
+};
+
+export const checkExistDomainUrlAPI = async (
+    domainUrl: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(BRAND_PATH.CHECK_DOMAIN_EXISTS, {
+        domainUrl,
+    });
+
+    const response = await jfwAxios.get<HttpResponse<boolean>>(url, config);
+
+    return response.data;
+};
+
+export const generateDomainAPI = async (config?: AxiosRequestConfig) => {
+    const url = BRAND_PATH.GENERATE_DOMAIN;
+
+    const response = await jfwAxios.get<HttpResponse<IGeneratedDomain>>(
+        url,
+        config,
+    );
 
     return response.data;
 };

@@ -1,8 +1,19 @@
+import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { ILanguage } from '../language';
-import { IPackage } from '../packages';
 import { IRole } from '../role';
 import { ITimezone } from '../timezone';
+
+export interface IBaseUser {
+    id: IdType;
+    packageId: IdType;
+
+    avatar?: string;
+    code: string;
+    emailAddress: string;
+    nickName: string;
+    packageCode: string;
+}
 
 export interface IUser {
     username: string;
@@ -41,7 +52,7 @@ export interface IUser {
     roles: IRole[];
     language?: ILanguage;
     timeZone?: ITimezone;
-    package?: IPackage;
+    package?: string; // #CONFIRM: Return package type is string or IPackage ?
     type: string;
     status: number;
     testMode?: boolean;
@@ -56,32 +67,48 @@ export interface IReferee {
 }
 
 //#region API types
-export interface IQueryUserParams {
+export interface IQueryUserParams extends IPageable, ISortable {
+    roleId?: IdType;
+    code?: string;
+    username?: string;
+    userType?: string;
+    isEmailAddressVerified?: boolean;
+    isUserVerified?: boolean;
+    testMode?: boolean;
+    status?: string;
+    isSystem?: boolean;
+    firstName?: string;
+    lastName?: string;
+    nickName?: string;
+    avatar?: string;
+    emailAddress?: string;
+    phoneNumber?: string;
+    keywords?: string;
     packageId?: IdType;
     languageCode?: string;
-    loginName?: string;
-    userId?: IdType;
-    username?: string;
-    status?: string;
-    testMode?: boolean;
+    timeZoneId?: string;
+    trackingLevel?: number;
+    referralCode?: string;
 }
 
 export interface IGetUserInfoByUsernamePath {
     username: string;
 }
-export interface IUpdateProfileParams {
-    username: string;
-    emailAddress?: string;
-    firstName?: string;
-    phoneNumber1?: string;
-    lastName?: string;
-    website?: string;
-    nickName?: string;
-    avatar?: File | string;
-    bio?: string;
-    languageCode?: string;
-    timeZoneId?: IdType;
+export interface IUpdateUserData {
+    username?: string | null;
+    emailAddress?: string | null;
+    nickName?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    languageCode?: string | null;
+    timeZoneId?: IdType | null;
+    phoneNumber?: string | null;
+    phoneNumber1?: string | null;
+    avatar?: string | null;
+    bio?: string | null;
+    website?: string | null;
 }
+
 export interface IGetUserConfigurationParams {
     code: string;
 }
@@ -101,12 +128,14 @@ export interface IInitialSignUpValues {
 }
 export interface IRegisterParams {
     username: string;
+    phoneNumber?: string | null;
     password: string;
-    emailAddress: string;
-    referralCode?: string;
-    timeZoneId?: string;
-    languageCode?: string;
-    brandUrl?: string;
+    emailAddress?: string | null;
+    firstName?: string | null;
+    lastName?: string | null;
+    nickName?: string | null;
+    referralCode?: string | null;
+    timeZoneId?: IdType | null;
 }
 export interface IForgotPasswordParams {
     emailAddress: string;
@@ -147,5 +176,9 @@ export interface IAuthenticateByEmailAddressParams {
     emailAddress: string;
     callbackUrl: string;
     returnUrl: string;
+}
+
+export interface ICheckAuthKeyAvailableParams {
+    authKey: string;
 }
 //#endregion

@@ -1,5 +1,5 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get, post, put, remove } from '../../utils/axiosHelper';
+import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { PRICE_PATH } from './paths';
@@ -18,7 +18,7 @@ export const queryPriceAPI = async (
     params: IQueryPriceParams,
 ): Promise<IPrice[]> => {
     const url = PRICE_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
     return response.data;
@@ -32,7 +32,7 @@ export const getPriceByIdAPI = async (priceId: IdType): Promise<IPrice> => {
         id: priceId,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
     return response.data;
 };
 
@@ -42,7 +42,7 @@ export const getPriceByIdAPI = async (priceId: IdType): Promise<IPrice> => {
 export const createPriceAPI = async (payload: ICreatePriceParams) => {
     const url = PRICE_PATH.CREATE;
 
-    const response = await post(url, payload);
+    const response = await jfwAxios.post(url, payload);
     return response.data;
 };
 
@@ -56,7 +56,7 @@ export const updatePriceAPI = async (
     const url = generatePath(PRICE_PATH.UPDATE_BY_ID, {
         id: priceId,
     });
-    const response = await put(url, params);
+    const response = await jfwAxios.put(url, params);
     return response.data;
 };
 
@@ -67,7 +67,7 @@ export const deletePriceAPI = async (priceId: IdType) => {
     const url = generatePath(PRICE_PATH.DELETE_BY_ID, {
         id: priceId,
     });
-    const response = await remove(url);
+    const response = await jfwAxios.delete(url);
     return response.data;
 };
 
@@ -77,20 +77,16 @@ export const deletePriceAPI = async (priceId: IdType) => {
 export const generateCheckoutLink = async (
     priceId: IdType,
     params: IGenerateCheckoutLinkParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PRICE_PATH.GENERATE_CHECKOUT_LINK, {
         id: priceId,
     });
 
-    const response = await post(
-        url,
-        null,
-        {
-            params,
-        },
-        userHeaders,
-    );
+    const response = await jfwAxios.post(url, null, {
+        ...config,
+        params,
+    });
     return response.data;
 };
 

@@ -1,9 +1,9 @@
 const REST = 'coupons';
 
 export const COUPON_PATH = {
-    QUERY: `${REST}`,
-    CREATE: `${REST}`,
-    GET_BY_ID: `${REST}/:id`,
-    UPDATE_BY_ID: `${REST}/:id`,
-    DELETE_BY_ID: `${REST}/:id`,
+    CREATE_COUPON: `${REST}`,
+    DELETE_COUPON: `${REST}/:id`,
+    GET_COUPON: `${REST}/:id`,
+    GET_COUPONS: `${REST}`,
+    UPDATE_COUPON: `${REST}/:id`,
 };

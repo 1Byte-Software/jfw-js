@@ -1,7 +1,7 @@
-import { IStatistic, IStatisticCommonParams } from '../../core';
-import { get } from '../../utils/axiosHelper';
+import { HttpResponse, IStatisticCommon, IStatisticCommonParams } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IdType, IListResponse } from '../base';
+import { IdType } from '../base';
 import { PAYMENT_PATH } from './paths';
 import {
     IGetPaymentDashboardParams,
@@ -15,18 +15,13 @@ import {
  */
 export const queryPaymentHistoryAPI = async (
     params: IQueryPaymentParams,
-): Promise<IListResponse<IPayment>> => {
+): Promise<HttpResponse<IPayment>> => {
     const url = PAYMENT_PATH.QUERY;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
-    const { items, ...rest } = response.data;
-
-    return {
-        items,
-        pagination: rest,
-    };
+    return response.data
 };
 
 /**
@@ -39,7 +34,7 @@ export const getPaymentByIdAPI = async (
         id: paymentId,
     });
 
-    const response = await get(url);
+    const response = await jfwAxios.get(url);
 
     return response.data;
 };
@@ -51,7 +46,7 @@ export const getPaymentDashboardAPI = async (
     params: IGetPaymentDashboardParams,
 ): Promise<IPaymentDashboard> => {
     const url = PAYMENT_PATH.GET_DASHBOARD;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 
@@ -63,9 +58,9 @@ export const getPaymentDashboardAPI = async (
  */
 export const getPaymentStatisticAPI = async (
     params: IStatisticCommonParams,
-): Promise<IStatistic[]> => {
+): Promise<IStatisticCommon[]> => {
     const url = PAYMENT_PATH.GET_STATISTIC;
-    const response = await get(url, {
+    const response = await jfwAxios.get(url, {
         params,
     });
 

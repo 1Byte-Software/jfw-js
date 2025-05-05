@@ -1,5 +1,5 @@
 const REST = 'languages';
 
 export const LANGUAGE_PATH = {
-    QUERY: `${REST}`,
+    GET_LANGUAGES: `${REST}`,
 };

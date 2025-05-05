@@ -1,7 +1,8 @@
-import { RawAxiosRequestHeaders } from 'axios';
-import { get, post, put } from '../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponseList } from '../../core';
+import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IListResponse, IdType } from '../base';
+import { IdType } from '../base';
 import { WALLET_PATH } from './paths';
 import {
     IAddMoneyParams,
@@ -19,10 +20,10 @@ import {
  */
 export const getWalletAPI = async (
     params: IGetWalletParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ): Promise<IWallet[]> => {
     const url = WALLET_PATH.GET;
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get(url, { ...config, params });
 
     return response.data;
 };
@@ -33,22 +34,22 @@ export const getWalletAPI = async (
 export const getWalletHistoryAPI = async (
     walletId: IdType,
     params: IGetWalletHistoryParams,
-    userHeaders?: RawAxiosRequestHeaders,
-): Promise<IListResponse<IWalletHistory>> => {
+    config?: AxiosRequestConfig,
+): Promise<HttpResponseList<IWalletHistory>> => {
     const url = generatePath(WALLET_PATH.GET_HISTORY, {
         id: walletId,
     });
-    const response = await get(url, { params }, userHeaders);
+    const response = await jfwAxios.get(url, { ...config, params });
 
     return response.data;
 };
 
 // export const getListEarnEventsAPI = async (
 //     params: IGetEarnEventParams,
-//     userHeaders?: RawAxiosRequestHeaders,
+//     config?: AxiosRequestConfig,
 // ): Promise<IEarnEvent[]> => {
 //     const url = `${REST_EVENT}`;
-//     const response = await get(url, { params }, userHeaders);
+//     const response = await jfwAxios.get(url, { ...config, params });
 
 //     return response.data;
 // };
@@ -59,13 +60,13 @@ export const getWalletHistoryAPI = async (
 export const createWalletDefaultAPI = async (
     currencyCode: string,
     params?: ICreateWalletParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(WALLET_PATH.CREATE_DEFAULT, {
         currencyCode,
     });
 
-    return await post(url, null, { params }, userHeaders);
+    return await jfwAxios.post(url, null, { ...config, params });
 };
 
 /**
@@ -73,11 +74,11 @@ export const createWalletDefaultAPI = async (
  */
 export const convertWalletMoneyAPI = async (
     params: IConvertWalletMoneyParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = WALLET_PATH.CONVERT;
 
-    return await post(url, params, null, userHeaders);
+    return await jfwAxios.post(url, params, config);
 };
 
 /**
@@ -85,7 +86,7 @@ export const convertWalletMoneyAPI = async (
  */
 export const applyRedeemAPI = async (
     params: IApplyRedeemParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const { redeemCode, walletId } = params;
     const url = generatePath(WALLET_PATH.APPLY_REDEEM, {
@@ -93,7 +94,7 @@ export const applyRedeemAPI = async (
         redeemCode,
     });
 
-    return await post(url, null, null, userHeaders);
+    return await jfwAxios.post(url, null, config);
 };
 
 /**
@@ -101,18 +102,14 @@ export const applyRedeemAPI = async (
  */
 export const addMoneyAPI = async (
     params: IAddMoneyParams,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = WALLET_PATH.ADD_MONEY_CHECKOUT_LINK;
 
-    return await post(
-        url,
-        null,
-        {
-            params,
-        },
-        userHeaders,
-    );
+    return await jfwAxios.post(url, null, {
+        ...config,
+        params,
+    });
 };
 
 /**
@@ -120,11 +117,9 @@ export const addMoneyAPI = async (
  */
 export const closeWalletAPI = async (
     walletId: IdType,
-    userHeaders?: RawAxiosRequestHeaders,
+    config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(WALLET_PATH.CLOSE, {
         id: walletId,
     });
-
-    return await put(url, null, null, userHeaders);
 };

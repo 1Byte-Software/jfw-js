@@ -1,38 +1,54 @@
-import { AxiosHeaders } from 'axios';
-import { get, put } from '../../../utils/axiosHelper';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../../core';
+import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
-import { BRAND_PROFILE_PATH } from './paths';
-import { IBrandEmailAddress, IUpdateEmailAddressParams } from './types';
+import { BRAND_EMAIL_ADDRESS_PATH } from './paths';
+import { IBrandEmailAddress, IUpdateEmailAddressData } from './types';
 
 /**
- * Gets brand email addresses by the given brand id.
+ * Gets the brand's email by the given brand id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-emails-with-a-brand}
  */
-export const getBrandEmailAddressAPI = async (
+export const getEmailsWithBrandAPI = async (
     brandId: IdType,
-    userHeaders?: AxiosHeaders,
-): Promise<IBrandEmailAddress> => {
-    const url = generatePath(BRAND_PROFILE_PATH.GET, {
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(BRAND_EMAIL_ADDRESS_PATH.GET_EMAILS_WITH_BRAND, {
         id: brandId,
     });
 
-    const response = await get(url, null, userHeaders);
+    const response = await jfwAxios.get<HttpResponse<IBrandEmailAddress>>(
+        url,
+        config,
+    );
 
     return response.data;
 };
 
 /**
- * Updates the brand email addresses by the given brand id.
+ * Updates the brand's emails by the given brand id.
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/update-a-email}
  */
 export const updateBrandEmailAddressAPI = async (
     brandId: IdType,
-    payload: IUpdateEmailAddressParams,
+    data: IUpdateEmailAddressData,
+    config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(BRAND_PROFILE_PATH.UPDATE, {
-        id: brandId,
-    });
+    const url = generatePath(
+        BRAND_EMAIL_ADDRESS_PATH.UPDATE_BRAND_EMAIL_ADDRESS,
+        {
+            id: brandId,
+        },
+    );
 
-    const response = await put(url, payload);
+    const response = await jfwAxios.put<HttpResponse<IBrandEmailAddress>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };

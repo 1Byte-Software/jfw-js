@@ -3,7 +3,8 @@ import axios, {
     InternalAxiosRequestConfig,
     RawAxiosRequestHeaders,
 } from 'axios';
-import { _AppService, API_DOMAIN, MODE_VALUES } from '../../core';
+import { _AppService, MODE_VALUES } from '../../core';
+import { BaseUrl } from '../../core/client/constants';
 
 let axiosInstanceJfw: ReturnType<typeof axiosInstance>;
 let brandUrl = '';
@@ -17,8 +18,8 @@ config$.subscribe((config) => {
     if (config) {
         const baseUrl =
             config.mode === MODE_VALUES.development
-                ? API_DOMAIN.development
-                : API_DOMAIN.production;
+                ? BaseUrl.development
+                : BaseUrl.live;
 
         brandUrl = config.brandUrl;
 
