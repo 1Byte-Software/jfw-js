@@ -1,10 +1,10 @@
 export enum AppIntegrationType {
     Authenticate = 'Authenticate',
-    Email = 'Email',
-    FileStorage = 'FileStorage',
-    Sms = 'Sms',
+    SMTP = 'SMTP',
+    CDN = 'CDN',
+    SMS = 'SMS',
     PushNotification = 'PushNotification',
-    Payment = 'Payment'
+    PaymentGateway = 'PaymentGateway'
 }
 
 export enum AppIntegrationStatus {
