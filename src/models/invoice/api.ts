@@ -9,6 +9,8 @@ import { IGetInvoicesParams, IInvoice } from './types';
 /**
  * Delete an Invoice.
  *
+ * @param id - The id of the invoice.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/delete-an-invoice}
  */
 export const deleteInvoiceAPI = async (
@@ -18,7 +20,6 @@ export const deleteInvoiceAPI = async (
     const url = generatePath(INVOICE_PATH.DELETE_INVOICE, {
         id,
     });
-
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
     return response.data;
@@ -27,6 +28,8 @@ export const deleteInvoiceAPI = async (
 /**
  * Get invoices.
  *
+ * @param params - The parameters for getting invoices.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/get-invoices}
  */
 export const getInvoicesAPI = async (
@@ -34,7 +37,6 @@ export const getInvoicesAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = INVOICE_PATH.GET_INVOICES;
-
     const response = await jfwAxios.get<HttpResponseList<IInvoice>>(url, {
         params,
         ...config,
@@ -46,6 +48,8 @@ export const getInvoicesAPI = async (
 /**
  * Get an invoice.
  *
+ * @param id - The id of the invoice.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/get-a-invoice}
  */
 export const getInvoiceAPI = async (
@@ -55,7 +59,6 @@ export const getInvoiceAPI = async (
     const url = generatePath(INVOICE_PATH.GET_INVOICE, {
         id,
     });
-
     const response = await jfwAxios.get<HttpResponse<IInvoice>>(url, config);
 
     return response.data;
@@ -64,7 +67,10 @@ export const getInvoiceAPI = async (
 /**
  * Exports the invoice to pdf by the given id. Returns the file as a download.
  *
+ * @param id - The id of the invoice.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/export-a-invoice}
+ * #JFW-300
  */
 export const exportInvoiceAPI = async (
     id: IdType,
@@ -73,7 +79,7 @@ export const exportInvoiceAPI = async (
     const url = generatePath(INVOICE_PATH.EXPORT_INVOICE, {
         id,
     });
-    const response = await jfwAxios.get(url, config);
+    const response = await jfwAxios.post(url, config);
 
-    return response;
+    return response.data;
 };
