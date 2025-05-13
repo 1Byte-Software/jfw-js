@@ -1,9 +1,20 @@
 //#region API types
-export interface IDecryptParams {
+/**
+ * The cryptography decrypt request model.
+ * #JFW-297
+ */
+export interface IDecryptData {
+    /**
+     * The cipher text to decrypt.
+     */
     cipherText: string;
 }
 
-export interface IEncryptParams {
+/**
+ * The cryptography encrypt request model.
+ * #JFW-297
+ */
+export interface IEncryptData {
     plainText: string;
 }
 //#endregion
