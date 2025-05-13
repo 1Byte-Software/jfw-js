@@ -5,14 +5,15 @@ import { IRole } from '../role';
 import { ITimezone } from '../timezone';
 
 export interface IBaseUser {
-    id: IdType;
-    packageId: IdType;
-
-    avatar?: string;
     code: string;
+    avatar: string | null;
+    packageId: IdType;
+    packageCode: string | null;
     emailAddress: string;
     nickName: string;
-    packageCode: string;
+    roles: string[];
+    id: IdType;
+    createdDate: DateType; 
 }
 
 export interface IUser {

@@ -8,7 +8,7 @@ import {
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
-import { IConfiguration, ICreateConfigurationParams } from '../configuration';
+import { IConfiguration, ICreateConfigurationData } from '../configuration';
 import { IDevice } from '../device';
 import { USER_PATH } from './paths';
 import {
@@ -157,18 +157,29 @@ export const getUserConfigurationAPI = async (
 };
 
 /**
- * #JFW-66 Thiếu tài liệu GET, POST: api/users/{id}/configurations
+ * Creates a new configuration for the user.
+ *
+ * @param id - The id of the user.
+ * @param data - The data for creating a new configuration for the user.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/configurations#post-api-users-id-configurations}
+ * #JFW-307
  */
 export const createUserConfigurationAPI = async (
-    userId: IdType,
-    data: ICreateConfigurationParams,
+    id: IdType,
+    data: ICreateConfigurationData,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.CONFIGURATIONS.CREATE, {
-        id: userId,
+        id,
     });
+    const response = await jfwAxios.post<HttpResponse<IConfiguration>>(
+        url,
+        data,
+        config,
+    );
 
-    return await jfwAxios.post(url, data, config);
+    return response.data;
 };
 
 /**
@@ -462,7 +473,7 @@ export const activeUserEmailAddressAPI = async (
     const response = await jfwAxios.put<HttpResponse<boolean>>(
         url,
         {
-            token
+            token,
         },
         config,
     );
