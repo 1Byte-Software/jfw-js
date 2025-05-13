@@ -5,8 +5,10 @@ import { CURRENCY_PATH } from './paths';
 import { ICurrency, IGetCurrenciesParams } from './types';
 
 /**
- * Gets a list of all currencies in the system.
+ * Get currencies
  *
+ * @param params - The parameters for getting currencies.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-currencies}
  */
 export const getCurrenciesAPI = async (
