@@ -22,6 +22,10 @@ export interface ICountry extends IBaseObject {
 }
 
 //#region API types
+
+/**
+ * JFW-291
+ */
 export interface IGetCountriesParams extends IPageable, ISortable {
     keywords?: string;
     iso3166?: string;

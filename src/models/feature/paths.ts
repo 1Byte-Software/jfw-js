@@ -1,9 +1,12 @@
 const REST = 'features';
+const REST_PACKAGE = 'packages';
 
 export const FEATURE_PATH = {
-    QUERY: `${REST}`,
-    GET_BY_ID: `${REST}/:id`,
-    UPDATE_BY_ID: `${REST}/:id`,
-    CREATE: `${REST}`,
-    DELETE_BY_ID: `${REST}/:id`,
+    CREATE_FEATURE: `${REST}`,
+    DELETE_FEATURE: `${REST}/:id`,
+    GET_FEATURE: `${REST}/:id`,
+    GET_FEATURES: `${REST}`,
+    UPDATE_FEATURE: `${REST}/:id`,
+
+    GET_PACKAGES_BY_FEATURE: `${REST}/:id/${REST_PACKAGE}`,
 };

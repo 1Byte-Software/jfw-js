@@ -1,37 +1,86 @@
-import { IPageable } from '../../core';
+import { IPageable, ISortable } from '../../core';
 import { IUser } from '../user';
+import { CommissionRateType } from './constants';
 
 export interface ICommissionRate {
     percentage: number;
     quantityFrom: number;
     quantityTo: number;
-    type: string;
+    type: CommissionRateType;
     user: IUser | null;
     id: string;
-    description?: string;
+    description: string | null;
     unit: string;
     isDefault: boolean;
 }
+
 //#region API types
-export interface IGetDiscountCommissionDiscountParams {
-    quantity: number;
-}
+export interface IGetCommissionRatesParams extends IPageable, ISortable {
+    /**
+     * Filter by type. The type can be one of the following: Discount, Commission.
+     */
+    type?: CommissionRateType;
 
-export interface IQueryCommissionRatesParams extends IPageable {
-    type?: string;
+    /**
+     * The unit of the commission rate.
+     */
     unit?: string;
-}
 
-export interface ICreateCommissionRateParams {
-    userCode?: string;
-    type: string;
-    unit: string;
-    quantityFrom?: number;
-    quantityTo?: number;
-    percentage: number;
-    description?: string;
+    /**
+     * The default commission rate.
+     */
     isDefault?: boolean;
 }
 
-export type IUpdateCommissionRateParams = ICreateCommissionRateParams;
+/**
+ * #JFW-291
+ */
+export interface IGetDiscountCommissionDiscountParams {
+    quantity?: number;
+}
+
+/**
+ * Represents the commission rate create request DTO.
+ */
+export interface ICreateCommissionRateData {
+    /**
+     * The type of commission rate.
+     */
+    type?: CommissionRateType;
+
+    /**
+     * The unit of the commission rate.
+     */
+    unit?: string | null;
+
+    /**
+     * The quantity from.
+     */
+    quantityFrom?: number | null;
+
+    /**
+     * The quantity to.
+     */
+    quantityTo?: number | null;
+
+    /**
+     * The percentage.
+     */
+    percentage?: number | null;
+
+    /**
+     * The description.
+     */
+    description?: string | null;
+
+    /**
+     * The default commission rate.
+     */
+    isDefault?: boolean | null;
+}
+
+/**
+ * This class represents the commission rate create request DTO.
+ */
+export type IUpdateCommissionRateData = ICreateCommissionRateData;
 //#endregion

@@ -9,7 +9,7 @@ export interface IBrandDomain extends IBaseObject {
     protocol: string;
     type: BrandDomainType;
     verified: boolean;
-    verifiedDate: Date | null;
+    verifiedDate: Date;
     createdDate: DateType;
 }
 

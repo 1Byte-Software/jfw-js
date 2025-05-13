@@ -1,4 +1,4 @@
-import { DateType, IdType } from '../../models';
+import { DateType, IdType, SortOrder } from '../../models';
 import { JFWError } from '../error';
 import { JFWHttpCode } from '../http';
 
@@ -6,25 +6,27 @@ import { JFWHttpCode } from '../http';
 export interface IPageable {
     /**
      * The page size of the pagination.
+     * @remarks integer · int32
      */
     pageSize?: number;
 
     /**
      * The page number of the pagination.
+     * @remarks integer · int32
      */
     pageNumber?: number;
 }
 
-export interface ISortable<T = any> {
+export interface ISortable<T extends Record<string, any> = any> {
     /**
      * The sort data field of the pagination.
      */
     sortDataField?: keyof T;
-    
+
     /**
      * The sort order of the pagination.
      */
-    sortOrder?: 'ASC' | 'DESC';
+    sortOrder?: SortOrder;
 }
 
 export interface IBaseFilter {

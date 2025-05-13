@@ -20,6 +20,15 @@ export interface IEvent extends IBaseObject {
     isSystem: boolean;
 }
 
+export interface IWalletEarningEvent {
+    id: IdType;
+    trackingEventId: IdType;
+    code: string;
+    name: string;
+    amount: number;
+    description: string;
+}
+
 export interface IDefaultEmailTemplate {
     languageCode: ILanguage['code'];
     subject: string;
@@ -33,27 +42,65 @@ export interface IDefaultPhoneTemplate {
 
 //#region API types
 export interface IGetEventsParams extends IPageable, ISortable {
-    keywords?: string;
+    /**
+     * Filter by GroupCodeName.
+     */
     groupCodeName?: string;
+
+    /**
+     * Filter by Code.
+     */
     code?: string;
+
+    /**
+     * Filter by Name.
+     */
     name?: string;
+
+    /**
+     * Filter by Description.
+     */
     description?: string;
+
+    /**
+     * Filter by Tags.
+     */
     tags?: string;
+
+    /**
+     * Filter by ZOrder.
+     * @remarks integer · int64
+     */
     zOrder?: number;
+
+    /**
+     * Filter by Status.
+     */
     status?: EventStatus;
+
+    /**
+     * Filter by IsSystem.
+     */
     isSystem?: boolean;
+
+    /**
+     * Filter by IncludeParentBrand.
+     */
     includeParentBrand?: boolean;
+
+    /**
+     * Filter by Keywords.
+     */
+    keywords?: string;
 }
 
-export interface IGetEventsEarningWallet {
+export interface IGetEventsEarningWalletParams {
     /**
-     * The type of the wallet earning event. The value can be Earning or Redeem. By default, the type is Earning.
+     * The type of the wallet earning event. The value can be Earning or Redeem.
+     * @defaultValue Earning
      */
     type?: string;
 }
-
-export interface IGetEmailTemplateEventsParams {}
-export interface IGetPhoneTemplateEventsParams {}
 
 export interface IGetDefaultEmailTemplateParams {
     languageCode?: string;

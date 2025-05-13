@@ -1,8 +1,9 @@
 const REST = 'configurations';
 
 export const CONFIGURATION_PATH = {
-    QUERY: `${REST}`,
-    CREATE: `${REST}`,
-    UPDATE_BY_ID: `${REST}/:id`,
-    DELETE_BY_ID: `${REST}/:id`,
+    CREATE_CONFIGURATION: `v1/${REST}`,
+    DELETE_CONFIGURATION: `v1/${REST}/:id`,
+    GET_CONFIGURATIONS: `v1/${REST}`,
+    GET_CONFIGURATION: `v1/${REST}/:id`,
+    UPDATE_CONFIGURATION: `v1/${REST}/:id`,
 };

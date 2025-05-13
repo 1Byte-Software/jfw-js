@@ -1,9 +1,9 @@
 const REST = 'subscription-types';
 
 export const SUBSCRIPTION_TYPE_PATH = {
-    QUERY: `${REST}`,
-    CREATE: `${REST}`,
-    UPDATE_BY_ID: `${REST}/:id`,
-    GET_BY_ID: `${REST}/:id`,
-    DELETE_BY_ID: `${REST}/:id`,
+    CREATE_SUBSCRIPTION_TYPE: `${REST}`,
+    DELETE_SUBSCRIPTION_TYPE: `${REST}/:id`,
+    GET_SUBSCRIPTION_TYPES: `${REST}`,
+    GET_SUBSCRIPTION_TYPE: `${REST}/:id`,
+    UPDATE_SUBSCRIPTION_TYPE: `${REST}/:id`,
 };

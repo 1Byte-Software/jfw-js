@@ -1,66 +1,120 @@
 import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { CONFIGURATION_PATH } from './paths';
 import {
     IConfiguration,
-    ICreateConfigurationParams,
-    IQueryConfigurationPrams,
-    IUpdateConfigurationParams,
+    ICreateConfigurationData,
+    IGetConfigurationsParams,
+    IUpdateConfigurationData,
 } from './types';
 
 /**
- * #JFW-78: Thiếu tài liệu api/configurations
- */
-export const queryConfigurationAPI = async (
-    params: IQueryConfigurationPrams,
-): Promise<IConfiguration[]> => {
-    const url = CONFIGURATION_PATH.QUERY;
-
-    const response = await jfwAxios.get(url, {
-        params,
-    });
-
-    return response.data;
-};
-
-/**
- * #JFW-78: Thiếu tài liệu api/configurations
+ * Creates a new configuration.
+ *
+ * @param data - The data for creating a new configuration.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/configurations/create-a-configuration}
+ * #JFW-307
  */
 export const createConfigurationAPI = async (
-    payload: ICreateConfigurationParams,
+    data: ICreateConfigurationData,
+    config?: AxiosRequestConfig,
 ) => {
-    const url = CONFIGURATION_PATH.CREATE;
-    const response = await jfwAxios.post(url, payload);
+    const url = CONFIGURATION_PATH.CREATE_CONFIGURATION;
+    const response = await jfwAxios.post<HttpResponse<IConfiguration>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };
 
 /**
- * #JFW-78: Thiếu tài liệu api/configurations
+ * Delete a configuration by the given id.
+ *
+ * @param id - The id of the configuration.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/configurations/delete-a-configuration}
  */
-export const updateConfigurationAPI = async (
-    configurationId: IdType,
-    params: IUpdateConfigurationParams,
+export const deleteConfigurationAPI = async (
+    id: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(CONFIGURATION_PATH.UPDATE_BY_ID, {
-        id: configurationId,
+    const url = generatePath(CONFIGURATION_PATH.DELETE_CONFIGURATION, {
+        id,
     });
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
-    return await jfwAxios.put(url, params, config);
+    return response.data;
 };
 
 /**
- * #JFW-78: Thiếu tài liệu api/configurations
+ * Get configurations
+ *
+ * @param params - The parameters for getting configurations.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/configurations/get-configurations}
+ * JFW-280
  */
-export const deleteConfigurationAPI = async (configurationId: IdType) => {
-    const url = generatePath(CONFIGURATION_PATH.DELETE_BY_ID, {
-        id: configurationId,
+export const getConfigurationsAPI = async (
+    params?: IGetConfigurationsParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = CONFIGURATION_PATH.GET_CONFIGURATIONS;
+    const response = await jfwAxios.get<
+        HttpResponse<HttpResponseList<IConfiguration>>
+    >(url, {
+        params,
+        ...config,
     });
 
-    const response = await jfwAxios.delete(url);
+    return response.data;
+};
+
+/**
+ * Gets a configuration by the given id.
+ *
+ * @param id - The id of the configuration.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/configurations/get-a-configuration}
+ */
+export const getConfigurationAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(CONFIGURATION_PATH.GET_CONFIGURATION, {
+        id,
+    });
+
+    const response = await jfwAxios.get<HttpResponse<IConfiguration>>(
+        url,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * Updates a configuration by the given id.
+ *
+ * @param id - The id of the configuration.
+ * @param data - The data for updating a configuration.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/configurations/update-a-configuration}
+ */
+export const updateConfigurationAPI = async (
+    id: IdType,
+    data: IUpdateConfigurationData,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(CONFIGURATION_PATH.UPDATE_CONFIGURATION, {
+        id,
+    });
+    const response = await jfwAxios.put(url, data, config);
 
     return response.data;
 };

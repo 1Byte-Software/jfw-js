@@ -13,6 +13,8 @@ import {
 /**
  * Creates a new issue category.
  *
+ * @param data - The data for creating a new issue category.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/create-an-issue-category}
  */
 export const createIssueCategoryAPI = async (
@@ -32,6 +34,8 @@ export const createIssueCategoryAPI = async (
 /**
  * Deletes an issue category by the given id.
  *
+ * @param id - The id for deleting an issue category.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/delete-an-issue-category}
  */
 export const deleteIssueCategoryAPI = async (
@@ -41,7 +45,6 @@ export const deleteIssueCategoryAPI = async (
     const url = generatePath(ISSUE_CATEGORY_PATH.DELETE_ISSUE_CATEGORY, {
         id,
     });
-
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
     return response.data;
@@ -50,6 +53,8 @@ export const deleteIssueCategoryAPI = async (
 /**
  * Gets the list of issue category.
  *
+ * @param params - The parameters for getting lst of issue category.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/get-issue-categories}
  */
 export const getIssueCategoriesAPI = async (
@@ -57,7 +62,6 @@ export const getIssueCategoriesAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = ISSUE_CATEGORY_PATH.GET_ISSUE_CATEGORIES;
-
     const response = await jfwAxios.get<HttpResponseList<IIssueCategory>>(url, {
         params,
         ...config,
@@ -69,6 +73,8 @@ export const getIssueCategoriesAPI = async (
 /**
  * Gets an issue category by the given id.
  *
+ * @param id - The id of the issue category.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/get-an-issue-category}
  */
 export const getIssueCategoryAPI = async (
@@ -78,7 +84,6 @@ export const getIssueCategoryAPI = async (
     const url = generatePath(ISSUE_CATEGORY_PATH.GET_ISSUE_CATEGORY, {
         id,
     });
-
     const response = await jfwAxios.get<HttpResponse<IIssueCategory>>(
         url,
         config,
@@ -90,18 +95,20 @@ export const getIssueCategoryAPI = async (
 /**
  * Updates an issue category by the given id.
  *
+ * @param id - The id of the issue category.
+ * @param data - The data for updating a issue category.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/update-an-issue-category}
  */
 export const updateIssueCategoryAPI = async (
     id: IdType,
-    payload: ICreateIssueCategoryData,
+    data: ICreateIssueCategoryData,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ISSUE_CATEGORY_PATH.UPDATE_ISSUE_CATEGORY, {
         id,
     });
-
-    const response = await jfwAxios.patch<HttpResponse<IIssueCategory>>(url, payload, config);
+    const response = await jfwAxios.patch<HttpResponse<IIssueCategory>>(url, data, config);
 
     return response.data;
 };

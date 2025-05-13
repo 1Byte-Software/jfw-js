@@ -1,19 +1,16 @@
-import { IBaseObject, IdType } from '../base';
+import { IdType } from '../base';
 import { ICurrency } from '../currency';
-import { IPackage } from '../packages';
 
-export interface IPrice extends IBaseObject {
+export interface IPrice {
     id: IdType;
     packageId: IdType;
     subscriptionTypeId: IdType;
-
-    package?: IPackage;
     currencyData?: ICurrency;
 
     code: string;
 
     amount: number;
-    description: string;
+    description: string | null;
     checkoutLink: string;
     currency: string;
     name: string;
@@ -21,7 +18,6 @@ export interface IPrice extends IBaseObject {
     packageName: string;
     subscriptionName: string;
     zOrder: number;
-    displayAmount?: string;
 }
 
 //#region API types

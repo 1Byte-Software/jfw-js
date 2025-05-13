@@ -1,26 +1,67 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse } from '../../core';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { CDN_PATH } from './paths';
-import { ICDN, IUploadCDNData } from './types';
+import { ICDN, ICDNUpload, IGetFilesCDNParams, IUploadCDNData } from './types';
+import { IdType } from '../base';
+import { generatePath } from '../../utils/path';
 
 /**
- * Save the specified the file to the CDN folder with CDN file information.
+ * Delete a file CDN
  *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn}
+ * @param id - The id of the file cdn.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/delete-a-file-cdn}
+ * #JFW-290
  */
-export const uploadFileCDN = async (
-    data: FormData,
+export const deleteFileCDNAPI = async (
+    id: IdType,
     config?: AxiosRequestConfig,
-): Promise<HttpResponse<ICDN>> => {
-    const url = CDN_PATH.UPLOAD_FILE;
+) => {
+    const url = generatePath(CDN_PATH.DELETE_FILE_CDN, {
+        id,
+    });
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
-    if (!config.headers?.['Content-Type'])
-        config.headers ?? (config.headers = {});
+    return response.data;
+};
 
-    config.headers['Content-Type'] = 'multipart/form-data';
+/**
+ * Get a file CDN.
+ *
+ * @param id - The id of the file cdn.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/get-a-file-cdn}
+ * 
+ * #JFW-293, #JFW-289
+ */
+export const getFileCDNAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(CDN_PATH.GET_FILE_CDN, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<ICDN>>(url, config);
 
-    const response = await jfwAxios.post(url, data, config);
+    return response.data;
+};
+
+/**
+ * Get cdn items
+ *
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/get-files-cdn} 
+ * #JFW-293
+ */
+export const getFilesCDNAPI = async (
+    params?: IGetFilesCDNParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = CDN_PATH.GET_FILES_CDN;
+    const response = await jfwAxios.get<HttpResponseList<ICDN>>(url, {
+        params,
+        ...config,
+    });
 
     return response.data;
 };
@@ -28,9 +69,12 @@ export const uploadFileCDN = async (
 /**
  * Save the specified the file to the CDN folder with CDN file information.
  *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn}
+ * @param data - The data for uploading an file CDN.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/upload-file}
+ * #JFW-293
  */
-export const uploadFileCDNV2 = async (
+export const uploadFileCDN = async (
     data: IUploadCDNData,
     config?: AxiosRequestConfig,
 ) => {
@@ -43,7 +87,7 @@ export const uploadFileCDNV2 = async (
         });
     }
 
-    const response = await jfwAxios.post<HttpResponse<ICDN>>(url, data, {
+    const response = await jfwAxios.post<HttpResponse<ICDNUpload>>(url, data, {
         headers: {
             'Content-Type': 'multipart/form-data',
             ...config.headers,

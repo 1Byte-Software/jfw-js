@@ -1,75 +1,134 @@
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { FEATURE_PATH } from './paths';
 import {
-    ICreateFeatureParams,
+    ICreateFeatureData,
     IFeature,
-    IQueryFeatureParams,
-    IUpdateFeatureParams,
+    IGetFeaturesParams,
+    IUpdateFeatureData,
 } from './types';
+import { IPackage } from '../packages';
 
 /**
- * Gets the list of all features by the given filter.
+ * Creates a new feature.
+ *
+ * @param data - The data for creating a feature.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/create-a-feature}
  */
-export const queryFeatureAPI = async (
-    params?: IQueryFeatureParams,
-): Promise<IFeature[]> => {
-    const url = FEATURE_PATH.QUERY;
-    const response = await jfwAxios.get(url, {
-        params,
-    });
-    return response.data;
-};
-
-/**
- * Get a feature
- */
-export const getFeatureByIdAPI = async (id: IdType): Promise<IFeature> => {
-    const url = generatePath(FEATURE_PATH.GET_BY_ID, {
-        id,
-    });
-
-    const response = await jfwAxios.get(url);
-    return response.data;
-};
-
-/**
- * Adds a new feature.
- */
-export const createFeatureAPI = async (payload: ICreateFeatureParams) => {
-    const url = FEATURE_PATH.CREATE;
-
-    const response = await jfwAxios.post(url, payload);
-
-    return response.data;
-};
-
-/**
- * Updates the feature data.
- */
-export const updateFeatureByIdAPI = async (
-    id: IdType,
-    payload: IUpdateFeatureParams,
+export const createFeatureAPI = async (
+    data: ICreateFeatureData,
+    config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(FEATURE_PATH.UPDATE_BY_ID, {
-        id,
-    });
+    const url = FEATURE_PATH.CREATE_FEATURE;
 
-    const response = await jfwAxios.patch(url, payload);
+    const response = await jfwAxios.post<HttpResponse<IFeature>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };
 
 /**
- * Deletes a feature by data ID.
+ * Deletes a feature by the given id.
+ *
+ * @param id - The id of the feature to delete.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/delete-a-feature}
  */
-export const deleteFeatureByIdAPI = async (id: IdType) => {
-    const url = generatePath(FEATURE_PATH.DELETE_BY_ID, {
+export const deleteFeatureAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(FEATURE_PATH.DELETE_FEATURE, {
         id,
     });
 
-    const response = await jfwAxios.delete(url);
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Get a feature by the given id.
+ *
+ * @param id - The id of the feature to get.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/get-a-feature}
+ */
+export const getFeatureAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(FEATURE_PATH.GET_FEATURE, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<IFeature>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * Get features.
+ *
+ * @param params - The parameters for getting features.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/get-features}
+ */
+export const getFeaturesAPI = async (
+    params?: IGetFeaturesParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = FEATURE_PATH.GET_FEATURES;
+    const response = await jfwAxios.get<HttpResponseList<IFeature>>(url, {
+        params,
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * Updates a feature by the given id.
+ *
+ * @param id - The id of the feature to update.
+ * @param data - The data for updating a feature.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/update-a-feature}
+ */
+export const updateFeatureAPI = async (
+    id: IdType,
+    data: IUpdateFeatureData,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(FEATURE_PATH.UPDATE_FEATURE, {
+        id,
+    });
+    const response = await jfwAxios.patch<HttpResponse<IFeature>>(
+        url,
+        data,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * Will update in feature.
+ */
+export const getPackagesByFeatureAPI = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(FEATURE_PATH.GET_PACKAGES_BY_FEATURE, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<IPackage[]>>(url, config);
 
     return response.data;
 };

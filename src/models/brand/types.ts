@@ -23,6 +23,7 @@ export interface IBrand extends IBaseObject {
     name: string;
     description: string;
     alias: string;
+    tags: string | null;
 }
 
 //#region API types
@@ -98,17 +99,14 @@ export interface ICreateBrandData {
 }
 export interface IUpdateBrandData {
     /**
-     * The code of the Brand.
-     */
-    code: string;
-
-    /**
      * The name of the Brand.
+     * @remarks string · min: 1
      */
     name: string;
 
     /**
      * This is the abbreviation of the Brand.
+     * @remarks string · min: 1
      */
     abbr: string;
 
@@ -116,6 +114,11 @@ export interface IUpdateBrandData {
      * The description of the Brand.
      */
     description?: string | null;
+
+    /**
+     * The tags of the Brand.
+     */
+    tags?: string | null;
 }
 
 //#endregion
