@@ -44,23 +44,49 @@ const init = (initOption: InitOption) => {
 
 const createInstance = () => {};
 
+/**
+ * Changes the authentication key for all subsequent requests.
+ *
+ * @param authKey This is used to authenticate the request. If the request is not authenticated, the server will return a 401 Unauthorized response.
+ */
 const changeAuthKey = (authKey: string) => {
     jfwAxios.defaults.headers.common[HeaderKey.AuthKey] = authKey;
 };
 
+/**
+ * Removes the authentication key from the request headers.
+ * This is typically used when logging out a user or clearing their session.
+ * After calling this function, subsequent requests will not include the authentication key.
+ */
 const clearAuthKey = () => {
     delete jfwAxios.defaults.headers.common[HeaderKey.AuthKey];
 };
 
+/**
+ * Changes the brand URL for all subsequent requests.
+ *
+ * @param brandURL - The brand URL to be set in the request headers. This is used to identify the brand for the request.
+ */
 const changeBrandURL = (brandURL: string) => {
     jfwAxios.defaults.headers.common[HeaderKey.BrandUrl] = brandURL;
 };
 
+/**
+ * Changes the generated browser code for all subsequent requests.
+ *
+ * @param generatedBrowserCode - The browser code to be set in the request headers. This is used to identify the browser for the request.
+ */
 const changeGeneratedBrowserCode = (generatedBrowserCode: string) => {
     jfwAxios.defaults.headers.common[HeaderKey.BrowserCodeGenerate] =
         generatedBrowserCode;
 };
 
+/**
+ * Gets the base URL for API requests based on the environment.
+ *
+ * @param environment - The environment to get the base URL for. Can be either 'live' or 'development'.
+ * @returns The base URL for the specified environment. Returns development URL by default.
+ */
 const getBaseURL = (environment: InitOption['environment']): string => {
     switch (environment) {
         case 'live':
