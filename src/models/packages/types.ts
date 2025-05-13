@@ -1,52 +1,133 @@
-import { IBaseObject, IdType } from '../base';
+import { DateType, IdType } from '../base';
 import { IFeature } from '../feature';
 import { IPrice } from '../price';
 
-export interface IPackage extends IBaseObject {
+export interface IPackage {
+    /**
+     * Unique identifier of the package.
+     */
+    id: IdType;
+
+    /**
+     * The code of the package.
+     */
     code: string;
-    description: string;
-    features: IFeature[];
-    isDefault: boolean;
+
+    /**
+     * The name of the package.
+     */
     name: string;
-    prices: IPrice[];
+
+    /**
+     * The description of the package.
+     */
+    description: string;
+
+    /**
+     * The tags associated with the package.
+     */
     tags: string | null;
-    status: string;
+
+    /**
+     * The image URL of the package.
+     */
+    image: string | null;
+
+    /**
+     * The pattern avatar URL of the package.
+     */
+    patternAvatarUrl: string | null;
+
+    /**
+     * The styles of the package, in JSON string format.
+     */
+    styles: string | null;
+
+    /**
+     * The display order (z-index) of the package.
+     */
     zOrder: number;
-    image?: string;
-    styles?: string;
-    patternAvatarUrl?: string;
+
+    /**
+     * Whether this package is the default one.
+     */
+    isDefault: boolean;
+
+    /**
+     * Whether this package is free.
+     */
     isFree: boolean;
+
+    /**
+     * The list of features included in the package.
+     */
+    features: IFeature[];
+
+    /**
+     * The list of prices associated with the package.
+     */
+    prices: IPrice[];
+
+    /**
+     * The created date of package.
+     */
+    createdDate: DateType;
 }
 
 //#region API types
-export interface IGetPackagesParams {
-    priceId?: IdType;
-
-    code?: string;
-    name?: string;
-    description?: string;
-    tags?: string;
-}
-
-export interface IGetPackageByIdRequestPath {
-    packageId: string;
-}
+/**
+ * This class is used to present the package command request data transfer object.
+ */
 export interface ICreatePackageData {
-    code?: string;
-    name?: string;
-    image?: string;
-    patternAvatarUrl?: string;
-    styles?: string; // JSON string
+    /**
+     * The code of the package.
+     * @remarks string · min: 1
+     */
+    code: string;
+
+    /**
+     * The name of the package.
+     * @remarks string · min: 1
+     */
+    name: string;
+
+    /**
+     * The image URL of the package.
+     * @remarks string · uri
+     */
+    image?: string | null;
+
+    /**
+     * The pattern avatar URL of the package.
+     */
+    patternAvatarUrl?: string | null;
+
+    /**
+     * The styles of the package.
+     * @remarks string · json
+     */
+    styles?: string | null;
+
+    /**
+     * The description of the package.
+     */
     description?: string | null;
+
+    /**
+     * The tags of the package.
+     */
     tags?: string | null;
+
+    /**
+     * The order of the package.
+     */
     zOrder?: number | null;
 }
 
+/**
+ * This class is used to present the package command request data transfer object.
+ */
 export type IUpdatePackageData = ICreatePackageData;
-
-export interface IGetPricesFromPackageParams {
-    packageId: IdType;
-}
 
 export interface IAddFeaturesToPackageData {
     featureId: IdType;
