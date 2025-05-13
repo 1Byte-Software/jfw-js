@@ -1,4 +1,8 @@
-// Define an object to represent different payment status.
+/**
+ * Define an object to represent different payment status.
+ *
+ * @deprecated use PaymentStatus enum instead.
+ */
 export const PAYMENT_STATUS = {
     voided: 'Voided',
     expired: 'Expired',
@@ -12,7 +16,10 @@ export const PAYMENT_STATUS = {
     canceledReversal: 'Canceled Reversal',
 };
 
-// Define an array of payment status options for selection in a dropdown or similar UI component
+/**
+ * Define an array of payment status options for selection in a dropdown or similar UI component
+ * @deprecated Will delete in feature. This code should not be defined in jfw-js, this is front end business.
+ */
 export const PAYMENT_STATUS_OPTIONS = [
     {
         label: 'Voided',
@@ -55,3 +62,17 @@ export const PAYMENT_STATUS_OPTIONS = [
         value: 'Canceled Reversal',
     },
 ];
+
+export enum PaymentStatus {
+    Waiting = 'Waiting',
+    Completed = 'Completed',
+    Refunded = 'Refunded',
+    Failed = 'Failed',
+    Pending = 'Pending',
+    Denied = 'Denied',
+    Reserved = 'Reserved',
+    CanceledReversal = 'CanceledReversal',
+    Deleted = 'Deleted',
+    Voided = 'Voided',
+    Expired = 'Expired',
+}

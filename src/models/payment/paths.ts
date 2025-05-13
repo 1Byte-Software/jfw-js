@@ -1,9 +1,8 @@
 const REST = 'payments';
 
 export const PAYMENT_PATH = {
-    QUERY: `${REST}`,
-    GET_BY_ID: `${REST}/:id`,
+    GET_PAYMENT: `${REST}/:id`,
+    GET_PAYMENTS: `${REST}`,
 
-    GET_DASHBOARD: `${REST}/dashboard`,
-    GET_STATISTIC: `${REST}/statistics`,
+    GET_OVERVIEW_SELL_DASHBOARD: `${REST}/dashboard`,
 };
