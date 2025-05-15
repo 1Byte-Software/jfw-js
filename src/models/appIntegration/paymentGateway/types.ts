@@ -160,11 +160,15 @@ export interface IGetAppIntegrationPaymentGatewaysWithBrandParams {}
 export interface ICreateAppIntegrationPaymentGatewayData {
     /**
      * The app integration id of the payment gateway.
+     *
+     * @remarks string · min: 1
      */
     appIntegrationId: string;
 
     /**
      * The name of the payment gateway integration.
+     *
+     * @remarks string · min: 1
      */
     name: string;
 
@@ -173,6 +177,8 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * This endpoint will receive payment notifications from the gateway.
      * For PayPal: This is your IPN listener URL for payment status updates.
      * For Stripe: This would be your webhook URL for payment events.
+     *
+     * @remarks string · uri · min: 1
      */
     ipnListenerLink: string;
 
@@ -186,6 +192,8 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * The cancel link of the payment gateway. Users will be redirected here when they cancel a payment.
      * For PayPal: Set as the cancel_url in PayPal checkout.
      * For Stripe: Used as cancel_url in Stripe Checkout sessions.
+     *
+     * @remarks string · uri · min: 1
      */
     cancelLink: string;
 
@@ -193,6 +201,8 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * The return link of the payment gateway. Users will be redirected here after successful payment.
      * For PayPal: Set as the return_url in PayPal checkout.
      * For Stripe: Used as success_url in Stripe Checkout sessions.
+     *
+     * @remarks string · uri · min: 1
      */
     returnLink: string;
 
@@ -200,6 +210,8 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * The public key of the payment gateway.
      * For PayPal: Client ID from your PayPal app credentials.
      * For Stripe: Publishable key from your Stripe dashboard.
+     *
+     * @remarks string · min: 1
      */
     publicKey: string;
 
@@ -207,6 +219,8 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * The private key of the payment gateway.
      * For PayPal: Secret from your PayPal app credentials.
      * For Stripe: Secret key from your Stripe dashboard.
+     *
+     * @remarks string · min: 1
      */
     privateKey: string;
 
@@ -223,23 +237,26 @@ export interface ICreateAppIntegrationPaymentGatewayData {
     notes?: string | null;
 
     /**
-     * Flag to indicate if the Payment gateway integration is the default. By default, it is set to false.
+     * Flag to indicate if the Payment gateway integration is the default.
+     * @defaultValue `false`
      */
     isDefault?: boolean | null;
-
-    /**
-     * Available options: 0 - Inactive, 1 - Active
-     */
-    status?: AppIntegrationPaymentGatewayStatus;
 
     /**
      * Flag to indicate if the payment gateway is in test mode.
      * When true, transactions will use the provider's sandbox environment.
      * For PayPal: Uses https://api.sandbox.paypal.com instead of production.
      * For Stripe: Uses test mode keys and endpoints.
-     * Default is false (production mode).
+     * @defaultValue `false` is (production mode).
      */
     testMode?: boolean | null;
+
+    /**
+     * Possible options:
+     * - `0` - `Inactive`
+     * - `1` - `Active`
+     */
+    status?: AppIntegrationPaymentGatewayStatus;
 }
 
 /**
@@ -251,6 +268,8 @@ export type IUpdateAppIntegrationPaymentGatewayData =
 export interface ITestingCreateCheckoutLinkData {
     /**
      * This class represents the Checkout Payment Request PayPal Data Transfer Object.
+     *
+     * @remarks object
      */
     product: IAppIntegrationPaymentGatewayProduct;
 
@@ -258,6 +277,8 @@ export interface ITestingCreateCheckoutLinkData {
      * The public key of the payment gateway used for authentication.
      * For PayPal: Client ID from your PayPal app credentials (used with OAuth 2.0).
      * For Stripe: Publishable key from your Stripe dashboard (used client-side).
+     *
+     * @remarks string · min: 1
      */
     publicKey: string;
 
@@ -266,6 +287,9 @@ export interface ITestingCreateCheckoutLinkData {
      * For PayPal: Secret from your PayPal app credentials.
      * For Stripe: Secret key from your Stripe dashboard (used for server-side API calls).
      * Note: This should never be exposed to client-side code.
+     *
+     * @remarks This should never be exposed to client-side code.
+     * @remarks string · min: 1
      */
     privateKey: string;
 
@@ -274,6 +298,8 @@ export interface ITestingCreateCheckoutLinkData {
      * For PayPal: Appears as the merchant name during PayPal checkout flow.
      * For Stripe: Displayed as the company name on Stripe Checkout pages.
      * Maximum length is typically 127 characters for most payment providers.
+     *
+     * @remarks string · min: 1 · max: 127
      */
     displayName: string;
 }
