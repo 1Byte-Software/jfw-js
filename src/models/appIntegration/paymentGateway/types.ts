@@ -2,114 +2,33 @@ import { DateType, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationPaymentGatewayStatus } from './constants';
 
-/**
- * The response data transfer object representing a payment gateway integration,
- * as returned from the backend after creation or when fetching existing configurations.
- *
- * This includes all relevant credentials and links required to handle payment workflows
- * through third-party providers like PayPal or Stripe.
- */
 export interface IAppIntegrationPaymentGateway {
-    /**
-     * The unique identifier of this payment gateway integration.
-     */
     id: IdType;
-
-    /**
-     * The app integration that this payment gateway belongs to.
-     */
     appIntegration: IAppIntegration;
-
-    /**
-     * The name of the payment gateway integration.
-     */
     name: string;
-
-    /**
-     * The IPN (Instant Payment Notification) listener link of the payment gateway.
-     * For PayPal: Used for receiving payment status updates.
-     * For Stripe: This would be your webhook URL for payment events.
-     */
     ipnListenerLink: string;
-
-    /**
-     * The fallback link used when an unauthenticated user cancels the payment.
-     * For PayPal/Stripe: Redirect URL when session is lost or user isn't logged in.
-     */
     cancelLinkWithoutLogin: string | null;
-
-    /**
-     * The cancel link of the payment gateway.
-     * Redirects users here when they cancel the payment.
-     * For PayPal: Used as `cancel_url`.
-     * For Stripe: Used as `cancel_url` in Checkout sessions.
-     */
     cancelLink: string;
-
-    /**
-     * The return link of the payment gateway.
-     * Redirects users here after a successful payment.
-     * For PayPal: Used as `return_url`.
-     * For Stripe: Used as `success_url` in Checkout sessions.
-     */
     returnLink: string;
-
-    /**
-     * The public key used to authenticate with the payment provider.
-     * For PayPal: This is the Client ID.
-     * For Stripe: This is the Publishable key.
-     */
     publicKey: string;
-
-    /**
-     * The private key used to authenticate with the payment provider.
-     * For PayPal: This is the Client Secret.
-     * For Stripe: This is the Secret Key.
-     */
     privateKey: string;
-
-    /**
-     * A human-readable description of the payment gateway.
-     * Used internally for context or in dashboards.
-     */
     description: string | null;
-
-    /**
-     * Additional notes for internal use regarding the integration.
-     */
     notes: string | null;
-
-    /**
-     * Flag indicating whether this payment gateway is the default one.
-     */
     isDefault: boolean;
-
-    /**
-     * Indicates whether the payment gateway is running in test/sandbox mode.
-     * Default is `false` (production).
-     * For PayPal: Uses sandbox endpoint.
-     * For Stripe: Uses test keys and test endpoints.
-     */
     testMode: boolean | null;
-
-    /**
-     * The current status of the payment gateway integration.
-     * e.g., Active or Inactive.
-     */
     status: AppIntegrationPaymentGatewayStatus;
-
-    /**
-     * The date and time the payment gateway integration was created.
-     */
     createdDate: DateType;
 }
 
 /**
  * This class represents the Checkout Payment Request PayPal Data Transfer Object.
+ * #JFW-357, #JFW-358
  */
 export interface IAppIntegrationPaymentGatewayProduct {
     /**
      * The name of the item.
+     *
+     * @remarks string - min: 1
      */
     name: string;
 
@@ -122,31 +41,55 @@ export interface IAppIntegrationPaymentGatewayProduct {
      * The currency code. PayPal supports the following currencies for use:
      * AUD, BRL, CAD, CNY, CZK, DKK, EUR, HKD, HUF, ILS, JPY, MYR, MXN,
      * TWD, NZD, NOK, PHP, PLN, GBP, SGD, SEK, CHF, THB, USD.
+     *
+     * @remarks string - min: 1
      */
-    currencyCode?: string | null;
+    currencyCode: string;
 
     /**
      * The code of the item.
+     *
+     * @remarks string - min: 1
      */
     code?: string | null;
 
     /**
      * The quantity of the item. By default is 1.
+     *
+     * @remarks integer - int32
      */
     quantity: number;
 
     /**
      * The amount of the item.
+     *
+     * @remarks number - double
      */
     amount: number;
 
     /**
+     * The tax amout.
+     *
+     * @remarks number - double
+     */
+    tax?: number;
+
+    /**
+     * The shipping amount.
+     */
+    shipping?: number;
+
+    /**
      * The return url.
+     *
+     * @remarks string - min: 1
      */
     returnUrl?: string | null;
 
     /**
      * The cancel url.
+     *
+     * @remarks string - min: 1
      */
     cancelUrl?: string | null;
 }
@@ -161,14 +104,14 @@ export interface ICreateAppIntegrationPaymentGatewayData {
     /**
      * The app integration id of the payment gateway.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     appIntegrationId: string;
 
     /**
      * The name of the payment gateway integration.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     name: string;
 
@@ -178,7 +121,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * For PayPal: This is your IPN listener URL for payment status updates.
      * For Stripe: This would be your webhook URL for payment events.
      *
-     * @remarks string · uri · min: 1
+     * @remarks string - uri - min: 1
      */
     ipnListenerLink: string;
 
@@ -193,7 +136,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * For PayPal: Set as the cancel_url in PayPal checkout.
      * For Stripe: Used as cancel_url in Stripe Checkout sessions.
      *
-     * @remarks string · uri · min: 1
+     * @remarks string - uri - min: 1
      */
     cancelLink: string;
 
@@ -202,7 +145,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * For PayPal: Set as the return_url in PayPal checkout.
      * For Stripe: Used as success_url in Stripe Checkout sessions.
      *
-     * @remarks string · uri · min: 1
+     * @remarks string - uri - min: 1
      */
     returnLink: string;
 
@@ -211,7 +154,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * For PayPal: Client ID from your PayPal app credentials.
      * For Stripe: Publishable key from your Stripe dashboard.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     publicKey: string;
 
@@ -220,7 +163,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
      * For PayPal: Secret from your PayPal app credentials.
      * For Stripe: Secret key from your Stripe dashboard.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     privateKey: string;
 
@@ -265,7 +208,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
 export type IUpdateAppIntegrationPaymentGatewayData =
     ICreateAppIntegrationPaymentGatewayData;
 
-export interface ITestingCreateCheckoutLinkData {
+export interface ITestingCreatingCheckoutLinkData {
     /**
      * This class represents the Checkout Payment Request PayPal Data Transfer Object.
      *
@@ -278,7 +221,7 @@ export interface ITestingCreateCheckoutLinkData {
      * For PayPal: Client ID from your PayPal app credentials (used with OAuth 2.0).
      * For Stripe: Publishable key from your Stripe dashboard (used client-side).
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     publicKey: string;
 
@@ -289,7 +232,7 @@ export interface ITestingCreateCheckoutLinkData {
      * Note: This should never be exposed to client-side code.
      *
      * @remarks This should never be exposed to client-side code.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     privateKey: string;
 
@@ -299,7 +242,7 @@ export interface ITestingCreateCheckoutLinkData {
      * For Stripe: Displayed as the company name on Stripe Checkout pages.
      * Maximum length is typically 127 characters for most payment providers.
      *
-     * @remarks string · min: 1 · max: 127
+     * @remarks string - min: 1 - max: 127
      */
     displayName: string;
 }

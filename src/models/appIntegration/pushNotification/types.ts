@@ -147,49 +147,49 @@ export interface ICreateAppIntegrationPushNotificationData {
     /**
      * The app integration provider ID of the push notification.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     appIntegrationId: IdType;
 
     /**
      * The code of the push notification.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     code: string;
 
     /**
      * The name of the push notification.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     name: string;
 
     /**
      * The project ID of the push notification.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     projectId: IdType;
 
     /**
      * The client email of the push notification.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     clientEmail: string;
 
     /**
      * The client ID of the push notification.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     clientId?: string | null;
 
     /**
      * The private key of the push notification.
      *
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     privateKey: string;
 

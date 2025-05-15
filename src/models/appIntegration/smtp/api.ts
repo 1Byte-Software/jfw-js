@@ -8,13 +8,15 @@ import {
     IAppIntegrationSMTP,
     ICreateAppIntegrationSMTPData,
     IGetAppIntegrationSMTPsParams,
-    ISendTestEmailData,
+    ITestSendingEmailAddressData,
     IUpdateAppIntegrationSMTPData,
 } from './types';
 
 /**
  * Creates a new app integration SMTP.
  *
+ * @param data - The data for creating a new app integration SMTP.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/smtp/creates-an-app-integration-smtp}
  */
 export const createAppIntegrationSMTPAPI = async (
@@ -34,6 +36,8 @@ export const createAppIntegrationSMTPAPI = async (
 /**
  * Deletes the app integration SMTP by the given id.
  *
+ * @param id - The id of the app integration SMTP.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/smtp/deletes-an-app-integration-smtp}
  */
 export const deleteAppIntegrationSMTPAPI = async (
@@ -54,6 +58,8 @@ export const deleteAppIntegrationSMTPAPI = async (
 /**
  * Gets the app integration SMTP by the given id.
  *
+ * @param id - The id of the app integration SMTP.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/smtp/gets-an-app-integration-smtp}
  */
 export const getAppIntegrationSMTPAPI = async (
@@ -66,7 +72,6 @@ export const getAppIntegrationSMTPAPI = async (
             id,
         },
     );
-
     const response = await jfwAxios.get<HttpResponse<IAppIntegrationSMTP>>(
         url,
         config,
@@ -76,21 +81,22 @@ export const getAppIntegrationSMTPAPI = async (
 };
 
 /**
- * Gets the app integration SMTP by the given id.
+ * Get apps integration SMTP.
  *
+ * @param params - The parameters for getting apps integration SMTP.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/smtp/gets-an-app-integration-smtp-with-brand}
  */
-export const getAppIntegrationSMTPsWithBrandAPI = async (
+export const getAppsIntegrationSMTPWithBrandAPI = async (
     params?: IGetAppIntegrationSMTPsParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = APP_INTEGRATION_SMTP_PATH.GET_APP_INTEGRATION_SMTPS_WITH_BRAND;
-
+    const url = APP_INTEGRATION_SMTP_PATH.GET_APPS_INTEGRATION_SMTP_WITH_BRAND;
     const response = await jfwAxios.get<HttpResponse<IAppIntegrationSMTP[]>>(
         url,
         {
-            ...config,
             params,
+            ...config,
         },
     );
 
@@ -98,16 +104,20 @@ export const getAppIntegrationSMTPsWithBrandAPI = async (
 };
 
 /**
- * Testing for send SMS base on user's setting.
+ * This endpoint allows you to **send a test email** using the configured SMTP integration settings.
+ * It is used to verify that the provided SMTP credentials (such as host, port, username, and password) are working correctly and can be used to send emails.
  *
+ * Use this endpoint to ensure that your SMTP integration is properly set up **before enabling real transactional or notification emails** in your application.
+ *
+ * @param data - The data for test sending email address.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/send-sms-test-message}
  */
-export const sendTestEmailAPI = async (
-    data: ISendTestEmailData,
+export const testSendingEmailAddressAPI = async (
+    data: ITestSendingEmailAddressData,
     config?: AxiosRequestConfig,
 ) => {
-    const url = APP_INTEGRATION_SMTP_PATH.SEND_TEST_EMAIL;
-
+    const url = APP_INTEGRATION_SMTP_PATH.TEST_SENDING_EMAIL_ADDRESS_MESSAGE;
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
         data,
@@ -120,6 +130,9 @@ export const sendTestEmailAPI = async (
 /**
  * Updates the app integration SMTP by the given id.
  *
+ * @param id - The id of the app integration SMTP.
+ * @param data - The data for updating an app integration SMTP.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/smtp/update-an-app-integration-smtp}
  */
 export const updateAppIntegrationSMTPAPI = async (

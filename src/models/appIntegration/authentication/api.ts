@@ -85,12 +85,12 @@ export const getAppIntegrationAuthenticationAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/list-the-apps-integration-authentication}
  */
-export const getAppIntegrationAuthenticationsWithBrandAPI = async (
+export const getAppsIntegrationAuthenticationWithBrandAPI = async (
     params?: IGetAppIntegrationAuthenticationsWithBrandParams,
     config?: AxiosRequestConfig,
 ) => {
     const url =
-        APP_INTEGRATION_AUTHENTICATION_PATH.GET_APP_INTEGRATION_AUTHENTICATIONS_WITH_BRAND;
+        APP_INTEGRATION_AUTHENTICATION_PATH.GET_APPS_INTEGRATION_AUTHENTICATION_WITH_BRAND;
     const response = await jfwAxios.get<
         HttpResponse<IAppIntegrationAuthentication[]>
     >(url, {

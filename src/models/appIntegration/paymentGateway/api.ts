@@ -8,7 +8,7 @@ import {
     IAppIntegrationPaymentGateway,
     ICreateAppIntegrationPaymentGatewayData,
     IGetAppIntegrationPaymentGatewaysWithBrandParams,
-    ITestingCreateCheckoutLinkData,
+    ITestingCreatingCheckoutLinkData,
     IUpdateAppIntegrationPaymentGatewayData,
 } from './types';
 
@@ -85,12 +85,12 @@ export const getAppIntegrationPaymentGatewayAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/gets-app-integration-payment-gateways-with-brand}
  */
-export const getAppIntegrationPaymentGatewaysWithBrandAPI = async (
+export const getAppsIntegrationPaymentGatewayWithBrandAPI = async (
     params?: IGetAppIntegrationPaymentGatewaysWithBrandParams,
     config?: AxiosRequestConfig,
 ) => {
     const url =
-        APP_INTEGRATION_PAYMENT_GATEWAY_PATH.GET_APP_INTEGRATION_PAYMENT_GATEWAYS_WITH_BRAND;
+        APP_INTEGRATION_PAYMENT_GATEWAY_PATH.GET_APPS_INTEGRATION_PAYMENT_GATEWAY_WITH_BRAND;
     const response = await jfwAxios.get<
         HttpResponse<IAppIntegrationPaymentGateway[]>
     >(url, {
@@ -112,13 +112,13 @@ export const getAppIntegrationPaymentGatewaysWithBrandAPI = async (
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/test-create-checkout-link}
  * #JFW-353
  */
-export const testingCreateCheckoutLinkAPI = async (
+export const testCreatingCheckoutLinkAPI = async (
     appIntegrationId: IdType,
-    data: ITestingCreateCheckoutLinkData,
+    data: ITestingCreatingCheckoutLinkData,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
-        APP_INTEGRATION_PAYMENT_GATEWAY_PATH.TESTING_FOR_CREATE_CHECKOUT_LINK,
+        APP_INTEGRATION_PAYMENT_GATEWAY_PATH.TEST_CREATING_CHECKOUT_LINK,
         {
             appIntegrationId,
         },
