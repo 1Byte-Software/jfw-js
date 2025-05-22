@@ -8,7 +8,7 @@ import {
     IAppIntegrationPaymentGateway,
     ICreateAppIntegrationPaymentGatewayData,
     IGetAppIntegrationPaymentGatewaysWithBrandParams,
-    ITestingCreatingCheckoutLinkData,
+    ITestCreatingCheckoutLinkData,
     IUpdateAppIntegrationPaymentGatewayData,
 } from './types';
 
@@ -114,7 +114,7 @@ export const getAppsIntegrationPaymentGatewayWithBrandAPI = async (
  */
 export const testCreatingCheckoutLinkAPI = async (
     appIntegrationId: IdType,
-    data: ITestingCreatingCheckoutLinkData,
+    data: ITestCreatingCheckoutLinkData,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(

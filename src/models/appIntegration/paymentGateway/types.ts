@@ -208,7 +208,7 @@ export interface ICreateAppIntegrationPaymentGatewayData {
 export type IUpdateAppIntegrationPaymentGatewayData =
     ICreateAppIntegrationPaymentGatewayData;
 
-export interface ITestingCreatingCheckoutLinkData {
+export interface ITestCreatingCheckoutLinkData {
     /**
      * This class represents the Checkout Payment Request PayPal Data Transfer Object.
      *
