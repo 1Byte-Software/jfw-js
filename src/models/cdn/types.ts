@@ -29,7 +29,7 @@ export interface ICDN {
 
     /**
      * This is the reference id of the uploaded file. This is used to reference the Id of the object.
-     * @remarks integer · int64
+     * @remarks integer - int64
      */
     refId: number | null;
 

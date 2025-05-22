@@ -6,13 +6,15 @@ import { JFWHttpCode } from '../http';
 export interface IPageable {
     /**
      * The page size of the pagination.
-     * @remarks integer · int32
+     * @remarks integer - int32
+     * @defaultValue 200
      */
     pageSize?: number;
 
     /**
      * The page number of the pagination.
-     * @remarks integer · int32
+     * @remarks integer - int32
+     * @defaultValue 0
      */
     pageNumber?: number;
 }

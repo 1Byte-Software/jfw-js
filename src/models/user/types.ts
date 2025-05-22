@@ -13,7 +13,7 @@ export interface IBaseUser {
     nickName: string;
     roles: string[];
     id: IdType;
-    createdDate: DateType; 
+    createdDate: DateType;
 }
 
 export interface IUser {

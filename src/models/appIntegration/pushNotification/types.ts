@@ -141,40 +141,55 @@ export interface IGetAppIntegrationPushNotificationParams {}
 
 /**
  * The request data transfer object for the push notification integration when creating.
+ * #JFW-354
  */
 export interface ICreateAppIntegrationPushNotificationData {
     /**
      * The app integration provider ID of the push notification.
+     *
+     * @remarks string - min: 1
      */
     appIntegrationId: IdType;
 
     /**
      * The code of the push notification.
+     *
+     * @remarks string - min: 1
      */
     code: string;
 
     /**
      * The name of the push notification.
+     *
+     * @remarks string - min: 1
      */
     name: string;
 
     /**
      * The project ID of the push notification.
+     *
+     * @remarks string - min: 1
      */
     projectId: IdType;
 
     /**
      * The client email of the push notification.
+     *
+     * @remarks string - min: 1
      */
     clientEmail: string;
 
     /**
      * The client ID of the push notification.
+     *
+     * @remarks string - min: 1
      */
     clientId?: string | null;
 
     /**
      * The private key of the push notification.
+     *
+     * @remarks string - min: 1
      */
     privateKey: string;
 
@@ -239,7 +254,9 @@ export interface ICreateAppIntegrationPushNotificationData {
     vapidKey?: string | null;
 
     /**
-     * Flag to indicate if the push notification integration is the default. Default is false.
+     * Flag to indicate if the push notification integration is the default.
+     * 
+     * @defaultValue `false`
      */
     isDefault?: boolean | null;
 }

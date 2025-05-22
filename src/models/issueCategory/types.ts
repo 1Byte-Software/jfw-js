@@ -49,13 +49,13 @@ export interface IGetIssueCategoriesParams extends IPageable {
 
     /**
      * Filter by z order.
-     * @remarks integer · int64
+     * @remarks integer - int64
      */
     zOrder?: number;
 
     /**
      * Filter by status.
-     * @remarks string · enum
+     * @remarks string - enum
      * @example
      * 0 - Inactive
      * 1 - Active
@@ -79,13 +79,13 @@ export interface ICreateIssueCategoryData {
 
     /**
      * The code of the issue category.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     code: string;
 
     /**
      * The name of the issue category.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     name: string;
 
@@ -107,7 +107,7 @@ export interface ICreateIssueCategoryData {
 
     /**
      * The links of the issue category.
-     * @remarks string · uri
+     * @remarks string - uri
      * @example https://www.example.com/suggestion
      */
     suggestionUrl?: string | null;

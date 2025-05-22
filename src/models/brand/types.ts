@@ -1,8 +1,8 @@
-import { IPageable } from '../../core';
+import { IPageable, ISortable } from '../../core';
 import { IBaseObject } from '../base';
 import { IdType } from '../base';
+import { IDomain } from '../domain';
 import { BrandStatus } from './constants';
-import { IBrandDomain } from './domain';
 import { IBrandProfile } from './profile';
 import { IBrandSetting } from './setting';
 
@@ -12,7 +12,7 @@ export interface IBrand extends IBaseObject {
     /**
      * @deprecated use getBrandDomainsAPI instead
      */
-    domains: IBrandDomain[];
+    domains: IDomain[];
     profile: IBrandProfile;
     setting: IBrandSetting;
 
@@ -31,47 +31,41 @@ export interface IGetBrandDetailPath {
     brandCode: string;
 }
 
-export interface IGetQueryBrandParams extends IPageable {
-    keywords?: string;
-
-    parentBrandId?: IdType;
-
+export interface IGetBrandsParams extends IPageable, ISortable {
     /**
-     * @deprecated use code instead
+     * The code of the brand.
      */
-    brandCode?: string;
     code?: string;
 
+    /**
+     * The name of the brand.
+     */
     name?: string;
+
+    /**
+     * The abbreviation of the brand
+     */
     abbr?: string;
+
+    /**
+     * The abbreviation of the brand
+     */
     description?: string;
+
+    /**
+     * The tags of the brand.
+     */
     tags?: string;
-    emailSupport?: string;
-    emailSupportTitle?: string;
-    systemEmail?: string;
-    systemEmailTitle?: string;
-    loginNotificationEmails?: string;
-    purchaseNotificationEmails?: string;
-    orderNotificationEmails?: string;
-    refundNotificationEmails?: string;
-    chargebackNotificationEmails?: string;
-    developerTeamEmails?: string;
-    maintenanceTeamEmails?: string;
-    systemAdminNotificationEmails?: string;
-    systemAdminEmails?: string;
-    bccNotificationEmails?: string;
-    productWebsite?: string;
-    productAlias?: string;
-    domainWhiteList?: string;
-    googleAnalyticsAccount?: string;
-    cdnUrl?: string;
-    cdnFolder?: string;
-    companyName?: string;
-    website?: string;
-    logoUrl?: string;
-    faviconUrl?: string;
-    titlePage?: string;
+
+    /**
+     * The status of the brand.
+     */
     status?: BrandStatus;
+
+    /**
+     *  The keywords of the brand.
+     */
+    keywords?: string;
 }
 
 export interface IGeneratedDomain {
@@ -100,13 +94,13 @@ export interface ICreateBrandData {
 export interface IUpdateBrandData {
     /**
      * The name of the Brand.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     name: string;
 
     /**
      * This is the abbreviation of the Brand.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     abbr: string;
 

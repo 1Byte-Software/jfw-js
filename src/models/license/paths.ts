@@ -3,9 +3,9 @@ const REST_PURCHASE = 'purchase';
 const REST_STATISTIC = 'statistics';
 
 export const LICENSE_PATH = {
-    GET: `${REST}`,
+    GET: `v1/${REST}`,
     CREATE: `v1/${REST}`,
-    GENERATE_LICENSE_KEY: `${REST}/generate-key`,
+    GENERATE_LICENSE_KEY: `v1/${REST}/generate-key`,
     CHECK: `v1/${REST}/check`,
     APPLY_TO_LOGGED_USER: `v1/${REST}/apply`,
     APPLY_TO_LOGIN_NAME: `v1/${REST}/apply-to-login-name`,

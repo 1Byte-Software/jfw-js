@@ -104,7 +104,7 @@ export interface IGetIssuesParams extends IPageable, ISortable {
 
     /**
      * Filter with reference type.
-     * @remarks integer · int32
+     * @remarks integer - int32
      */
     refType?: number;
 
@@ -160,13 +160,13 @@ export interface ICreateIssueData {
 
     /**
      * The content of the issue.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     content: string;
 
     /**
      * The referrer id of the issue.
-     * @remarks integer · int64
+     * @remarks integer - int64
      */
     refId?: number;
 
@@ -177,7 +177,7 @@ export interface ICreateIssueData {
 
     /**
      * The referrer type of the issue.
-     * @remarks integer · int32
+     * @remarks integer - int32
      */
     refType?: number | null;
 
@@ -239,7 +239,7 @@ export interface IUpdateIssueData {
 
     /**
      * The content of the issue.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     content: string;
 
@@ -280,13 +280,13 @@ export interface IUpdateIssueData {
 export interface ICreateIssueReactionData {
     /**
      * The id of the issue.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     issueId: IdType;
 
     /**
      * The type of reaction for the issue.
-     * @remarks string · enum
+     * @remarks string - enum
      * Possible values:
      * - 0 - Dislike
      * - 1 - Like
@@ -300,7 +300,7 @@ export interface ICreateIssueReactionData {
 
     /**
      * The status of the issue reaction.
-     * @remarks string · enum
+     * @remarks string - enum
      * Possible values:
      * - 0 - Inactive
      * - 1 - Active

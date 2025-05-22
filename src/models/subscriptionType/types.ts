@@ -53,19 +53,19 @@ export interface ISubscriptionType {
 export interface ICreateSubscriptionTypeData {
     /**
      * The name of the subscription type
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     name: string;
 
     /**
      * The unit of the subscription type
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     unit: string;
 
     /**
      * The quantity of the subscription type
-     * @remarks integer · int32
+     * @remarks integer - int32
      */
     quantity?: number;
 
@@ -76,7 +76,7 @@ export interface ICreateSubscriptionTypeData {
 
     /**
      * The z-order of the subscription type
-     * @remarks integer · int64
+     * @remarks integer - int64
      * @defaultValue 1
      */
     zOrder?: number;

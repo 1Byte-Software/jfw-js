@@ -14,7 +14,6 @@ export const getAppIntegrationsAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = APP_INTEGRATION_PATH.GET_APP_INTEGRATIONS;
-
     const response = await jfwAxios.get<HttpResponse<IAppIntegration[]>>(url, {
         params,
         ...config,

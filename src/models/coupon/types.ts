@@ -36,18 +36,14 @@ export interface IGetCouponsParams extends IPageable, ISortable {
     /**
      * Filter by the percentage of the coupon
      *
-     * @remarks
-     * This value is a floating-point number (double) representing the discount percentage.
-     * For example: `15.5` means 15.5%.
+     * @remarks number - double
      */
     percentage?: number;
 
     /**
      * Filter by the quantity of the coupon
      *
-     * @remarks
-     * Type: int (integer number). Represents the number of coupons available.
-     * For example: `100` means there are 100 coupons in total.
+     * @remarks integer - int32
      */
     quantity?: number;
 
@@ -63,7 +59,8 @@ export interface IGetCouponsParams extends IPageable, ISortable {
 
     /**
      * Filter by the status of the coupon
-     * Possible values: 1 - Active, 2 - Inactive, 3 - Expired, -3 - Deleted
+     * @remarks string - enum
+     * Possible values: `1` - `Active`, `2` - `Inactive`, `3` - `Expired`, `-3` - `Deleted`
      */
     status?: CouponStatus;
 
@@ -85,39 +82,43 @@ export interface IGetCouponsParams extends IPageable, ISortable {
 export interface ICreateCouponData {
     /**
      * The name of the coupon.
+     *
+     * @remarks string - min: 1
      */
     name: string;
 
     /**
      * The code of the coupon.
+     *
+     * @remarks string - min: 1
      */
     code: string;
 
     /**
      * The percentage of the coupon.
      *
-     * @remarks
-     * This value is a floating-point number (double) representing the discount percentage.
-     * For example: `15.5` means 15.5%.
+     * @remarks number - double
      */
     percentage?: number | null;
 
     /**
      * The quantity of the coupon.
      *
-     * @remarks
-     * Type: int (integer number). Represents the number of coupons available.
-     * For example: `100` means there are 100 coupons in total.
+     * @remarks integer - int32
      */
     quantity?: number | null;
 
     /**
      * The start date and end date of the coupon.
+     *
+     * @remarks string - date-time
      */
     startDate: DateType;
 
     /**
      * The end date of the coupon.
+     *
+     * @remarks string - date-time
      */
     endDate: DateType;
 
@@ -139,17 +140,18 @@ export interface ICreateCouponData {
     /**
      * The status of the coupon.
      *
-     * @remarks
+     * @remarks string - enum
      * This is a string-based enum with the following possible values:
-     * - `'1'` - Active
-     * - `'2'` - Inactive
-     * - `'3'` - Expired
-     * - `'-3'` - Deleted
+     * - `1` - `Active`
+     * - `2` - `Inactive`
+     * - `3` - `Expired`
+     * - `-3` - `Deleted`
      */
     status?: CouponStatus;
 
     /**
      * The test mode of the coupon.
+     * @defaultValue `false`
      */
     testMode?: boolean;
 }

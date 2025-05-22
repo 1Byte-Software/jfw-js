@@ -14,7 +14,16 @@ export interface IAppIntegration {
 
 //#region API types
 export interface IGetAppIntegrationsParams {
-    keywords?: string;
+    /**
+     * The type of the app integration to get.
+     *
+     * @remarks string - enum
+     */
     type?: AppIntegrationType;
+
+    /**
+     * The keywords of the app integration to get.
+     */
+    keywords?: string;
 }
 //#endregion

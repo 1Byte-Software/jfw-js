@@ -1,6 +1,4 @@
-export * from './domain';
 export * from './emailAddress';
-export * from './links';
 export * from './profile';
 export * from './setting';
 

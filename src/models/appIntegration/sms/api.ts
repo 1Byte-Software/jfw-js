@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../../core';
+import { HttpResponse } from '../../../core';
 import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
@@ -7,13 +7,15 @@ import { APP_INTEGRATION_SMS_PATH } from './paths';
 import {
     IAppIntegrationSMS,
     ICreateAppIntegrationSMSData,
-    ISendSMSTextMessageData,
+    ITestSendingSMSMessageData,
     IUpdateAppIntegrationSMSData,
 } from './types';
 
 /**
- * Creates a new app integration sms.
+ * Creates a new app integration SMS.
  *
+ * @param data - The data for creating a new app integration payment gateway.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/creates-an-app-integration-sms}
  */
 export const createAppIntegrationSMSAPI = async (
@@ -33,6 +35,8 @@ export const createAppIntegrationSMSAPI = async (
 /**
  * Deletes an app integration sms by the given id.
  *
+ * @param id - The id of the app integration SMS.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/deletes-an-app-integration-sms}
  */
 export const deleteAppIntegrationSMSAPI = async (
@@ -51,8 +55,10 @@ export const deleteAppIntegrationSMSAPI = async (
 };
 
 /**
- * Gets an app integration sms by the given id.
+ * Gets an app integration SMS by the given id.
  *
+ * @param id - The id of the app integration SMS.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/gets-an-app-integration-sms}
  */
 export const getAppIntegrationSMSAPI = async (
@@ -62,7 +68,6 @@ export const getAppIntegrationSMSAPI = async (
     const url = generatePath(APP_INTEGRATION_SMS_PATH.GET_APP_INTEGRATION_SMS, {
         id,
     });
-
     const response = await jfwAxios.get<HttpResponse<IAppIntegrationSMS>>(
         url,
         config,
@@ -72,15 +77,16 @@ export const getAppIntegrationSMSAPI = async (
 };
 
 /**
- * List all app integration sms.
+ * List all app integration SMS.
  *
+ * @param params - The parameters for getting all app integration SMS.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/gets-an-app-integration-sms-with-brand}
  */
-export const getAppIntegrationSMSsWithBrandAPI = async (
+export const getAppsIntegrationSMSWithBrandAPI = async (
     config?: AxiosRequestConfig,
 ) => {
-    const url = APP_INTEGRATION_SMS_PATH.GET_APP_INTEGRATION_SMSS_WITH_BRAND;
-
+    const url = APP_INTEGRATION_SMS_PATH.GET_APPS_INTEGRATION_SMS_WITH_BRAND;
     const response = await jfwAxios.get<HttpResponse<IAppIntegrationSMS[]>>(
         url,
         config,
@@ -90,19 +96,28 @@ export const getAppIntegrationSMSsWithBrandAPI = async (
 };
 
 /**
- * Testing for send SMS base on user's setting.
+ * This endpoint allows you to **send a test SMS message** using the configured SMS integration settings for a specific App Integration.
  *
+ * It is useful for verifying that your SMS provider credentials (e.g., API keys, sender ID, etc.) are correctly set up and functioning.
+ *
+ * Use this to confirm the integration works **before enabling SMS notifications or sending real user messages.**
+ *
+ * @param appIntegrationId - The id of the app integration.
+ * @param data - The data for test sending text message.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/send-sms-test-message}
  */
-export const sendSMSTextMessageAPI = async (
+export const testSendingSMSMessageAPI = async (
     appIntegrationId: IdType,
-    data: ISendSMSTextMessageData,
+    data: ITestSendingSMSMessageData,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(APP_INTEGRATION_SMS_PATH.SEND_SMS_TEST_MESSAGE, {
-        appIntegrationId,
-    });
-
+    const url = generatePath(
+        APP_INTEGRATION_SMS_PATH.TEST_SENDING_SMS_MESSAGE,
+        {
+            appIntegrationId,
+        },
+    );
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
         data,
@@ -113,8 +128,11 @@ export const sendSMSTextMessageAPI = async (
 };
 
 /**
- * Updates an app integration sms by the given id.
+ * Updates an app integration SMS by the given id.
  *
+ * @param id - The id of the app integration SMS.
+ * @param data - The data for updating an app integration SMS.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/update-an-app-integration-sms}
  */
 export const updateAppIntegrationSMSAPI = async (
