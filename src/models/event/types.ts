@@ -69,7 +69,7 @@ export interface IGetEventsParams extends IPageable, ISortable {
 
     /**
      * Filter by ZOrder.
-     * @remarks integer · int64
+     * @remarks integer - int64
      */
     zOrder?: number;
 

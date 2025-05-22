@@ -44,13 +44,13 @@ export interface IGetCurrenciesParams extends ISortable, IPageable {
 
     /**
      * The number of decimal digits for the currency
-     * @remarks integer · int32
+     * @remarks integer - int32
      */
     decimalDigits?: number;
 
     /**
      * The rounding value for the currency
-     * @remarks number · double
+     * @remarks number - double
      */
     rounding?: number;
 

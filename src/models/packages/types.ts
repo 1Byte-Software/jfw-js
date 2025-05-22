@@ -81,19 +81,19 @@ export interface IPackage {
 export interface ICreatePackageData {
     /**
      * The code of the package.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     code: string;
 
     /**
      * The name of the package.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     name: string;
 
     /**
      * The image URL of the package.
-     * @remarks string · uri
+     * @remarks string - uri
      */
     image?: string | null;
 
@@ -104,7 +104,7 @@ export interface ICreatePackageData {
 
     /**
      * The styles of the package.
-     * @remarks string · json
+     * @remarks string - json
      */
     styles?: string | null;
 

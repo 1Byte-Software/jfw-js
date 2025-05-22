@@ -80,7 +80,7 @@ export interface IGetFeaturesParams extends IPageable, ISortable {
 export interface ICreateFeatureData {
     /**
      * The tracking event id. This value represents the event that the feature belongs to.
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     eventId: IdType;
 
@@ -91,13 +91,13 @@ export interface ICreateFeatureData {
 
     /**
      * The code of the feature
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     code: string;
 
     /**
      * The name of the feature
-     * @remarks string · min: 1
+     * @remarks string - min: 1
      */
     name: string;
 
@@ -108,7 +108,7 @@ export interface ICreateFeatureData {
 
     /**
      * The image of the feature. This value must be a valid URL.
-     * @remarks string · uri
+     * @remarks string - uri
      */
     image?: string | null;
 
@@ -129,7 +129,7 @@ export interface ICreateFeatureData {
 
     /**
      * The order number in the list. This property is used to sort the features in the list when displaying them.
-     * @remarks integer · int64
+     * @remarks integer - int64
      */
     zOrder?: number;
 

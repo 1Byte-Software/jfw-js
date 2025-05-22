@@ -32,7 +32,7 @@ export interface IConvertCurrencyParams {
 
     /**
      * The amount to convert.
-     * @remarks number · double 
+     * @remarks number - double 
      */
     amount: number;
 }
