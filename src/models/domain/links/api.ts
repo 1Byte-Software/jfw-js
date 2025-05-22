@@ -7,7 +7,7 @@ import { BRAND_LINK_PATH } from './paths';
 import {
     IBrandLink,
     ICreateBrandLinkData,
-    IDeleteBrandLinkForBrandParams,
+    IDeleteBrandLinkParams,
     IGetBrandLinkParams,
     IGetBrandLinksByTypeParams,
     IUpdateBrandLinkData,
@@ -64,9 +64,9 @@ export const getBrandLinkAPI = async (
 /**
  * Gets links by type.
  *
- * @param id - The id of the app integration SMTP.
+ * @param id - The id of the domain.
  * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-links-by-type}
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/get-brand-links-by-type}
  * #JFW-363
  */
 export const getBrandLinksByTypeAPI = async (
@@ -144,8 +144,8 @@ export const updateBrandLinkAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/delete-a-link-for-a-brand}
  */
-export const deleteBrandLinkForBrandAPI = async (
-    params: IDeleteBrandLinkForBrandParams,
+export const deleteBrandLinkAPI = async (
+    params: IDeleteBrandLinkParams,
     config?: AxiosRequestConfig,
 ) => {
     const { id, brandLinkId } = params;

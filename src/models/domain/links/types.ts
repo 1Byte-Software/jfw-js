@@ -41,6 +41,11 @@ export interface IGetBrandLinksByTypeParams {
      * The type of the link.
      */
     type: BrandLinkType;
+
+    /**
+     * #NOTE: Will update document in feature
+     */
+    isReplaceTemplate?:boolean; 
 }
 
 /**
@@ -97,7 +102,7 @@ export interface ICreateBrandLinkData {
     description?: string | null;
 }
 
-export interface IDeleteBrandLinkForBrandParams {
+export interface IDeleteBrandLinkParams {
     /**
      * The id of the domain.
      */

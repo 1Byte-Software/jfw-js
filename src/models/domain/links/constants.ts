@@ -81,8 +81,8 @@ export enum BrandLinkStatus {
 /**
  * This parameters used to create a link in brand link menu item
  */
-export enum BrandLinkMenuItemParams {
-    Authkey = 'auth_key',
+export enum BrandLinkMenuItemPlaceholderParams {
+    AuthKey = 'auth_key',
     Id = 'id',
     Username = 'username',
     EmailAddress = 'email_address',
