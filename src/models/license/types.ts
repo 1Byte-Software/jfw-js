@@ -93,7 +93,7 @@ export interface IMutateLicenseParams {
     licenseKey: string;
 }
 export interface IApplyLicenseForUserParams {
-    brandUrl: string;
+    brandURL: string;
     licenseKey: string;
     userCode: string;
 }
@@ -115,8 +115,8 @@ export interface IPurchaseLicenseParams {
 
 export interface IPurchaseToAddLicensesByCheckoutLinkParams
     extends IPurchaseLicenseParams {
-    returnUrl: string;
-    cancelUrl: string;
+    returnURL: string;
+    cancelURL: string;
 }
 
 export interface IPurchaseToAddLicensesByWalletParams
