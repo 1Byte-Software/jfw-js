@@ -21,8 +21,8 @@ export const queryRoleAPI = async (
 ) => {
     const url = ROLE_PATH.QUERY;
     const response = await jfwAxios.get<HttpResponseList<IRole>>(url, {
-        ...configs,
         params,
+        ...configs,
     });
 
     return response.data;
