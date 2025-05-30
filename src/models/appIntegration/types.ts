@@ -6,7 +6,7 @@ export interface IAppIntegration {
     name: string;
     domain: string;
     description: string;
-    logoUrl: string;
+    logoURL: string;
     status: AppIntegrationStatus;
     id: IdType;
     createdDate: string;
