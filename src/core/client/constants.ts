@@ -1,7 +1,7 @@
 export enum HeaderKey {
-    AuthKey = 'AuthKey',
-    BrandUrl = 'BrandUrl',
-    BrowserCodeGenerate = 'BrowserCodeGenerate',
+    AuthKey = 'Auth-Key',
+    BrandUrl = 'Brand-Url',
+    DeviceCode = 'Device-Code',
     ContentType = 'Content-Type',
 }
 
