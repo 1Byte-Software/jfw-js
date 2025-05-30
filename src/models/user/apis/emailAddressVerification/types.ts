@@ -12,7 +12,7 @@ export interface IEmailAddressVerificationQueryParameters {
     /**
      * The return URL after the user clicks the link in the email.
      */
-    returnUrl: string;
+    returnURL: string;
 }
 
 export interface IEmailAddressVerificationParameters

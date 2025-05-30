@@ -12,13 +12,13 @@ export interface IGetAppIntegrationAuthenticateURLsQueryParameters {
      * The callback URL.
      * It is the URL that the user will be redirected to after logging in.
      */
-    callbackUrl: string;
+    callbackURL: string;
 
     /**
      * The return URL.
      * It is the URL that the user will be redirected to after canceling the login.
      */
-    returnUrl: string;
+    returnURL: string;
 
     /**
      * The device code.
