@@ -3,12 +3,12 @@ import { IUser } from '../user';
 import { CommissionRateType } from './constants';
 
 export interface ICommissionRate {
+    id: string;
     percentage: number;
     quantityFrom: number;
     quantityTo: number;
     type: CommissionRateType;
     user: IUser | null;
-    id: string;
     description: string | null;
     unit: string;
     isDefault: boolean;
