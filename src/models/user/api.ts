@@ -17,15 +17,12 @@ import {
     IAuthenticateResponse,
     IAuthenticationByGoogleParams,
     IAuthenticationParams,
-    IChangePasswordParams,
     ICheckAuthKeyAvailableParams,
     IForgotPasswordParams,
     IGetUserConfigurationParams,
     IQueryUserParams,
     IReferee,
-    IRegisterParams,
     IResetPasswordParams,
-    IUpdateUserData,
     IUpdateUserTypeParams,
     IUser,
 } from './types';
@@ -74,68 +71,6 @@ export const getUserByUsernameAPI = async (username: string) => {
     });
 
     const response = await jfwAxios.get<HttpResponse<IUser>>(url, null);
-
-    return response.data;
-};
-
-/**
- * Gets a user
- */
-export const getUserByIdAPI = async (
-    userId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(USER_PATH.GET_BY_ID, {
-        id: userId,
-    });
-    const response = await jfwAxios.get<HttpResponse<IUser>>(url, config);
-
-    return response.data;
-};
-
-/**
- * Updates a user
- */
-export const updateUserByIdAPI = async (
-    userId: IdType,
-    data: IUpdateUserData,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(USER_PATH.UPDATE_BY_ID, {
-        id: userId,
-    });
-
-    const response = await jfwAxios.put(url, data, config);
-
-    return response.data;
-};
-
-/**
- * Delete a user
- */
-export const deleteUserAPI = async (
-    userId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(USER_PATH.DELETE_BY_ID, {
-        id: userId,
-    });
-
-    const response = await jfwAxios.delete(url, config);
-
-    return response.data;
-};
-
-/**
- * Change the password of the user. If the user logs in to the system using the Google method, after calling the API change password successfully, we send an email to verify the user request.
- */
-export const changePasswordAPI = async (
-    data: IChangePasswordParams,
-    config?: AxiosRequestConfig,
-) => {
-    const url = USER_PATH.CHANGE_PASSWORD;
-
-    const response = await jfwAxios.put(url, data, config);
 
     return response.data;
 };
@@ -233,22 +168,6 @@ export const applyReferralCodeAPI = async (
 };
 
 /**
- * Register a new user by the given information.
- */
-export const registerAPI = async (
-    data: IRegisterParams,
-    config?: AxiosRequestConfig,
-) => {
-    const url = USER_PATH.REGISTER;
-    const response = await jfwAxios.post<HttpResponse<string>>(
-        url,
-        data,
-        config,
-    );
-    return response.data;
-};
-
-/**
  * Forgot password
  */
 export const forgotPasswordAPI = async (
@@ -303,55 +222,6 @@ export const updateUserTypeAPI = async (
     });
 
     const response = await jfwAxios.put(url, config);
-    return response.data;
-};
-
-/**
- * Assigns roles to the user.
- */
-export const assignRolesToUserAPI = async (
-    userId: IdType,
-    roleIds: IdType[],
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(USER_PATH.ROLES.ASSIGN_TO_USER, {
-        id: userId,
-    });
-
-    const response = await jfwAxios.patch<HttpResponse<boolean>>(url, null, {
-        params: {
-            roleIds,
-        },
-        paramsSerializer: {
-            indexes: true, // use brackets with indexes
-        },
-        ...config,
-    });
-
-    return response.data;
-};
-
-/**
- * Revokes roles from the user.
- */
-export const revokeRolesFromUserAPI = async (
-    userId: IdType,
-    roleIds: IdType[],
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(USER_PATH.ROLES.REMOVE_FROM_USER, {
-        id: userId,
-    });
-    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
-        params: {
-            roleIds,
-        },
-        paramsSerializer: {
-            indexes: true, // use brackets with indexes
-        },
-        ...config,
-    });
-
     return response.data;
 };
 
