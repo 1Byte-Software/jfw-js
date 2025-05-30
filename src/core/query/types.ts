@@ -1,4 +1,5 @@
 import { DateType, IdType, SortOrder } from '../../models';
+import { HeaderKey } from '../client/constants';
 import { JFWError } from '../error';
 import { JFWHttpCode } from '../http';
 
@@ -61,4 +62,21 @@ export interface ListData<T = any> {
 }
 
 export type HttpResponseList<T = any> = HttpResponse<ListData<T>>;
+
+export interface IHeaderParameters {
+    /**
+     * The brand URL of the request. This is used to identify the brand.
+     * @example
+     * YOUR_BRAND_URL
+     */
+    [HeaderKey.BrandUrl]: string;
+}
+
+export interface IHeaderParametersPrivate extends IHeaderParameters {
+    [HeaderKey.AuthKey]: string;
+}
+
+export interface IBaseParameters {
+    headerParameters: IHeaderParameters;
+}
 //#endregion
