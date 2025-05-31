@@ -1,34 +1,35 @@
 {
-  "name": "@jframework/jfw-js",
-  "description": "The Javascript package for JFW",
-  "version": "5.0.1",
-  "author": "1byte devteam",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/1Byte-Software/jfw-js/issues"
-  },
-  "homepage": "https://github.com/1Byte-Software/jfw-js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/1Byte-Software/jfw-js.git"
-  },
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "rollup -c",
-    "watch": "npm run build -- --watch src",
-    "prepublishOnly": "npm run build",
-    "test": "yarn build && yalc publish --push --no-scripts"
-  },
-  "dependencies": {
-    "axios": "^1.7.7",
-    "query-string": "^9.1.0",
-    "rollup": "^4.22.0",
-    "rollup-plugin-typescript2": "^0.36.0",
-    "rxjs": "^7.8.1"
-  },
-  "devDependencies": {
-    "@types/node": "^22.5.5",
-    "prettier": "^3.3.3",
-    "typescript": "^5.6.2"
-  }
+    "name": "@jframework/jfw-js",
+    "description": "The Javascript package for JFW",
+    "version": "5.0.1",
+    "author": "1byte devteam",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/1Byte-Software/jfw-js/issues"
+    },
+    "homepage": "https://github.com/1Byte-Software/jfw-js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/1Byte-Software/jfw-js.git"
+    },
+    "_____main": "dist/index.js",
+    "main": "src/index.ts",
+    "scripts": {
+        "build": "rollup -c",
+        "watch": "npm run build -- --watch src",
+        "prepublishOnly": "npm run build",
+        "test": "yalc publish --push --no-scripts --files ."
+    },
+    "dependencies": {
+        "axios": "^1.7.7",
+        "query-string": "^9.1.0",
+        "rollup": "^4.22.0",
+        "rollup-plugin-typescript2": "^0.36.0",
+        "rxjs": "^7.8.1"
+    },
+    "devDependencies": {
+        "@types/node": "^22.5.5",
+        "prettier": "^3.3.3",
+        "typescript": "^5.6.2"
+    }
 }
