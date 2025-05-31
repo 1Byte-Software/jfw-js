@@ -47,25 +47,25 @@ export interface IAppIntegrationPushNotification {
      * The authentication URL used by the push notification provider.
      * Optional and nullable.
      */
-    authUrl: string | null;
+    authURL: string | null;
 
     /**
      * The token URL for retrieving access tokens from the provider.
      * Optional and nullable.
      */
-    tokenUrl: string | null;
+    tokenURL: string | null;
 
     /**
      * The authentication provider's X.509 certificate URL.
      * Optional and nullable.
      */
-    authProviderX509CertUrl: string | null;
+    authProviderX509CertURL: string | null;
 
     /**
      * The client X.509 certificate URL.
      * Optional and nullable.
      */
-    clientX509CertUrl: string | null;
+    clientX509CertURL: string | null;
 
     /**
      * The universe domain for the push notification provider.
@@ -196,22 +196,22 @@ export interface ICreateAppIntegrationPushNotificationData {
     /**
      * The authentication URL of the push notification.
      */
-    authUrl?: string | null;
+    authURL?: string | null;
 
     /**
      * The token URL of the push notification.
      */
-    tokenUrl?: string | null;
+    tokenURL?: string | null;
 
     /**
      * The authentication provider X509 certificate URL of the push notification.
      */
-    authProviderX509CertUrl?: string | null;
+    authProviderX509CertURL?: string | null;
 
     /**
      * The client X509 certificate URL of the push notification.
      */
-    clientX509CertUrl?: string | null;
+    clientX509CertURL?: string | null;
 
     /**
      * The universe domain of the push notification.

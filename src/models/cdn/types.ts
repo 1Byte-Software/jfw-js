@@ -34,7 +34,7 @@ export interface ICDN {
     refId: number | null;
 
     mimeType: string;
-    fileUrl: string;
+    fileURL: string;
     originalFilename: string;
     notes: string | null;
     tags: string | null;
@@ -51,9 +51,9 @@ export interface ICDNUpload {
     fileName: string;
     originalFilename: string;
     prefixFolder: string;
-    relativeUrl: string;
-    url: string;
-    fileUrl: string;
+    relativeURL: string;
+    URL: string;
+    fileURL: string;
     fileExtension: string;
     mimeType: string;
     fileSize: number;

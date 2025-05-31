@@ -16,7 +16,7 @@ export interface ITrackingActivity {
     browserName: string;
     os: string;
     ipAddress: string;
-    url: string;
+    URL: string;
     eventId: IdType;
     user: IBaseUser;
 }
@@ -29,7 +29,7 @@ export interface IGetTrackingActivitiesParams extends IPageable, ISortable {
     /** Filter by tracking event id */
     eventId?: IdType;
     /** Filter by the url requested */
-    url?: string;
+    URL?: string;
     /** Filter by the ip address */
     ipAddress?: string;
     /** Filter by the os */
@@ -68,7 +68,7 @@ export interface ICreateTrackingActivityParams {
     os: string;
     requestFromMobile: boolean;
     eventId: IdType;
-    url: string;
+    URL: string;
     userAgent: string;
     userId: IdType;
 }

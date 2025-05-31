@@ -80,18 +80,18 @@ export interface IAppIntegrationPaymentGatewayProduct {
     shipping?: number;
 
     /**
-     * The return url.
+     * The return URL.
      *
      * @remarks string - min: 1
      */
-    returnUrl?: string | null;
+    returnURL?: string | null;
 
     /**
-     * The cancel url.
+     * The cancel URL.
      *
      * @remarks string - min: 1
      */
-    cancelUrl?: string | null;
+    cancelURL?: string | null;
 }
 
 //#region API types

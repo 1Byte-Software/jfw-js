@@ -8,9 +8,9 @@ export interface IBrandSetting extends IBaseObject {
     cdnFolder: string;
 
     /**
-     * The cdn url.
+     * The cdn URL.
      */
-    cdnUrl: string;
+    cdnURL: string;
 
     /**
      * The coin earning code of the brand system.
@@ -18,9 +18,9 @@ export interface IBrandSetting extends IBaseObject {
     coinCurrencyCode: string | null;
 
     /**
-     * The domain white list urls.
+     * The domain white list URLs.
      */
-    domainWhiteListUrls: string | null;
+    domainWhiteListURLs: string | null;
 
     /**
      * The google analytics account.
@@ -41,9 +41,9 @@ export interface IBrandSetting extends IBaseObject {
 //#region API types
 export interface IUpdateBrandSettingData {
     /**
-     * The domain white list urls.
+     * The domain white list URLs.
      */
-    domainWhiteListUrls?: string | null;
+    domainWhiteListURLs?: string | null;
 
     /**
      * The google analytics account.
@@ -61,9 +61,9 @@ export interface IUpdateBrandSettingData {
     coinCurrencyCode?: string | null;
 
     /**
-     * The cdn url.
+     * The cdn URL.
      */
-    cdnUrl?: string | null;
+    cdnURL?: string | null;
 
     /**
      * The cdn folder.

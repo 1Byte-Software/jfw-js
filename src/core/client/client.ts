@@ -10,7 +10,7 @@ const init = (initOption: InitOption) => {
     jfwAxios = axios.create({
         baseURL: getBaseURL(initOption.environment),
         headers: {
-            [HeaderKey.BrandUrl]: initOption.brandUrl,
+            [HeaderKey.BrandUrl]: initOption.brandURL,
             'content-type': 'application/json',
         },
     });
@@ -72,13 +72,12 @@ const changeBrandURL = (brandURL: string) => {
 };
 
 /**
- * Changes the generated browser code for all subsequent requests.
+ * Changes the device code for all subsequent requests.
  *
- * @param generatedBrowserCode - The browser code to be set in the request headers. This is used to identify the browser for the request.
+ * @param deviceCode - The device code to be set in the request headers. This is used to identify the device for the request.
  */
-const changeGeneratedBrowserCode = (generatedBrowserCode: string) => {
-    jfwAxios.defaults.headers.common[HeaderKey.BrowserCodeGenerate] =
-        generatedBrowserCode;
+const changeDeviceCode = (deviceCode: string) => {
+    jfwAxios.defaults.headers.common[HeaderKey.DeviceCode] = deviceCode;
 };
 
 /**
@@ -104,7 +103,7 @@ const jfwjs = {
     changeAuthKey,
     clearAuthKey,
     changeBrandURL,
-    changeGeneratedBrowserCode,
+    changeDeviceCode,
     getBaseURL,
     globalErrorHandler,
 };

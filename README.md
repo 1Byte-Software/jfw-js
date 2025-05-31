@@ -34,7 +34,7 @@ var authClient = new AuthClient(/* configOptions */);
 ```javascript
 const config = {
   mode: 'development',
-  brandUrl: 'jframework.io',
+  brandURL: 'jframework.io',
 };
 
 const authClient = new AuthClient(config);
@@ -49,7 +49,7 @@ import { AuthClient, JfwConfig } from 'jfw-js';
 
 const config: JfwConfig = {
   mode: 'development',
-  brandUrl: 'jframework.io',
+  brandURL: 'jframework.io',
 };
 
 const authClient: AuthClient = new AuthClient(config);
@@ -78,7 +78,7 @@ const response = await signInAPI(payload);
 
 These options can be included when instantiating JFW Auth JS (`new AuthClient(config)`).
 
-#### `brandUrl`
+#### `brandURL`
 
 > :warning: This option is required
 

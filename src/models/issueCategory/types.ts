@@ -38,9 +38,9 @@ export interface IGetIssueCategoriesParams extends IPageable {
     description?: string;
 
     /**
-     * Filter by suggestion url.
+     * Filter by suggestion URL.
      */
-    suggestionUrl?: string;
+    suggestionURL?: string;
 
     /**
      * Filter by tags.
@@ -106,11 +106,11 @@ export interface ICreateIssueCategoryData {
     tags?: string | null;
 
     /**
-     * The links of the issue category.
+     * The URL suggestion of the issue category.
      * @remarks string - uri
      * @example https://www.example.com/suggestion
      */
-    suggestionUrl?: string | null;
+    suggestionURL?: string | null;
 }
 
 /**

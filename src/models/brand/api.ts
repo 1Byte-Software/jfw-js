@@ -71,7 +71,7 @@ export const getBrandAPI = async (id: IdType, config?: AxiosRequestConfig) => {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-a-brand-by-brand-url}
  */
-export const getBrandByUrlAPI = async (config?: AxiosRequestConfig) => {
+export const getBrandByURLAPI = async (config?: AxiosRequestConfig) => {
     const url = BRAND_PATH.GET_BRAND_BY_URL;
     const response = await jfwAxios.get<HttpResponse<IBrand>>(url, config);
 
@@ -130,7 +130,7 @@ export const updateBrandAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/check-domain-exists}
  */
-export const checkExistDomainUrlAPI = async (
+export const checkExistDomainURLAPI = async (
     domain: string,
     config?: AxiosRequestConfig,
 ) => {

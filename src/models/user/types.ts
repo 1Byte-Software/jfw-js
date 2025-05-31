@@ -1,8 +1,9 @@
-import { IPageable, ISortable } from '../../core';
+import { IBaseParameters, IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { ILanguage } from '../language';
 import { IRole } from '../role';
 import { ITimezone } from '../timezone';
+import { UserStatus } from './constants';
 
 export interface IBaseUser {
     code: string;
@@ -24,6 +25,7 @@ export interface IUser {
     nickName: string;
     avatar?: string;
     emailAddress: string;
+    phoneNumber?: string;
     phoneNumber1?: string;
     phoneNumber2?: string;
     phoneNumber3?: string;
@@ -55,7 +57,7 @@ export interface IUser {
     timeZone?: ITimezone;
     package?: string; // #CONFIRM: Return package type is string or IPackage ?
     type: string;
-    status: number;
+    status: UserStatus;
     testMode?: boolean;
 }
 
@@ -95,20 +97,6 @@ export interface IQueryUserParams extends IPageable, ISortable {
 export interface IGetUserInfoByUsernamePath {
     username: string;
 }
-export interface IUpdateUserData {
-    username?: string | null;
-    emailAddress?: string | null;
-    nickName?: string | null;
-    firstName?: string | null;
-    lastName?: string | null;
-    languageCode?: string | null;
-    timeZoneId?: IdType | null;
-    phoneNumber?: string | null;
-    phoneNumber1?: string | null;
-    avatar?: string | null;
-    bio?: string | null;
-    website?: string | null;
-}
 
 export interface IGetUserConfigurationParams {
     code: string;
@@ -116,7 +104,7 @@ export interface IGetUserConfigurationParams {
 export interface IGetUserByIdParams {
     authKey: string;
 }
-export interface IChangePasswordParams {
+export interface IChangePasswordData {
     oldPassword: string;
     newPassword: string;
     confirmPassword: string;
@@ -126,17 +114,6 @@ export interface IInitialSignUpValues {
     emailAddress: string;
     password: string;
     confirmPassword: string;
-}
-export interface IRegisterParams {
-    username: string;
-    phoneNumber?: string | null;
-    password: string;
-    emailAddress?: string | null;
-    firstName?: string | null;
-    lastName?: string | null;
-    nickName?: string | null;
-    referralCode?: string | null;
-    timeZoneId?: IdType | null;
 }
 export interface IForgotPasswordParams {
     emailAddress: string;
@@ -159,8 +136,8 @@ export interface IApplyReferralCodeParams {
 }
 
 export interface IAuthenticationByGoogleParams {
-    callbackUrl: string;
-    returnUrl: string;
+    callbackURL: string;
+    returnURL: string;
 }
 
 export interface IAuthenticationParams {
@@ -175,11 +152,12 @@ export interface IAuthenticateResponse {
 
 export interface IAuthenticateByEmailAddressParams {
     emailAddress: string;
-    callbackUrl: string;
-    returnUrl: string;
+    callbackURL: string;
+    returnURL: string;
 }
 
 export interface ICheckAuthKeyAvailableParams {
     authKey: string;
 }
+
 //#endregion

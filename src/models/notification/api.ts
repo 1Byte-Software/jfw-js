@@ -1,12 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../core';
+import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
-import { generatePath } from '../../utils/path';
-import { IdType } from '../base';
 import { NOTIFICATION_PATH } from './paths';
 import {
-    IGetNotificationsByUserAuthorizedParams,
-    INotification,
     IPushNotificationDataMessageByDevicesParams,
     IPushNotificationDataMessageByGivenDeviceCodeParams,
     IPushNotificationDataMessageByTokensParams,
@@ -14,63 +10,6 @@ import {
     IPushNotificationResponse,
     IUpdateStatusNotificationParams,
 } from './types';
-
-/**
- * Deletes tracking notification with id.
- *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/delete-a-notification}
- */
-export const deleteNotificationAPI = async (
-    trackingNotificationId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(NOTIFICATION_PATH.DELETE_BY_ID, {
-        trackingNotificationId,
-    });
-
-    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
-
-    return response.data;
-};
-
-/**
- * Get notifications by the user authorized.
- *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/get-notifications-by-the-user-authorized}
- */
-export const getNotificationByUserAuthorizedAPI = async (
-    params?: IGetNotificationsByUserAuthorizedParams,
-    config?: AxiosRequestConfig,
-): Promise<HttpResponseList<INotification>> => {
-    const url = NOTIFICATION_PATH.GET_NOTIFICATION_BY_USER_AUTHORIZED;
-    const response = await jfwAxios.get<HttpResponseList<INotification>>(url, {
-        params,
-        ...config,
-    });
-
-    return response.data;
-};
-
-/**
- * Marks the tracking notification as read.
- *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/mark-as-read}
- */
-export const markNotificationAsReadAPI = async (
-    trackingNotificationId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(NOTIFICATION_PATH.MARK_AS_READ, {
-        trackingNotificationId,
-    });
-
-    const response = await jfwAxios.post<HttpResponse<boolean>>(
-        url,
-        null,
-        config,
-    );
-    return response.data;
-};
 
 /**
  * Push the notification with the given title and body to the given device tokens.
@@ -201,28 +140,5 @@ export const updateStatusNotificationsAPI = async (
         ...config,
     });
 
-    return response.data;
-};
-
-/**
- * Updates status of the tracking notification.
- *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/updates-status-of-a-notification}
- */
-export const updateStatusOfNotificationAPI = async (
-    trackingNotificationId: IdType,
-    status: string,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(NOTIFICATION_PATH.UPDATE_STATUS_OF_NOTIFICATION, {
-        trackingNotificationId,
-    });
-
-    const response = await jfwAxios.put(url, null, {
-        ...config,
-        params: {
-            status,
-        },
-    });
     return response.data;
 };

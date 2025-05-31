@@ -11,11 +11,11 @@ export interface IAppIntegrationAuthentication {
     projectId: string;
     clientId: string;
     clientSecret: string;
-    redirectUri: string;
+    redirectURI: string;
     scope: string;
     authEndpoint: string | null;
     tokenEndpoint: string | null;
-    iconUrl: string | null;
+    iconURL: string | null;
     tags: string | null;
     description: string | null;
     status: AppIntegrationAuthenticationStatus;
@@ -73,9 +73,9 @@ export interface IGetAppIntegrationAuthenticationsWithBrandParams
     privateKey?: string;
 
     /**
-     * The redirect uri of filter.
+     * The redirect URI of filter.
      */
-    redirectUri?: string;
+    redirectURI?: string;
 
     /**
      * The scope of filter.
@@ -93,9 +93,9 @@ export interface IGetAppIntegrationAuthenticationsWithBrandParams
     tokenEndpoint?: string;
 
     /**
-     * The icon url of filter.
+     * The icon URL of filter.
      */
-    iconUrl?: string;
+    iconURL?: string;
 
     /**
      * The tags of filter.
@@ -166,7 +166,7 @@ export interface ICreateAppIntegrationAuthenticationData {
      *
      * @remarks string - min: 1
      */
-    redirectUri: string;
+    redirectURI: string;
 
     /**
      * The scope of the app integration.
@@ -188,7 +188,7 @@ export interface ICreateAppIntegrationAuthenticationData {
     /**
      * The icon URL of the app integration.
      */
-    iconUrl?: string | null;
+    iconURL?: string | null;
 
     /**
      * The tags of the app integration.
@@ -235,7 +235,7 @@ export interface ITestBuildingAuthenticationURLData {
      *
      * @remarks string - min: 1
      */
-    redirectUri: string;
+    redirectURI: string;
 
     /**
      * The scope of the app integration.
