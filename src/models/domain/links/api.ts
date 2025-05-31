@@ -73,14 +73,14 @@ export const getBrandLinksByTypeAPI = async (
     params: IGetBrandLinksByTypeParams,
     config?: AxiosRequestConfig,
 ) => {
-    const { id, type } = params;
+    const { id, type, ...restParams } = params;
     const url = generatePath(BRAND_LINK_PATH.GET_LINKS_BY_TYPE, {
         id,
         type,
     });
     const response = await jfwAxios.get<HttpResponse<IBrandLink[]>>(url, {
+        params: restParams,
         ...config,
-        params,
     });
 
     return response.data;
