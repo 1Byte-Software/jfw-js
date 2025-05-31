@@ -61,7 +61,7 @@ export interface ListData<T = any> {
     pageSize: number;
 }
 
-export type HttpResponseList<T = any> = HttpResponse<ListData<T>>;
+export type HttpResponseList<T = any, U = {}> = HttpResponse<ListData<T> & U>;
 
 export interface IHeaderParameters {
     /**
