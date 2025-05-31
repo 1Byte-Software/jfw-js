@@ -36,7 +36,7 @@ export interface IPackage {
     /**
      * The pattern avatar URL of the package.
      */
-    patternAvatarUrl: string | null;
+    patternAvatarURL: string | null;
 
     /**
      * The styles of the package, in JSON string format.
@@ -100,7 +100,7 @@ export interface ICreatePackageData {
     /**
      * The pattern avatar URL of the package.
      */
-    patternAvatarUrl?: string | null;
+    patternAvatarURL?: string | null;
 
     /**
      * The styles of the package.

@@ -1,4 +1,4 @@
 export enum GetAppIntegrationAuthenticateURLsTypeResponse {
-    RedirectURL = 'RedirectUrl',
+    RedirectURL = 'RedirectURL',
     JsonFormat = 'JsonFormat',
 }

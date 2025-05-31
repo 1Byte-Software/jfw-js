@@ -136,8 +136,8 @@ export interface IApplyReferralCodeParams {
 }
 
 export interface IAuthenticationByGoogleParams {
-    callbackUrl: string;
-    returnUrl: string;
+    callbackURL: string;
+    returnURL: string;
 }
 
 export interface IAuthenticationParams {
@@ -152,8 +152,8 @@ export interface IAuthenticateResponse {
 
 export interface IAuthenticateByEmailAddressParams {
     emailAddress: string;
-    callbackUrl: string;
-    returnUrl: string;
+    callbackURL: string;
+    returnURL: string;
 }
 
 export interface ICheckAuthKeyAvailableParams {

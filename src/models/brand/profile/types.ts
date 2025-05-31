@@ -2,14 +2,14 @@ import { IBaseObject } from '../../base';
 
 export interface IBrandProfile extends IBaseObject {
     /**
-     * The favicon url.
+     * The favicon URL.
      */
-    faviconUrl: string | null;
+    faviconURL: string | null;
 
     /**
-     * The logo url.
+     * The logo URL.
      */
-    logoUrl: string | null;
+    logoURL: string | null;
 
     /**
      * The slogan.
@@ -40,14 +40,14 @@ export interface IBrandProfile extends IBaseObject {
 //#region API types
 export interface IUpdateBrandProfileData {
     /**
-     * The logo url.
+     * The logo URL.
      */
-    logoUrl?: string | null;
+    logoURL?: string | null;
 
     /**
-     * The favicon url.
+     * The favicon URL.
      */
-    faviconUrl?: string | null;
+    faviconURL?: string | null;
 
     /**
      * The slogan.
