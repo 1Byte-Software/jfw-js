@@ -15,7 +15,7 @@ export type InitOption = {
      * The brand URL of the request. This is used to identify the brand.
      * @example YOUR_BRAND_URL
      */
-    brandUrl: string;
+    brandURL: string;
 
     /**
      * Specifies which API to call. For example, 'development' will use protocol.jframework.dev, while 'live' will use protocol.jframework.io.

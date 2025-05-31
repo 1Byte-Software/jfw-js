@@ -1,6 +1,6 @@
 export interface JfwConfig {
     mode?: ModeType;
-    brandUrl: string;
+    brandURL: string;
 }
 
 export type ModeType = 'development' | 'production';

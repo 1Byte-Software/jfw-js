@@ -10,7 +10,7 @@ const init = (initOption: InitOption) => {
     jfwAxios = axios.create({
         baseURL: getBaseURL(initOption.environment),
         headers: {
-            [HeaderKey.BrandUrl]: initOption.brandUrl,
+            [HeaderKey.BrandUrl]: initOption.brandURL,
             'content-type': 'application/json',
         },
     });
