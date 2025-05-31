@@ -1,37 +1,103 @@
-import { IPageable, ISortable } from '../../core';
-import { IBaseObject, IdType } from '../base';
+import { IdType } from '../base';
 import { NotificationStatus } from './constants';
 
-export interface INotification extends IBaseObject {
-    patternCode: string;
-    supportCode: string;
+export interface INotification {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: string;
 
-    emailBody: string;
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: string | null;
+
+    /**
+     * @deprecated
+     * The email subject.
+     *
+     * @remarks min: 1
+     * @readonly
+     */
     emailSubject: string;
-    status: string;
+
+    /**
+     * The title.
+     *
+     * @remarks min: 1
+     */
+    title: string;
+
+    /**
+     * @deprecated
+     * The email body.
+     *
+     * @remarks min: 1
+     * @readonly
+     */
+    emailBody: string;
+
+    /**
+     * The content.
+     *
+     * @remarks min: 1
+     */
+    content: string;
+
+    /**
+     * The action url.
+     *
+     * @remarks uri
+     */
+    actionUrl?: string | null;
+
+    /**
+     * The category.
+     */
+    category?: string | null;
+
+    /**
+     * The topic.
+     */
+    topic?: string | null;
+
+    /**
+     * The time to sent notification.
+     *
+     * @remarks date-time
+     */
+    sentTime?: string | null;
+
+    /**
+     * The seen at.
+     *
+     * @remarks date-time
+     */
+    seenAt?: string | null;
+
+    /**
+     * The status of the notification.
+     *
+     * @remarks enum
+     * Possible values:
+     * - 0 - Unread
+     * - 1 - ReadEmailNotification
+     * - 2 - ReadEmailNotificationButNotYetTakenAction
+     * - 3 - ReadEmailNotificationAndClickedTakenAction
+     */
+    status: NotificationStatus;
+
+    /**
+     * Flag to indicate if the notification is in test mode.
+     */
+    testMode: boolean;
 }
 
 //#region API types
-export interface IGetNotificationsByUserAuthorizedParams
-    extends IPageable,
-        ISortable {
-    countryCode?: string;
-    languageCode?: string;
-
-    notificationType?: string;
-    notificationChannelType?: string;
-
-    emailFrom?: string;
-    emailTo?: string;
-    emailCc?: string;
-    emailBcc?: string;
-    emailSubject?: string;
-    emailBody?: string;
-    testMode?: boolean;
-
-    tags?: string;
-    status?: NotificationStatus;
-}
 
 export interface IPushNotificationMessageForTokensParams {
     title: string;
