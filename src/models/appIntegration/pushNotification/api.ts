@@ -1,43 +1,47 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../../core';
+import { HttpResponse } from '../../../core';
 import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { APP_INTEGRATION_PUSH_NOTIFICATION_PATH } from './paths';
 import {
     IAppIntegrationPushNotification,
-    ICreateAppIntegrationPushNotificationData,
-    IUpdateAppIntegrationPushNotificationData,
+    ICreateAppIntegrationPushNotificationParams,
+    IUpdateAppIntegrationPushNotificationParams,
 } from './types';
 
 /**
+ * # Create an app integration push notification
+ *
  * Create a new app integration push notification.
  *
- * @param data - The data for creating a new app integration payment gateway.
+ * @param params - The params for creating a new app integration push notification.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/push-notification/create-an-app-integration-push-notification}
  */
-export const createAppIntegrationPushNotificationAPI = async (
-    data: ICreateAppIntegrationPushNotificationData,
+export const createAppIntegrationPushNotification = async (
+    params: ICreateAppIntegrationPushNotificationParams,
     config?: AxiosRequestConfig,
 ) => {
     const url =
         APP_INTEGRATION_PUSH_NOTIFICATION_PATH.CREATE_APP_INTEGRATION_PUSH_NOTIFICATION;
     const response = await jfwAxios.post<
         HttpResponse<IAppIntegrationPushNotification>
-    >(url, data, config);
+    >(url, params, config);
 
     return response.data;
 };
 
 /**
+ * # Delete an app integration push notification
+ *
  * Delete an app integration push notification by the given id.
  *
  * @param id - The id of the app integration push notification.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/push-notification/delete-an-app-integration-push-notification}
  */
-export const deleteAppIntegrationPushNotificationAPI = async (
+export const deleteAppIntegrationPushNotification = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -53,13 +57,15 @@ export const deleteAppIntegrationPushNotificationAPI = async (
 };
 
 /**
+ * # Get an app integration push notification
+ *
  * Get an app integration push notification by the given id.
  *
  * @param id - The id of the app integration push notification.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/push-notification/get-an-app-integration-push-notification}
  */
-export const getAppIntegrationPushNotificationAPI = async (
+export const getAppIntegrationPushNotification = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -69,7 +75,6 @@ export const getAppIntegrationPushNotificationAPI = async (
             id,
         },
     );
-
     const response = await jfwAxios.get<
         HttpResponse<IAppIntegrationPushNotification>
     >(url, config);
@@ -78,17 +83,18 @@ export const getAppIntegrationPushNotificationAPI = async (
 };
 
 /**
+ * # Get an app integration push notification with brand
+ *
  * Get the current brand's app integration push notification.
  *
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/push-notification/get-app-integration-push-notification-with-brand}
  */
-export const getAppIntegrationPushNotificationsWithBrandAPI = async (
+export const getAppIntegrationPushNotificationsWithBrand = async (
     config?: AxiosRequestConfig,
 ) => {
     const url =
         APP_INTEGRATION_PUSH_NOTIFICATION_PATH.GET_APP_INTEGRATION_PUSH_NOTIFICATIONS_WITH_BRAND;
-
     const response = await jfwAxios.get<
         HttpResponse<IAppIntegrationPushNotification[]>
     >(url, config);
@@ -97,16 +103,18 @@ export const getAppIntegrationPushNotificationsWithBrandAPI = async (
 };
 
 /**
+ * # Update an app integration push notification
+ *
  * Update an app integration push notification by the given id.
  *
  * @param id - The id of the app integration push notification.
- * @param data - The data for updating an app integration push notification.
+ * @param params - The params for updating an app integration push notification.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/push-notification/update-an-app-integration-push-notification}
  */
-export const updateAppIntegrationPushNotificationAPI = async (
+export const updateAppIntegrationPushNotification = async (
     id: IdType,
-    data: IUpdateAppIntegrationPushNotificationData,
+    params: IUpdateAppIntegrationPushNotificationParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
@@ -117,7 +125,7 @@ export const updateAppIntegrationPushNotificationAPI = async (
     );
     const response = await jfwAxios.put<
         HttpResponse<IAppIntegrationPushNotification>
-    >(url, data, config);
+    >(url, params, config);
 
     return response.data;
 };
