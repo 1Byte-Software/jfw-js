@@ -21,7 +21,7 @@ import {
  * @param config - Optional axios request configuration object.
  * @link {@see https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/creates-an-app-integration-authentication}
  */
-export const createAppIntegrationAuthenticationAPI = async (
+export const createAppIntegrationAuthentication = async (
     params: ICreateAppIntegrationAuthenticationParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -43,7 +43,7 @@ export const createAppIntegrationAuthenticationAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/deletes-an-app-integration-authentication}
  */
-export const deleteAppIntegrationAuthenticationAPI = async (
+export const deleteAppIntegrationAuthentication = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -67,7 +67,7 @@ export const deleteAppIntegrationAuthenticationAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/gets-an-app-integration-authentication}
  */
-export const getAppIntegrationAuthenticationAPI = async (
+export const getAppIntegrationAuthentication = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -93,7 +93,7 @@ export const getAppIntegrationAuthenticationAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/list-the-apps-integration-authentication}
  */
-export const getAppsIntegrationAuthenticationWithBrandAPI = async (
+export const getAppsIntegrationAuthenticationWithBrand = async (
     params?: IGetAppIntegrationAuthenticationsWithBrandParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -122,7 +122,7 @@ export const getAppsIntegrationAuthenticationWithBrandAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/test-building-an-authentication-url}
  */
-export const testBuildingAuthenticationURLAPI = async (
+export const testBuildingAuthenticationURL = async (
     appIntegrationId: IdType,
     params: ITestBuildingAuthenticationURLParams,
     config?: AxiosRequestConfig,
@@ -152,7 +152,7 @@ export const testBuildingAuthenticationURLAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/updates-an-app-integration-authentication}
  */
-export const updateAppIntegrationAuthenticationAPI = async (
+export const updateAppIntegrationAuthentication = async (
     id: IdType,
     params: IUpdateAppIntegrationAuthenticationParams,
     config?: AxiosRequestConfig,

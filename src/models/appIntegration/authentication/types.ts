@@ -1,4 +1,5 @@
 import { IPageable, ISortable } from '../../../core';
+import { IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationAuthenticationStatus } from './constants';
 
@@ -8,7 +9,7 @@ export interface IAppIntegrationAuthentication {
      *
      * @remarks min: 1
      */
-    id: string;
+    id: IdType;
 
     /**
      * The created date of the object.
