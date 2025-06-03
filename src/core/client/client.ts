@@ -1,7 +1,7 @@
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import { HttpResponse } from '../query';
 import { BaseURL, HeaderKey } from './constants';
-import { InitOption } from './types';
+import { EnvironmentOption, InitOption } from './types';
 
 // Singleton instance of Axios used throughout the application
 export let jfwAxios: Axios | null = null;
@@ -105,7 +105,7 @@ const changeDeviceCode = (deviceCode: string) => {
  * @param environment - Either 'live' or 'development'.
  * @returns A base URL string appropriate for the given environment.
  */
-const getBaseURL = (environment: InitOption['environment']): string => {
+const getBaseURL = (environment: EnvironmentOption): string => {
     switch (environment) {
         case 'live':
             return BaseURL.live;
