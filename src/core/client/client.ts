@@ -19,7 +19,7 @@ const init = (initOption: InitOption) => {
         baseURL: getBaseURL(initOption.environment),
         headers: {
             [HeaderKey.BrandURL]: initOption.brandURL,
-            'content-type': 'application/json',
+            [HeaderKey.ContentType]: 'application/json',
         },
     });
 
