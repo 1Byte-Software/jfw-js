@@ -1,4 +1,4 @@
-export const SortOrder = {
-    ASC: 'ASC',
-    DESC: 'DESC',
-};
+export enum SortOrder {
+    ASC = 'asc',
+    DESC = 'desc',
+}

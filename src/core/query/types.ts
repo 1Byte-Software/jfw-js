@@ -1,7 +1,8 @@
 import { HttpStatusCode } from 'axios';
-import { DateType, IdType, SortOrder } from '../../models';
+import { DateType, IdType } from '../../models';
 import { JFWError } from '../error';
 import { JFWHttpStatusCode } from '../http';
+import { SortOrder } from './constants';
 
 //#region Query params types
 export interface Pageable {

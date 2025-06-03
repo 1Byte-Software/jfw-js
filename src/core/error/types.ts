@@ -1,5 +1,3 @@
-import { AxiosError } from 'axios';
-import { HttpResponse } from '../query';
 import { JFWLogLevel } from './constants';
 
 export type JFWError = {
@@ -29,5 +27,3 @@ export type JFWError = {
      */
     logLevel?: JFWLogLevel | null;
 };
-
-export type THttpError = Error | AxiosError<HttpResponse>;
