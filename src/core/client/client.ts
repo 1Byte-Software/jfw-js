@@ -1,11 +1,19 @@
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
-import { THttpError } from '../error';
 import { HttpResponse } from '../query';
 import { BaseURL, HeaderKey } from './constants';
 import { InitOption } from './types';
 
+// Singleton instance of Axios used throughout the application
 export let jfwAxios: Axios | null = null;
 
+/**
+ * Initializes the Axios instance (`jfwAxios`) with a base URL and default headers.
+ * It also sets up global response interceptors to handle successful responses
+ * and errors in a standardized way.
+ *
+ * @param initOption - Configuration options used to initialize Axios,
+ * including environment and brandURL. Optionally includes a global error handler.
+ */
 const init = (initOption: InitOption) => {
     jfwAxios = axios.create({
         baseURL: getBaseURL(initOption.environment),
@@ -15,17 +23,25 @@ const init = (initOption: InitOption) => {
         },
     });
 
+    /**
+     * A response interceptor that simply returns the response without modification.
+     *
+     * @param response - The Axios response object.
+     * @returns The unmodified Axios response.
+     */
     function responseHandler<T = any>(response: AxiosResponse<T>) {
-        // const config = response?.config;
-
-        // if (config.raw) {
-        //     return response;
-        // }
-
-        // return response.data;
         return response;
     }
 
+    /**
+     * A response error interceptor that either:
+     * - Returns the error directly if the request config contains a `raw` flag,
+     * - Delegates to a custom global error handler if provided,
+     * - Or does nothing (commented out fallback).
+     *
+     * @param error - The Axios error object containing request and response info.
+     * @returns Either the original error or the result of the global error handler.
+     */
     function responseErrorHandler(error: AxiosError<HttpResponse>) {
         const config = error?.config;
         if (config.raw) {
@@ -35,19 +51,16 @@ const init = (initOption: InitOption) => {
         if (initOption.globalErrorHandler) {
             return initOption.globalErrorHandler(error);
         }
-
-        // return httpErrorHandler(response);
     }
 
     jfwAxios.interceptors.response.use(responseHandler, responseErrorHandler);
 };
 
-const createInstance = () => {};
-
 /**
  * Changes the authentication key for all subsequent requests.
  *
- * @param authKey This is used to authenticate the request. If the request is not authenticated, the server will return a 401 Unauthorized response.
+ * @param authKey - A string used to authenticate API requests.
+ * Required for endpoints that enforce authentication (e.g., returns 401 if missing).
  */
 const changeAuthKey = (authKey: string) => {
     jfwAxios.defaults.headers.common[HeaderKey.AuthKey] = authKey;
@@ -55,36 +68,42 @@ const changeAuthKey = (authKey: string) => {
 
 /**
  * Removes the authentication key from the request headers.
- * This is typically used when logging out a user or clearing their session.
- * After calling this function, subsequent requests will not include the authentication key.
+ * Typically used when the user logs out or their session is cleared.
  */
 const clearAuthKey = () => {
     delete jfwAxios.defaults.headers.common[HeaderKey.AuthKey];
 };
 
 /**
- * Changes the brand URL for all subsequent requests.
+ * Updates the `brandURL` in the headers for all subsequent requests.
  *
- * @param brandURL - The brand URL to be set in the request headers. This is used to identify the brand for the request.
+ * `brandURL` is used to explicitly specify which brand the request is targeting.
+ * This is especially useful in multi-brand systems where a single frontend may serve multiple brands.
+ *
+ * If you do not manually provide this value (i.e., you don't call `changeBrandURL`),
+ * the backend will automatically detect the brand based on your origin domain (e.g., `window.location.origin`).
+ *
+ * @param brandURL - The brand URL to set in the request headers. Used to identify the target brand for the request.
  */
 const changeBrandURL = (brandURL: string) => {
     jfwAxios.defaults.headers.common[HeaderKey.BrandURL] = brandURL;
 };
 
 /**
- * Changes the device code for all subsequent requests.
+ * Sets the device code in the request headers.
+ * Useful for tracking which device is making the request.
  *
- * @param deviceCode - The device code to be set in the request headers. This is used to identify the device for the request.
+ * @param deviceCode - A string representing the device making the API call.
  */
 const changeDeviceCode = (deviceCode: string) => {
     jfwAxios.defaults.headers.common[HeaderKey.DeviceCode] = deviceCode;
 };
 
 /**
- * Gets the base URL for API requests based on the environment.
+ * Resolves the base API URL based on the environment setting.
  *
- * @param environment - The environment to get the base URL for. Can be either 'live' or 'development'.
- * @returns The base URL for the specified environment. Returns development URL by default.
+ * @param environment - Either 'live' or 'development'.
+ * @returns A base URL string appropriate for the given environment.
  */
 const getBaseURL = (environment: InitOption['environment']): string => {
     switch (environment) {
@@ -95,17 +114,14 @@ const getBaseURL = (environment: InitOption['environment']): string => {
     }
 };
 
-const globalErrorHandler = (error: THttpError) => {};
-
+// Exported API to be used across the app for centralized axios configuration
 const jfwjs = {
     init,
-    createInstance,
     changeAuthKey,
     clearAuthKey,
     changeBrandURL,
     changeDeviceCode,
     getBaseURL,
-    globalErrorHandler,
 };
 
 export default jfwjs;

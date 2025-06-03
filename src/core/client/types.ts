@@ -26,4 +26,9 @@ export type InitOption = {
     globalErrorHandler?: (error: AxiosError<HttpResponse>) => void;
 };
 
-export interface JfwAxiosRequestConfig extends AxiosRequestConfig {}
+export interface JfwAxiosRequestConfig extends AxiosRequestConfig {
+    raw?: boolean;
+    silent?: boolean;
+    ignoreGlobalException?: boolean;
+    context?: string;
+}
