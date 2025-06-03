@@ -1,10 +1,10 @@
+import { HttpStatusCode } from 'axios';
 import { DateType, IdType, SortOrder } from '../../models';
-import { HeaderKey } from '../client/constants';
 import { JFWError } from '../error';
-import { JFWHttpCode } from '../http';
+import { JFWHttpStatusCode } from '../http';
 
 //#region Query params types
-export interface IPageable {
+export interface Pageable {
     /**
      * The page size of the pagination.
      * @remarks integer - int32
@@ -32,7 +32,7 @@ export interface ISortable<T extends Record<string, any> = any> {
     sortOrder?: SortOrder;
 }
 
-export interface IBaseFilter {
+export interface JFWBaseFilter {
     modifiedUserBy?: IdType;
     modifiedDateFrom?: DateType;
     modifiedDateTo?: DateType;
@@ -47,7 +47,7 @@ export interface IBaseFilter {
 //#region Query response types
 export interface HttpResponse<T = any> {
     success: boolean;
-    statusCode?: JFWHttpCode;
+    statusCode?: HttpStatusCode | JFWHttpStatusCode;
     message: string;
     data: T | null;
     errors: JFWError[];
@@ -62,21 +62,4 @@ export interface ListData<T = any> {
 }
 
 export type HttpResponseList<T = any, U = {}> = HttpResponse<ListData<T> & U>;
-
-export interface IHeaderParameters {
-    /**
-     * The brand URL of the request. This is used to identify the brand.
-     * @example
-     * YOUR_BRAND_URL
-     */
-    [HeaderKey.BrandURL]: string;
-}
-
-export interface IHeaderParametersPrivate extends IHeaderParameters {
-    [HeaderKey.AuthKey]: string;
-}
-
-export interface IBaseParameters {
-    headerParameters: IHeaderParameters;
-}
 //#endregion
