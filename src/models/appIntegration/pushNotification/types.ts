@@ -6,7 +6,6 @@ export interface IAppIntegrationPushNotification {
     /**
      * The id of the object.
      * @remarks min: 1
-     * @example Kd12AnplKdMd5s
      */
     id: IdType;
 
