@@ -1,6 +1,9 @@
 import { DateType, IdType } from '../../base';
 import { IAppIntegration } from '../types';
-import { AppIntegrationPaymentGatewayStatus } from './constants';
+import {
+    AppIntegrationPaymentGatewayStatus,
+    PaymentGatewayProductCurrencyCode,
+} from './constants';
 
 export interface IAppIntegrationPaymentGateway {
     id: IdType;
@@ -22,7 +25,6 @@ export interface IAppIntegrationPaymentGateway {
 
 /**
  * This class represents the Checkout Payment Request PayPal Data Transfer Object.
- * #JFW-358
  */
 export interface IAppIntegrationPaymentGatewayProduct {
     /**
@@ -42,7 +44,7 @@ export interface IAppIntegrationPaymentGatewayProduct {
      *
      * @remarks min: 1
      */
-    currencyCode: string;
+    currencyCode: PaymentGatewayProductCurrencyCode;
 
     /**
      * The code of the item.
