@@ -1,45 +1,45 @@
-import { IBaseObject } from '../../base';
 import { PasswordPolicyLevel } from './constants';
 
-export interface IBrandSetting extends IBaseObject {
-    /**
-     * The cdn folder.
-     */
-    cdnFolder: string;
-
-    /**
-     * The cdn URL.
-     */
-    cdnURL: string;
-
-    /**
-     * The coin earning code of the brand system.
-     */
-    coinCurrencyCode: string | null;
-
+export interface IBrandSetting {
     /**
      * The domain white list URLs.
      */
-    domainWhiteListURLs: string | null;
+    domainWhiteListURLs?: string | null;
 
     /**
-     * The google analytics account.
+     * The Google Analytics account.
      */
-    googleAnalyticsAccount: string | null;
+    googleAnalyticsAccount?: string | null;
 
     /**
      * The reCaptcha key.
      */
-    reCaptchaKey: string | null;
+    reCaptchaKey?: string | null;
 
     /**
-     * Available options: 1 - Low | 2 - Medium | 3 - High
+     * The currency code of the brand.
+     */
+    currencyCode?: string | null;
+
+    /**
+     * The CDN URL.
+     */
+    cdnURL?: string | null;
+
+    /**
+     * The CDN folder.
+     */
+    cdnFolder?: string | null;
+
+    /**
+     * The password policy level.
+     *
+     * @remarks enum
      */
     passwordPolicyLevel: PasswordPolicyLevel;
 }
-
 //#region API types
-export interface IUpdateBrandSettingData {
+export interface IUpdateBrandSettingParams {
     /**
      * The domain white list URLs.
      */
