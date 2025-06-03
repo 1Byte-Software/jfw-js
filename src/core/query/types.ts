@@ -5,7 +5,7 @@ import { JFWHttpStatusCode } from '../http';
 import { SortOrder } from './constants';
 
 //#region Query params types
-export interface Pageable {
+export interface IPageable {
     /**
      * The page size of the pagination.
      * @remarks integer - int32
@@ -62,5 +62,7 @@ export interface ListData<T = unknown> {
     pageSize: number;
 }
 
-export type HttpResponseList<T = unknown, U = {}> = HttpResponse<ListData<T> & U>;
+export type HttpResponseList<T = unknown, U = {}> = HttpResponse<
+    ListData<T> & U
+>;
 //#endregion
