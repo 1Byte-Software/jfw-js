@@ -46,7 +46,7 @@ export interface JFWBaseFilter {
 //#endregion
 
 //#region Query response types
-export interface HttpResponse<T = any> {
+export interface HttpResponse<T = unknown> {
     success: boolean;
     statusCode?: HttpStatusCode | JFWHttpStatusCode;
     message: string;
@@ -54,7 +54,7 @@ export interface HttpResponse<T = any> {
     errors: JFWError[];
 }
 
-export interface ListData<T = any> {
+export interface ListData<T = unknown> {
     items: T[];
 
     totalItems: number;
@@ -62,5 +62,5 @@ export interface ListData<T = any> {
     pageSize: number;
 }
 
-export type HttpResponseList<T = any, U = {}> = HttpResponse<ListData<T> & U>;
+export type HttpResponseList<T = unknown, U = {}> = HttpResponse<ListData<T> & U>;
 //#endregion
