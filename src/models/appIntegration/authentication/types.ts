@@ -1,26 +1,108 @@
 import { IPageable, ISortable } from '../../../core';
-import { DateType, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationAuthenticationStatus } from './constants';
 
 export interface IAppIntegrationAuthentication {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
     id: string;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: string | null;
+
+    /**
+     * The app integration dto.
+     */
     appIntegration: IAppIntegration;
+
+    /**
+     * The code of the app integration.
+     *
+     * @remarks min: 1
+     */
     code: string;
+
+    /**
+     * The name of the app integration.
+     *
+     * @remarks min: 1
+     */
     name: string;
+
+    /**
+     * The project Id of the app integration.
+     *
+     * @remarks min: 1
+     */
     projectId: string;
+
+    /**
+     * The client email of the app integration. This value is used for OAuth2 methods. For example, for Google OAuth2, this value is the email of the service account.
+     *
+     * @remarks min: 1
+     */
     clientId: string;
+
+    /**
+     * The client secret of the app integration. This value is used for OAuth2 methods. For example, for Google OAuth2, this value is the private key of the service account.
+     *
+     * @remarks min: 1
+     */
     clientSecret: string;
-    redirectURI: string;
-    scope: string;
-    authEndpoint: string | null;
-    tokenEndpoint: string | null;
-    iconURL: string | null;
-    tags: string | null;
-    description: string | null;
+
+    /**
+     * The redirect URI of the app integration. After the user logs in, the user is redirected to this URI. This value is must be mapping with the application configuration on the OAuth2 provider.
+     */
+    redirectURI?: string | null;
+
+    /**
+     * The scope of the app integration.
+     */
+    scope?: string | null;
+
+    /**
+     * The authentication endpoint of the app integration.
+     */
+    authEndpoint?: string | null;
+
+    /**
+     * The token endpoint of the app integration.
+     */
+    tokenEndpoint?: string | null;
+
+    /**
+     * The icon URL of the app integration.
+     */
+    iconURL?: string | null;
+
+    /**
+     * The tags of the app integration.
+     */
+    tags?: string | null;
+
+    /**
+     * The description of the app integration.
+     */
+    description?: string | null;
+
+    /**
+     * The status of the app integration.
+     *
+     * @remarks enum
+     */
     status: AppIntegrationAuthenticationStatus;
+
+    /**
+     * Flag to indicate if the authentication integration is the default.
+     */
     isDefault: boolean;
-    createdDate: DateType;
 }
 
 //#region API types
@@ -112,81 +194,81 @@ export interface IGetAppIntegrationAuthenticationsWithBrandParams
     status?: AppIntegrationAuthenticationStatus;
 }
 
-export interface ICreateAppIntegrationAuthenticationData {
+export interface ICreateAppIntegrationAuthenticationParams {
     /**
      * The app integration id.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
-    appIntegrationId: IdType;
+    appIntegrationId: string;
 
     /**
      * The code of the app integration.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     code: string;
 
     /**
      * The name of the app integration.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     name: string;
 
     /**
      * The project Id of the app integration.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     projectId: string;
 
     /**
-     * The client email of the app integration.
-     * This value is used for OAuth2 methods.
-     * For example, for Google OAuth2, this value is the email of the service account.
+     * The client email of the app integration. This value is used for OAuth2 methods. For example, for Google OAuth2, this value is the email of the service account.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     clientId: string;
 
     /**
-     * The client secret of the app integration.
-     * This value is used for OAuth2 methods.
-     * For example, for Google OAuth2, this value is the private key of the service account.
+     * The client secret of the app integration. This value is used for OAuth2 methods. For example, for Google OAuth2, this value is the private key of the service account.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     clientSecret: string;
 
     /**
-     * The redirect URI of the app integration.
-     * After the user logs in, the user is redirected to this URI.
-     * This value must be mapped with the application configuration on the OAuth2 provider.
+     * The redirect URI of the app integration. After the user logs in, the user is redirected to this URI. This value is must be mapping with the application configuration on the OAuth2 provider.
      *
-     * @remarks string - min: 1
+     * @remarks uri - min: 1
      */
     redirectURI: string;
 
     /**
      * The scope of the app integration.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     scope: string;
 
     /**
      * The authentication endpoint of the app integration.
+     *
+     * @remarks uri
      */
     authEndpoint?: string | null;
 
     /**
      * The token endpoint of the app integration.
+     *
+     * @remarks uri
      */
     tokenEndpoint?: string | null;
 
     /**
      * The icon URL of the app integration.
+     *
+     * @remarks uri
      */
     iconURL?: string | null;
 
@@ -201,46 +283,142 @@ export interface ICreateAppIntegrationAuthenticationData {
     description?: string | null;
 
     /**
-     * Possible options
-     * - `0` - `Inactive`
-     * - `1` - `Active`
+     * The status of the app integration.
+     *
+     * @remarks enum
      */
     status?: AppIntegrationAuthenticationStatus;
 
     /**
      * Flag to indicate if the authentication integration is the default.
+     *
      * @defaultValue `false`
      */
-    isDefault?: boolean;
+    isDefault?: boolean | null;
 }
 
-export type IUpdateAppIntegrationAuthenticationData =
-    ICreateAppIntegrationAuthenticationData;
-
-export interface ITestBuildingAuthenticationURLData {
+export interface IUpdateAppIntegrationAuthenticationParams {
     /**
-     * The client email of the app integration.
-     * This value is used for OAuth2 methods.
-     * For example, for Google OAuth2, this value is the email of the service account.
-     * This is required for initiating the OAuth2 flow.
+     * The app integration id.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
+     */
+    appIntegrationId: string;
+
+    /**
+     * The code of the app integration.
+     *
+     * @remarks min: 1
+     */
+    code: string;
+
+    /**
+     * The name of the app integration.
+     *
+     * @remarks min: 1
+     */
+    name: string;
+
+    /**
+     * The project Id of the app integration.
+     *
+     * @remarks min: 1
+     */
+    projectId: string;
+
+    /**
+     * The client email of the app integration. This value is used for OAuth2 methods. For example, for Google OAuth2, this value is the email of the service account.
+     *
+     * @remarks min: 1
      */
     clientId: string;
 
     /**
-     * The redirect URI of the app integration.
-     * After the user logs in, they are redirected to this URI.
-     * This value is must be mapping with the application configuration on the OAuth2 provider.
+     * The client secret of the app integration. This value is used for OAuth2 methods. For example, for Google OAuth2, this value is the private key of the service account.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
+     */
+    clientSecret: string;
+
+    /**
+     * The redirect URI of the app integration. After the user logs in, the user is redirected to this URI. This value is must be mapping with the application configuration on the OAuth2 provider.
+     *
+     * @remarks uri - min: 1
      */
     redirectURI: string;
 
     /**
      * The scope of the app integration.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
+     */
+    scope: string;
+
+    /**
+     * The authentication endpoint of the app integration.
+     *
+     * @remarks uri
+     */
+    authEndpoint?: string | null;
+
+    /**
+     * The token endpoint of the app integration.
+     *
+     * @remarks uri
+     */
+    tokenEndpoint?: string | null;
+
+    /**
+     * The icon URL of the app integration.
+     *
+     * @remarks uri
+     */
+    iconURL?: string | null;
+
+    /**
+     * The tags of the app integration.
+     */
+    tags?: string | null;
+
+    /**
+     * The description of the app integration.
+     */
+    description?: string | null;
+
+    /**
+     * The status of the app integration.
+     *
+     * @remarks enum
+     */
+    status?: AppIntegrationAuthenticationStatus;
+
+    /**
+     * Flag to indicate if the authentication integration is the default.
+     *
+     * @defaultValue `false`
+     */
+    isDefault?: boolean | null;
+}
+
+export interface ITestBuildingAuthenticationURLParams {
+    /**
+     * The client email of the app integration. This value is used for OAuth2 methods. For example, for Google OAuth2, this value is the email of the service account.
+     *
+     * @remarks min: 1
+     */
+    clientId: string;
+
+    /**
+     * The redirect URI of the app integration. After the user logs in, the user is redirected to this URI. This value is must be mapping with the application configuration on the OAuth2 provider.
+     *
+     * @remarks min: 1
+     */
+    redirectURI: string;
+
+    /**
+     * The scope of the app integration.
+     *
+     * @remarks min: 1
      */
     scope: string;
 
@@ -249,5 +427,4 @@ export interface ITestBuildingAuthenticationURLData {
      */
     state?: string | null;
 }
-
 //#endregion
