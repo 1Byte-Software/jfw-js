@@ -5,7 +5,7 @@ export enum HeaderKey {
     ContentType = 'Content-Type',
 }
 
-export const BaseUrl = {
+export const BaseURL = {
     live: 'https://protocol.jframework.io/api/',
     development: 'https://protocol.jframework.dev/api/',
 };

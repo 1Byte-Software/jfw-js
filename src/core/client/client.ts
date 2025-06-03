@@ -1,7 +1,7 @@
 import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 import { THttpError } from '../error';
 import { HttpResponse } from '../query';
-import { BaseUrl, HeaderKey } from './constants';
+import { BaseURL, HeaderKey } from './constants';
 import { InitOption } from './types';
 
 export let jfwAxios: Axios | null = null;
@@ -89,9 +89,9 @@ const changeDeviceCode = (deviceCode: string) => {
 const getBaseURL = (environment: InitOption['environment']): string => {
     switch (environment) {
         case 'live':
-            return BaseUrl.live;
+            return BaseURL.live;
         default:
-            return BaseUrl.development;
+            return BaseURL.development;
     }
 };
 
