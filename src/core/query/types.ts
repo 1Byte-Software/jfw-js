@@ -47,11 +47,31 @@ export interface JFWBaseFilter {
 
 //#region Query response types
 export interface HttpResponse<T = unknown> {
+    /**
+     * @readonly
+     */
     success: boolean;
-    statusCode?: HttpStatusCode | JFWHttpStatusCode;
-    message: string;
+
+    /**
+     * @remarks int32
+     * @readonly
+     */
+    statusCode: HttpStatusCode | JFWHttpStatusCode;
+
+    /**
+     * @readonly
+     */
+    message: string | null;
+
+    /**
+     * @readonly
+     */
+    errors: JFWError[] | null;
+
+    /**
+     * @readonly
+     */
     data: T | null;
-    errors: JFWError[];
 }
 
 export interface ListData<T = unknown> {
