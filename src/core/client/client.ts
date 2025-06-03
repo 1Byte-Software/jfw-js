@@ -10,7 +10,7 @@ const init = (initOption: InitOption) => {
     jfwAxios = axios.create({
         baseURL: getBaseURL(initOption.environment),
         headers: {
-            [HeaderKey.BrandUrl]: initOption.brandURL,
+            [HeaderKey.BrandURL]: initOption.brandURL,
             'content-type': 'application/json',
         },
     });
@@ -68,7 +68,7 @@ const clearAuthKey = () => {
  * @param brandURL - The brand URL to be set in the request headers. This is used to identify the brand for the request.
  */
 const changeBrandURL = (brandURL: string) => {
-    jfwAxios.defaults.headers.common[HeaderKey.BrandUrl] = brandURL;
+    jfwAxios.defaults.headers.common[HeaderKey.BrandURL] = brandURL;
 };
 
 /**

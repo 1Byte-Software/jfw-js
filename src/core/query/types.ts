@@ -69,7 +69,7 @@ export interface IHeaderParameters {
      * @example
      * YOUR_BRAND_URL
      */
-    [HeaderKey.BrandUrl]: string;
+    [HeaderKey.BrandURL]: string;
 }
 
 export interface IHeaderParametersPrivate extends IHeaderParameters {
