@@ -2,130 +2,215 @@ import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { CouponStatus } from './constants';
 
-export interface ICoupon {
-    id: IdType;
-    name: string;
-    code: string;
-    description: string;
-    percentage: number;
-    quantity?: number;
-    status: CouponStatus;
-    createdDate: DateType;
-    startDate: DateType;
-    endDate: DateType;
-    autoApplyToPrice: boolean;
-}
-
-//#region API types
-export interface IGetCouponsParams extends IPageable, ISortable {
-    /**
-     * Filter by the name of the coupon
-     */
-    name?: string;
-
-    /**
-     * Filter by the code of the coupon
-     */
-    code?: string;
-
-    /**
-     * Filter by the description of the coupon
-     */
-    description?: string;
-
-    /**
-     * Filter by the percentage of the coupon
-     *
-     * @remarks number - double
-     */
-    percentage?: number;
-
-    /**
-     * Filter by the quantity of the coupon
-     *
-     * @remarks integer - int32
-     */
-    quantity?: number;
-
-    /**
-     * Filter by the auto apply to price of the coupon
-     */
-    autoApplyToPrice?: boolean;
-
-    /**
-     * Filter by the tags of the coupon
-     */
-    tags?: string;
-
-    /**
-     * Filter by the status of the coupon
-     * @remarks string - enum
-     * Possible values: `1` - `Active`, `2` - `Inactive`, `3` - `Expired`, `-3` - `Deleted`
-     */
-    status?: CouponStatus;
-
-    /**
-     * Filter by the keywords of the coupon
-     */
-    keywords?: string;
-
-    /**
-     * Filter by the test mode of the coupon. Default is false.
-     */
-    testMode?: boolean;
-}
-
 /**
- * This class is used to provide a data transfer object for the coupon which is used for command requests.
- * #JFW-296
+ * This class represents the coupon dto.
  */
-export interface ICreateCouponData {
+export interface ICoupon {
     /**
-     * The name of the coupon.
+     * The id of the object.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
-    name: string;
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
 
     /**
      * The code of the coupon.
      *
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     code: string;
 
     /**
+     * The name of the coupon.
+     *
+     * @remarks min: 1
+     */
+    name: string;
+
+    /**
+     * The description of the coupon.
+     */
+    description?: string | null;
+
+    /**
+     * The tags of the coupon.
+     */
+    tags?: string | null;
+
+    /**
      * The percentage of the coupon.
      *
-     * @remarks number - double
+     * @remarks double
      */
     percentage?: number | null;
 
     /**
      * The quantity of the coupon.
      *
-     * @remarks integer - int32
+     * @remarks int32
      */
     quantity?: number | null;
 
     /**
      * The start date and end date of the coupon.
      *
-     * @remarks string - date-time
+     * @remarks date-time
+     */
+    startDate?: DateType | null;
+
+    /**
+     * The end date of the coupon.
+     *
+     * @remarks date-time
+     */
+    endDate?: DateType | null;
+
+    /**
+     * Is the coupon auto apply to price.
+     */
+    autoApplyToPrice?: boolean | null;
+
+    /**
+     * The status of the coupon.
+     *
+     * @remarks enum
+     */
+    status: CouponStatus;
+
+    /**
+     * The test mode of the coupon.
+     */
+    testMode: boolean;
+
+    /**
+     * The modified date of the coupon.
+     *
+     * @remarks date-time
+     */
+    modifiedDate?: DateType;
+}
+
+//#region API types
+/**
+ * Interface representing parameters to filter and get coupons.
+ */
+export interface IGetCouponsParams extends IPageable, ISortable {
+    /**
+     * Filter by the name of the coupon.
+     */
+    name?: string;
+
+    /**
+     * Filter by the code of the coupon.
+     */
+    code?: string;
+
+    /**
+     * Filter by the description of the coupon.
+     */
+    description?: string;
+
+    /**
+     * Filter by the percentage of the coupon.
+     *
+     * @remarks double
+     */
+    percentage?: number;
+
+    /**
+     * Filter by the quantity of the coupon.
+     *
+     * @remarks int32
+     */
+    quantity?: number;
+
+    /**
+     * Filter by the auto apply to price of the coupon.
+     */
+    autoApplyToPrice?: boolean;
+
+    /**
+     * Filter by the tags of the coupon.
+     */
+    tags?: string;
+
+    /**
+     * Filter by the status of the coupon.
+     *
+     * @remarks enum
+     */
+    status?: CouponStatus;
+
+    /**
+     * Filter by the keywords of the coupon.
+     */
+    keywords?: string;
+
+    /**
+     * Filter by the test mode of the coupon.
+     *
+     * @defaultValue false
+     */
+    testMode?: boolean;
+}
+
+/**
+ * This class is used to provide a data transfer object for the coupon which is used for command requests.
+ */
+export interface ICreateCouponParams {
+    /**
+     * The name of the coupon.
+     *
+     * @remarks min: 1
+     */
+    name: string;
+
+    /**
+     * The code of the coupon.
+     *
+     * @remarks min: 1
+     */
+    code: string;
+
+    /**
+     * The percentage of the coupon.
+     *
+     * @remarks double
+     */
+    percentage?: number | null;
+
+    /**
+     * The quantity of the coupon.
+     *
+     * @remarks int32
+     */
+    quantity?: number | null;
+
+    /**
+     * The start date and end date of the coupon.
+     *
+     * @remarks date-time
      */
     startDate: DateType;
 
     /**
      * The end date of the coupon.
      *
-     * @remarks string - date-time
+     * @remarks date-time
      */
     endDate: DateType;
 
     /**
-     * Is the coupon auto apply to price. If true, the coupon will be applied to the price automatically.
+     * Is the coupon auto apply to price. If true, the coupon will be applied to the price automatically. By default, the value is false.
      */
-    autoApplyToPrice?: boolean | null;
+    autoApplyToPrice?: boolean;
 
     /**
      * The description of the coupon.
@@ -140,18 +225,12 @@ export interface ICreateCouponData {
     /**
      * The status of the coupon.
      *
-     * @remarks string - enum
-     * This is a string-based enum with the following possible values:
-     * - `1` - `Active`
-     * - `2` - `Inactive`
-     * - `3` - `Expired`
-     * - `-3` - `Deleted`
+     * @remarks enum
      */
     status?: CouponStatus;
 
     /**
-     * The test mode of the coupon.
-     * @defaultValue `false`
+     * The test mode of the coupon. By default, the value is false.
      */
     testMode?: boolean;
 }
@@ -159,5 +238,5 @@ export interface ICreateCouponData {
 /**
  * This class is used to provide a data transfer object for the coupon which is used for command requests.
  */
-export type IUpdateCouponData = ICreateCouponData;
+export type IUpdateCouponParams = ICreateCouponParams;
 //#endregion
