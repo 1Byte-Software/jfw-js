@@ -16,7 +16,7 @@ import { HeaderKey } from '../../core/client/constants';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/delete-a-file-cdn}
  */
-export const deleteFileCDNAPI = async (
+export const deleteFileCDN = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -37,10 +37,7 @@ export const deleteFileCDNAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/get-a-file-cdn}
  */
-export const getFileCDNAPI = async (
-    id: IdType,
-    config?: AxiosRequestConfig,
-) => {
+export const getFileCDN = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(CDN_PATH.GET_FILE_CDN, {
         id,
     });
@@ -58,7 +55,7 @@ export const getFileCDNAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/get-files-cdn}
  */
-export const getFilesCDNAPI = async (
+export const getFilesCDN = async (
     params?: IGetFilesCDNParams,
     config?: AxiosRequestConfig,
 ) => {
