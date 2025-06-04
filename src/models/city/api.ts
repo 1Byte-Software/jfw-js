@@ -13,7 +13,7 @@ import { ICity, IGetCitiesParams } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cities}
  */
-export const getCitiesAPI = async (
+export const getCities = async (
     params?: IGetCitiesParams,
     config?: AxiosRequestConfig,
 ) => {
