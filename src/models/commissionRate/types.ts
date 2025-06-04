@@ -1,16 +1,73 @@
 import { IPageable, ISortable } from '../../core';
-import { IUser } from '../user';
+import { DateType, IdType } from '../base';
+import { IBaseUser } from '../user';
 import { CommissionRateType } from './constants';
 
+/**
+ * This class represents the commission rate DTO.
+ */
 export interface ICommissionRate {
-    id: string;
-    percentage: number;
-    quantityFrom: number;
-    quantityTo: number;
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * The id of the brand.
+     */
+    brandId?: IdType | null;
+
+    /**
+     * This class is used to return user information to client.
+     */
+    user?: IBaseUser;
+
+    /**
+     * @remarks enum
+     */
     type: CommissionRateType;
-    user: IUser | null;
-    description: string | null;
-    unit: string;
+
+    /**
+     * The description.
+     */
+    description?: string | null;
+
+    /**
+     * The quantity from.
+     *
+     * @remarks int32
+     */
+    quantityFrom?: number | null;
+
+    /**
+     * The quantity to.
+     *
+     * @remarks int32
+     */
+    quantityTo?: number | null;
+
+    /**
+     * The unit of the commission rate.
+     */
+    unit?: string | null;
+
+    /**
+     * The percentage.
+     *
+     * @remarks double
+     */
+    percentage?: number | null;
+
+    /**
+     * The default commission rate.
+     */
     isDefault: boolean;
 }
 
@@ -33,40 +90,41 @@ export interface IGetCommissionRatesParams extends IPageable, ISortable {
 }
 
 /**
- * #JFW-291
+ * This class represents the commission rate create request DTO.
  */
-export interface IGetDiscountCommissionDiscountParams {
-    quantity?: number;
-}
-
-/**
- * Represents the commission rate create request DTO.
- */
-export interface ICreateCommissionRateData {
+export interface ICreateCommissionRateParams {
     /**
-     * The type of commission rate.
+     * @remarks enum
      */
     type?: CommissionRateType;
 
     /**
      * The unit of the commission rate.
+     *
+     * @remarks min: 1
      */
-    unit?: string | null;
+    unit: string;
 
     /**
      * The quantity from.
+     *
+     * @remarks int32
      */
     quantityFrom?: number | null;
 
     /**
      * The quantity to.
+     *
+     * @remarks int32
      */
     quantityTo?: number | null;
 
     /**
      * The percentage.
+     *
+     * @remarks double
      */
-    percentage?: number | null;
+    percentage: number;
 
     /**
      * The description.
@@ -75,12 +133,59 @@ export interface ICreateCommissionRateData {
 
     /**
      * The default commission rate.
+     *
+     * @defaultValue `false`
      */
-    isDefault?: boolean | null;
+    isDefault?: boolean;
 }
 
 /**
- * This class represents the commission rate create request DTO.
+ * This class represents the commission rate update request DTO.
  */
-export type IUpdateCommissionRateData = ICreateCommissionRateData;
+export interface IUpdateCommissionRateParams {
+    /**
+     * @remarks enum
+     */
+    type?: CommissionRateType;
+
+    /**
+     * The unit of the commission rate.
+     *
+     * @remarks min: 1
+     */
+    unit: string;
+
+    /**
+     * The quantity from.
+     *
+     * @remarks int32
+     */
+    quantityFrom?: number | null;
+
+    /**
+     * The quantity to.
+     *
+     * @remarks int32
+     */
+    quantityTo?: number | null;
+
+    /**
+     * The percentage.
+     *
+     * @remarks double
+     */
+    percentage: number;
+
+    /**
+     * The description.
+     */
+    description?: string | null;
+
+    /**
+     * The default commission rate.
+     *
+     * @defaultValue `false`
+     */
+    isDefault?: boolean;
+}
 //#endregion
