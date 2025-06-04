@@ -1,114 +1,174 @@
 import { IPageable, ISortable } from '../../core';
-import { IdType } from '../base';
+import { DateType, IdType } from '../base';
 import { FeatureStatus, FeatureType } from './constants';
 
+/**
+ * This class represents the feature data transfer object.
+ */
 export interface IFeature {
+    /**
+     * The id of the object.
+     */
     id: IdType;
-    parentBrandId: IdType;
-    trackingEventId: IdType | null;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * The id of the brand that owns the feature.
+     */
+    parentBrandId?: IdType | null;
+
+    /**
+     * The id of the event.
+     */
+    eventId?: IdType | null;
+
+    /**
+     * The type of the feature.
+     *
+     * @remarks enum
+     */
     type: FeatureType;
+
+    /**
+     * The code of the feature. This code is used to identify the feature.
+     */
     code: string;
+
+    /**
+     * The name of the feature.
+     */
     name: string;
-    // Title will required in feature
-    title: string | null;
-    image: string | null;
-    styles: string | null;
-    description: string | null;
-    tags: string | null;
-    zOrder: number | null;
+
+    /**
+     * The image of the feature.
+     *
+     * @remarks uri
+     */
+    image?: string | null;
+
+    /**
+     * The style of the feature. It is a JSON string.
+     */
+    styles?: string | null;
+
+    /**
+     * The description of the feature.
+     */
+    description?: string | null;
+
+    /**
+     * The tags of the feature.
+     */
+    tags?: string | null;
+
+    /**
+     * The zOrder number in the list. The default value is 1.
+     *
+     * @remarks int64
+     */
+    zOrder: number;
+
+    /**
+     * The status of the feature.
+     *
+     * @remarks enum
+     */
     status: FeatureStatus;
-    isUnlimited: boolean;
-    quantity: number;
-    unit: string;
 }
 //#region API types
-
-/**
- * Parameters for getting features
- */
 export interface IGetFeaturesParams extends IPageable, ISortable {
     /**
-     * Filter by the package id
+     * Filter by the package id.
      */
     packageId?: IdType;
 
     /**
-     * Filter by the event id
+     * Filter by the event id.
      */
     eventId?: IdType;
 
     /**
-     * Filter by the feature type
+     * Filter by the feature type.
+     *
+     * @remarks enum
      */
     type?: FeatureType;
 
     /**
-     * Filter by the code
+     * Filter by the code.
      */
     code?: string;
 
     /**
-     * Filter by the name
+     * Filter by the name.
      */
     name?: string;
 
     /**
-     * Filter by the description
+     * Filter by the description.
      */
     description?: string;
 
     /**
-     * Filter by the tags
+     * Filter by the tags.
      */
     tags?: string;
 
     /**
-     * Filter by the notes
+     * Filter by the notes.
      */
     notes?: string;
 
     /**
-     * Filter by the status
+     * Filter by the status.
+     *
+     * @remarks enum
      */
     status?: FeatureStatus;
 }
 
 /**
  * This class represents the feature data transfer object for the command request.
- * #JFW-296
  */
-export interface ICreateFeatureData {
+export interface ICreateFeatureParams {
     /**
-     * The tracking event id. This value represents the event that the feature belongs to.
-     * @remarks string - min: 1
+     * The event id. This value represents the event that the feature belongs to.
+     *
+     * @remarks min: 1
      */
     eventId: IdType;
 
     /**
-     * The type of feature
+     * The type of the feature.
+     *
+     * @remarks enum
      */
-    type: FeatureType;
+    type?: FeatureType;
 
     /**
-     * The code of the feature
-     * @remarks string - min: 1
+     * The code of the feature.
+     *
+     * @remarks min: 1
      */
     code: string;
 
     /**
-     * The name of the feature
-     * @remarks string - min: 1
+     * The name of the feature.
+     *
+     * @remarks min: 1
      */
     name: string;
 
     /**
-     * The title of the feature
-     */
-    title: string;
-
-    /**
      * The image of the feature. This value must be a valid URL.
-     * @remarks string - uri
+     *
+     * @remarks uri
      */
     image?: string | null;
 
@@ -128,13 +188,17 @@ export interface ICreateFeatureData {
     tags?: string | null;
 
     /**
-     * The order number in the list. This property is used to sort the features in the list when displaying them.
-     * @remarks integer - int64
+     * The zOrder number in the list. This property is used to sort the features in the list when displaying them. By default, the value is 1.
+     *
+     * @remarks int64
+     * @defaultValue `1`
      */
-    zOrder?: number;
+    zOrder?: number | null;
 
     /**
-     * The status of the feature
+     * The status of the feature.
+     *
+     * @remarks enum
      */
     status?: FeatureStatus;
 }
@@ -142,6 +206,6 @@ export interface ICreateFeatureData {
 /**
  * This class represents the feature data transfer object for the command request.
  */
-export type IUpdateFeatureData = ICreateFeatureData;
+export type IUpdateFeatureParams = ICreateFeatureParams;
 
 //#endregion
