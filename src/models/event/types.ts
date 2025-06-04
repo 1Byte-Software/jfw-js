@@ -1,65 +1,6 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IBaseObject, IdType } from '../base';
-import { ILanguage } from '../language';
-import { EventStatus } from './constants';
-
-/**
- * This class represents the data transfer object for the email template.
- */
-export interface IEmailTemplate {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     *
-     * @example "Kd12AnplKdMd5s"
-     */
-    id: string;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
-    /**
-     * The country code of the email.
-     * This value is used to determine the country of the email.
-     * Following the ISO 3166-1 alpha-2 standard. For example, "US" for United States, "FR" for France, etc.
-     */
-    countryCode?: string | null;
-
-    /**
-     * The language code of the email.
-     * This value is used to determine the language of the email.
-     * Following the ISO 639-1 standard. For example, "en" for English, "fr" for French, etc.
-     *
-     * @remarks min: 1
-     */
-    languageCode: string;
-
-    /**
-     * The subject of the email.
-     *
-     * @remarks min: 1
-     */
-    subject: string;
-
-    /**
-     * The body of the email.
-     *
-     * @remarks min: 1
-     */
-    body: string;
-
-    /**
-     * The tags of the email.
-     */
-    tags?: string | null;
-
-    event: IEvent;
-}
+import { DateType, IdType } from '../base';
+import { EventStatus, PhoneTemplateStatus } from './constants';
 
 /**
  * This class represents the EventDto class.
@@ -142,6 +83,51 @@ export interface IEvent {
      * Flag indicating if the event is a system event.
      */
     isSystem: boolean;
+}
+
+/**
+ * This class represents the Phone Template Data Transfer Object.
+ */
+export interface IPhoneTemplate {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * This class represents the EventDto class.
+     */
+    event?: IEvent;
+
+    /**
+     * The language code of the template.
+     *
+     * @remarks min: 1
+     */
+    languageCode: string;
+
+    /**
+     * The content of the template.
+     *
+     * @remarks min: 1
+     */
+    content: string;
+
+    /**
+     * The status of the template.
+     *
+     * @remarks enum
+     */
+    status: PhoneTemplateStatus;
 }
 
 /**

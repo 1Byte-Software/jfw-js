@@ -3,16 +3,17 @@ import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { IEmailTemplate } from '../emailTemplate';
 import { EVENT_PATH } from './paths';
 import {
     IDefaultEmailTemplate,
     IDefaultPhoneTemplate,
-    IEmailTemplate,
     IEvent,
     IGetEmailTemplateDefaultByEventParams,
     IGetEventsEarningWalletParams,
     IGetEventsParams,
     IGetPhoneTemplateDefaultByEventParams,
+    IPhoneTemplate,
     IWalletEarningEvent,
 } from './types';
 
@@ -164,7 +165,7 @@ export const getPhoneTemplateByEvent = async (
     const url = generatePath(EVENT_PATH.GET_PHONE_TEMPLATE_BY_EVENT, {
         eventId,
     });
-    const response = await jfwAxios.get<HttpResponse<IEmailTemplate>>(
+    const response = await jfwAxios.get<HttpResponse<IPhoneTemplate>>(
         url,
         config,
     );
