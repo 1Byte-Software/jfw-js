@@ -13,7 +13,7 @@ import { ICurrency, IGetCurrenciesParams } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-currencies}
  */
-export const getCurrenciesAPI = async (
+export const getCurrencies = async (
     params?: IGetCurrenciesParams,
     config?: AxiosRequestConfig,
 ) => {
