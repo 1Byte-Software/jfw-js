@@ -5,19 +5,19 @@ import { COUNTRY_PATH } from './paths';
 import { ICountry, IGetCountriesParams } from './types';
 
 /**
- * List all countries by the given filter.
+ * # Countries
  *
- * @param params - The parameters for getting countries.
+ * Get countries
+ *
+ * @param params - The params for getting countries.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-countries}
- * JFW-294
  */
-export const getCountriesAPI = async (
+export const getCountries = async (
     params?: IGetCountriesParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = COUNTRY_PATH.GET_COUNTRIES;
-
     const response = await jfwAxios.get<HttpResponseList<ICountry>>(url, {
         params,
         ...config,
