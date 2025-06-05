@@ -1,31 +1,32 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../core';
+import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { SUBSCRIPTION_TYPE_PATH } from './paths';
 import {
-    ICreateSubscriptionTypeData,
+    ICreateSubscriptionTypeParams,
     ISubscriptionType,
-    IUpdateSubscriptionTypeData,
+    IUpdateSubscriptionTypeParams,
 } from './types';
 
 /**
+ * # Create a subscription type
+ *
  * Creates a new subscription type.
  *
- * @param data - The data for creating a new subscription type.
+ * @param params - The params for creating a new subscription type.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/create-a-subscription-type}
  */
-export const createSubscriptionTypeAPI = async (
-    data: ICreateSubscriptionTypeData,
+export const createSubscriptionType = async (
+    params: ICreateSubscriptionTypeParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = SUBSCRIPTION_TYPE_PATH.CREATE_SUBSCRIPTION_TYPE;
-
     const response = await jfwAxios.post<HttpResponse<ISubscriptionType>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -33,13 +34,15 @@ export const createSubscriptionTypeAPI = async (
 };
 
 /**
+ * # Delete a subscription type
+ *
  * Deletes a subscription type by the given Id.
  *
  * @param id - The id of the subscription type.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/delete-a-subscription-type}
  */
-export const deleteSubscriptionTypeAPI = async (
+export const deleteSubscriptionType = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -52,20 +55,21 @@ export const deleteSubscriptionTypeAPI = async (
 };
 
 /**
+ * # Get a subscription type
+ *
  * Gets a subscription type by id.
  *
  * @param id - The id of the subscription type.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/get-a-subscription-type}
  */
-export const getSubscriptionTypeAPI = async (
+export const getSubscriptionType = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(SUBSCRIPTION_TYPE_PATH.GET_SUBSCRIPTION_TYPE, {
         id,
     });
-
     const response = await jfwAxios.get<HttpResponse<ISubscriptionType>>(
         url,
         config,
@@ -75,6 +79,8 @@ export const getSubscriptionTypeAPI = async (
 };
 
 /**
+ * # Get subscription types
+ *
  * Gets a list of all subscription type.
  *
  * @param config - Optional axios request configuration object.
@@ -82,7 +88,6 @@ export const getSubscriptionTypeAPI = async (
  */
 export const getSubscriptionTypesAPI = async (config?: AxiosRequestConfig) => {
     const url = SUBSCRIPTION_TYPE_PATH.GET_SUBSCRIPTION_TYPES;
-
     const response = await jfwAxios.get<HttpResponse<ISubscriptionType[]>>(
         url,
         config,
@@ -92,16 +97,18 @@ export const getSubscriptionTypesAPI = async (config?: AxiosRequestConfig) => {
 };
 
 /**
+ * # Update a subscription type
+ *
  * Updates a subscription type by the given Id.
  *
  * @param id - The id of the subscription type.
- * @param data - The data for updating a coupon.
+ * @param params - The params for updating a subscription type.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/update-a-subscription-type}
  */
 export const updateSubscriptionTypeAPI = async (
     id: IdType,
-    data: IUpdateSubscriptionTypeData,
+    params: IUpdateSubscriptionTypeParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(SUBSCRIPTION_TYPE_PATH.UPDATE_SUBSCRIPTION_TYPE, {
@@ -109,7 +116,7 @@ export const updateSubscriptionTypeAPI = async (
     });
     const response = await jfwAxios.put<HttpResponse<ISubscriptionType>>(
         url,
-        data,
+        params,
         config,
     );
 

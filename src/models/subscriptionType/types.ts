@@ -1,48 +1,73 @@
 import { DateType, IdType } from '../base';
 import { SubscriptionTypeStatus } from './constants';
 
+/**
+ * This class is used to define the data transfer object for the SubscriptionType entity class.
+ */
 export interface ISubscriptionType {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
     id: IdType;
 
     /**
-     * The name of the subscription type
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * The name of the subscription type.
+     *
+     * @remarks min: 1
      */
     name: string;
 
     /**
-     * The unit of the subscription type
+     * The unit of the subscription type.
+     *
+     * @remarks min: 1
      */
     unit: string;
 
     /**
-     * The quantity of the subscription type
+     * The quantity of the subscription type.
+     *
+     * @remarks int32
      */
-    quantity: number | null;
+    quantity?: number | null;
 
     /**
-     * The tags of the subscription type
+     * The tags of the subscription type.
      */
-    tags: string | null;
+    tags?: string | null;
 
     /**
-     * The description of the subscription type
-     */
-    description: string | null;
-
-    /**
-     * Flag to indicate if the subscription type is default
-     */
-    isDefault: boolean;
-
-    /**
-     * The z-order of the subscription type
+     * The z-order of the subscription type.
+     *
+     * @remarks int64
      */
     zOrder: number;
 
     /**
-     * The status of the subscription type
+     * The status of the subscription type.
+     *
+     * @remarks enum
      */
     status: SubscriptionTypeStatus;
+
+    /**
+     * Flag to indicate if the subscription type is default.
+     */
+    isDefault: boolean;
+
+    /**
+     * The description of the subscription type.
+     */
+    description?: string | null;
 }
 
 //#region API types
@@ -50,50 +75,57 @@ export interface ISubscriptionType {
 /**
  * Data transfer object for creating or updating a subscription type
  */
-export interface ICreateSubscriptionTypeData {
+export interface ICreateSubscriptionTypeParams {
     /**
-     * The name of the subscription type
-     * @remarks string - min: 1
+     * The name of the subscription type.
+     *
+     * @remarks min: 1
      */
     name: string;
 
     /**
-     * The unit of the subscription type
-     * @remarks string - min: 1
+     * The unit of the subscription type.
+     *
+     * @remarks min: 1
      */
     unit: string;
 
     /**
-     * The quantity of the subscription type
-     * @remarks integer - int32
+     * The quantity of the subscription type.
+     *
+     * @remarks int32
      */
     quantity?: number;
 
     /**
-     * The tags of the subscription type
+     * The tags of the subscription type.
      */
     tags?: string | null;
 
     /**
-     * The z-order of the subscription type
-     * @remarks integer - int64
-     * @defaultValue 1
+     * The z-order of the subscription type. Default is 1
+     *
+     * @remarks int64
+     * @defaultValue `1`
      */
     zOrder?: number;
 
     /**
-     * The status of the subscription type
+     * The status of the subscription type.
+     *
+     * @remarks enum
      */
     status?: SubscriptionTypeStatus;
 
     /**
-     * Flag to indicate if the subscription type is default
-     * @defaultValue false
+     * Flag to indicate if the subscription type is default. By default, it is false.
+     *
+     * @defaultValue `false`
      */
     isDefault?: boolean;
 
     /**
-     * The description of the subscription type
+     * The description of the subscription type.
      */
     description?: string | null;
 }
@@ -101,5 +133,5 @@ export interface ICreateSubscriptionTypeData {
 /**
  * This class is used to define the data transfer object for the SubscriptionType which is used to create or update a subscription type.
  */
-export type IUpdateSubscriptionTypeData = ICreateSubscriptionTypeData;
+export type IUpdateSubscriptionTypeParams = ICreateSubscriptionTypeParams;
 //#endregion
