@@ -1,30 +1,33 @@
 import { AxiosRequestConfig } from 'axios';
-import { HttpResponse, HttpResponseList } from '../../core';
+import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { ISSUE_CATEGORY_PATH } from './paths';
 import {
-    ICreateIssueCategoryData,
+    ICreateIssueCategoryParams,
     IGetIssueCategoriesParams,
-    IIssueCategory
+    IIssueCategory,
+    IUpdateIssueCategoryParams,
 } from './types';
 
 /**
+ * # Create an issue category
+ *
  * Creates a new issue category.
  *
- * @param data - The data for creating a new issue category.
+ * @param params - The params for creating a new issue category.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/create-an-issue-category}
  */
 export const createIssueCategoryAPI = async (
-    data: ICreateIssueCategoryData,
+    params: ICreateIssueCategoryParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = ISSUE_CATEGORY_PATH.CREATE_ISSUE_CATEGORY;
     const response = await jfwAxios.post<HttpResponse<IIssueCategory>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -32,9 +35,11 @@ export const createIssueCategoryAPI = async (
 };
 
 /**
+ * # Delete an issue category
+ *
  * Deletes an issue category by the given id.
  *
- * @param id - The id for deleting an issue category.
+ * @param id - The id of the issue category.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/delete-an-issue-category}
  */
@@ -51,9 +56,11 @@ export const deleteIssueCategoryAPI = async (
 };
 
 /**
+ * # Get issue categories
+ *
  * Gets the list of issue category.
  *
- * @param params - The parameters for getting lst of issue category.
+ * @param params - The params for getting lst of issue category.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/get-issue-categories}
  */
@@ -62,7 +69,7 @@ export const getIssueCategoriesAPI = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = ISSUE_CATEGORY_PATH.GET_ISSUE_CATEGORIES;
-    const response = await jfwAxios.get<HttpResponseList<IIssueCategory>>(url, {
+    const response = await jfwAxios.get<HttpResponse<IIssueCategory[]>>(url, {
         params,
         ...config,
     });
@@ -71,6 +78,8 @@ export const getIssueCategoriesAPI = async (
 };
 
 /**
+ * # Get an issue category
+ *
  * Gets an issue category by the given id.
  *
  * @param id - The id of the issue category.
@@ -93,6 +102,8 @@ export const getIssueCategoryAPI = async (
 };
 
 /**
+ * # Update an issue category
+ *
  * Updates an issue category by the given id.
  *
  * @param id - The id of the issue category.
@@ -102,13 +113,17 @@ export const getIssueCategoryAPI = async (
  */
 export const updateIssueCategoryAPI = async (
     id: IdType,
-    data: ICreateIssueCategoryData,
+    data: IUpdateIssueCategoryParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ISSUE_CATEGORY_PATH.UPDATE_ISSUE_CATEGORY, {
         id,
     });
-    const response = await jfwAxios.patch<HttpResponse<IIssueCategory>>(url, data, config);
+    const response = await jfwAxios.patch<HttpResponse<IIssueCategory>>(
+        url,
+        data,
+        config,
+    );
 
     return response.data;
 };

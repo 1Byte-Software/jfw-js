@@ -1,4 +1,9 @@
+/**
+ * Possible values:
+ * - `0` - `Inactive`
+ * - `1` - `Active`
+ */
 export enum IssueCategoryStatus {
-    Active = 'Active',
     Inactive = 'Inactive',
+    Active = 'Active',
 }
