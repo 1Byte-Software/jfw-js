@@ -7,81 +7,185 @@ import {
 } from './constants';
 
 export interface ITrackingEmail {
-    id: IdType;
-    countryCode: string;
-    languageCode: string | null;
-    notificationType: TrackingEmailNotificationType;
-    notificationChannelType: TrackingEmailNotificationChannelType;
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: string;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * The country code.
+     */
+    countryCode?: string | null;
+
+    /**
+     * The language code.
+     */
+    languageCode?: string | null;
+
+    /**
+     * @remarks enum
+     */
+    notificationType?: TrackingEmailNotificationType | null;
+
+    /**
+     * @remarks enum
+     */
+    notificationChannelType?: TrackingEmailNotificationChannelType | null;
+
+    /**
+     * The email from.
+     *
+     * @remarks min: 1
+     */
     emailFrom: string;
+
+    /**
+     * The email to.
+     *
+     * @remarks min: 1
+     */
     emailTo: string;
-    emailCc: string;
-    emailBcc: string;
-    emailSubject: string;
+
+    /**
+     * The email cc.
+     */
+    emailCc?: string | null;
+
+    /**
+     * The email bcc.
+     */
+    emailBcc?: string | null;
+
+    /**
+     * The email subject.
+     */
+    emailSubject?: string | null;
+
+    /**
+     * The email body.
+     *
+     * @remarks min: 1
+     */
     emailBody: string;
+
+    /**
+     * The time sent.
+     *
+     * @remarks date-time
+     */
     sentTime: DateType;
+
+    /**
+     * The test mode of the tracking email.
+     */
     testMode: boolean;
-    tags: string | null;
-    status: TrackingEmailStatus;
-    createdDate: DateType;
+
+    /**
+     * The tags.
+     */
+    tags?: string | null;
+
+    /**
+     * @remarks enum
+     */
+    status?: TrackingEmailStatus | null;
 }
+
 //#region API types
 export interface IGetTrackingEmailsParams extends IPageable, ISortable {
-    /** The id of the user. */
-    userId?: string;
-    /** The id of the event. */
-    eventId?: string;
-    /** The country code. This is a two letter country code. */
+    /**
+     * The id of the user.
+     */
+    userId?: IdType;
+
+    /**
+     * The id of the event.
+     */
+    eventId?: IdType;
+
+    /**
+     * The country code. This is a two letter country code.
+     */
     countryCode?: string;
-    /** The language code. This is a two letter language code. */
+
+    /**
+     * The language code. This is a two letter language code.
+     */
     languageCode?: string;
+
     /**
      * The notification type.
-     * Possible values:
-     * - 0: System
-     * - 1: User
+     *
+     * @remarks enum
      */
     type?: TrackingEmailNotificationType;
+
     /**
      * The notification channel type.
-     * Possible values:
-     * - 0: None
-     * - 1: Inbox
-     * - 2: Email
-     * - 3: InboxAndEmail
-     * - 4: Sms
-     * - 5: InboxAndSms
-     * - 6: EmailAndSms
-     * - 7: InboxAndEmailAndSms
+     *
+     * @remarks enum
      */
     notificationChannelType?: TrackingEmailNotificationChannelType;
-    /** The email from. */
+
+    /**
+     * The email from.
+     */
     emailFrom?: string;
-    /** The email to. */
+
+    /**
+     * The email to.
+     */
     emailTo?: string;
-    /** The email cc. */
+
+    /**
+     * The email cc.
+     */
     emailCc?: string;
-    /** The email bcc. */
+
+    /**
+     * The email bcc.
+     */
     emailBcc?: string;
-    /** The email subject. */
+
+    /**
+     * The email subject.
+     */
     emailSubject?: string;
-    /** The email body. */
+
+    /**
+     * The email body.
+     */
     emailBody?: string;
-    /** Flag to indicate if the email is in test mode. */
+
+    /**
+     * Flag to indicate if the email is in test mode.
+     */
     testMode?: boolean;
-    /** The tags. */
+
+    /**
+     * Filter by keywords.
+     */
+    keywords?: string;
+
+    /**
+     * The tags.
+     */
     tags?: string;
+
     /**
      * The status of the tracking email.
-     * Possible values:
-     * - 0: Unread
-     * - 1: ReadEmailNotification
-     * - 2: ReadEmailNotificationButNotYetTakenAction
-     * - 3: ReadEmailNotificationAndClickedTakenAction
+     *
+     * @remarks enum
      */
     status?: TrackingEmailStatus;
-
-    /** Filter by the keywords. */
-    keywords?: string;
 }
-
 //#endregion
