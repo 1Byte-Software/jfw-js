@@ -1,9 +1,10 @@
-// export const NOTIFICATION_STATUS = {
-//     unread: 'Unread',
-//     read: 'ReadEmailNotification',
-//     takenAction: 'ReadEmailNotificationAndClickedTakenAction',
-// };
-
+/**
+ * Possible values:
+ * - `0` - `Unread`
+ * - `1` - `ReadEmailNotification`
+ * - `2` - `ReadEmailNotificationButNotYetTakenAction`
+ * - `3` - `ReadEmailNotificationAndClickedTakenAction`
+ */
 export enum NotificationStatus {
     Unread = 'Unread',
     ReadEmailNotification = 'ReadEmailNotification',
