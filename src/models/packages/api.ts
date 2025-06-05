@@ -7,23 +7,25 @@ import { IFeature } from '../feature';
 import { IPrice } from '../price';
 import { PACKAGE_PATH } from './paths';
 import {
-    IAddFeaturesToPackageData,
-    ICreatePackageData,
+    IAddFeaturesToPackageParams,
+    ICreatePackageParams,
     IPackage,
-    IUpdatePackageData,
+    IUpdatePackageParams,
 } from './types';
 
 /**
+ * # Add features to a package
+ *
  * Add features to a package.
  *
  * @param id - The package id.
- * @param data - The data for adding features to a package.
+ * @param params - The params for adding features to a package.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/add-features-to-a-package}
  */
-export const addFeaturesToPackageAPI = async (
+export const addFeaturesToPackage = async (
     id: IdType,
-    data: IAddFeaturesToPackageData[],
+    params: IAddFeaturesToPackageParams[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PACKAGE_PATH.ADD_FEATURE_TO_PACKAGE, {
@@ -31,7 +33,7 @@ export const addFeaturesToPackageAPI = async (
     });
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -39,20 +41,22 @@ export const addFeaturesToPackageAPI = async (
 };
 
 /**
+ * # Create a package
+ *
  * Creates a new package.
  *
- * @param data - The data for creating a new package.
+ * @param params - The params for creating a new package.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/create-a-package}
  */
-export const createPackageAPI = async (
-    data: ICreatePackageData,
+export const createPackage = async (
+    params: ICreatePackageParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = PACKAGE_PATH.CREATE_PACKAGE;
     const response = await jfwAxios.post<HttpResponse<IPackage>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -60,13 +64,15 @@ export const createPackageAPI = async (
 };
 
 /**
+ * # Delete a package
+ *
  * Deletes a package.
  *
  * @param id - The id of the package to delete.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/delete-a-package}
  */
-export const deletePackageAPI = async (
+export const deletePackage = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -79,16 +85,15 @@ export const deletePackageAPI = async (
 };
 
 /**
+ * # Get a package
+ *
  * Gets a package
  *
  * @param id - The package id.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/get-a-package}
  */
-export const getPackageAPI = async (
-    id: IdType,
-    config?: AxiosRequestConfig,
-) => {
+export const getPackage = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(PACKAGE_PATH.GET_PACKAGE, {
         id,
     });
@@ -98,13 +103,36 @@ export const getPackageAPI = async (
 };
 
 /**
+ * # Get features from a package
+ *
+ * Get features from a package
+ *
+ * @param id - The id of the package.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/get-features-from-package}
+ */
+export const getFeaturesFromPackage = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(PACKAGE_PATH.GET_FEATURES_FROM_PACKAGE, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<IFeature[]>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * # Get packages
+ *
  * Get packages
  *
- * @param params - The parameters for getting packages.
+ * @param params - The params for getting packages.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/get-packages}
  */
-export const getPackagesAPI = async (config?: AxiosRequestConfig) => {
+export const getPackages = async (config?: AxiosRequestConfig) => {
     const url = PACKAGE_PATH.GET_PACKAGES;
     const response = await jfwAxios.get<HttpResponse<IPackage[]>>(url, config);
 
@@ -112,13 +140,15 @@ export const getPackagesAPI = async (config?: AxiosRequestConfig) => {
 };
 
 /**
+ * # Get prices from a package
+ *
  * Get prices by package id.
  *
  * @param id - The id of the package.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/get-prices-from-a-package}
  */
-export const getPricesFromPackageAPI = async (
+export const getPricesFromPackage = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -131,25 +161,26 @@ export const getPricesFromPackageAPI = async (
 };
 
 /**
+ * # Update a package
+ *
  * Updates a package.
  *
  * @param id - The package id.
- * @param data - The data for updating a package.
+ * @param params - The params for updating a package.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/update-a-package}
  */
-export const updatePackageAPI = async (
+export const updatePackage = async (
     id: IdType,
-    data: IUpdatePackageData,
+    params: IUpdatePackageParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PACKAGE_PATH.UPDATE_PACKAGE, {
         id,
     });
-
     const response = await jfwAxios.put<HttpResponse<IPackage>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -157,41 +188,32 @@ export const updatePackageAPI = async (
 };
 
 /**
+ * # Remove features from a package
+ *
  * Remove features from a package.
  *
  * @param id - The package id.
+ * @param featureIds - The list of the feature id to remove.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/remove-features-from-a-package}
  */
-export const deleteFeaturesFromPackageAPI = async (
+export const removeFeaturesFromPackage = async (
     id: IdType,
+    featureIds: IdType[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PACKAGE_PATH.REMOVE_FEATURES_FROM_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
-
-    return response.data;
-};
-
-/**
- * Get features by package id.
- *
- * @param id - The id of the package.
- * @param config - Optional axios request configuration object.
- * @see {@link Will update in feature}
- *
- * #JFW-268
- */
-export const getFeaturesFromPackageAPI = async (
-    id: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(PACKAGE_PATH.GET_FEATURES_FROM_PACKAGE, {
-        id,
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
+        params: {
+            featureIds,
+        },
+        paramsSerializer: {
+            indexes: true,
+        },
+        ...config,
     });
-    const response = await jfwAxios.get<HttpResponse<IFeature[]>>(url, config);
 
     return response.data;
 };
