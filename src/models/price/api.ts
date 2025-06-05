@@ -1,101 +1,142 @@
-import { AxiosRequestConfig, RawAxiosRequestHeaders } from 'axios';
+import { AxiosRequestConfig } from 'axios';
+import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { PRICE_PATH } from './paths';
 import {
     ICreatePriceParams,
-    IGenerateCheckoutLinkParams,
+    IGetPricesParams,
     IPrice,
-    IQueryPriceParams,
     IUpdatePriceParams,
 } from './types';
 
 /**
- * Gets a list of all prices that match the given filter.
+ * # Create a price
+ *
+ * Create a price.
+ *
+ * @param params - The params for creating a price.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/create-a-price}
  */
-export const queryPriceAPI = async (
-    params: IQueryPriceParams,
-): Promise<IPrice[]> => {
-    const url = PRICE_PATH.QUERY;
-    const response = await jfwAxios.get(url, {
-        params,
-    });
-    return response.data;
-};
-
-/**
- * Gets a price
- */
-export const getPriceByIdAPI = async (priceId: IdType): Promise<IPrice> => {
-    const url = generatePath(PRICE_PATH.GET_BY_ID, {
-        id: priceId,
-    });
-
-    const response = await jfwAxios.get(url);
-    return response.data;
-};
-
-/**
- * Creates price
- */
-export const createPriceAPI = async (payload: ICreatePriceParams) => {
-    const url = PRICE_PATH.CREATE;
-
-    const response = await jfwAxios.post(url, payload);
-    return response.data;
-};
-
-/**
- * Updates a price
- */
-export const updatePriceAPI = async (
-    priceId: IdType,
-    params: IUpdatePriceParams,
+export const createPrice = async (
+    params: ICreatePriceParams,
+    config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(PRICE_PATH.UPDATE_BY_ID, {
-        id: priceId,
-    });
-    const response = await jfwAxios.put(url, params);
+    const url = PRICE_PATH.CREATE_PRICE;
+    const response = await jfwAxios.post<HttpResponse<IPrice>>(
+        url,
+        params,
+        config,
+    );
+
     return response.data;
 };
 
 /**
- * Deletes a price
+ * # Delete a price
+ *
+ * Deletes a price by the given id.
+ *
+ * @param id - The id of the price.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/delete-a-price}
  */
-export const deletePriceAPI = async (priceId: IdType) => {
-    const url = generatePath(PRICE_PATH.DELETE_BY_ID, {
-        id: priceId,
+export const deletePrice = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(PRICE_PATH.DELETE_PRICE, {
+        id,
     });
-    const response = await jfwAxios.delete(url);
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+
     return response.data;
 };
 
 /**
- * #JFW-64: Thiếu tài liệu GET: api/prices/:id/generate-checkout-link
+ * # Generate checkout link
+ *
+ * Gets the checkout link for the price with the given id.
+ *
+ * @param id - The id of the price.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/generate-checkout-link}
+ * #JFW-505
  */
 export const generateCheckoutLink = async (
-    priceId: IdType,
-    params: IGenerateCheckoutLinkParams,
+    id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PRICE_PATH.GENERATE_CHECKOUT_LINK, {
-        id: priceId,
+        id,
     });
+    const response = await jfwAxios.get(url, config);
 
-    const response = await jfwAxios.post(url, null, {
-        ...config,
-        params,
-    });
     return response.data;
 };
 
 /**
- * Creates the direct checkout link.
- * @feature Will make in feature
+ * # Get a price
+ *
+ * Gets a price.
+ *
+ * @param id - The id of the price.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/get-a-price}
  */
-export const createDirectCheckoutLinkAPI = (priceId: IdType) => {
-    const url = generatePath(PRICE_PATH.DIRECT_CHECKOUT_LINK, {
-        id: priceId,
+export const getPrice = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(PRICE_PATH.GET_PRICE, {
+        id,
     });
+    const response = await jfwAxios.get<HttpResponse<IPrice>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * # Get prices
+ *
+ * Get prices.
+ *
+ * @param params - The params for getting prices.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/get-prices}
+ */
+export const getPrices = async (
+    params?: IGetPricesParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = PRICE_PATH.GET_PRICES;
+    const response = await jfwAxios.get<HttpResponse<IPrice[]>>(url, {
+        params,
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * # Update a price
+ *
+ * Updates a price by the given id.
+ *
+ * @param id - The id of the price.
+ * @param params - The params for updating a price.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/update-a-price}
+ */
+export const updatePrice = async (
+    id: IdType,
+    params: IUpdatePriceParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(PRICE_PATH.UPDATE_PRICE, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<IPrice>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
 };
