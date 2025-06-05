@@ -3,19 +3,15 @@ const REST_PERMISSION = 'permissions';
 const REST_USER = 'users';
 
 export const ROLE_PATH = {
-    QUERY: `v1/${REST}`,
-    CREATE: `v1/${REST}`,
-    UPDATE_BY_ID: `v1/${REST}/:id`,
-    GET_BY_ID: `v1/${REST}/:id`,
-    DELETE_BY_ID: `v1/${REST}/:id`,
+    ASSIGN_USERS_TO_ROLE: `v1/${REST}/{id}/${REST_USER}`,
+    DELETE_ROLE: `v1/${REST}/{id}`,
+    CREATE_ROLE: `v1/${REST}`,
+    GET_ROLE: `v1/${REST}/{id}`,
+    GET_ROLES: `v1/${REST}`,
 
-    PERMISSION: {
-        GET: `v1/${REST}/:id/${REST_PERMISSION}`,
-        GRANT: `v1/${REST}/:id/${REST_PERMISSION}`,
-        REMOVE: `v1/${REST}/:id/${REST_PERMISSION}`,
-    },
+    GRANT_PERMISSIONS_TO_ROLE: `v1/${REST}/{id}/${REST_PERMISSION}`,
+    GET_PERMISSIONS_GRANTED_BY_ROLE: `v1/${REST}/{id}/${REST_PERMISSION}`,
+    REMOVE_PERMISSIONS_FROM_ROLE: `v1/${REST}/{id}/${REST_PERMISSION}`,
 
-    USER: {
-        ASSIGN: `v1/${REST}/:id/${REST_USER}`,
-    },
+    UPDATE_ROLE: `v1/${REST}/{id}`,
 };
