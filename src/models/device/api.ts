@@ -26,7 +26,7 @@ import {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/check-user-access-device}
  */
-export const checkUserAccessDeviceAPI = async (
+export const checkUserAccessDevice = async (
     params: ICheckUserAccessDeviceParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -48,7 +48,7 @@ export const checkUserAccessDeviceAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/create-a-device}
  */
-export const createDeviceAPI = async (
+export const createDevice = async (
     params: ICreateDeviceParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -71,7 +71,7 @@ export const createDeviceAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/delete-a-device}
  */
-export const deleteDeviceAPI = async (
+export const deleteDevice = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -92,7 +92,7 @@ export const deleteDeviceAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-a-device}
  */
-export const getDeviceAPI = async (id: IdType, config?: AxiosRequestConfig) => {
+export const getDevice = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(DEVICE_PATH.GET_DEVICE, {
         id,
     });
@@ -109,7 +109,7 @@ export const getDeviceAPI = async (id: IdType, config?: AxiosRequestConfig) => {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-current-device-access}
  */
-export const getCurrentDeviceOfUserAuthorizedAPI = async (
+export const getCurrentDeviceOfUserAuthorized = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = DEVICE_PATH.GET_CURRENT_DEVICE_OF_USER_AUTHORIZED;
@@ -127,7 +127,7 @@ export const getCurrentDeviceOfUserAuthorizedAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-devices}
  */
-export const getDevicesAPI = async (
+export const getDevices = async (
     params?: IGetDevicesParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -149,7 +149,7 @@ export const getDevicesAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/statistics}
  */
-export const deviceStatisticAPI = async (
+export const deviceStatistic = async (
     params?: IStatisticCommonParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -171,7 +171,7 @@ export const deviceStatisticAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/update-a-device}
  */
-export const updateDeviceAPI = async (
+export const updateDevice = async (
     id: IdType,
     params: IUpdateDeviceParams,
     config?: AxiosRequestConfig,
