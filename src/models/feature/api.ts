@@ -44,7 +44,7 @@ export const createFeature = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/delete-a-feature}
  */
-export const deleteFeatureAPI = async (
+export const deleteFeature = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -65,7 +65,7 @@ export const deleteFeatureAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/get-a-feature}
  */
-export const getFeatureAPI = async (
+export const getFeature = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -86,7 +86,7 @@ export const getFeatureAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/get-features}
  */
-export const getFeaturesAPI = async (
+export const getFeatures = async (
     params?: IGetFeaturesParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -108,7 +108,7 @@ export const getFeaturesAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/get-packages-from-feature}
  */
-export const getPackagesByFeatureAPI = async (
+export const getPackagesByFeature = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -130,7 +130,7 @@ export const getPackagesByFeatureAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/update-a-feature}
  */
-export const updateFeatureAPI = async (
+export const updateFeature = async (
     id: IdType,
     params: IUpdateFeatureParams,
     config?: AxiosRequestConfig,
