@@ -15,7 +15,7 @@ import { IGetPaymentsParams, IPayment, IPaymentDashboard } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/payments/get-a-payment}
  */
-export const getPaymentAPI = async (
+export const getPayment = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -36,7 +36,7 @@ export const getPaymentAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/payments/get-payments}
  */
-export const getPaymentsAPI = async (
+export const getPayments = async (
     params?: IGetPaymentsParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -57,7 +57,7 @@ export const getPaymentsAPI = async (
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/payments/gets-the-overview-sell-dashboard}
  * #JFW-502
  */
-export const getOverviewSellDashboardAPI = async (
+export const getOverviewSellDashboard = async (
     testMode?: boolean,
     config?: AxiosRequestConfig,
 ) => {
