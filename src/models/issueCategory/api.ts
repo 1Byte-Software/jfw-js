@@ -20,7 +20,7 @@ import {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/create-an-issue-category}
  */
-export const createIssueCategoryAPI = async (
+export const createIssueCategory = async (
     params: ICreateIssueCategoryParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -43,7 +43,7 @@ export const createIssueCategoryAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/delete-an-issue-category}
  */
-export const deleteIssueCategoryAPI = async (
+export const deleteIssueCategory = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -64,7 +64,7 @@ export const deleteIssueCategoryAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/get-issue-categories}
  */
-export const getIssueCategoriesAPI = async (
+export const getIssueCategories = async (
     params?: IGetIssueCategoriesParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -86,7 +86,7 @@ export const getIssueCategoriesAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/get-an-issue-category}
  */
-export const getIssueCategoryAPI = async (
+export const getIssueCategory = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -111,7 +111,7 @@ export const getIssueCategoryAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issue-categories/update-an-issue-category}
  */
-export const updateIssueCategoryAPI = async (
+export const updateIssueCategory = async (
     id: IdType,
     data: IUpdateIssueCategoryParams,
     config?: AxiosRequestConfig,
