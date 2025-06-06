@@ -1,4 +1,4 @@
-export * from './links';
+export * from './brandLinks';
 
 export * from './api';
 export * from './constants';

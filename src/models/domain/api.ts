@@ -20,10 +20,7 @@ import {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/delete-a-domain}
  */
-export const deleteDomainAPI = async (
-    id: IdType,
-    config?: AxiosRequestConfig,
-) => {
+export const deleteDomain = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(DOMAIN_PATH.DELETE_DOMAIN, {
         id,
     });
@@ -41,7 +38,7 @@ export const deleteDomainAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/get-domains}
  */
-export const getDomainsAPI = async (
+export const getDomains = async (
     params?: IGetDomainsParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -63,7 +60,7 @@ export const getDomainsAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/get-a-domain}
  */
-export const getCoupon = async (id: IdType, config?: AxiosRequestConfig) => {
+export const getDomain = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(DOMAIN_PATH.GET_DOMAIN, {
         id,
     });
@@ -81,7 +78,7 @@ export const getCoupon = async (id: IdType, config?: AxiosRequestConfig) => {
  * @param config - Optional axios request configuration object.
  * @see {@link }
  */
-export const createDomainAPI = async (
+export const createDomain = async (
     data: ICreateDomainParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -105,10 +102,7 @@ export const createDomainAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link }
  */
-export const updateDomainAPI = async (
-    id: IdType,
-    data: IUpdateDomainParams,
-) => {
+export const updateDomain = async (id: IdType, data: IUpdateDomainParams) => {
     const url = generatePath(DOMAIN_PATH.UPDATE_DOMAIN, {
         id,
     });
