@@ -24,7 +24,7 @@ import {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/create-a-brand-link}
  */
-export const createBrandLinkAPI = async (
+export const createBrandLink = async (
     id: IdType,
     params: ICreateBrandLinkParams,
     config?: AxiosRequestConfig,
@@ -51,7 +51,7 @@ export const createBrandLinkAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/delete-a-brand-link}
  */
-export const deleteBrandLinkAPI = async (
+export const deleteBrandLink = async (
     id: IdType,
     brandLinkId: IdType,
     config?: AxiosRequestConfig,
@@ -74,7 +74,7 @@ export const deleteBrandLinkAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/get-a-brand-link}
  */
-export const getBrandLinkAPI = async (
+export const getBrandLink = async (
     params: IGetBrandLinkParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -99,7 +99,7 @@ export const getBrandLinkAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/get-brand-links-by-type}
  */
-export const getBrandLinksByTypeAPI = async (
+export const getBrandLinksByType = async (
     id: IdType,
     type: BrandLinkType,
     params: IGetBrandLinksByTypeParams,
@@ -129,7 +129,7 @@ export const getBrandLinksByTypeAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/get-brand-links}
  */
-export const getBrandLinksAPI = async (
+export const getBrandLinks = async (
     id: IdType,
     params: IGetBrandLinksParams,
     config?: AxiosRequestConfig,
@@ -156,7 +156,7 @@ export const getBrandLinksAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/update-a-brand-link}
  */
-export const updateBrandLinkAPI = async (
+export const updateBrandLink = async (
     id: IdType,
     brandLinkId: IdType,
     params: IUpdateBrandLinkParams,
