@@ -15,7 +15,7 @@ import { IGetTrackingEmailsParams, ITrackingEmail } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/tracking-emails/get-a-tracking-email}
  */
-export const getTrackingEmailAPI = async (
+export const getTrackingEmail = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -37,7 +37,7 @@ export const getTrackingEmailAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/tracking-emails/get-tracking-emails}
  */
-export const getTrackingEmailsAPI = async (
+export const getTrackingEmails = async (
     params?: IGetTrackingEmailsParams,
     config?: AxiosRequestConfig,
 ) => {
