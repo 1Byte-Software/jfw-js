@@ -20,7 +20,7 @@ import {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/create-an-email-template}
  */
-export const createEmailTemplateAPI = async (
+export const createEmailTemplate = async (
     params: ICreateEmailTemplateParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -43,7 +43,7 @@ export const createEmailTemplateAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/delete-an-email-template}
  */
-export const deleteEmailTemplateAPI = async (
+export const deleteEmailTemplate = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -64,7 +64,7 @@ export const deleteEmailTemplateAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/get-an-email-template}
  */
-export const getEmailTemplateAPI = async (
+export const getEmailTemplate = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -88,7 +88,7 @@ export const getEmailTemplateAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/get-email-templates}
  */
-export const getEmailTemplatesAPI = async (
+export const getEmailTemplates = async (
     params?: IGetEmailTemplatesParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -109,7 +109,7 @@ export const getEmailTemplatesAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/gets-all-placeholder-keys-available}
  */
-export const getAllPlaceHolderKeysAvailableAPI = async (
+export const getAllPlaceHolderKeysAvailable = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = EMAIL_TEMPLATE_PATH.GET_ALL_PLACEHOLDER_KEYS_AVAILABLE;
@@ -131,7 +131,7 @@ export const getAllPlaceHolderKeysAvailableAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/update-an-email-template}
  */
-export const updateEmailTemplateAPI = async (
+export const updateEmailTemplate = async (
     id: IdType,
     params: IUpdateEmailTemplateParams,
     config?: AxiosRequestConfig,
