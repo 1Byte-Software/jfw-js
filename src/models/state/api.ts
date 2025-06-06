@@ -12,7 +12,7 @@ import { IState } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/states}
  */
-export const getStatesAPI = async (config?: AxiosRequestConfig) => {
+export const getStates = async (config?: AxiosRequestConfig) => {
     const url = STATE_PATH.GET_STATES;
     const response = await jfwAxios.get<HttpResponse<IState[]>>(url, config);
 
