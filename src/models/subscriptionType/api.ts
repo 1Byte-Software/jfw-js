@@ -86,7 +86,7 @@ export const getSubscriptionType = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/get-subscription-types}
  */
-export const getSubscriptionTypesAPI = async (config?: AxiosRequestConfig) => {
+export const getSubscriptionTypes = async (config?: AxiosRequestConfig) => {
     const url = SUBSCRIPTION_TYPE_PATH.GET_SUBSCRIPTION_TYPES;
     const response = await jfwAxios.get<HttpResponse<ISubscriptionType[]>>(
         url,
@@ -106,7 +106,7 @@ export const getSubscriptionTypesAPI = async (config?: AxiosRequestConfig) => {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/update-a-subscription-type}
  */
-export const updateSubscriptionTypeAPI = async (
+export const updateSubscriptionType = async (
     id: IdType,
     params: IUpdateSubscriptionTypeParams,
     config?: AxiosRequestConfig,
