@@ -1,4 +1,3 @@
-import { IPageable, ISortable } from '../../core';
 import { DateType } from '../base';
 
 /**
@@ -36,13 +35,6 @@ export interface IExchangeRate {
 
 export type IUserExchange = Omit<IExchangeRate, 'rate'>;
 //#region API types
-
-/**
- * #JFW-299
- */
-export interface IGetExchangeRatesParams extends IPageable, ISortable {
-    keywords?: string;
-}
 
 export interface IConvertCurrencyParams {
     /**
