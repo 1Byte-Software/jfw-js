@@ -44,7 +44,7 @@ export const getExchangeRates = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/exchange-rates/convert-currency}
  */
-export const convertCurrencyAPI = async (
+export const convertCurrency = async (
     params: IConvertCurrencyParams,
     config?: AxiosRequestConfig,
 ) => {

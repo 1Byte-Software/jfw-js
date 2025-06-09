@@ -116,7 +116,7 @@ export const getDiscountValue = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/commission-rates/get-commission-rates}
  */
-export const getCommissionRatesAPI = async (
+export const getCommissionRates = async (
     params?: IGetCommissionRatesParams,
     config?: AxiosRequestConfig,
 ) => {

@@ -93,7 +93,7 @@ export const getAppIntegrationSMTP = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/smtp/gets-an-app-integration-smtp-with-brand}
  */
-export const getAppsIntegrationSMTPWithBrandAPI = async (
+export const getAppsIntegrationSMTPWithBrand = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = APP_INTEGRATION_SMTP_PATH.GET_APPS_INTEGRATION_SMTP_WITH_BRAND;
@@ -117,7 +117,7 @@ export const getAppsIntegrationSMTPWithBrandAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/send-sms-test-message}
  */
-export const testSendingEmailAddressAPI = async (
+export const testSendingEmailAddress = async (
     params: ITestSendingEmailAddressParams,
     config?: AxiosRequestConfig,
 ) => {

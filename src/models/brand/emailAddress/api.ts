@@ -12,7 +12,7 @@ import { IBrandEmailAddress, IUpdateEmailAddressData } from './types';
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-emails-with-a-brand}
  * #JFW-361
  */
-export const getEmailsWithBrandAPI = async (
+export const getEmailsWithBrand = async (
     brandId: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -36,7 +36,7 @@ export const getEmailsWithBrandAPI = async (
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/update-a-email}
  * #JFW-361
  */
-export const updateBrandEmailAddressAPI = async (
+export const updateBrandEmailAddress = async (
     id: IdType,
     data: IUpdateEmailAddressData,
     config?: AxiosRequestConfig,

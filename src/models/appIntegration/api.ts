@@ -13,7 +13,7 @@ import { IAppIntegration, IGetAppIntegrationsParams } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/get-app-integrations}
  */
-export const getAppIntegrationsAPI = async (
+export const getAppIntegrations = async (
     params?: IGetAppIntegrationsParams,
     config?: AxiosRequestConfig,
 ) => {

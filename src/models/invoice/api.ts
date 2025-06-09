@@ -58,7 +58,7 @@ export const getInvoices = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/get-a-invoice}
  */
-export const getInvoiceAPI = async (
+export const getInvoice = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -84,7 +84,7 @@ export const getInvoiceAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/export-a-invoice}
  */
-export const exportInvoiceAPI = async (
+export const exportInvoice = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {

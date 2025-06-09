@@ -44,7 +44,7 @@ export const checkDomainIfExists = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/create-a-brand}
  */
-export const createBrandAPI = async (
+export const createBrand = async (
     params: ICreateBrandParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -68,7 +68,7 @@ export const createBrandAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/generate-domain}
  */
-export const generateNewDomainAPI = async (config?: AxiosRequestConfig) => {
+export const generateNewDomain = async (config?: AxiosRequestConfig) => {
     const url = BRAND_PATH.GENERATE_NEW_DOMAIN;
     const response = await jfwAxios.get<HttpResponse<IGeneratedDomain>>(
         url,
@@ -87,7 +87,7 @@ export const generateNewDomainAPI = async (config?: AxiosRequestConfig) => {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-a-brand}
  */
-export const getBrandAPI = async (id: IdType, config?: AxiosRequestConfig) => {
+export const getBrand = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(BRAND_PATH.GET_BRAND, {
         id,
     });
@@ -112,7 +112,7 @@ export const getBrandAPI = async (id: IdType, config?: AxiosRequestConfig) => {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-a-brand-by-brand-url}
  */
-export const getBrandByURLAPI = async (config?: AxiosRequestConfig) => {
+export const getBrandByURL = async (config?: AxiosRequestConfig) => {
     const url = BRAND_PATH.GET_BRAND_BY_URL;
     const response = await jfwAxios.get<HttpResponse<IBrand>>(url, config);
 
@@ -128,7 +128,7 @@ export const getBrandByURLAPI = async (config?: AxiosRequestConfig) => {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-brands}
  */
-export const getBrandsAPI = async (
+export const getBrands = async (
     params?: IGetBrandsParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -151,7 +151,7 @@ export const getBrandsAPI = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/update-a-brand}
  */
-export const updateBrandAPI = async (
+export const updateBrand = async (
     id: IdType,
     params: IUpdateBrandParams,
     config?: AxiosRequestConfig,

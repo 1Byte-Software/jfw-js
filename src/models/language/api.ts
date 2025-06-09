@@ -10,7 +10,7 @@ import { ILanguage } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/languages}
  */
-export const getLanguagesAPI = async (config?: AxiosRequestConfig) => {
+export const getLanguages = async (config?: AxiosRequestConfig) => {
     const url = LANGUAGE_PATH.GET_LANGUAGES;
     const response = await jfwAxios.get<HttpResponse<ILanguage[]>>(url, config);
 
