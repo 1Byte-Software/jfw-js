@@ -22,13 +22,6 @@ export interface ICountry extends IBaseObject {
 }
 
 //#region API types
-
-/**
- * JFW-291
- */
-/**
- * Parameters used to filter and paginate the list of countries.
- */
 export interface IGetCountriesParams extends IPageable, ISortable {
     /**
      * The region of the country.
