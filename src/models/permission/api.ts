@@ -144,7 +144,7 @@ export const getRolesFromPermission = async (
     const url = generatePath(PERMISSION_PATH.GET_ROLES_FROM_PERMISSION, {
         permissionId,
     });
-    const response = await jfwAxios.get<HttpResponseList<IRole>>(url, config);
+    const response = await jfwAxios.get<HttpResponse<IRole>>(url, config);
 
     return response.data;
 };
