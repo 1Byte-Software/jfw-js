@@ -2,11 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { EXCHANGE_RATE_PATH } from './paths';
-import {
-    IConvertCurrencyParams,
-    IExchangeRate,
-    IGetExchangeRatesParams,
-} from './types';
+import { IConvertCurrencyParams, IExchangeRate } from './types';
 
 /**
  * # Get exchange rates
@@ -19,15 +15,12 @@ import {
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/exchange-rates/get-exchange-rates}
  */
-export const getExchangeRates = async (
-    params?: IGetExchangeRatesParams,
-    config?: AxiosRequestConfig,
-) => {
+export const getExchangeRates = async (config?: AxiosRequestConfig) => {
     const url = EXCHANGE_RATE_PATH.GET_EXCHANGE_RATES;
-    const response = await jfwAxios.get<HttpResponse<IExchangeRate[]>>(url, {
-        params,
-        ...config,
-    });
+    const response = await jfwAxios.get<HttpResponse<IExchangeRate[]>>(
+        url,
+        config,
+    );
 
     return response.data;
 };
