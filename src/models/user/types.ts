@@ -11,9 +11,9 @@ import { ConfigurationStatus } from '../configuration/constants';
 import { IPackage } from '../packages';
 import { IRole } from '../role';
 import {
-    AddDeviceToUserStatus,
     AuthenticationResponseType,
     BrandPartnerAuthenticateStatus,
+    UserDeviceStatus,
     UserStatus,
     UserType,
 } from './constants';
@@ -631,7 +631,7 @@ export interface IAddDeviceToUserParams {
      * @remarks enum
      * #JFW-509
      */
-    status?: AddDeviceToUserStatus;
+    status?: UserDeviceStatus;
 }
 
 export interface IGetAppIntegrationAuthenticateURLsParams {

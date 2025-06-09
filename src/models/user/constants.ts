@@ -34,8 +34,7 @@ export enum UserStatus {
  * - `1` - `Online`
  * - `-3` - `Deleted`
  */
-// #JFW-509
-export enum AddDeviceToUserStatus {
+export enum UserDeviceStatus {
     Offline = 'Offline',
     Online = 'Online',
     Deleted = 'Deleted',
