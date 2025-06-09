@@ -5,11 +5,15 @@ import { APP_INTEGRATION_PATH } from './paths';
 import { IAppIntegration, IGetAppIntegrationsParams } from './types';
 
 /**
+ * # Get apps integration
+ *
  * List all the app integration by the given type.
  *
+ * @param params - The params for gets a user.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/get-app-integrations}
  */
-export const getAppIntegrationsAPI = async (
+export const getAppIntegrations = async (
     params?: IGetAppIntegrationsParams,
     config?: AxiosRequestConfig,
 ) => {

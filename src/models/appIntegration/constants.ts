@@ -16,7 +16,12 @@ export enum AppIntegrationType {
     PaymentGateway = 'PaymentGateway',
 }
 
+/**
+ * Possible values
+ * - `0` - `Inactive`
+ * - `1` - `Active`
+ */
 export enum AppIntegrationStatus {
-    Active = 'Active',
     Inactive = 'Inactive',
+    Active = 'Active',
 }

@@ -4,16 +4,18 @@ import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { INVOICE_PATH } from './paths';
-import { IGetInvoicesParams, IInvoice } from './types';
+import { IExportInvoice, IGetInvoicesParams, IInvoice } from './types';
 
 /**
+ * # Delete an invoice
+ *
  * Delete an Invoice.
  *
  * @param id - The id of the invoice.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/delete-an-invoice}
  */
-export const deleteInvoiceAPI = async (
+export const deleteInvoice = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -26,13 +28,15 @@ export const deleteInvoiceAPI = async (
 };
 
 /**
+ * # Get invoices
+ *
  * Get invoices.
  *
- * @param params - The parameters for getting invoices.
+ * @param params - The params for getting invoices.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/get-invoices}
  */
-export const getInvoicesAPI = async (
+export const getInvoices = async (
     params?: IGetInvoicesParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -46,13 +50,15 @@ export const getInvoicesAPI = async (
 };
 
 /**
+ * # Get an invoice
+ *
  * Get an invoice.
  *
  * @param id - The id of the invoice.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/get-a-invoice}
  */
-export const getInvoiceAPI = async (
+export const getInvoice = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -65,21 +71,30 @@ export const getInvoiceAPI = async (
 };
 
 /**
- * Exports the invoice to pdf by the given id. Returns the file as a download.
+ * # Export an invoice
+ *
+ * Exports the invoice to pdf by the given id.
+ *
+ * On success, the browser/download manager receives the file stream:
+ *
+ * - Content-Type: application/pdf
+ * - Content-Disposition: attachment; filename="invoice_12345.pdf"
  *
  * @param id - The id of the invoice.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/invoices/export-a-invoice}
- * #JFW-300
  */
-export const exportInvoiceAPI = async (
+export const exportInvoice = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(INVOICE_PATH.EXPORT_INVOICE, {
         id,
     });
-    const response = await jfwAxios.post(url, config);
+    const response = await jfwAxios.post<HttpResponse<IExportInvoice>>(
+        url,
+        config,
+    );
 
     return response.data;
 };

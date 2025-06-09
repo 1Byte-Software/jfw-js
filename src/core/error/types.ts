@@ -1,13 +1,29 @@
-import { AxiosError } from 'axios';
 import { JFWLogLevel } from './constants';
-import { HttpResponse } from '../query';
 
 export type JFWError = {
-    code: number;
-    subcode: number;
-    errorCode: number;
-    details: string;
-    logLevel: JFWLogLevel;
-};
+    /**
+     * @remarks int32
+     */
+    code?: number;
 
-export type THttpError = Error | AxiosError<HttpResponse>;
+    /**
+     * @remarks int32
+     */
+    subcode?: number;
+
+    /**
+     * @remarks int32
+     */
+    errorCode?: number;
+
+    /**
+     * @remarks int32
+     * @readonly
+     */
+    details?: string | null;
+
+    /**
+     * @remarks enum
+     */
+    logLevel?: JFWLogLevel | null;
+};

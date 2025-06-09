@@ -2,70 +2,151 @@ import { DateType, IdType } from '../base';
 import { ConfigurationStatus } from './constants';
 
 /**
- * #JFW-307
+ * This class represents the configuration DTO.
  */
 export interface IConfiguration {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
     id: IdType;
-    name: string;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * The group code of the configuration.
+     *
+     * @remarks min: 1
+     */
     groupCode: string;
-    code: string;
-    value: string | null;
-    description: string | null;
-    userId: IdType;
-    createdDate: DateType;
-}
-
-//#region API types
-
-/**
- * #JFW-291
- */
-export interface IGetConfigurationsParams {
-    groupCode?: string;
-    code?: string;
-    name?: string;
-    description?: string;
-    value?: string;
-    status?: ConfigurationStatus;
-}
-
-/**
- * Configuration data transfer object used for creating or updating configurations
- */
-export interface ICreateConfigurationData {
-    /**
-     * The group code of the configuration
-     */
-    groupCode?: string | null;
 
     /**
-     * The code of the configuration
-     * @min 1
+     * The code of the configuration.
+     *
+     * @remarks min: 1
      */
     code: string;
 
     /**
-     * The name of the configuration
-     * @min 1
+     * The name of the configuration.
+     *
+     * @remarks min: 1
      */
     name: string;
 
     /**
-     * The value of the configuration
+     * The value of the configuration.
+     *
+     * @remarks min: 1
      */
     value: string;
 
     /**
-     * The description of the configuration
+     * The description of the configuration.
      */
     description?: string | null;
 
     /**
-     * The status of the configuration (0: Inactive, 1: Active)
+     * The status of the configuration.
+     *
+     * @remarks enum
+     */
+    status: ConfigurationStatus;
+
+    /**
+     * Is system configuration.
+     */
+    isSystem: boolean;
+}
+
+//#region API types
+export interface IGetConfigurationsParams {
+    /**
+     * Filter by group code
+     */
+    groupCode?: string;
+
+    /**
+     * Filter by code
+     */
+    code?: string;
+
+    /**
+     * Filter by name
+     */
+    name?: string;
+
+    /**
+     * Filter by description
+     */
+    description?: string;
+
+    /**
+     * Filter by value
+     */
+    value?: string;
+
+    /**
+     * Filter by status
+     *
+     * @remarks enum
+     */
+    status?: ConfigurationStatus;
+}
+/**
+ * This class represents the configuration data transfer object which is used to create or update a configuration.
+ */
+export interface ICreateConfigurationParams {
+    /**
+     * The group code of the configuration.
+     *
+     * @remarks min: 1
+     */
+    groupCode: string;
+
+    /**
+     * The code of the configuration.
+     *
+     * @remarks min: 1
+     */
+    code: string;
+
+    /**
+     * The name of the configuration.
+     *
+     * @remarks min: 1
+     */
+    name: string;
+
+    /**
+     * The description of the configuration.
+     */
+    description?: string | null;
+
+    /**
+     * The value of the configuration.
+     *
+     * @remarks min: 1
+     */
+    value: string;
+
+    /**
+     * The status of the configuration.
+     *
+     * @remarks enum
      */
     status?: ConfigurationStatus;
 }
 
-export type IUpdateConfigurationData = ICreateConfigurationData;
+/**
+ * This class represents the configuration data transfer object which is used to create or update a configuration.
+ */
+export type IUpdateConfigurationParams = ICreateConfigurationParams;
 
 //#endregion

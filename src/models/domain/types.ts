@@ -1,16 +1,62 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IBaseObject, IdType } from '../base';
+import { DateType, IdType } from '../base';
 import { DomainProtocol, DomainType } from './constants';
 
-export interface IDomain extends IBaseObject {
-    domain: string;
-    isDefault: boolean;
-    isPrimary: boolean;
-    protocol: string;
+export interface IDomain {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * @remarks enum
+     */
     type: DomainType;
+
+    /**
+     * The protocol of the domain.
+     *
+     * @remarks min: 1
+     */
+    protocol: string;
+
+    /**
+     * The value of the domain.
+     *
+     * @remarks min: 1
+     */
+    domain: string;
+
+    /**
+     * Flag to indicate if the domain is verified.
+     */
     verified: boolean;
-    verifiedDate: Date;
-    createdDate: DateType;
+
+    /**
+     * The date and time when the domain was verified.
+     *
+     * @remarks date-time
+     */
+    verifiedDate?: DateType | null;
+
+    /**
+     * Flag to indicate if the domain is the default domain.
+     */
+    isDefault: boolean;
+
+    /**
+     * Flag to indicate if the domain is the primary domain.
+     */
+    isPrimary: boolean;
 }
 
 //#region API types
@@ -18,14 +64,14 @@ export interface IGetDomainsParams extends IPageable, ISortable {
     /**
      * The type of the domain.
      *
-     * @remarks string - enum
+     * @remarks enum
      */
     type?: DomainType;
 
     /**
      * The protocol of the domain.
      *
-     * @remarks string - enum
+     * @remarks enum
      */
     protocol?: DomainProtocol;
 
@@ -58,7 +104,7 @@ export interface IGetDomainsParams extends IPageable, ISortable {
 /**
  * #NOTE: Will update api in feature
  */
-export interface ICreateDomainData {
+export interface ICreateDomainParams {
     id: IdType;
 
     domain: string;
@@ -68,6 +114,6 @@ export interface ICreateDomainData {
     type: DomainType;
 }
 
-export type IUpdateDomainData = ICreateDomainData;
+export type IUpdateDomainParams = ICreateDomainParams;
 
 //#endregion

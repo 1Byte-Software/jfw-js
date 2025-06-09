@@ -5,36 +5,35 @@ import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { ORGANIZATION_PATH } from './paths';
 import {
-    IAddNewUserToOrganizationParams,
-    IAddUserForDefaultLanguageCodeOrganizationSystemParams,
-    IAssignRoleForUserInOrganizationData,
     IAssignRoleForUserInOrganizationParams,
-    ICreateOrganizationData,
-    IGetOrganizationParams,
+    ICreateOrganizationParams,
+    IGetOrganizationsParams,
     IGetUsersOfOrganizationParams,
     IOrganization,
     IOrganizationUser,
-    IRemoveUserInOrganizationParams,
-    IUpdateOrganizationData,
-    IUpdateUserStatusInOrganizationData,
-    IUpdateUserStatusInOrganizationParams
+    IUpdateOrganizationParams,
+    IUpdateUserStatusInOrganizationParams,
 } from './types';
 
 /**
- * Adds a new user to the organization.
+ * # Adds a new user to the organization
  *
+ * Add a user to the organization.
+ *
+ * @param id - The id of the organization.
+ * @param userId - The id of the user to add.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/add-a-user-in-an-organization}
  */
-export const addNewUserToOrganizationAPI = async (
-    params: IAddNewUserToOrganizationParams,
+export const addNewUserToOrganization = async (
+    id: IdType,
+    userId: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const { userId, organizationId } = params;
-    const url = generatePath(ORGANIZATION_PATH.USERS.ADD_TO_ORGANIZATION, {
-        id: organizationId,
+    const url = generatePath(ORGANIZATION_PATH.ADD_NEW_USER_TO_ORGANIZATION, {
+        id,
         userId,
     });
-
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
         null,
@@ -45,23 +44,26 @@ export const addNewUserToOrganizationAPI = async (
 };
 
 /**
+ * # Adds a user for default language code organization system
+ *
  * Add a new user to the organization system by the given user id based on the default language.
  *
+ * @param userId - The user id to add.
+ * @param languageCode - The language code to use.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/adds-a-user-for-default-language-code-organization}
  */
 export const addUserForDefaultLanguageCodeOrganizationSystem = async (
-    params: IAddUserForDefaultLanguageCodeOrganizationSystemParams,
+    userId: IdType,
+    languageCode: string,
     config?: AxiosRequestConfig,
 ) => {
-    const { userId, languageCode } = params;
     const url = generatePath(
-        ORGANIZATION_PATH.USERS
-            .ADD_FOR_DEFAULT_LANGUAGE_CODE_ORGANIZATION_SYSTEM,
+        ORGANIZATION_PATH.ADD_USER_FOR_DEFAULT_LANGUAGE_CODE_ORGANIZATION_SYSTEM,
         {
             userId,
         },
     );
-
     const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
         params: {
             languageCode,
@@ -73,24 +75,29 @@ export const addUserForDefaultLanguageCodeOrganizationSystem = async (
 };
 
 /**
+ * # Assign role for a user in an organization
+ *
  * Assign a role to the user in the organization.
  *
+ * @param id - The id of the organization.
+ * @param params - The params for assigning a role to the user in the organization
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/assign-role-for-a-user-in-an-organization}
  */
 export const assignRoleForUserInOrganization = async (
+    id: IdType,
     params: IAssignRoleForUserInOrganizationParams,
-    data: IAssignRoleForUserInOrganizationData,
     config?: AxiosRequestConfig,
 ) => {
-    const { organizationId } = params;
-
-    const url = generatePath(ORGANIZATION_PATH.ASSIGN_ROLE_USERS, {
-        id: organizationId,
-    });
-
+    const url = generatePath(
+        ORGANIZATION_PATH.ASSIGN_ROLE_FOR_USER_IN_ORGANIZATION,
+        {
+            id,
+        },
+    );
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -98,18 +105,22 @@ export const assignRoleForUserInOrganization = async (
 };
 
 /**
+ * # Creates an organization
+ *
  * Creates a new organization.
  *
+ * @param params - The params for creating a new organization.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/create-an-organization}
  */
-export const createOrganizationAPI = async (
-    data: ICreateOrganizationData,
+export const createOrganization = async (
+    params: ICreateOrganizationParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = ORGANIZATION_PATH.CREATE;
-    const response = await jfwAxios.post<HttpResponse<IOrganization | null>>(
+    const url = ORGANIZATION_PATH.CREATE_ORGANIZATION;
+    const response = await jfwAxios.post<HttpResponse<IOrganization>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -117,32 +128,40 @@ export const createOrganizationAPI = async (
 };
 
 /**
+ * # Deletes an organization
+ *
  * Deletes an organization by the given id.
  *
+ * @param id - The organization id.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/delete-an-organization}
  */
-export const deleteOrganizationAPI = async (
+export const deleteOrganization = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(ORGANIZATION_PATH.DELETE_BY_ID, {
+    const url = generatePath(ORGANIZATION_PATH.DELETE_ORGANIZATION, {
         id,
     });
-    const response = await jfwAxios.delete(url, config);
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
     return response.data;
 };
 
 /**
+ * # Get an organization
+ *
  * Gets an organization by the given id.
  *
+ * @param id - The organization id.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/get-an-organization}
  */
-export const getOrganizationAPI = async (
+export const getOrganization = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(ORGANIZATION_PATH.GET_BY_ID, {
+    const url = generatePath(ORGANIZATION_PATH.GET_ORGANIZATION, {
         id,
     });
     const response = await jfwAxios.get<HttpResponse<IOrganization>>(
@@ -154,15 +173,19 @@ export const getOrganizationAPI = async (
 };
 
 /**
- * Gets the list of organizations.
+ * # Get organizations
  *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/list-organizations}
+ * Get organizations.
+ *
+ * @param params - The params for getting organizations.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/get-organizations}
  */
-export const getOrganizationsAPI = async (
-    params: IGetOrganizationParams,
+export const getOrganizations = async (
+    params?: IGetOrganizationsParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = ORGANIZATION_PATH.GET;
+    const url = ORGANIZATION_PATH.GET_ORGANIZATIONS;
 
     const response = await jfwAxios.get<HttpResponseList<IOrganization>>(url, {
         params,
@@ -173,64 +196,75 @@ export const getOrganizationsAPI = async (
 };
 
 /**
- * List all the users in organization.
+ * # Get users of an organization
  *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/list-users-of-an-organization}
+ * Get users of an organization
+ *
+ * @param id - The id of the organization.
+ * @param params - The params for getting users of an organization.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/get-users-of-an-organization}
  */
-export const getUsersOfOrganizationAPI = async (
+export const getUsersOfOrganization = async (
+    id: IdType,
     params?: IGetUsersOfOrganizationParams,
     config?: AxiosRequestConfig,
 ) => {
-    const { organizationId, ...restParams } = params;
-
-    const url = generatePath(ORGANIZATION_PATH.USERS.GET, {
-        id: organizationId,
+    const url = generatePath(ORGANIZATION_PATH.GET_USERS_OF_ORGANIZATION, {
+        id,
     });
     const response = await jfwAxios.get<HttpResponse<IOrganizationUser>>(url, {
+        params,
         ...config,
-        params: restParams,
     });
 
     return response.data;
 };
 
 /**
- * Remove an organization member.
+ * # Remove a user in an organization
  *
+ * Remove a user from an organization.
+ *
+ * @param id - The id of the organization.
+ * @param userId - The id of the user.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/remove-a-user-in-an-organization}
  */
-export const removeUserInOrganizationAPI = async (
-    params: IRemoveUserInOrganizationParams,
+export const removeUserInOrganization = async (
+    id: IdType,
+    userId: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const { userId, organizationId } = params;
-
-    const url = generatePath(ORGANIZATION_PATH.USERS.REMOVE_FROM_ORGANIZATION, {
-        id: organizationId,
+    const url = generatePath(ORGANIZATION_PATH.REMOVE_USERS_IN_ORGANIZATION, {
+        id,
         userId,
     });
-
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
     return response.data;
 };
 
 /**
+ * # Updates an organization
+ *
  * Updates an organization by the given id.
  *
+ * @param params - The params for updating an organization.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/updates-an-organization}
  */
-export const updateOrganizationAPI = async (
+export const updateOrganization = async (
     id: IdType,
-    data: IUpdateOrganizationData,
+    params: IUpdateOrganizationParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(ORGANIZATION_PATH.UPDATE_BY_ID, {
+    const url = generatePath(ORGANIZATION_PATH.UPDATE_ORGANIZATION, {
         id,
     });
     const response = await jfwAxios.put<HttpResponse<boolean>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -240,21 +274,26 @@ export const updateOrganizationAPI = async (
 /**
  * Update a user status in an organization
  *
+ * @param id - The id of the organization.
+ * @param params - The params for updating a user status in an organization.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/updates-users-status-in-an-organization}
  */
-export const updateUserStatusInOrganizationAPI = async (
+export const updateUserStatusInOrganization = async (
+    id: IdType,
     params: IUpdateUserStatusInOrganizationParams,
-    data: IUpdateUserStatusInOrganizationData,
     config?: AxiosRequestConfig,
 ) => {
-    const { organizationId } = params;
-    const url = generatePath(ORGANIZATION_PATH.USERS.UPDATE_STATUS, {
-        id: organizationId,
-    });
+    const url = generatePath(
+        ORGANIZATION_PATH.UPDATE_USER_STATUS_IN_ORGANIZATION,
+        {
+            id,
+        },
+    );
 
     const response = await jfwAxios.patch<HttpResponse<boolean>>(
         url,
-        data,
+        params,
         config,
     );
 

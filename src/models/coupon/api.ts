@@ -6,26 +6,28 @@ import { IdType } from '../base';
 import { COUPON_PATH } from './paths';
 import {
     ICoupon,
-    ICreateCouponData,
+    ICreateCouponParams,
     IGetCouponsParams,
-    IUpdateCouponData,
+    IUpdateCouponParams,
 } from './types';
 
 /**
+ * # Create a Coupon
+ *
  * Creates a new coupon.
  *
- * @param data - The data for creating a coupon.
+ * @param params - The params for creating a coupon.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/create-a-coupon}
  */
-export const createCouponAPI = async (
-    data: ICreateCouponData,
+export const createCoupon = async (
+    params: ICreateCouponParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = COUPON_PATH.CREATE_COUPON;
     const response = await jfwAxios.post<HttpResponse<ICoupon>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -33,16 +35,15 @@ export const createCouponAPI = async (
 };
 
 /**
+ * # Delete a Coupon
+ *
  * Deletes a coupon by the given id.
  *
- * @param id - The id for deleting a coupon.
+ * @param id - The id of the coupon.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/delete-a-coupon}
  */
-export const deleteCouponAPI = async (
-    id: IdType,
-    config?: AxiosRequestConfig,
-) => {
+export const deleteCoupon = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(COUPON_PATH.DELETE_COUPON, {
         id,
     });
@@ -52,13 +53,15 @@ export const deleteCouponAPI = async (
 };
 
 /**
+ * Get a Coupon
+ *
  * Gets a coupon by the given id.
  *
  * @param id - The id of the coupon.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/get-a-coupon}
  */
-export const getCouponAPI = async (id: IdType, config?: AxiosRequestConfig) => {
+export const getCoupon = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(COUPON_PATH.GET_COUPON, {
         id,
     });
@@ -68,13 +71,15 @@ export const getCouponAPI = async (id: IdType, config?: AxiosRequestConfig) => {
 };
 
 /**
+ * # Get Coupons
+ *
  * Get coupons
  *
- * @param params - The parameters for getting coupons.
+ * @param params - The params for getting coupons.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/get-coupons}
  */
-export const getCouponsAPI = async (
+export const getCoupons = async (
     params: IGetCouponsParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -88,16 +93,18 @@ export const getCouponsAPI = async (
 };
 
 /**
+ * # Update a Coupon
+ *
  * Updates a coupon by the given id.
  *
  * @param id - The id of the coupon.
- * @param data - The data for updating a coupon.
+ * @param params - The params for updating a coupon.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/coupons/update-a-coupon}
  */
-export const updateCouponAPI = async (
+export const updateCoupon = async (
     id: IdType,
-    data: IUpdateCouponData,
+    params: IUpdateCouponParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(COUPON_PATH.UPDATE_COUPON, {
@@ -105,7 +112,7 @@ export const updateCouponAPI = async (
     });
     const response = await jfwAxios.put<HttpResponse<ICoupon>>(
         url,
-        data,
+        params,
         config,
     );
 

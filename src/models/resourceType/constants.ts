@@ -1,28 +1,21 @@
 /**
- * Define an object to represent different resourceTypes.
- * Not defined resource type constant here.
- * @deprecated  Will delete in feature. vdt-fe is used
+ * Possible values:
+ * - `0` - `BuiltIn`
+ * - `1` - `Custom`
  */
-export const RESOURCE_TYPE = {
-    community: {
-        upload: 'COMMUNITY.UPLOAD',
-        download: 'COMMUNITY.DOWNLOAD',
-        add: 'COMMUNITY.ADD',
-        delete: 'COMMUNITY.DELETE',
-        update: 'COMMUNITY.UPDATE',
-        edit: 'COMMUNITY.EDIT',
-        deleteComment: 'COMMUNITY.DELETE-COMMENT',
-    },
-    debugMode: 'SYSTEM.DEBUGMODE',
-    issue: {
-        delete: 'ISSUE.DELETE',
-    },
-    user: {
-        view: 'USER.VIEW',
-    },
-};
-
 export enum ResourceTypeType {
+    BuiltIn = 'BuiltIn',
+    Custom = 'Custom',
+}
+
+/**
+ * Possible values:
+ * - `0` - `None`
+ * - `1` - `All`
+ * - `2` - `BuiltIn`
+ * - `3` - `Custom`
+ */
+export enum ResourceTypeTypeFilter {
     None = 'None',
     All = 'All',
     BuiltIn = 'BuiltIn',

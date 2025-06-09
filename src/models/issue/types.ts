@@ -1,7 +1,6 @@
 import { IPageable, ISortable } from '../../core';
-import { IBaseObject, IdType } from '../base';
-import { IMedia } from '../cdn';
-import { IIssueCategory } from '../issueCategory';
+import { DateType, IdType } from '../base';
+import { IBaseUser } from '../user';
 import {
     IssuePriority,
     IssueReactionStatus,
@@ -9,59 +8,165 @@ import {
     IssueStatus,
 } from './constants';
 
-export interface IIssue extends IBaseObject {
-    assigneeUserId?: IdType;
-    parentId?: IdType;
-    name: string;
-    description?: string;
-    refType: number;
-    refObject: string;
-    refId: number;
+export interface IIssue {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType;
+
+    /**
+     * The assignee user id of the issue.
+     */
+    assigneeUserId?: IdType | null;
+
+    /**
+     * The parent id of the issue.
+     */
+    parentId?: IdType | null;
+
+    /**
+     * The name of the issue.
+     */
+    name?: string | null;
+
+    /**
+     * The description of the issue.
+     */
+    description?: string | null;
+
+    /**
+     * The reference type of the issue.
+     *
+     * @remarks int32
+     */
+    refType?: number | null;
+
+    /**
+     * The reference object of the issue.
+     */
+    refObject?: string | null;
+
+    /**
+     * The reference id of the issue.
+     *
+     * @remarks int64
+     */
+    refId?: number | null;
+
+    /**
+     * The content of the issue.
+     *
+     * @remarks min: 1
+     */
     content: string;
-    issueCc?: string;
-    issueTypeCode?: string | null;
-    issueCategoryCode?: string;
-    issueTypeName?: string | null;
-    issueCategoryName?: string;
-    priority?: string;
-    tags?: string;
-    status?: string;
-    medias: IMedia[];
-    children: IIssue[];
-    childrenCount: number;
-    reactions: IIssueReaction[];
-    user: IUserIssue;
+
+    /**
+     * The issue cc of the issue.
+     */
+    issueCc?: string | null;
+
+    /**
+     * The issue type code of the issue.
+     */
+    issueCategoryCode?: string | null;
+
+    /**
+     * The issue type code of the issue.
+     */
+    issueCategoryName?: string | null;
+
+    /**
+     * The priority of the issue.
+     *
+     * @remarks enum
+     */
+    priority?: IssuePriority | null;
+
+    /**
+     * The tags of the issue.
+     */
+    tags?: string | null;
+
+    /**
+     * The status of the issue.
+     *
+     * @remarks enum
+     */
+    status?: IssueStatus | null;
+
+    /**
+     * This is the list of media urls.
+     */
+    medias?: string[] | null;
+
+    /**
+     * The children of the issue.
+     */
+    children?: IIssue[] | null;
+
+    /**
+     * This is the count of the children.
+     *
+     * @remarks int32
+     */
+    childrenCount?: number;
+
+    /**
+     * The reactions of the issue.
+     */
+    reactions?: IIssueReaction[] | null;
+
+    /**
+     * This class is used to return user information to client.
+     */
+    user?: IBaseUser;
 }
 
+/**
+ * The reactions of the issue.
+ */
 export interface IIssueReaction {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
     id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType;
+
+    /**
+     * The type of the reaction.
+     *
+     * @remarks enum
+     */
+    type: IssueReactionType;
+
+    /**
+     * The user code of the issue.
+     *
+     * @remarks min: 1
+     */
     userId: IdType;
-}
-
-export interface IUserIssue {
-    id: IdType;
-    packageId: IdType;
-
-    code: string;
-    packageCode: string;
-
-    avatar?: string;
-    nickName: string;
-    emailAddress: string;
-    roles: string[];
 }
 
 //#region API types
 
-/**
- * #JFW-299
- */
 export interface IGetIssuesParams extends IPageable, ISortable {
-    /**
-     * Filter with keywords.
-     */
-    keywords?: string;
-
     /**
      * This property represents the only parent filter.
      */
@@ -104,7 +209,8 @@ export interface IGetIssuesParams extends IPageable, ISortable {
 
     /**
      * Filter with reference type.
-     * @remarks integer - int32
+     *
+     * @remarks int32
      */
     refType?: number;
 
@@ -135,19 +241,21 @@ export interface IGetIssuesParams extends IPageable, ISortable {
 
     /**
      * Filter with status.
+     *
+     * @remarks enum
      */
-    status?: string;
+    status?: IssueStatus;
 
     /**
-     * The organizations.
+     * Filter with keywords.
      */
-    organizationCodes?: string[];
+    keywords?: string;
 }
 
 /**
  * The issue of the dto transfer, It's presentation with the create issue request from client.
  */
-export interface ICreateIssueData {
+export interface ICreateIssueParams {
     /**
      * The id of the issue category.
      */
@@ -160,13 +268,15 @@ export interface ICreateIssueData {
 
     /**
      * The content of the issue.
-     * @remarks string - min: 1
+     *
+     * @remarks min: 1
      */
     content: string;
 
     /**
      * The referrer id of the issue.
-     * @remarks integer - int64
+     *
+     * @remarks int64
      */
     refId?: number;
 
@@ -177,7 +287,8 @@ export interface ICreateIssueData {
 
     /**
      * The referrer type of the issue.
-     * @remarks integer - int32
+     *
+     * @remarks int32
      */
     refType?: number | null;
 
@@ -187,13 +298,7 @@ export interface ICreateIssueData {
     assigneeId?: IdType | null;
 
     /**
-     * Priority of the issue.
      * @remarks enum
-     * Possible values:
-     * - 1 - Low
-     * - 2 - Medium
-     * - 3 - High
-     * - 4 - Urgent
      */
     priority?: IssuePriority | null;
 
@@ -219,9 +324,9 @@ export interface ICreateIssueData {
 }
 
 /**
- * The issue of the dto transfer, It's presentation with the create issue request from client.
+ * The issue of the dto transfer, It's presentation with the update issue request from client.
  */
-export interface IUpdateIssueData {
+export interface IUpdateIssueParams {
     /**
      * Assignee user id of the issue.
      */
@@ -239,18 +344,13 @@ export interface IUpdateIssueData {
 
     /**
      * The content of the issue.
-     * @remarks string - min: 1
+     *
+     * @remarks min: 1
      */
     content: string;
 
     /**
-     * Priority of the issue.
      * @remarks enum
-     * Possible values:
-     * - 1 - Low
-     * - 2 - Medium
-     * - 3 - High
-     * - 4 - Urgent
      */
     priority?: IssuePriority | null;
 
@@ -265,45 +365,30 @@ export interface IUpdateIssueData {
     tags?: string | null;
 
     /**
-     * Status of the issue.
      * @remarks enum
-     * Possible values:
-     * - 0 - Inactive
-     * - 1 - Active
      */
-    status?: IssueStatus | null;
+    status?: IssueStatus;
 }
 
 /**
  * This class presents the Reaction Issue Create Request Dto in the system.
  */
-export interface ICreateIssueReactionData {
+export interface ICreateIssueReactionParams {
     /**
      * The id of the issue.
-     * @remarks string - min: 1
+     * @remarks min: 1
      */
     issueId: IdType;
 
     /**
      * The type of reaction for the issue.
-     * @remarks string - enum
-     * Possible values:
-     * - 0 - Dislike
-     * - 1 - Like
-     * - 2 - Love
-     * - 3 - Care
-     * - 4 - Haha
-     * - 5 - Wow
-     * - 6 - Angry
+     * @remarks enum
      */
     issueReactionType: IssueReactionType;
 
     /**
      * The status of the issue reaction.
-     * @remarks string - enum
-     * Possible values:
-     * - 0 - Inactive
-     * - 1 - Active
+     * @remarks enum
      */
     status: IssueReactionStatus;
 }

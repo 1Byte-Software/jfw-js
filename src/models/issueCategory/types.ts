@@ -1,22 +1,65 @@
-import { IPageable } from '../../core';
-import { IBaseObject } from '../base';
+import { DateType, IdType } from '../base';
 import { IssueCategoryStatus } from './constants';
 
-export interface IIssueCategory extends IBaseObject {
+export interface IIssueCategory {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType;
+
+    /**
+     * The group code of the issue category.
+     */
+    groupCode?: string | null;
+
+    /**
+     * The code of the issue category.
+     *
+     * @remarks min: 1
+     */
     code: string;
-    groupCode: string | null;
+
+    /**
+     * The name of the issue category.
+     *
+     * @remarks min: 1
+     */
     name: string;
-    description: string | null;
-    isSystem: boolean;
-    links?: string;
-    tags: string | null;
+
+    /**
+     * The description of the issue category.
+     */
+    description?: string | null;
+
+    /**
+     * Is system issue category.
+     */
+    isSystem?: boolean;
+
+    /**
+     * The tags of the issue category.
+     */
+    tags?: string | null;
+
+    /**
+     * The links of the issue category.
+     *
+     * @remarks uri
+     */
+    suggestionURL?: string | null;
 }
 
 //#region API types
-/**
- * Parameters for getting issue categories
- */
-export interface IGetIssueCategoriesParams extends IPageable {
+export interface IGetIssueCategoriesParams {
     /**
      * Filter by group code.
      */
@@ -71,7 +114,7 @@ export interface IGetIssueCategoriesParams extends IPageable {
 /**
  * The issue category of the dto transfer when creating or updating.
  */
-export interface ICreateIssueCategoryData {
+export interface ICreateIssueCategoryParams {
     /**
      * The group code of the issue category. If null, it is a root issue category.
      */
@@ -79,13 +122,15 @@ export interface ICreateIssueCategoryData {
 
     /**
      * The code of the issue category.
-     * @remarks string - min: 1
+     *
+     * @remarks min: 1
      */
     code: string;
 
     /**
      * The name of the issue category.
-     * @remarks string - min: 1
+     *
+     * @remarks min: 1
      */
     name: string;
 
@@ -95,20 +140,14 @@ export interface ICreateIssueCategoryData {
     description?: string | null;
 
     /**
-     * Is system issue category.
-     * @defaultValue false
-     */
-    isSystem?: boolean;
-
-    /**
      * The tags of the issue category.
      */
     tags?: string | null;
 
     /**
-     * The URL suggestion of the issue category.
-     * @remarks string - uri
-     * @example https://www.example.com/suggestion
+     * The links of the issue category.
+     *
+     * @remarks uri
      */
     suggestionURL?: string | null;
 }
@@ -116,5 +155,5 @@ export interface ICreateIssueCategoryData {
 /**
  * The issue category of the dto transfer when creating or updating.
  */
-export type IUpdateIssueCategoryData = ICreateIssueCategoryData;
+export type IUpdateIssueCategoryParams = ICreateIssueCategoryParams;
 //#endregion

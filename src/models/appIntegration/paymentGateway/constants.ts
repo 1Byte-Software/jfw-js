@@ -1,9 +1,15 @@
+/**
+ * @remarks enum
+ * Possible values:
+ * - 0 - Inactive
+ * - 1 - Active
+ */
 export enum AppIntegrationPaymentGatewayStatus {
-    Active = 'Active',
     Inactive = 'Inactive',
+    Active = 'Active',
 }
 
-export enum PaymentGatewayCurrencyCode {
+export enum PaymentGatewayProductCurrencyCode {
     AUD = 'AUD', // Australian Dollar
     BRL = 'BRL', // Brazilian Real
     CAD = 'CAD', // Canadian Dollar

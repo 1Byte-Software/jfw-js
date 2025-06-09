@@ -1,9 +1,19 @@
-export enum InvoiceStatus {
-    Paid = 'Paid',
-    Unpaid = 'Unpaid',
+/**
+ * Possible values:
+ * - `0` - `Provisional`
+ * - `1` - `Post`
+ */
+export enum InvoiceType {
+    Provisional = 'Provisional',
+    Post = 'Post',
 }
 
-export enum InvoiceType {
-    Post = 'Post',
-    Provisional = 'Provisional',
+/**
+ * Possible values:
+ * - `0` - `Unpaid`
+ * - `1` - `Paid`
+ */
+export enum InvoiceStatus {
+    Unpaid = 'Unpaid',
+    Paid = 'Paid',
 }

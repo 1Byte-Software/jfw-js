@@ -6,48 +6,49 @@ import { IdType } from '../../base';
 import { APP_INTEGRATION_PAYMENT_GATEWAY_PATH } from './paths';
 import {
     IAppIntegrationPaymentGateway,
-    ICreateAppIntegrationPaymentGatewayData,
-    IGetAppIntegrationPaymentGatewaysWithBrandParams,
-    ITestCreatingCheckoutLinkData,
-    IUpdateAppIntegrationPaymentGatewayData,
+    ICreateAppIntegrationPaymentGatewayParams,
+    ITestCreatingCheckoutLinkParams,
+    IUpdateAppIntegrationPaymentGatewayParams,
 } from './types';
 
 /**
- * Create an app integration payment gateway
+ * # Create an app integration payment gateway
  *
- * @param data - The data for creating a new app integration payment gateway.
+ * Creates a new app integration payment gateway.
+ *
+ * @param params - The params for creating a new app integration payment gateway.
  * @param config - Optional axios request configuration object.
  * @link {@see https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/creates-an-app-integration-payment-gateway}
  */
-export const createAppIntegrationPaymentGatewayAPI = async (
-    data: ICreateAppIntegrationPaymentGatewayData,
+export const createAppIntegrationPaymentGateway = async (
+    params: ICreateAppIntegrationPaymentGatewayParams,
     config?: AxiosRequestConfig,
 ) => {
     const url =
         APP_INTEGRATION_PAYMENT_GATEWAY_PATH.CREATE_APP_INTEGRATION_PAYMENT_GATEWAY;
     const response = await jfwAxios.post<
         HttpResponse<IAppIntegrationPaymentGateway>
-    >(url, data, config);
+    >(url, params, config);
 
     return response.data;
 };
 
 /**
+ * # Delete an app integration payment gateway
+ *
  * Deletes an app integration payment gateway by the given id.
  *
- * @param id - The app integration payment gateway id.
+ * @param id - The id of the app integration payment gateway to delete.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/deletes-an-app-integration-payment-gateway}
  */
-export const deleteAppIntegrationPaymentGatewayAPI = async (
+export const deleteAppIntegrationPaymentGateway = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
         APP_INTEGRATION_PAYMENT_GATEWAY_PATH.DELETE_APP_INTEGRATION_PAYMENT_GATEWAY,
-        {
-            id,
-        },
+        { id },
     );
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
@@ -55,21 +56,21 @@ export const deleteAppIntegrationPaymentGatewayAPI = async (
 };
 
 /**
+ * # Get an app integration payment gateway
+ *
  * Gets an app integration payment gateway by the given id.
  *
  * @param id - The id of the app integration payment gateway.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/gets-an-app-integration-payment-gateway}
  */
-export const getAppIntegrationPaymentGatewayAPI = async (
+export const getAppIntegrationPaymentGateway = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
         APP_INTEGRATION_PAYMENT_GATEWAY_PATH.GET_APP_INTEGRATION_PAYMENT_GATEWAY,
-        {
-            id,
-        },
+        { id },
     );
     const response = await jfwAxios.get<
         HttpResponse<IAppIntegrationPaymentGateway>
@@ -79,42 +80,43 @@ export const getAppIntegrationPaymentGatewayAPI = async (
 };
 
 /**
+ * # Get apps integration payment gateway with brand
+ *
  * Gets the list of the app integration payment gateways by the current brand.
  *
- * @param params - The parameters for getting list of the app integration payment gateways by the current brand.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/gets-app-integration-payment-gateways-with-brand}
  */
-export const getAppsIntegrationPaymentGatewayWithBrandAPI = async (
-    params?: IGetAppIntegrationPaymentGatewaysWithBrandParams,
+export const getAppsIntegrationPaymentGatewayWithBrand = async (
     config?: AxiosRequestConfig,
 ) => {
     const url =
         APP_INTEGRATION_PAYMENT_GATEWAY_PATH.GET_APPS_INTEGRATION_PAYMENT_GATEWAY_WITH_BRAND;
+
     const response = await jfwAxios.get<
         HttpResponse<IAppIntegrationPaymentGateway[]>
-    >(url, {
-        params,
-        ...config,
-    });
+    >(url, config);
 
     return response.data;
 };
 
 /**
- * This endpoint is used to **test the process of generating a checkout link** for a given App Integration using the configured payment gateway settings.
+ * # Test creating a checkout link
  *
- * It allows developers to **validate that the integration with the payment gateway is working as expected**, before enabling real payment flows in production.
+ * This endpoint is used to **test the process of generating a checkout link**
+ * for a given App Integration using the configured payment gateway settings.
  *
- * @param appIntegrationId - The id of the appIntegrationId.
- * @param data - The data for test building authentication url.
+ * It allows developers to **validate that the integration with the payment gateway
+ * is working as expected**, before enabling real payment flows in production.
+ *
+ * @param appIntegrationId - The id of the app integration.
+ * @param params - The parameters for test building authentication url.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/test-create-checkout-link}
- * #JFW-353
  */
-export const testCreatingCheckoutLinkAPI = async (
+export const testCreatingCheckoutLink = async (
     appIntegrationId: IdType,
-    data: ITestCreatingCheckoutLinkData,
+    params: ITestCreatingCheckoutLinkParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
@@ -125,7 +127,7 @@ export const testCreatingCheckoutLinkAPI = async (
     );
     const response = await jfwAxios.post<HttpResponse<string>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -136,13 +138,13 @@ export const testCreatingCheckoutLinkAPI = async (
  * Updates an app integration payment gateway by the given id.
  *
  * @param id - The app integration payment gateway id.
- * @param data - The data for updating an app integration payment gateway.
+ * @param params - The params for updating an app integration payment gateway.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/updates-an-app-integration-payment-gateway-copy}
  */
-export const updateAppIntegrationPaymentGatewayAPI = async (
+export const updateAppIntegrationPaymentGateway = async (
     id: IdType,
-    data: IUpdateAppIntegrationPaymentGatewayData,
+    params: IUpdateAppIntegrationPaymentGatewayParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
@@ -153,7 +155,7 @@ export const updateAppIntegrationPaymentGatewayAPI = async (
     );
     const response = await jfwAxios.put<
         HttpResponse<IAppIntegrationPaymentGateway>
-    >(url, data, config);
+    >(url, params, config);
 
     return response.data;
 };

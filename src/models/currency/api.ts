@@ -5,18 +5,19 @@ import { CURRENCY_PATH } from './paths';
 import { ICurrency, IGetCurrenciesParams } from './types';
 
 /**
+ * # Currencies
+ *
  * Get currencies
  *
- * @param params - The parameters for getting currencies.
+ * @param params - The params for getting currencies.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/get-currencies}
  */
-export const getCurrenciesAPI = async (
+export const getCurrencies = async (
     params?: IGetCurrenciesParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = CURRENCY_PATH.GET_CURRENCIES;
-
     const response = await jfwAxios.get<HttpResponseList<ICurrency>>(url, {
         ...config,
         params,

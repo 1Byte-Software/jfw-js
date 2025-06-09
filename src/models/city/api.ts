@@ -5,14 +5,15 @@ import { CITY_PATH } from './paths';
 import { ICity, IGetCitiesParams } from './types';
 
 /**
+ * # Cities
+ * 
  * Gets a list of all cities.
  *
  * @param params - The parameters for getting cities
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cities}
- * #JFW-282
  */
-export const getCitiesAPI = async (
+export const getCities = async (
     params?: IGetCitiesParams,
     config?: AxiosRequestConfig,
 ) => {

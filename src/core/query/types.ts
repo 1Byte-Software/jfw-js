@@ -1,20 +1,21 @@
-import { DateType, IdType, SortOrder } from '../../models';
-import { HeaderKey } from '../client/constants';
+import { HttpStatusCode } from 'axios';
+import { DateType, IdType } from '../../models';
 import { JFWError } from '../error';
-import { JFWHttpCode } from '../http';
+import { JFWHttpStatusCode } from '../http';
+import { SortOrder } from './constants';
 
 //#region Query params types
 export interface IPageable {
     /**
      * The page size of the pagination.
-     * @remarks integer - int32
+     * @remarks int32
      * @defaultValue 200
      */
     pageSize?: number;
 
     /**
      * The page number of the pagination.
-     * @remarks integer - int32
+     * @remarks int32
      * @defaultValue 0
      */
     pageNumber?: number;
@@ -32,7 +33,23 @@ export interface ISortable<T extends Record<string, any> = any> {
     sortOrder?: SortOrder;
 }
 
-export interface IBaseFilter {
+export interface ICreatedDateFilter {
+    /**
+     * The created date from.
+     *
+     * @remarks date-time
+     */
+    createdDateFrom?: DateType;
+
+    /**
+     * The created date to.
+     *
+     * @remarks date-time
+     */
+    createdDateTo?: DateType;
+}
+
+export interface JFWBaseFilter {
     modifiedUserBy?: IdType;
     modifiedDateFrom?: DateType;
     modifiedDateTo?: DateType;
@@ -45,38 +62,54 @@ export interface IBaseFilter {
 //#endregion
 
 //#region Query response types
-export interface HttpResponse<T = any> {
+export interface HttpResponse<T = unknown> {
+    /**
+     * @readonly
+     */
     success: boolean;
-    statusCode?: JFWHttpCode;
-    message: string;
+
+    /**
+     * @remarks int32
+     * @readonly
+     */
+    statusCode: HttpStatusCode | JFWHttpStatusCode;
+
+    /**
+     * @readonly
+     */
+    message: string | null;
+
+    /**
+     * @readonly
+     */
+    errors: JFWError[] | null;
+
+    /**
+     * @readonly
+     */
     data: T | null;
-    errors: JFWError[];
 }
 
-export interface ListData<T = any> {
+export interface ListData<T = unknown> {
     items: T[];
 
+    /**
+     * @remarks int32
+     */
     totalItems: number;
+
+    /**
+     * @remarks int32
+     */
     pageNumber: number;
+
+    /**
+     * @remarks int32
+     */
     pageSize: number;
 }
 
-export type HttpResponseList<T = any, U = {}> = HttpResponse<ListData<T> & U>;
-
-export interface IHeaderParameters {
-    /**
-     * The brand URL of the request. This is used to identify the brand.
-     * @example
-     * YOUR_BRAND_URL
-     */
-    [HeaderKey.BrandUrl]: string;
-}
-
-export interface IHeaderParametersPrivate extends IHeaderParameters {
-    [HeaderKey.AuthKey]: string;
-}
-
-export interface IBaseParameters {
-    headerParameters: IHeaderParameters;
-}
+export type HttpResponseList<T = unknown, U = {}> = HttpResponse<
+    ListData<T> & U
+>;
 //#endregion

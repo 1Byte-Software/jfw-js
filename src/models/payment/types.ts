@@ -1,35 +1,139 @@
-import { IPageable, ISortable } from '../../core';
+import { ICreatedDateFilter, IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { IPackage } from '../packages';
 import { IPrice } from '../price';
-import { IUser } from '../user';
+import { IBaseUser } from '../user';
 import { PaymentStatus } from './constants';
 
 /**
- * #JFW-313
+ * The Package Data Transfer Object.
  */
 export interface IPayment {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
     id: IdType;
-    price: IPrice | null;
-    package: IPackage | null;
-    sharedAmount: number | null;
-    amount: number;
-    paymentDate: DateType | null;
-    user: IUser;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType;
+
+    /**
+     * The payment code.
+     *
+     * @remarks min: 1
+     */
     code: string;
+
+    /**
+     * The payment name.
+     *
+     * @remarks min: 1
+     */
     name: string;
 
+    /**
+     * The payment amount gross.
+     *
+     * @remarks double
+     */
     amountGross: number;
+
+    /**
+     * The payment amount fee.
+     *
+     * @remarks double
+     */
     amountFee: number;
+
+    /**
+     * The payment amount net.
+     *
+     * @remarks double
+     */
     amountNet: number;
-    commission: number;
+
+    /**
+     * The commission amount.
+     *
+     * @remarks double
+     */
+    commission?: number | null;
+
+    /**
+     * The currency code.
+     *
+     * @remarks min: 1
+     */
     currencyCode: string;
-    description: string;
-    invoiceNo: string;
-    paymentType: string;
-    notes: string;
+
+    /**
+     * The description.
+     */
+    description?: string | null;
+
+    /**
+     * The invoice number.
+     */
+    invoiceNo?: string | null;
+
+    /**
+     * The payment type.
+     */
+    paymentType?: string | null;
+
+    /**
+     * The notes.
+     */
+    notes?: string | null;
+
+    /**
+     * The status of the payment.
+     *
+     * @remarks enum
+     */
     status: PaymentStatus;
-    createdDate: DateType;
+
+    /**
+     * This class is used to return user information to client.
+     */
+    user?: IBaseUser;
+
+    /**
+     * This class presents the Price Data Transfer Object.
+     */
+    price?: IPrice;
+
+    /**
+     * The Package Data Transfer Object.
+     */
+    package?: IPackage;
+
+    /**
+     * The shared amount. This value is used for shared payments.
+     *
+     * @remarks double
+     */
+    sharedAmount?: number | null;
+
+    /**
+     * The amount.
+     *
+     * @remarks double
+     */
+    amount: number;
+
+    /**
+     * The payment date.
+     *
+     * @remarks date-time
+     */
+    paymentDate?: DateType;
 }
 
 export interface IPaymentDashboard {
@@ -39,79 +143,63 @@ export interface IPaymentDashboard {
     dailyRevenue: number;
 }
 
-export interface IMerchant {
-    id: IdType;
-    type: number;
-    code: string;
-    name: string;
-    website: string;
-}
-
 //#region API types
 /**
  * Parameters for getting payments
  */
-export interface IGetPaymentsParams extends IPageable, ISortable {
+export interface IGetPaymentsParams
+    extends IPageable,
+        ISortable,
+        ICreatedDateFilter {
     /**
-     * Filter by the app integration payment gateway id
+     * Filter by the app integration payment gateway id.
      */
-    appIntegrationPaymentGatewayId?: IdType;
+    appIntegrationPaymentGatewayId?: string;
 
     /**
-     * The price id
+     * The price id.
      */
-    priceId?: IdType;
+    priceId?: string;
 
     /**
-     * The payment request code
+     * The payment request code.
      */
     code?: string;
 
     /**
-     * The user code
+     * The id of the user.
      */
-    userCode?: string;
+    userId?: IdType;
 
     /**
-     * The reference user code
+     * The reference user code.
      */
     referralUserCode?: string;
 
     /**
-     * The status of the payment request
+     * The status of the payment request.
+     *
+     * @remarks enum
      */
-    status?: string;
+    status?: PaymentStatus | null;
 
     /**
-     * The payment request type
+     * The payment request type.
      */
     paymentType?: string;
 
     /**
-     * The currency code
+     * The currency code.
      */
     currencyCode?: string;
 
     /**
-     * The payment request amount
+     * The keywords to filter.
      */
-    testMode?: boolean;
+    keywords?: string;
 
     /**
-     * The created date from
-     */
-    createdDateFrom?: DateType;
-
-    /**
-     * The created date to
-     */
-    createdDateTo?: DateType;
-}
-
-export interface IGetPaymentDashboardParams {
-    /**
-     * Query parameter to enable the test mode.
-     * @defaultValue false
+     * The payment request amount.
      */
     testMode?: boolean;
 }

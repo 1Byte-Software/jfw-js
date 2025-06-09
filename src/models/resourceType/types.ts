@@ -1,58 +1,56 @@
-import { IdType } from '../base';
-import { ResourceTypeType } from './constants';
-
-export interface IResourceType {
-    id: IdType;
-    parentBrandId: IdType | null;
-    guid: string;
-    code: string;
-    name: string;
-    description: string;
-    tags: string | null;
-    type: ResourceTypeType;
-}
-
-//#region API types
-export interface IGetResourceTypesParams {
-    /** Filter by code */
-    code?: string;
-
-    /** Filter by name */
-    name?: string;
-
-    /** Filter by tags */
-    tags?: string;
-
-    /** Filter by description */
-    description?: string;
-
-    /**
-     * The param type to apply filter.
-     */
-    type?: ResourceTypeType;
-
-    /** Filter by keywords */
-    keywords?: string;
-}
+import { DateType, IdType } from '../base';
+import { ResourceTypeType, ResourceTypeTypeFilter } from './constants';
 
 /**
- * This class represents the ResourceType data transfer object for command requests.
+ * This class represents the ResourceType data transfer object.
  */
-export interface ICreateResourceTypeData {
+export interface IResourceType {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * The parent brand id.
+     */
+    parentBrandId?: IdType | null;
+
+    /**
+     * The GUID.
+     *
+     * @remarks uuid
+     */
+    guid: string;
+
     /**
      * The ResourceType code.
+     *
+     * @remarks min: 1
      */
     code: string;
 
     /**
      * The name of the ResourceType.
+     *
+     * @remarks min: 1
      */
     name: string;
 
     /**
      * The description of the ResourceType.
+     *
+     * @remarks min: 1
      */
-    description?: string | null;
+    description: string;
 
     /**
      * The tags of the ResourceType.
@@ -60,13 +58,76 @@ export interface ICreateResourceTypeData {
     tags?: string | null;
 
     /**
-     * #NOTE: Not in the document yet
+     * The type of the ResourceType.
+     *
+     * @remarks enum
      */
-    parentBrandId?: IdType | null;
+    type: ResourceTypeType;
+}
+
+//#region API types
+export interface IGetResourceTypesParams {
+    /**
+     * Filter by code.
+     */
+    code?: string;
+
+    /**
+     * Filter by name.
+     */
+    name?: string;
+
+    /**
+     * Filter by tags.
+     */
+    tags?: string;
+
+    /**
+     * Filter by description.
+     */
+    description?: string;
+
+    /**
+     * The param type to apply filter.
+     *
+     * @remarks enum
+     */
+    type?: ResourceTypeTypeFilter;
+
+    /**
+     * Filter by keywords.
+     */
+    keywords?: string;
 }
 
 /**
  * This class represents the ResourceType data transfer object for command requests.
  */
-export type IUpdateResourceTypeData = ICreateResourceTypeData;
+export interface ICreateResourceTypeParams {
+    /**
+     * The ResourceType code.
+     *
+     * @remarks min: 1
+     */
+    code: string;
+
+    /**
+     * The name of the ResourceType.
+     *
+     * @remarks min: 1
+     */
+    name: string;
+
+    /**
+     * The description of the ResourceType.
+     *
+     * @remarks min: 1
+     */
+    description: string;
+}
+
+/**
+ * This class represents the ResourceType data transfer object for command requests.
+ */
+export type IUpdateResourceTypeParams = ICreateResourceTypeParams;
 //#endregion

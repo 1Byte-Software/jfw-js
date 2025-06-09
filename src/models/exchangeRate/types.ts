@@ -1,23 +1,40 @@
-import { IPageable, ISortable } from '../../core';
 import { DateType } from '../base';
 
+/**
+ * This class represents the exchange rate data transfer object.
+ */
 export interface IExchangeRate {
+    /**
+     * The currency code from which the rate is calculated.
+     *
+     * @remarks min: 1
+     */
     fromCurrencyCode: string;
+
+    /**
+     * The currency code to which the rate is calculated.
+     *
+     * @remarks min: 1
+     */
     toCurrencyCode: string;
+
+    /**
+     * The rate amount from the from currency to the to currency.
+     *
+     * @remarks double
+     */
     rate: number;
-    lastUpdate: DateType;
+
+    /**
+     * The last update date of the exchange rate.
+     *
+     * @remarks date-time
+     */
+    lastUpdate?: DateType | null;
 }
 
 export type IUserExchange = Omit<IExchangeRate, 'rate'>;
 //#region API types
-
-/**
- * #JFW-299
- */
-export interface IGetExchangeRatesParams extends IPageable, ISortable {
-    keywords?: string;
-
-}
 
 export interface IConvertCurrencyParams {
     /**
@@ -32,7 +49,7 @@ export interface IConvertCurrencyParams {
 
     /**
      * The amount to convert.
-     * @remarks number - double 
+     * @remarks double
      */
     amount: number;
 }

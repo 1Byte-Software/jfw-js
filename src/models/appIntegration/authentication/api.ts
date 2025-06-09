@@ -6,40 +6,44 @@ import { IdType } from '../../base';
 import { APP_INTEGRATION_AUTHENTICATION_PATH } from './paths';
 import {
     IAppIntegrationAuthentication,
-    ICreateAppIntegrationAuthenticationData,
+    ICreateAppIntegrationAuthenticationParams,
     IGetAppIntegrationAuthenticationsWithBrandParams,
-    ITestBuildingAuthenticationURLData,
-    IUpdateAppIntegrationAuthenticationData,
+    ITestBuildingAuthenticationURLParams,
+    IUpdateAppIntegrationAuthenticationParams,
 } from './types';
 
 /**
+ * # Creates an app integration authentication
+ *
  * Creates a new app integration authentication.
  *
- * @param data - The data for creating a new app integration authentication.
+ * @param params - The params for creating a new app integration authentication.
  * @param config - Optional axios request configuration object.
  * @link {@see https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/creates-an-app-integration-authentication}
  */
-export const createAppIntegrationAuthenticationAPI = async (
-    data: ICreateAppIntegrationAuthenticationData,
+export const createAppIntegrationAuthentication = async (
+    params: ICreateAppIntegrationAuthenticationParams,
     config?: AxiosRequestConfig,
 ) => {
     const url =
         APP_INTEGRATION_AUTHENTICATION_PATH.CREATE_APP_INTEGRATION_AUTHENTICATION;
     const response = await jfwAxios.post<
         HttpResponse<IAppIntegrationAuthentication>
-    >(url, data, config);
+    >(url, params, config);
 
     return response.data;
 };
 
 /**
+ * # Deletes an app integration authentication
+ *
  * Deletes the app integration authentication by the given id.
  *
  * @param id - The id of the app integration authentication.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/deletes-an-app-integration-authentication}
  */
-export const deleteAppIntegrationAuthenticationAPI = async (
+export const deleteAppIntegrationAuthentication = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -55,13 +59,15 @@ export const deleteAppIntegrationAuthenticationAPI = async (
 };
 
 /**
+ * # Gets an app integration authentication
+ *
  * Gets the app integration authentication by the given id.
  *
  * @param id - The id of the app integration authentication
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/gets-an-app-integration-authentication}
  */
-export const getAppIntegrationAuthenticationAPI = async (
+export const getAppIntegrationAuthentication = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -79,13 +85,15 @@ export const getAppIntegrationAuthenticationAPI = async (
 };
 
 /**
+ * # Get apps integration authentication with brand
+ *
  * Get apps integration authentication with brand
  *
  * @param params - The parameters for getting apps integration authentication with brand.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/list-the-apps-integration-authentication}
  */
-export const getAppsIntegrationAuthenticationWithBrandAPI = async (
+export const getAppsIntegrationAuthenticationWithBrand = async (
     params?: IGetAppIntegrationAuthenticationsWithBrandParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -102,19 +110,21 @@ export const getAppsIntegrationAuthenticationWithBrandAPI = async (
 };
 
 /**
+ * #Test building an authentication URL
+ *
  * This endpoint is used to simulate the process of building an authentication URL for a specific App Integration.
  * It helps validate that the configured authentication settings (e.g., OAuth2 parameters, redirect URIs, scopes) generate a correct and functional URL for initiating the authentication flow.
  *
  * Use this endpoint to verify the integration setup before enabling real authentication with third-party services.
  *
  * @param appIntegrationId - The id of the appIntegrationId.
- * @param data - The data for test building authentication url.
+ * @param params - The params for test building authentication url.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/test-building-an-authentication-url}
  */
-export const testBuildingAuthenticationURLAPI = async (
+export const testBuildingAuthenticationURL = async (
     appIntegrationId: IdType,
-    data: ITestBuildingAuthenticationURLData,
+    params: ITestBuildingAuthenticationURLParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
@@ -123,10 +133,9 @@ export const testBuildingAuthenticationURLAPI = async (
             appIntegrationId,
         },
     );
-
     const response = await jfwAxios.post<HttpResponse<string>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -134,16 +143,18 @@ export const testBuildingAuthenticationURLAPI = async (
 };
 
 /**
+ * # Updates an app integration authentication
+ *
  * Updates the app integration authentication by the given id.
  *
  * @param id - The id of the app integration authentication.
- * @param data - The data for updating an app integration authentication.
+ * @param params - The params for updating an app integration authentication.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/updates-an-app-integration-authentication}
  */
-export const updateAppIntegrationAuthenticationAPI = async (
+export const updateAppIntegrationAuthentication = async (
     id: IdType,
-    data: IUpdateAppIntegrationAuthenticationData,
+    params: IUpdateAppIntegrationAuthenticationParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(
@@ -152,10 +163,9 @@ export const updateAppIntegrationAuthenticationAPI = async (
             id,
         },
     );
-
     const response = await jfwAxios.put<
         HttpResponse<IAppIntegrationAuthentication>
-    >(url, data, config);
+    >(url, params, config);
 
     return response.data;
 };

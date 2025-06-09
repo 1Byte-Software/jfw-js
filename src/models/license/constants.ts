@@ -1,3 +1,10 @@
+/**
+ * Possible values:
+ * - `1` - `Normal`
+ * - `2` - `Refunded`
+ * - `3` - `Prepaid`
+ * - `4` - `MailDelivery`
+ */
 export enum LicenseType {
     Normal = 'Normal',
     Refunded = 'Refunded',
@@ -5,7 +12,12 @@ export enum LicenseType {
     MailDelivery = 'MailDelivery',
 }
 
+/**
+ * Possible values:
+ * - `0` - `Inactive`
+ * - `1` - `Active`
+ */
 export enum LicenseStatus {
-    Active = 'Active',
     Inactive = 'Inactive',
+    Active = 'Active',
 }

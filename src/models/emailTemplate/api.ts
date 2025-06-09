@@ -5,28 +5,29 @@ import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { EMAIL_TEMPLATE_PATH } from './paths';
 import {
-    ICreateEmailTemplateData,
+    ICreateEmailTemplateParams,
     IEmailTemplate,
-    IGetAllPlaceholderKeysAvailableParams,
     IGetEmailTemplatesParams,
-    IUpdateEmailTemplateData,
+    IUpdateEmailTemplateParams,
 } from './types';
 
 /**
+ * # Create an email template
+ *
  * Create an email template
  *
- * @param data - The data for creating an email template.
+ * @param params - The params for creating an email template.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/create-an-email-template}
  */
-export const createEmailTemplateAPI = async (
-    data: ICreateEmailTemplateData,
+export const createEmailTemplate = async (
+    params: ICreateEmailTemplateParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = EMAIL_TEMPLATE_PATH.CREATE_EMAIL_TEMPLATE;
     const response = await jfwAxios.post<HttpResponse<IEmailTemplate>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -34,52 +35,36 @@ export const createEmailTemplateAPI = async (
 };
 
 /**
- * #JFW-286
+ * # Delete an email template
+ *
+ * Delete an email template
+ *
+ * @param id - The id of the email template.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/delete-an-email-template}
  */
-export const deleteEmailTemplateAPI = async (
+export const deleteEmailTemplate = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(EMAIL_TEMPLATE_PATH.DELETE_EMAIL_TEMPLATE, {
         id,
     });
-
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
     return response.data;
 };
 
 /**
- * Get an email template by event id.
+ * # Get an email template
  *
- * @param eventId - The eventId for getting an email template.
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/get-an-email-template-by-event}
- * #JFW-287
- */
-export const getEmailTemplateByEventAPI = async (
-    eventId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(EMAIL_TEMPLATE_PATH.GET_EMAIL_TEMPLATE_BY_EVENT, {
-        eventId,
-    });
-    const response = await jfwAxios.get<HttpResponse<IEmailTemplate[]>>(
-        url,
-        config,
-    );
-
-    return response.data;
-};
-
-/**
  * Get an email template
  *
  * @param id - The id of the email template.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/get-an-email-template}
  */
-export const getEmailTemplateAPI = async (
+export const getEmailTemplate = async (
     id: IdType,
     config?: AxiosRequestConfig,
 ) => {
@@ -95,13 +80,15 @@ export const getEmailTemplateAPI = async (
 };
 
 /**
- * Get email templates.
+ * # Get email templates
+ *
+ * Get email templates
  *
  * @param params - The parameters for getting email templates.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/get-email-templates}
  */
-export const getEmailTemplatesAPI = async (
+export const getEmailTemplates = async (
     params?: IGetEmailTemplatesParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -115,39 +102,38 @@ export const getEmailTemplatesAPI = async (
 };
 
 /**
+ * # Gets all placeholder keys available
+ *
  * Gets all placeholder keys related to the email templates.
  *
- * @param params - The parameters for getting email templates.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/gets-all-placeholder-keys-available}
  */
-export const getAllPlaceHolderKeysAvailableAPI = async (
-    params?: IGetAllPlaceholderKeysAvailableParams,
+export const getAllPlaceHolderKeysAvailable = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = EMAIL_TEMPLATE_PATH.GET_ALL_PLACEHOLDER_KEYS_AVAILABLE;
     const response = await jfwAxios.get<HttpResponse<Record<string, string[]>>>(
         url,
-        {
-            params,
-            ...config,
-        },
+        config,
     );
 
     return response.data;
 };
 
 /**
+ * # Update an email template
+ *
  * Update an email template.
  *
  * @param id - The id of the email template.
- * @param data - The data for updating an email template.
+ * @param params - The params for updating an email template.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/email-templates/update-an-email-template}
  */
-export const updateEmailTemplateAPI = async (
+export const updateEmailTemplate = async (
     id: IdType,
-    data: IUpdateEmailTemplateData,
+    params: IUpdateEmailTemplateParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(EMAIL_TEMPLATE_PATH.UPDATE_EMAIL_TEMPLATE, {
@@ -155,7 +141,7 @@ export const updateEmailTemplateAPI = async (
     });
     const response = await jfwAxios.put<HttpResponse<IEmailTemplate>>(
         url,
-        data,
+        params,
         config,
     );
 

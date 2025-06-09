@@ -5,25 +5,29 @@ import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { RESOURCE_TYPE_PATH } from './paths';
 import {
-    ICreateResourceTypeData,
+    ICreateResourceTypeParams,
     IGetResourceTypesParams,
     IResourceType,
-    IUpdateResourceTypeData
+    IUpdateResourceTypeParams,
 } from './types';
 
 /**
+ * # Create a resource type
+ *
  * Creates a new resource type.
  *
+ * @param params - The params for creating a new resource type.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/resource-types/create-a-resource-type}
  */
-export const createResourceTypeAPI = async (
-    data: ICreateResourceTypeData,
+export const createResourceType = async (
+    params: ICreateResourceTypeParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = RESOURCE_TYPE_PATH.CREATE_RESOURCE_TYPE;
     const response = await jfwAxios.post<HttpResponse<IResourceType>>(
         url,
-        data,
+        params,
         config,
     );
 
@@ -31,16 +35,20 @@ export const createResourceTypeAPI = async (
 };
 
 /**
+ * # Delete a resource type
+ *
  * Delete a resource type.
  *
+ * @param id - The id of the resource type to delete.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/resource-types/delete-a-resource-type}
  */
-export const deleteResourceTypeAPI = async (
-    resourceTypeId: IdType,
+export const deleteResourceType = async (
+    id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(RESOURCE_TYPE_PATH.DELETE_RESOURCE_TYPE, {
-        id: resourceTypeId,
+        id,
     });
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
@@ -48,16 +56,20 @@ export const deleteResourceTypeAPI = async (
 };
 
 /**
+ * # Get a resource type
+ *
  * Get a resource type.
  *
+ * @param id - The id of the resource type to get.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/resource-types/get-a-resource-type}
  */
-export const getResourceTypeAPI = async (
-    resourceTypeId: IdType,
+export const getResourceType = async (
+    id: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(RESOURCE_TYPE_PATH.GET_RESOURCE_TYPE, {
-        id: resourceTypeId,
+        id,
     });
     const response = await jfwAxios.get<HttpResponse<IResourceType>>(
         url,
@@ -68,11 +80,15 @@ export const getResourceTypeAPI = async (
 };
 
 /**
+ * # Get resource types
+ *
  * Gets a list of resource types.
  *
+ * @param params - The params for getting resource types.
+ * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/resource-types/get-resource-types}
  */
-export const getResourceTypesAPI = async (
+export const getResourceTypes = async (
     params?: IGetResourceTypesParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -87,20 +103,26 @@ export const getResourceTypesAPI = async (
 };
 
 /**
+ * # Update a resource type
+ *
  * Updates a resourceType
+ *
+ * @param id - The id of the resource type to get.
+ * @param params - The params for getting resource types.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/resource-types/update-a-resource-type}
  */
-export const updateResourceTypeByIdAPI = async (
-    resourceTypeId: IdType,
-    data: IUpdateResourceTypeData,
+export const updateResourceType = async (
+    id: IdType,
+    params: IUpdateResourceTypeParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(RESOURCE_TYPE_PATH.UPDATE_RESOURCE_TYPE, {
-        id: resourceTypeId,
+        id,
     });
-
     const response = await jfwAxios.put<HttpResponse<IResourceType>>(
         url,
-        data,
+        params,
         config,
     );
 
