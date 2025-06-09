@@ -174,7 +174,7 @@ export const getPermissionsGrantedByRole = async (
     const url = generatePath(ROLE_PATH.GET_PERMISSIONS_GRANTED_BY_ROLE, {
         roleId,
     });
-    const response = await jfwAxios.get<HttpResponseList<IPermission>>(
+    const response = await jfwAxios.get<HttpResponse<IPermission[]>>(
         url,
         config,
     );
