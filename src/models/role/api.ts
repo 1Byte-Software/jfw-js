@@ -163,16 +163,16 @@ export const grantPermissionsToRole = async (
  *
  * Get permissions granted by role.
  *
- * @param id - The id of the role to list granted permissions.
+ * @param roleId - The id of the role to list granted permissions.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/roles/get-permissions-granted-by-role}
  */
 export const getPermissionsGrantedByRole = async (
-    id: IdType,
+    roleId: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ROLE_PATH.GET_PERMISSIONS_GRANTED_BY_ROLE, {
-        id,
+        roleId,
     });
     const response = await jfwAxios.get<HttpResponseList<IPermission>>(
         url,
@@ -189,18 +189,18 @@ export const getPermissionsGrantedByRole = async (
  *
  * Remove permissions from a role.
  *
- * @param id - The id of the role.
+ * @param roleId - The id of the role.
  * @param permissionIds - The list of permission ids.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/roles/remove-permissions-from-a-role}
  */
-export const removePermissionFromRole = async (
-    id: IdType,
+export const removePermissionsFromRole = async (
+    roleId: IdType,
     permissionIds: IdType[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ROLE_PATH.REMOVE_PERMISSIONS_FROM_ROLE, {
-        id,
+        roleId,
     });
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
         data: {
