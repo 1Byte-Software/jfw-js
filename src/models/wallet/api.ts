@@ -143,7 +143,7 @@ export const closeWallet = async (id: IdType, config?: AxiosRequestConfig) => {
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/wallets/get-wallets}
  */
 export const getWallets = async (
-    params: IGetWalletsParams,
+    params?: IGetWalletsParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = WALLET_PATH.GET_WALLETS;
