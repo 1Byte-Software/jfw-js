@@ -55,8 +55,8 @@ export const getPayments = async (
  * @param testMode - Query parameter to enable the test mode.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/payments/gets-the-overview-sell-dashboard}
- * #JFW-502
  */
+// #JFW-502
 export const getOverviewSellDashboard = async (
     testMode?: boolean,
     config?: AxiosRequestConfig,
