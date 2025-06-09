@@ -1,3 +1,4 @@
+import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { IBaseUser } from '../user';
 import {
@@ -165,7 +166,7 @@ export interface IIssueReaction {
 
 //#region API types
 
-export interface IGetIssuesParams {
+export interface IGetIssuesParams extends IPageable, ISortable {
     /**
      * This property represents the only parent filter.
      */
