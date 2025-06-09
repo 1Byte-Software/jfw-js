@@ -8,14 +8,14 @@ import { SortOrder } from './constants';
 export interface IPageable {
     /**
      * The page size of the pagination.
-     * @remarks integer - int32
+     * @remarks int32
      * @defaultValue 200
      */
     pageSize?: number;
 
     /**
      * The page number of the pagination.
-     * @remarks integer - int32
+     * @remarks int32
      * @defaultValue 0
      */
     pageNumber?: number;
@@ -31,6 +31,22 @@ export interface ISortable<T extends Record<string, any> = any> {
      * The sort order of the pagination.
      */
     sortOrder?: SortOrder;
+}
+
+export interface ICreatedDateFilter {
+    /**
+     * The created date from.
+     *
+     * @remarks date-time
+     */
+    createdDateFrom?: DateType;
+
+    /**
+     * The created date to.
+     *
+     * @remarks date-time
+     */
+    createdDateTo?: DateType;
 }
 
 export interface JFWBaseFilter {
@@ -77,8 +93,19 @@ export interface HttpResponse<T = unknown> {
 export interface ListData<T = unknown> {
     items: T[];
 
+    /**
+     * @remarks int32
+     */
     totalItems: number;
+
+    /**
+     * @remarks int32
+     */
     pageNumber: number;
+
+    /**
+     * @remarks int32
+     */
     pageSize: number;
 }
 

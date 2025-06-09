@@ -1,4 +1,7 @@
-export enum StatisticTypeResponse {
-    Month = 'MONTH',
-    Date = 'DATE',
+/**
+ * The type of statistic response.
+ */
+export enum StatisticResponseType {
+    MONTH = 'MONTH',
+    DATE = 'DATE',
 }
