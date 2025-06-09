@@ -325,7 +325,6 @@ export interface ICreateIssueParams {
 /**
  * The issue of the dto transfer, It's presentation with the update issue request from client.
  */
-// #JFW-496
 export interface IUpdateIssueParams {
     /**
      * Assignee user id of the issue.
