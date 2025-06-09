@@ -18,7 +18,6 @@ import {
  * @param params - The parameters for getting exchange rates.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/exchange-rates/get-exchange-rates}
- * #JFW-452
  */
 export const getExchangeRates = async (
     params?: IGetExchangeRatesParams,
