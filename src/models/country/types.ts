@@ -1,24 +1,90 @@
 import { IPageable, ISortable } from '../../core';
-import { IBaseObject, IdType } from '../base';
+import { DateType, IdType } from '../base';
 
-export interface ICountry extends IBaseObject {
+export interface ICountry {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
     id: IdType;
-    name: string;
-    iso3: string;
-    phoneCode: string;
-    region: string;
-    subregion: string;
-    tld: string;
-    native: string;
-    capital: string;
-    numericCode: number;
-    iso3166: string;
-    currency: string;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
+
+    /**
+     * The region of the country.
+     */
+    region?: string | null;
+
+    /**
+     * The subregion of the country.
+     */
+    subregion?: string | null;
+
+    /**
+     * The alpha 2 code of the country.
+     *
+     * @remarks min: 1
+     */
     codeAlpha2: string;
-    codeAlpha3: string;
-    codeNumeric: number;
-    codePhone: string;
-    tags: string | null;
+
+    /**
+     * The alpha 3 code of the country.
+     */
+    codeAlpha3?: string | null;
+
+    /**
+     * The numeric code of the country.
+     *
+     * @remarks int32
+     */
+    codeNumeric?: number | null;
+
+    /**
+     * The phone code of the country.
+     */
+    codePhone?: string | null;
+
+    /**
+     * The name of the country.
+     *
+     * @remarks min: 1
+     */
+    name: string;
+
+    /**
+     * The capital of the country.
+     */
+    capital?: string | null;
+
+    /**
+     * The currency of the country.
+     *
+     * @remarks min: 1
+     */
+    currency: string;
+
+    /**
+     * The top level domain of the country.
+     *
+     * @remarks min: 1
+     */
+    tld: string;
+
+    /**
+     * The native name of the country.
+     */
+    native?: string | null;
+
+    /**
+     * The tags of the country.
+     */
+    tags?: string | null;
 }
 
 //#region API types
