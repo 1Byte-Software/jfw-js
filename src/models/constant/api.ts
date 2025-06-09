@@ -280,7 +280,7 @@ export const getTrackingNotificationTypes = async (
 /**
  * # Tracking Notification
  *
- * Gets all the notification types.
+ * Gets all the notification channel types.
  *
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-notification#get-api-v1-constants-tracking-notification-channel-types}
