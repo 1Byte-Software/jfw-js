@@ -11,6 +11,7 @@ import {
     IPushNotificationResponse,
     IUpdateStatusNotificationParams,
 } from './types';
+import { NotificationStatus } from './constants';
 
 /**
  * # Delete a notification
@@ -149,10 +150,9 @@ export const pushNotificationDataMessageByTokens = async (
  * @param status - The status to update.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/updates-all-notification}
- * #JFW-504
  */
 export const updateAllNotification = async (
-    status: string,
+    status: NotificationStatus,
     config?: AxiosRequestConfig,
 ) => {
     const url = NOTIFICATION_PATH.UPDATE_ALL_NOTIFICATION;
@@ -174,7 +174,7 @@ export const updateAllNotification = async (
  * @param params - The params for updating status notifications.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/updates-status-notifications}
- * #JFW-499, #JFW-504
+ * #JFW-499
  */
 export const updateStatusNotifications = async (
     params: IUpdateStatusNotificationParams,
@@ -198,11 +198,10 @@ export const updateStatusNotifications = async (
  * @param status - The status to update.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/updates-status-of-a-notification}
- * #JFW-504
  */
 export const updateStatusOfNotification = async (
     trackingNotificationId: IdType,
-    status: string,
+    status: NotificationStatus,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(NOTIFICATION_PATH.UPDATE_STATUS_OF_NOTIFICATION, {

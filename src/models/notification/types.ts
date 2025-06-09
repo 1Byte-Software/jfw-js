@@ -158,7 +158,7 @@ export interface IPushNotificationMessageForTokensParams {
 export interface IPushNotificationResponse {
     /**
      * The count of success. This is the number of notifications that were successfully pushed.
-     * 
+     *
      * @remarks int32
      */
     countSuccess: number;
@@ -173,7 +173,7 @@ export interface IUpdateStatusNotificationParams {
     /**
      * The status to update.
      */
-    status: string;
+    status: NotificationStatus;
 }
 
 //#endregion
