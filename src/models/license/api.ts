@@ -2,12 +2,11 @@ import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../base';
+import { ICountSuccessResponse, IdType } from '../base';
 import { LICENSE_PATH } from './paths';
 import {
     IApplyLicenseToGivenLoginNameParams,
     IApplyLicenseToGivenUserParams,
-    ICountSuccessResponse,
     ICreateLicensesParams,
     IGenerateLicenseKeyParams,
     IGetLicensesParams,
@@ -15,7 +14,7 @@ import {
     ILicenseStatistic,
     IPurchaseToAddLicensesByCheckoutLinkParams,
     IPurchaseToAddLicensesByWalletParams,
-    IStatisticsPercentageLicensesUsedParams
+    IStatisticsPercentageLicensesUsedParams,
 } from './types';
 
 /**

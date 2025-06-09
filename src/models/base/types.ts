@@ -14,3 +14,15 @@ export interface IBaseObject {
     modifiedBy?: IdType;
     modifiedDate: DateType;
 }
+
+/**
+ * Represents the count of successful operations.
+ */
+export interface ICountSuccessResponse {
+    /**
+     * The number of successful operations.
+     *
+     * @remarks int32
+     */
+    countSuccess: number;
+}

@@ -108,19 +108,6 @@ export interface ILicenseStatistic {
     unavailableQuantity: number;
 }
 
-
-/**
- * Represents the count of successful operations.
- */
-export interface ICountSuccessResponse {
-    /**
-     * The number of successful operations.
-     * 
-     * @remarks int32
-     */
-    countSuccess: number;
-}
-
 //#region API types
 export interface IApplyLicenseToGivenLoginNameParams {
     /**

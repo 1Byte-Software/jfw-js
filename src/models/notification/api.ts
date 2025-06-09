@@ -2,7 +2,8 @@ import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
-import { IdType } from '../base';
+import { ICountSuccessResponse, IdType } from '../base';
+import { NotificationStatus } from './constants';
 import { NOTIFICATION_PATH } from './paths';
 import {
     IGetNotificationsByUserAuthorizedParams,
@@ -11,7 +12,6 @@ import {
     IPushNotificationResponse,
     IUpdateStatusNotificationParams,
 } from './types';
-import { NotificationStatus } from './constants';
 
 /**
  * # Delete a notification
@@ -174,17 +174,20 @@ export const updateAllNotification = async (
  * @param params - The params for updating status notifications.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/updates-status-notifications}
- * #JFW-499
  */
 export const updateStatusNotifications = async (
     params: IUpdateStatusNotificationParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = NOTIFICATION_PATH.UPDATE_STATUS_NOTIFICATIONS;
-    const response = await jfwAxios.put<HttpResponse<number>>(url, null, {
-        params,
-        ...config,
-    });
+    const response = await jfwAxios.put<HttpResponse<ICountSuccessResponse>>(
+        url,
+        null,
+        {
+            params,
+            ...config,
+        },
+    );
 
     return response.data;
 };
