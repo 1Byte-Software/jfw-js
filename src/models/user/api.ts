@@ -17,6 +17,7 @@ import {
     IAuthenticationByMagicLinkParams,
     IAuthenticationParams,
     IBaseUser,
+    IBrandPartnerAuthenticate,
     IChangePasswordParams,
     ICheckAuthKeyAvailableParams,
     ICreateConfigurationOfUserParams,
@@ -726,7 +727,6 @@ export const getRefereeOfUser = async (
  * @param userId - The id of the user to get the connection authenticate brand status for.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/list-all-brand-partner-auth}
- * // JFW-512
  */
 export const listAllBrandPartnersAuthenticate = async (
     userId: IdType,
@@ -735,7 +735,9 @@ export const listAllBrandPartnersAuthenticate = async (
     const url = generatePath(USER_PATH.LIST_ALL_BRAND_PARTNERS_AUTHENTICATE, {
         userId,
     });
-    const response = await jfwAxios.get<HttpResponse<any>>(url, config);
+    const response = await jfwAxios.get<
+        HttpResponse<IBrandPartnerAuthenticate>
+    >(url, config);
 
     return response.data;
 };
