@@ -4,8 +4,8 @@ export const CONSTANT_PATH = {
     GET_BRAND_LINK_TYPES: `v1/${REST}/brand/link/types`,
     GET_BLACK_LIST_TYPES: `v1/${REST}/black-list/types`,
     GET_COUPON_STATUSES: `v1/${REST}/coupon/status`,
+
     GET_COMMISSION_RATE_TYPES: `v1/${REST}/commission-rate/types`,
-    GET_COMMISSION_RATE_STATUSES: `v1/${REST}/commission-rate/status`,
 
     GET_DEVICE_TYPES: `v1/${REST}/device/types`,
     GET_DEVICE_STATUSES: `v1/${REST}/device/types`,

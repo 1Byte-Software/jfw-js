@@ -64,24 +64,6 @@ export const getCommissionRateTypes = async (config?: AxiosRequestConfig) => {
 };
 
 /**
- * # Commission Rate
- *
- * Gets all the commission rate types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/commission-rate#get-api-v1-constants-device-status}
- * #JFW-515
- */
-export const getCommissionRateStatuses = async (
-    config?: AxiosRequestConfig,
-) => {
-    const url = CONSTANT_PATH.GET_COMMISSION_RATE_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
-
-    return response.data;
-};
-
-/**
  * # Device
  *
  * Gets all the device status.
