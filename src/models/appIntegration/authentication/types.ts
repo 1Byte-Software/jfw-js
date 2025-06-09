@@ -60,13 +60,17 @@ export interface IAppIntegrationAuthentication {
 
     /**
      * The redirect URI of the app integration. After the user logs in, the user is redirected to this URI. This value is must be mapping with the application configuration on the OAuth2 provider.
+     *
+     * @remarks min: 1
      */
-    redirectURI?: string | null;
+    redirectURI: string;
 
     /**
      * The scope of the app integration.
+     *
+     * @remarks min: 1
      */
-    scope?: string | null;
+    scope: string;
 
     /**
      * The authentication endpoint of the app integration.
