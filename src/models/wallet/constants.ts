@@ -1,7 +1,7 @@
 /**
  * Possible values:
  * - `0` - `Unknown`
- * - `1` - `LicesnePurchase`
+ * - `1` - `LicensePurchase`
  * - `3` - `Payment`
  * - `4` - `Refund`
  * - `5` - `Void`
@@ -18,7 +18,7 @@
 // JFW-514
 export enum WalletHistoryType {
     Unknown = 'Unknown',
-    LicesnePurchase = 'LicesnePurchase',
+    LicensePurchase = 'LicensePurchase',
     Payment = 'Payment',
     Refund = 'Refund',
     Void = 'Void',
