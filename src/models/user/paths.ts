@@ -28,7 +28,8 @@ export const USER_PATH = {
     // #JFW-508
     DEACTIVATE_USER: `v1/${REST}/{id}/deactivate`,
     DELETE_USER: `v1/${REST}/{id}`,
-    EMAIL_ADDRESS_VERIFICATION: `v1/${REST}/email-address/active`,
+    SEND_EMAIL_TO_VERIFY_EMAIL_ADDRESS_OF_USER: `v1/${REST}/{id}/email-address/verify/send`,
+    ACTIVE_USER_EMAIL_ADDRESS: `v1/${REST}/email-address/active`,
     FORGOT_PASSWORD: `v1/${REST}/forgot-password`,
     GET_USER_BY_USERNAME: `v1/${REST}/by-username/{username}`,
     GET_USER: `v1/${REST}/{id}`,
@@ -54,9 +55,5 @@ export const USER_PATH = {
     VERIFY_EMAIL_ADDRESS_OTP_TO_AUTHENTICATION: `v1/${REST}/auth/passwordless/verify-email-otp`,
     VERIFY_SMS_OTP_TO_AUTHENTICATION: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/verify-sms-otp`,
 
-    /**
-     * #JFW-510
-     */
-    VERIFY_USER_EMAIL_ADDRESS: `v1/${REST}/{userId}/email-address/verify/send`,
     CHECK_AUTH_KEY_AVAILABLE: `v1/${REST}/check-auth-key-available`,
 };

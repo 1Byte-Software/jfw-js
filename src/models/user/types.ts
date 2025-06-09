@@ -5,6 +5,7 @@ import {
     IStatisticCommonParams,
 } from '../../core';
 import { DateType, IdType } from '../base';
+import { ICreateConfigurationParams } from '../configuration';
 import { ConfigurationStatus } from '../configuration/constants';
 import { IPackage } from '../packages';
 import { IRole } from '../role';
@@ -883,12 +884,6 @@ export interface IResetPasswordParams {
 
 export interface IStatisticsUsersParams extends IStatisticCommonParams {}
 
-export interface IAuthenticateByEmailAddressParams {
-    emailAddress: string;
-    callbackURL: string;
-    returnURL: string;
-}
-
 export interface ICheckAuthKeyAvailableParams {
     authKey: string;
 }
@@ -918,40 +913,7 @@ export interface IVerifyUserEmailAddressParams {
 
 export type IVerifySMSOTPToAuthenticationParams = IVerifyUserEmailAddressParams;
 
-// #JFW-513
-export interface ICreateConfigurationOfUserParams {
-    /**
-     * The group code of the configuration.
-     *
-     * @remarks min: 1
-     */
-    groupCode: string;
-
-    /**
-     * The code of the configuration.
-     *
-     * @remarks min: 1
-     */
-    code: string;
-
-    /**
-     * The name of the configuration.
-     *
-     * @remarks min: 1
-     */
-    name: string;
-
-    /**
-     * The description of the configuration.
-     */
-    description?: string | null;
-
-    /**
-     * The value of the configuration.
-     *
-     * @remarks min: 1
-     */
-    value: string;
-}
+export interface ICreateConfigurationOfUserParams
+    extends ICreateConfigurationParams {}
 
 //#endregion

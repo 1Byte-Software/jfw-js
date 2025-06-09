@@ -125,16 +125,16 @@ export interface ICreateConfigurationParams {
     name: string;
 
     /**
+     * The description of the configuration.
+     */
+    description?: string | null;
+
+    /**
      * The value of the configuration.
      *
      * @remarks min: 1
      */
     value: string;
-
-    /**
-     * The description of the configuration.
-     */
-    description?: string | null;
 
     /**
      * The status of the configuration.

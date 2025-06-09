@@ -283,10 +283,8 @@ export const authentication = async (
     const url = USER_PATH.AUTHENTICATION;
     const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
         url,
-        {
-            params,
-            ...config,
-        },
+        params,
+        config,
     );
 
     return response.data;
@@ -343,7 +341,6 @@ export const checkReferralUserCode = async (
  * @param params - The params for creating a new configuration for the user.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/configurations#post-api-users-id-configurations}
- * #JFW-513
  */
 export const createNewConfigurationForUser = async (
     id: IdType,
@@ -452,38 +449,63 @@ export const deleteUser = async (id: IdType, config?: AxiosRequestConfig) => {
     return response.data;
 };
 
-// /**
-//  * # Email address verification
-//  *
-//  * Sends the email to verify user's email address.
-//  *
-//  * The email will contain a link to verify the email address.
-//  *
-//  * @param options - The options for email address verification.
-//  * @param config - Optional axios request configuration object.
-//  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#verify-user-email-address}
-//  * #JFW-510
-//  */
-// export const emailAddressVerification = async (
-//     options: IEmailAddressVerificationOptions,
-//     config?: AxiosRequestConfig,
-// ) => {
-//     const url = generatePath(
-//         USER_PATH.EMAIL_ADDRESS_VERIFICATION,
-//         pathParameters,
-//     );
+/**
+ * # Verify user email address
+ *
+ * Sends the email to verify user's email address.
+ * The email will contain a link to verify the email address.
+ *
+ * @param returnURL - The return URL after the user clicks the link in the email.
+ * @param id - The user id to send the email.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#post-api-v1-users-id-email-address-verify-send}
+ */
+export const sendEmailToVerifyEmailAddressOfUser = async (
+    id: IdType,
+    returnURL: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(
+        USER_PATH.SEND_EMAIL_TO_VERIFY_EMAIL_ADDRESS_OF_USER,
+        {
+            id,
+        },
+    );
+    const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
+        params: {
+            returnURL,
+        },
+        ...config,
+    });
 
-//     const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
-//         params: queryParameters,
-//         headers: {
-//             ...headerParameters,
-//             ...config?.headers,
-//         },
-//         ...config,
-//     });
+    return response.data;
+};
 
-//     return response.data;
-// };
+/**
+ * # Actives the user email address
+ *
+ * Actives the user email address.
+ *
+ * @param token - The token to active the email address. This is the token that was received from the request to send the OTP.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#put-api-v1-users-email-address-active}
+ * #JFW-510
+ */
+export const activeUserEmailAddress = async (
+    token: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.ACTIVE_USER_EMAIL_ADDRESS;
+
+    const response = await jfwAxios.put<HttpResponse<boolean>>(
+        url,
+        {
+            token,
+        },
+        config,
+    );
+
+    return response.data;
+};
 
 /**
  * # Forgot password
@@ -827,7 +849,7 @@ export const resetPassword = async (
  */
 export const revokeRolesFromUser = async (
     id: IdType,
-    roleIds: IdType,
+    roleIds: IdType[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.REVOKE_ROLES_FROM_USER, {
@@ -1035,42 +1057,6 @@ export const verifySMSOTPToAuthentication = async (
 
     return response.data;
 };
-// /**
-//  * Sends the email to verify user's email address.
-//  * The email will contain a link to verify the email address.
-//  *
-//  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#api-v1-users-userid-email-address-verify-send}
-//  */
-// export const verifyUserEmailAddress = async (
-//     userId: IdType,
-//     config?: AxiosRequestConfig,
-// ) => {
-//     const url = generatePath(USER_PATH.VERIFY_USER_EMAIL_ADDRESS, {
-//         userId,
-//     });
-
-//     const response = await jfwAxios.post<HttpResponse<boolean>>(
-//         url,
-//         null,
-//         config,
-//     );
-
-//     return response.data;
-// };
-
-/**
- * Authenticates the user with the given email and brand URL.
- */
-// export const authenticateByEmailAddress = async (
-//     data: IAuthenticateByEmailAddressParams,
-//     config?: AxiosRequestConfig,
-// ) => {
-//     const url = USER_PATH.AUTH.BY_EMAIL_ADDRESS;
-
-//     const response = await jfwAxios.post<HttpResponse<null>>(url, data, config);
-
-//     return response.data;
-// };
 
 /**
  * Check auth key available
@@ -1089,25 +1075,3 @@ export const checkAuthKeyAvailable = async (
 
     return response.data;
 };
-
-/**
- * Actives the user email address.
- *
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#api-v1-users-email-address-active-token}
- */
-// export const activeUserEmailAddress = async (
-//     token: string,
-//     config?: AxiosRequestConfig,
-// ) => {
-//     const url = USER_PATH.ACTIVE_USER_EMAIL_ADDRESS;
-
-//     const response = await jfwAxios.put<HttpResponse<boolean>>(
-//         url,
-//         {
-//             token,
-//         },
-//         config,
-//     );
-
-//     return response.data;
-// };
