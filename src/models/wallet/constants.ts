@@ -15,7 +15,6 @@
  * - `23` - `WalletRedeem`
  * - `24` - `WalletConvert`
  */
-// JFW-514
 export enum WalletHistoryType {
     Unknown = 'Unknown',
     LicensePurchase = 'LicensePurchase',
