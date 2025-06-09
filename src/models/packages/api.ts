@@ -3,12 +3,12 @@ import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
-import { IFeature } from '../feature';
 import { IPrice } from '../price';
 import { PACKAGE_PATH } from './paths';
 import {
     IAddFeaturesToPackageParams,
     ICreatePackageParams,
+    IFeatureOfPackage,
     IPackage,
     IUpdatePackageParams,
 } from './types';
@@ -31,7 +31,7 @@ export const addFeaturesToPackage = async (
     const url = generatePath(PACKAGE_PATH.ADD_FEATURE_TO_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.post<HttpResponse<boolean>>(
+    const response = await jfwAxios?.post<HttpResponse<boolean>>(
         url,
         params,
         config,
@@ -54,7 +54,7 @@ export const createPackage = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = PACKAGE_PATH.CREATE_PACKAGE;
-    const response = await jfwAxios.post<HttpResponse<IPackage>>(
+    const response = await jfwAxios?.post<HttpResponse<IPackage>>(
         url,
         params,
         config,
@@ -79,7 +79,7 @@ export const deletePackage = async (
     const url = generatePath(PACKAGE_PATH.DELETE_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+    const response = await jfwAxios?.delete<HttpResponse<boolean>>(url, config);
 
     return response.data;
 };
@@ -97,7 +97,7 @@ export const getPackage = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(PACKAGE_PATH.GET_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.get<HttpResponse<IPackage>>(url, config);
+    const response = await jfwAxios?.get<HttpResponse<IPackage>>(url, config);
 
     return response.data;
 };
@@ -118,7 +118,10 @@ export const getFeaturesFromPackage = async (
     const url = generatePath(PACKAGE_PATH.GET_FEATURES_FROM_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.get<HttpResponse<IFeature[]>>(url, config);
+    const response = await jfwAxios?.get<HttpResponse<IFeatureOfPackage[]>>(
+        url,
+        config,
+    );
 
     return response.data;
 };
@@ -134,7 +137,7 @@ export const getFeaturesFromPackage = async (
  */
 export const getPackages = async (config?: AxiosRequestConfig) => {
     const url = PACKAGE_PATH.GET_PACKAGES;
-    const response = await jfwAxios.get<HttpResponse<IPackage[]>>(url, config);
+    const response = await jfwAxios?.get<HttpResponse<IPackage[]>>(url, config);
 
     return response.data;
 };
@@ -155,7 +158,7 @@ export const getPricesFromPackage = async (
     const url = generatePath(PACKAGE_PATH.GET_PRICES_FROM_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.get<HttpResponse<IPrice[]>>(url, config);
+    const response = await jfwAxios?.get<HttpResponse<IPrice[]>>(url, config);
 
     return response.data;
 };
@@ -178,7 +181,7 @@ export const updatePackage = async (
     const url = generatePath(PACKAGE_PATH.UPDATE_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.put<HttpResponse<IPackage>>(
+    const response = await jfwAxios?.put<HttpResponse<IPackage>>(
         url,
         params,
         config,
@@ -205,7 +208,7 @@ export const removeFeaturesFromPackage = async (
     const url = generatePath(PACKAGE_PATH.REMOVE_FEATURES_FROM_PACKAGE, {
         id,
     });
-    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
+    const response = await jfwAxios?.delete<HttpResponse<boolean>>(url, {
         params: {
             featureIds,
         },
