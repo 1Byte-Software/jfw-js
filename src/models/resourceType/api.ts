@@ -36,14 +36,13 @@ export const createResourceType = async (
 
 /**
  * # Delete a resource type
- * 
+ *
  * Delete a resource type.
  *
  * @param id - The id of the resource type to delete.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/resource-types/delete-a-resource-type}
  */
-// #JFW-502
 export const deleteResourceType = async (
     id: IdType,
     config?: AxiosRequestConfig,
@@ -58,7 +57,7 @@ export const deleteResourceType = async (
 
 /**
  * # Get a resource type
- * 
+ *
  * Get a resource type.
  *
  * @param id - The id of the resource type to get.
@@ -82,7 +81,7 @@ export const getResourceType = async (
 
 /**
  * # Get resource types
- * 
+ *
  * Gets a list of resource types.
  *
  * @param params - The params for getting resource types.
@@ -105,7 +104,7 @@ export const getResourceTypes = async (
 
 /**
  * # Update a resource type
- * 
+ *
  * Updates a resourceType
  *
  * @param id - The id of the resource type to get.
