@@ -266,15 +266,6 @@ export interface IUser {
     isUserIntegration: boolean;
 }
 
-// JFW-511
-export interface IReferee {
-    emailAddress: string;
-    firstName: string;
-    lastName: string;
-    nickName: string;
-    createdDate: DateType;
-}
-
 export interface IAppIntegrationAuthenticateURL {
     /**
      * The app authentication name.

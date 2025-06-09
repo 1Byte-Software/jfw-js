@@ -16,6 +16,7 @@ import {
     IAuthenticationByGoogleParams,
     IAuthenticationByMagicLinkParams,
     IAuthenticationParams,
+    IBaseUser,
     IChangePasswordParams,
     ICheckAuthKeyAvailableParams,
     ICreateConfigurationOfUserParams,
@@ -23,7 +24,6 @@ import {
     IGetAppIntegrationAuthenticateURLsParams,
     IGetConfigurationsOfUserParams,
     IGetUsersParams,
-    IReferee,
     IRegisterNewUserParams,
     IRemoveDeviceFromUserParams,
     IResetPasswordParams,
@@ -706,7 +706,6 @@ export const getCurrentUserLoggedIn = async (config?: AxiosRequestConfig) => {
  * @param id - The id of the user.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/gets-the-referees-of-a-user}
- * // JFW-511
  */
 export const getRefereeOfUser = async (
     id: IdType,
@@ -715,7 +714,7 @@ export const getRefereeOfUser = async (
     const url = generatePath(USER_PATH.GET_REFEREES_OF_USER, {
         id,
     });
-    const response = await jfwAxios.get<HttpResponse<IReferee[]>>(url, config);
+    const response = await jfwAxios.get<HttpResponse<IBaseUser[]>>(url, config);
 
     return response.data;
 };
