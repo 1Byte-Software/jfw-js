@@ -60,7 +60,6 @@ export const deletePrice = async (id: IdType, config?: AxiosRequestConfig) => {
  * @param id - The id of the price.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/generate-checkout-link}
- * #JFW-505
  */
 export const generateCheckoutLink = async (
     id: IdType,
@@ -69,7 +68,7 @@ export const generateCheckoutLink = async (
     const url = generatePath(PRICE_PATH.GENERATE_CHECKOUT_LINK, {
         id,
     });
-    const response = await jfwAxios.get(url, config);
+    const response = await jfwAxios.get<HttpResponse<string>>(url, config);
 
     return response.data;
 };
