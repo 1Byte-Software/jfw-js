@@ -629,7 +629,6 @@ export interface IAddDeviceToUserParams {
 
     /**
      * @remarks enum
-     * #JFW-509
      */
     status?: UserDeviceStatus;
 }
