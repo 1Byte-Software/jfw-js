@@ -488,7 +488,6 @@ export const sendEmailToVerifyEmailAddressOfUser = async (
  * @param token - The token to active the email address. This is the token that was received from the request to send the OTP.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-user-email#put-api-v1-users-email-address-active}
- * #JFW-510
  */
 export const activeUserEmailAddress = async (
     token: string,
