@@ -205,7 +205,7 @@ export interface ICreateDeviceParams {
      *
      * @remarks enum
      */
-    status?: DeviceStatus | null;
+    status?: DeviceStatus;
 
     /**
      * Flag indicating if the device is the default device.

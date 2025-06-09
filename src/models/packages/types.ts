@@ -142,7 +142,7 @@ export interface ICreatePackageParams {
      * @remarks int64
      * @defaultValue `1`
      */
-    zOrder: number;
+    zOrder?: number;
 }
 /**
  * This class is used to present the package command request data transfer object.

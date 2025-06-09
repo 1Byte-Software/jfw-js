@@ -78,7 +78,7 @@ export interface ICDNFile {
     isSystem: boolean;
 }
 
-export interface ICDNFileUpload {
+export interface ICDNFileUploadParams {
     /**
      * The file ID of the file.
      *

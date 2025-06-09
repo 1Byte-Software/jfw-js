@@ -102,7 +102,7 @@ export const getBrandLink = async (
 export const getBrandLinksByType = async (
     id: IdType,
     type: BrandLinkType,
-    params: IGetBrandLinksByTypeParams,
+    params?: IGetBrandLinksByTypeParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINKS_BY_TYPE, {

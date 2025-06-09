@@ -225,6 +225,7 @@ export interface IUser {
      * The package id.
      *
      * @remarks min: 1
+     * @deprecated
      */
     packageId: IdType;
 

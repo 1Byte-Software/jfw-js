@@ -1,11 +1,11 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
+import { HeaderKey } from '../../core/client/constants';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { CDN_PATH } from './paths';
-import { ICDNFile, ICDNFileUpload, IGetFilesCDNParams } from './types';
-import { HeaderKey } from '../../core/client/constants';
+import { ICDNFile, ICDNFileUploadParams, IGetFilesCDNParams } from './types';
 
 /**
  * # Delete a file CDN
@@ -80,7 +80,7 @@ export const getFilesCDN = async (
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/upload-file}
  */
 export const uploadFileCDN = async (
-    params: ICDNFileUpload,
+    params: ICDNFileUploadParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = CDN_PATH.UPLOAD_FILE;
@@ -92,7 +92,7 @@ export const uploadFileCDN = async (
         });
     }
 
-    const response = await jfwAxios.post<HttpResponse<ICDNFileUpload>>(
+    const response = await jfwAxios.post<HttpResponse<ICDNFileUploadParams>>(
         url,
         params,
         {
