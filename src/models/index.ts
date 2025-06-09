@@ -24,7 +24,6 @@ export * from './notification';
 export * from './organization';
 export * from './packages';
 export * from './payment';
-export * from './paymentMethod';
 export * from './permission';
 export * from './price';
 export * from './resourceType';
