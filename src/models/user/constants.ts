@@ -50,3 +50,13 @@ export enum AuthenticationResponseType {
     RedirectURL = 'RedirectURL',
     JsonFormat = 'JsonFormat',
 }
+
+/**
+ * Possible values:
+ * - `0` - `Connected`
+ * - `1` - `Unconnected`
+ */
+export enum BrandPartnerAuthenticateStatus {
+    Connected = 'Connected',
+    Unconnected = 'Unconnected',
+}

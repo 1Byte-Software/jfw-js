@@ -5,6 +5,7 @@ import {
     IStatisticCommonParams,
 } from '../../core';
 import { DateType, IdType } from '../base';
+import { IBrand } from '../brand';
 import { ICreateConfigurationParams } from '../configuration';
 import { ConfigurationStatus } from '../configuration/constants';
 import { IPackage } from '../packages';
@@ -12,6 +13,7 @@ import { IRole } from '../role';
 import {
     AddDeviceToUserStatus,
     AuthenticationResponseType,
+    BrandPartnerAuthenticateStatus,
     UserStatus,
     UserType,
 } from './constants';
@@ -908,4 +910,24 @@ export type IVerifySMSOTPToAuthenticationParams = IVerifyUserEmailAddressParams;
 export interface ICreateConfigurationOfUserParams
     extends ICreateConfigurationParams {}
 
+export interface IBrandPartnerAuthenticate {
+    /**
+     * The user internal brand status.
+     *
+     * @remarks enum
+     */
+    status: BrandPartnerAuthenticateStatus;
+
+    /**
+     * The created date time.
+     *
+     * @remarks date-time
+     */
+    createdDate: DateType;
+
+    /**
+     * This class represents the Brand.
+     */
+    brand: IBrand;
+}
 //#endregion
