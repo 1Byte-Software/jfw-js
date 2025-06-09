@@ -25,7 +25,6 @@ export const USER_PATH = {
     CREATE_NEW_CONFIGURATION_FOR_USER: `v1/${REST}/{id}/configurations`,
     GET_CONFIGURATION_OF_USER: `v1/${REST}/{id}/configurations`,
     DELETE_CONFIGURATION_OF_USER_BY_ID: `v1/${REST}/{id}/configurations/{configurationId}`,
-    // #JFW-508
     DEACTIVATE_USER: `v1/${REST}/{id}/deactivate`,
     DELETE_USER: `v1/${REST}/{id}`,
     SEND_EMAIL_TO_VERIFY_EMAIL_ADDRESS_OF_USER: `v1/${REST}/{id}/email-address/verify/send`,
