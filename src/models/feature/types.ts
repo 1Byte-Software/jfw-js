@@ -1,5 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
+import { IFeatureOfPackageBase } from '../packages';
 import { FeatureStatus, FeatureType } from './constants';
 
 /**
@@ -131,6 +132,11 @@ export interface IGetFeaturesParams extends IPageable, ISortable {
      * @remarks enum
      */
     status?: FeatureStatus;
+
+    /**
+     * Filter by the keywords.
+     */
+    keywords?: string;
 }
 
 /**
@@ -207,5 +213,17 @@ export interface ICreateFeatureParams {
  * This class represents the feature data transfer object for the command request.
  */
 export type IUpdateFeatureParams = ICreateFeatureParams;
+
+/**
+ * The payload for add package to a feature
+ */
+export interface IAddPackageToFeatureParams extends IFeatureOfPackageBase {
+    /**
+     * The id of the package
+     *
+     * @remarks min: 1
+     */
+    packageId: IdType;
+}
 
 //#endregion
