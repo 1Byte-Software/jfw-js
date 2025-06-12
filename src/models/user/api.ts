@@ -4,7 +4,6 @@ import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { IConfiguration } from '../configuration';
-import { IDevice } from '../device';
 import { IRole } from '../role';
 import { UserType } from './constants';
 import { USER_PATH } from './paths';
@@ -21,6 +20,7 @@ import {
     IChangePasswordParams,
     ICheckAuthKeyAvailableParams,
     ICreateConfigurationOfUserParams,
+    IDeviceOfUser,
     IForgotPasswordParams,
     IGetAppIntegrationAuthenticateURLsParams,
     IGetConfigurationsOfUserParams,
@@ -611,7 +611,10 @@ export const getDevicesFromUser = async (
     const url = generatePath(USER_PATH.GET_DEVICES_FROM_USER, {
         userId,
     });
-    const response = await jfwAxios.get<HttpResponse<IDevice[]>>(url, config);
+    const response = await jfwAxios.get<HttpResponse<IDeviceOfUser[]>>(
+        url,
+        config,
+    );
 
     return response.data;
 };
