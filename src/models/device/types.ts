@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
-import { DeviceStatus } from './constants';
+import { DeviceStatus, DeviceType } from './constants';
 
 /**
  * This class represents the device DTO.
@@ -25,7 +25,7 @@ export interface IDevice {
      *
      * @remarks int32
      */
-    type: number;
+    type: DeviceType;
 
     /**
      * The code of the device.
@@ -177,9 +177,9 @@ export interface ICreateDeviceParams {
     /**
      * The type of the device.
      *
-     * @remarks int32
+     * @remarks enum
      */
-    type?: number | null;
+    type: DeviceType;
 
     /**
      * The code of the device.
