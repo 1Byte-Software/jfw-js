@@ -161,13 +161,6 @@ export interface IGetPricesParams extends IPageable, ISortable {
  */
 export interface ICreatePriceParams {
     /**
-     * The app setting payment gateway id.
-     *
-     * @remarks min: 1
-     */
-    appSettingPaymentGatewayId: string;
-
-    /**
      * The package id.
      *
      * @remarks min: 1
@@ -191,7 +184,7 @@ export interface ICreatePriceParams {
     /**
      * The name of the price.
      */
-    name?: string | null;
+    name: string;
 
     /**
      * The amount of the price.
