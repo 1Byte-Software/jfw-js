@@ -71,6 +71,24 @@ export const getEmailTemplateByEvent = async (
 };
 
 /**
+ * # Get an event
+ *
+ * Get events
+ *
+ * @param id - The id of the event.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/events/get-an-event}
+ */
+export const getEvent = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(EVENT_PATH.GET_EVENT, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<IEvent>>(url, config);
+
+    return response.data;
+};
+
+/**
  * # Get events
  *
  * Get events
