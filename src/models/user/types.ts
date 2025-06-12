@@ -8,6 +8,7 @@ import { DateType, IdType } from '../base';
 import { IBrand } from '../brand';
 import { ICreateConfigurationParams } from '../configuration';
 import { ConfigurationStatus } from '../configuration/constants';
+import { IDevice } from '../device';
 import { IPackage } from '../packages';
 import { IRole } from '../role';
 import {
@@ -266,6 +267,23 @@ export interface IUser {
      * Flag to check if the user is an integration from another application. E.g. Google, Apple, etc.
      */
     isUserIntegration: boolean;
+}
+
+export interface IDeviceOfUser extends IDevice {
+    /**
+     * The token of the user device.
+     */
+    token?: string | null;
+
+    /**
+     * The session of the user device.
+     */
+    session?: string | null;
+
+    /**
+     * @remarks enum
+     */
+    userDeviceStatus: UserDeviceStatus;
 }
 
 export interface IAppIntegrationAuthenticateURL {
