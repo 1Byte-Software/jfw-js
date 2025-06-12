@@ -3,7 +3,7 @@ const REST_FEATURE = 'features';
 const REST_PRICE = 'prices';
 
 export const PACKAGE_PATH = {
-    ADD_FEATURE_TO_PACKAGE: `v1/${REST}/{id}/${REST_FEATURE}`,
+    ADD_FEATURE_TO_PACKAGE: `v1/${REST}/{packageId}/${REST_FEATURE}`,
     CREATE_PACKAGE: `v1/${REST}`,
     DELETE_PACKAGE: `v1/${REST}/{id}`,
 
@@ -11,6 +11,7 @@ export const PACKAGE_PATH = {
     GET_FEATURES_FROM_PACKAGE: `v1/${REST}/{id}/${REST_FEATURE}`,
     GET_PACKAGES: `v1/${REST}`,
     GET_PRICES_FROM_PACKAGE: `v1/${REST}/{id}/${REST_PRICE}`,
+    REMOVE_FEATURES_FROM_PACKAGE: `v1/${REST}/{packageId}/${REST_FEATURE}`,
     UPDATE_PACKAGE: `v1/${REST}/{id}`,
-    REMOVE_FEATURES_FROM_PACKAGE: `v1/${REST}/{id}/${REST_FEATURE}`,
+    UPDATE_PACKAGE_FEATURE_DATA: `v1/${REST}/{packageId}/${REST_FEATURE}/{featureId}`,
 };

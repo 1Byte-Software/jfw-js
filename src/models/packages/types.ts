@@ -88,10 +88,7 @@ export interface IPackage {
     isDefault: boolean;
 }
 
-/**
- * This class provides the Feature of Package Dto.
- */
-export interface IFeatureOfPackage extends IFeature {
+export interface IFeatureOfPackageBase {
     /**
      * The title of the package feature. This title is used to display the feature in the UI.
      *
@@ -116,8 +113,13 @@ export interface IFeatureOfPackage extends IFeature {
     /**
      * Flag to indicate if the feature is unlimited. If true, the feature is unlimited. If false, the feature is limited to the quantity.
      */
-    isUnlimited: boolean;
+    isUnlimited?: boolean | null;
 }
+
+/**
+ * This class provides the Feature of Package Dto.
+ */
+export interface IFeatureOfPackage extends IFeature, IFeatureOfPackageBase {}
 
 //#region API types
 /**
@@ -168,29 +170,43 @@ export interface ICreatePackageParams {
     tags?: string | null;
 
     /**
-     * The order of the package. By default, the value is 1.
+     * The order of the package.
      *
      * @remarks int64
-     * @defaultValue `1`
+     * @defaultValue 1
      */
     zOrder?: number;
+
+    /**
+     * Flag to indicate if the package is default.
+     *
+     * @defaultValue false
+     */
+    isDefault?: boolean;
 }
 /**
  * This class is used to present the package command request data transfer object.
  */
 export type IUpdatePackageParams = ICreatePackageParams;
 
+export interface IUpdatePackageFeatureDataPathParams {
+    packageId: IdType;
+    featureId: IdType;
+}
+
 /**
  * The package feature request to add feature into package.
  */
-export interface IAddFeaturesToPackageParams {
+export interface IAddFeatureToPackageParams extends IFeatureOfPackageBase {
     /**
      * The feature id.
      *
      * @remarks min: 1
      */
     featureId: string;
+}
 
+export interface IUpdatePackageFeatureDataParams {
     /**
      * The title of the feature. This title is used to display the feature in the UI.
      */
@@ -212,6 +228,8 @@ export interface IAddFeaturesToPackageParams {
 
     /**
      * Flag to indicate if the feature is unlimited. Default is false.
+     *
+     * @defaultValue `false`
      */
     isUnlimited?: boolean | null;
 }
