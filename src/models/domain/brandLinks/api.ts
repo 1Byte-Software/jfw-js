@@ -19,18 +19,18 @@ import {
  *
  * Creates a new brand link.
  *
- * @param id - The id of the domain.
+ * @param domainId - The id of the domain.
  * @param params - The params for creating a new brand link.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/create-a-brand-link}
  */
 export const createBrandLink = async (
-    id: IdType,
+    domainId: IdType,
     params: ICreateBrandLinkParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(BRAND_LINK_PATH.CREATE_BRAND_LINK, {
-        id,
+        domainId,
     });
     const response = await jfwAxios.post<HttpResponse<IBrandLink>>(
         url,
@@ -46,18 +46,18 @@ export const createBrandLink = async (
  *
  * Deletes a brand link by the given id.
  *
- * @param id - The id of the domain.
+ * @param domainId - The id of the domain.
  * @param brandLinkId - The id of the brand link.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/delete-a-brand-link}
  */
 export const deleteBrandLink = async (
-    id: IdType,
+    domainId: IdType,
     brandLinkId: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(BRAND_LINK_PATH.DELETE_BRAND_LINK, {
-        id,
+        domainId,
         brandLinkId,
     });
     const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
@@ -78,9 +78,9 @@ export const getBrandLink = async (
     params: IGetBrandLinkParams,
     config?: AxiosRequestConfig,
 ) => {
-    const { id, brandLinkId } = params;
+    const { domainId, brandLinkId } = params;
     const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINK, {
-        id,
+        domainId,
         brandLinkId,
     });
     const response = await jfwAxios.get<HttpResponse<IBrandLink>>(url, config);
@@ -93,24 +93,22 @@ export const getBrandLink = async (
  *
  * Gets links by type.
  *
- * @param id - The id of the domain.
- * @param type - The type of the brand link.
  * @param params - The params for filter brand links (optional).
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/get-brand-links-by-type}
  */
 export const getBrandLinksByType = async (
-    id: IdType,
-    type: BrandLinkType,
-    params?: IGetBrandLinksByTypeParams,
+    params: IGetBrandLinksByTypeParams,
     config?: AxiosRequestConfig,
 ) => {
+    const { domainId, type, ...queryParameters } = params;
+
     const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINKS_BY_TYPE, {
-        id,
+        domainId,
         type,
     });
     const response = await jfwAxios.get<HttpResponse<IBrandLink[]>>(url, {
-        params,
+        params: queryParameters,
         ...config,
     });
 
@@ -124,18 +122,18 @@ export const getBrandLinksByType = async (
  *
  * We will get the domain from the request or from BrandUrl header request to filter the domain links.
  *
- * @param id - This is the domain id to filter.
+ * @param domainId - This is the domain id to filter.
  * @param params - The params for getting brand links.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/domains/brand-links/get-brand-links}
  */
 export const getBrandLinks = async (
-    id: IdType,
+    domainId: IdType,
     params: IGetBrandLinksParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINKS, {
-        id,
+        domainId,
     });
     const response = await jfwAxios.get<HttpResponse<IBrandLink[]>>(url, {
         params,

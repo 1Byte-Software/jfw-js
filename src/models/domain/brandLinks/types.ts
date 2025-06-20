@@ -96,7 +96,7 @@ export interface IGetBrandLinkParams {
     /**
      * The id of the domain.
      */
-    id: IdType;
+    domainId: IdType;
 
     /**
      * The id of the brand link.
@@ -105,6 +105,18 @@ export interface IGetBrandLinkParams {
 }
 
 export interface IGetBrandLinksByTypeParams {
+    /**
+     * The id of the domain.
+     */
+    domainId: IdType;
+
+    /**
+     * The type of the brand link.
+     *
+     * @remarks enum
+     */
+    type: BrandLinkType;
+
     /**
      * The name query parameter to filter.
      */
