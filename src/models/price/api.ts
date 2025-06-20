@@ -6,6 +6,7 @@ import { IdType } from '../base';
 import { PRICE_PATH } from './paths';
 import {
     ICreatePriceParams,
+    IGenerateCheckoutLinkParams,
     IGetPricesParams,
     IPrice,
     IUpdatePriceParams,
@@ -55,20 +56,32 @@ export const deletePrice = async (id: IdType, config?: AxiosRequestConfig) => {
 /**
  * # Generate checkout link
  *
- * Gets the checkout link for the price with the given id.
+ * Generate a direct checkout link for the price with the given id.
  *
- * @param id - The id of the price.
+ * Returns a checkout link that allows the user to place an order.
+ *
+ * After a successful checkout, JFW will redirect the user to the return URL configured in the app integration payment gateway management.
+ *
+ * A license will be sent to the purchaser's email, which can be used to apply the license and upgrade the user's package.
+ *
+ * @param params - The params for generating checkout link
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/generate-checkout-link}
  */
 export const generateCheckoutLink = async (
-    id: IdType,
+    params: IGenerateCheckoutLinkParams,
     config?: AxiosRequestConfig,
 ) => {
+    const { priceId, appIntegrationId } = params;
     const url = generatePath(PRICE_PATH.GENERATE_CHECKOUT_LINK, {
-        id,
+        priceId,
     });
-    const response = await jfwAxios.get<HttpResponse<string>>(url, config);
+    const response = await jfwAxios.post<HttpResponse<string>>(url, null, {
+        params: {
+            appIntegrationId,
+        },
+        ...config,
+    });
 
     return response.data;
 };
