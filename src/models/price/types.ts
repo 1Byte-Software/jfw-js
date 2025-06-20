@@ -233,4 +233,16 @@ export interface ICreatePriceParams {
  * This class presents the Price Command Request Data from the client.
  */
 export type IUpdatePriceParams = ICreatePriceParams;
+
+export interface IGenerateCheckoutLinkParams {
+    /**
+     * The id of the price
+     */
+    priceId: IdType;
+
+    /**
+     * The id of the app integration
+     */
+    appIntegrationId: IdType;
+}
 //#endregion

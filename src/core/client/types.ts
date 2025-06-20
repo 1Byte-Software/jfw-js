@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../query';
 
 declare module 'axios' {
@@ -21,7 +21,7 @@ export type InitOption = {
      *
      * @example "https://example-brand.com"
      */
-    brandURL: string;
+    brandURL?: string;
 
     /**
      * Specifies which API environment to use. This determines the base URL for all HTTP requests.
@@ -41,3 +41,5 @@ export type InitOption = {
      */
     globalErrorHandler?: (error: AxiosError<HttpResponse>) => void;
 };
+
+export type RdAxiosRequestConfig = AxiosRequestConfig; 
