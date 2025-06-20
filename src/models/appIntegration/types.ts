@@ -69,6 +69,13 @@ export interface IGetAppIntegrationsParams {
     type?: AppIntegrationType;
 
     /**
+     * The status of the app integration to filter.
+     *
+     * @remarks enum
+     */
+    status?: AppIntegrationStatus;
+
+    /**
      * The keywords of the app integration to get.
      */
     keywords?: string;
