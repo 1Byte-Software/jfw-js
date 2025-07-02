@@ -7,6 +7,7 @@ export const DEVICE_PATH = {
     GET_DEVICE: `v1/${REST}/{id}`,
     GET_CURRENT_DEVICE_OF_USER_AUTHORIZED: `v1/${REST}/current`,
     GET_DEVICES: `v1/${REST}`,
+    REFRESH_DEVICE_TOKEN: `v1/${REST}/refresh-token`,
     STATISTICS: `v1/${REST}/statistics`,
     UPDATE_DEVICE: `v1/${REST}/{id}`,
 };

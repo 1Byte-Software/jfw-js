@@ -14,6 +14,7 @@ import {
     ICreateDeviceParams,
     IDevice,
     IGetDevicesParams,
+    IRefreshDeviceTokenParams,
     IUpdateDeviceParams,
 } from './types';
 
@@ -71,10 +72,7 @@ export const createDevice = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/delete-a-device}
  */
-export const deleteDevice = async (
-    id: IdType,
-    config?: AxiosRequestConfig,
-) => {
+export const deleteDevice = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(DEVICE_PATH.DELETE_DEVICE, {
         id,
     });
@@ -136,6 +134,29 @@ export const getDevices = async (
         params,
         ...config,
     });
+
+    return response.data;
+};
+
+/**
+ * # Refresh device token
+ *
+ * Refresh new token for device
+ *
+ * @param params - The params for refreshing device token.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/refresh-device-token}
+ */
+export const refreshDeviceToken = async (
+    params?: IRefreshDeviceTokenParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = DEVICE_PATH.REFRESH_DEVICE_TOKEN;
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
+        url,
+        params,
+        config,
+    );
 
     return response.data;
 };
