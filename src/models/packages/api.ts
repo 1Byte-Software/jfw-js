@@ -7,9 +7,13 @@ import { IPrice } from '../price';
 import { PACKAGE_PATH } from './paths';
 import {
     IAddFeatureToPackageParams,
+    ICalculateTotalPriceCheckoutParams,
+    ICalculateTotalPriceCheckoutResponse,
     ICreatePackageParams,
     IFeatureOfPackage,
     IPackage,
+    IRenewalOrUpgradeUserPackageParams,
+    IRenewalOrUpgradeUserPackageResponse,
     IUpdatePackageFeatureDataParams,
     IUpdatePackageFeatureDataPathParams,
     IUpdatePackageParams,
@@ -38,6 +42,37 @@ export const addFeaturesToPackage = async (
         params,
         config,
     );
+
+    return response.data;
+};
+
+/**
+ * # Calculate total price checkout
+ *
+ * Calculate the total price of a package at checkout.
+ *
+ * This method is used to calculate the total price of a package at checkout based on the provided package ID and the request data.
+ * It takes into account the wallet used, refund amount, prorate amount, subtotal, tax, and total price to be paid.
+ *
+ * @param params - The params for calculating total price checkout.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/calculate-total-price-checkout}
+ */
+export const calculateTotalPriceCheckout = async (
+    params: ICalculateTotalPriceCheckoutParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { packageId, ...searchParams } = params;
+
+    const url = generatePath(PACKAGE_PATH.CALCULATE_TOTAL_PRICE_CHECKOUT, {
+        packageId,
+    });
+    const response = await jfwAxios?.post<
+        HttpResponse<ICalculateTotalPriceCheckoutResponse>
+    >(url, params, {
+        params: searchParams,
+        ...config,
+    });
 
     return response.data;
 };
@@ -192,6 +227,31 @@ export const removeFeaturesFromPackage = async (
         },
         ...config,
     });
+
+    return response.data;
+};
+
+/**
+ * # Renewal or upgrade user's package
+ *
+ * Renewal or upgrade user's package.
+ *
+ * @param params - The params for renewal or upgrade user's package
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/renewal-or-upgrade-user-package}
+ */
+export const renewalOrUpgradeUserPackage = async (
+    params: IRenewalOrUpgradeUserPackageParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { packageId, ...searchParams } = params;
+
+    const url = generatePath(PACKAGE_PATH.RENEWAL_OR_UPGRADE_USER_PACKAGE, {
+        packageId,
+    });
+    const response = await jfwAxios?.post<
+        HttpResponse<IRenewalOrUpgradeUserPackageResponse>
+    >(url, searchParams, config);
 
     return response.data;
 };
