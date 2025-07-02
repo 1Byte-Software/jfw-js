@@ -111,9 +111,9 @@ export interface ILicenseStatistic {
 //#region API types
 export interface IApplyLicenseToGivenLoginNameParams {
     /**
-     * The license key.
+     * The license code.
      */
-    licenseKey: string;
+    licenseCode: string;
 
     /**
      * The login name.
@@ -123,9 +123,9 @@ export interface IApplyLicenseToGivenLoginNameParams {
 
 export interface IApplyLicenseToGivenUserParams {
     /**
-     * The license key.
+     * The license code.
      */
-    licenseKey: string;
+    licenseCode: string;
 
     /**
      * The user id.
@@ -145,9 +145,9 @@ export interface IGetLicensesParams extends IPageable, ISortable {
     subscriptionTypeId?: IdType;
 
     /**
-     * The license key filter.
+     * The license code filter.
      */
-    licenseKey?: string;
+    licenseCode?: string;
 
     /**
      * The source id filter.
@@ -196,6 +196,13 @@ export interface IGetLicensesParams extends IPageable, ISortable {
     status?: LicenseStatus;
 
     /**
+     * The type filter.
+     *
+     * @remarks enum
+     */
+    type?: LicenseType;
+
+    /**
      * The user who used the license. The value is code of the user.
      */
     usedBy?: string;
@@ -212,6 +219,9 @@ export interface IGetLicensesParams extends IPageable, ISortable {
      */
     testMode?: boolean;
 
+    /**
+     * The keyword to filter.
+     */
     keywords?: string;
 
     /**
@@ -221,7 +231,7 @@ export interface IGetLicensesParams extends IPageable, ISortable {
 }
 
 /**
- * Contains the data for the license key create form.
+ * Contains the data for the license code create form.
  */
 export interface ICreateLicensesParams {
     /**
@@ -246,9 +256,10 @@ export interface ICreateLicensesParams {
     type: LicenseType;
 
     /**
-     * The license key custom. If the license key has value, we create with the license otherwise auto generate license code.
+     * The license code custom. 
+     * If the license code has value, we create with the license otherwise auto generate license code.
      */
-    key?: string | null;
+    code?: string | null;
 
     /**
      * The start date of the license.
@@ -287,22 +298,17 @@ export interface ICreateLicensesParams {
      * @remarks int32
      * @defaultValue `1`
      */
-    quantity: number;
-
-    /**
-     * Is the license key for one quantity.
-     */
-    isOneQuantity?: boolean;
+    quantity?: number;
 
     /**
      * The user code of the license. If the userCode is empty, we get the current user logged in.
      *
      * @remarks min: 1
      */
-    userCode: string;
+    userCode?: string | null;
 }
 
-export interface IGenerateLicenseKeyParams {
+export interface IGenerateLicenseCodeParams {
     /**
      * The packageId of the license.
      */
@@ -414,10 +420,10 @@ export interface IPurchaseToAddLicensesByWalletParams {
     type: LicenseType;
 
     /**
-     * The license key custom. If the license key has value, we create with the license
-     * otherwise auto generate license code.
+     * The license code custom. If the license code has value, we create with the license otherwise auto generate license code.
+     * Cannot be used when creating multiple licenses.
      */
-    key?: string | null;
+    code?: string | null;
 
     /**
      * The start date of the license.
@@ -457,11 +463,6 @@ export interface IPurchaseToAddLicensesByWalletParams {
      * @defaultValue `1`
      */
     quantity: number;
-
-    /**
-     * Is the license key for one quantity.
-     */
-    isOneQuantity: boolean;
 
     /**
      * The user code of the license. If the userCode is empty, we get the current user logged in.

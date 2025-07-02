@@ -1,11 +1,11 @@
 import { REST_BRAND } from '../paths';
 
-const REST_BRAND_EMAIL_ADDRESS = 'emails';
+const REST_EMAIL_ADDRESS = 'email-addresses';
 
-/**
- * #JFW-361
- */
-export const BRAND_EMAIL_ADDRESS_PATH = {
-    GET_EMAILS_WITH_BRAND: `v1/${REST_BRAND}/:id/${REST_BRAND_EMAIL_ADDRESS}`,
-    UPDATE_BRAND_EMAIL_ADDRESS: `v1/${REST_BRAND}/:id/${REST_BRAND_EMAIL_ADDRESS}`,
+export const EMAIL_ADDRESS_PATH = {
+    CREATE_EMAIL_ADDRESS: `v1/${REST_BRAND}/{brandId}/${REST_EMAIL_ADDRESS}`,
+    DELETE_EMAIL_ADDRESS: `v1/${REST_BRAND}/{brandId}/${REST_EMAIL_ADDRESS}/{emailAddressId}`,
+    GET_EMAIL_ADDRESS: `v1/${REST_BRAND}/{brandId}/${REST_EMAIL_ADDRESS}/{emailAddressId}`,
+    GET_EMAIL_ADDRESSES: `v1/${REST_BRAND}/{brandId}/${REST_EMAIL_ADDRESS}`,
+    UPDATE_EMAIL_ADDRESS: `v1/${REST_BRAND}/{brandId}/${REST_EMAIL_ADDRESS}/{emailAddressId}`,
 };

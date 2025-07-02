@@ -267,4 +267,23 @@ export interface ICreateDeviceParams {
 }
 
 export type IUpdateDeviceParams = ICreateDeviceParams;
+
+/**
+ * Represents a request to refresh a mobile device token for Firebase push notifications.
+ */
+export interface IRefreshDeviceTokenParams {
+    /**
+     * The previous Firebase device token that is now obsolete.
+     *
+     * @remarks min: 1
+     */
+    oldToken: string;
+
+    /**
+     * The new Firebase device token to replace the old one.
+     *
+     * @remarks min: 1
+     */
+    newToken: string;
+}
 //#endregion

@@ -8,7 +8,7 @@ import {
     IApplyLicenseToGivenLoginNameParams,
     IApplyLicenseToGivenUserParams,
     ICreateLicensesParams,
-    IGenerateLicenseKeyParams,
+    IGenerateLicenseCodeParams,
     IGetLicensesParams,
     ILicense,
     ILicenseStatistic,
@@ -18,6 +18,31 @@ import {
 } from './types';
 
 /**
+ * # Activate a license
+ *
+ * Activate a license
+ *
+ * @param id - The id of the license.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/activate-a-license}
+ */
+export const activateLicense = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(LICENSE_PATH.ACTIVATE_LICENSE, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<ILicense>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
  * # Applies a license to the logged user
  *
  * Applies a license to the logged user.
@@ -25,27 +50,29 @@ import {
  * After applying the license, the user will be able to use the features of the license.
  * And send the email to the user to notify the license is applied.
  *
- * @param licenseKey - The license key to apply.
+ * @param licenseCode - The license code to apply.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/applies-a-license-to-the-logged-user}
  */
 export const applyLicenseToLoggedUser = async (
-    licenseKey: string,
+    licenseCode: string,
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.APPLY_LICENSE_TO_LOGGED_USER;
-    return await jfwAxios.post<HttpResponse<boolean>>(url, null, {
+    const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
         params: {
-            licenseKey,
+            licenseCode,
         },
         ...config,
     });
+
+    return response.data;
 };
 
 /**
  * # Applies a license to the given login name
  *
- * Applies a license key for the given login name.
+ * Applies a license code for the given login name.
  *
  * After applying the license, the user will be able to use the features of the license.
  * And send the email to the user to notify the license is applied.
@@ -59,16 +86,18 @@ export const applyLicenseToGivenLoginName = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.APPLY_LICENSE_TO_GIVEN_LOGIN_NAME;
-    return await jfwAxios.post<HttpResponse<boolean>>(url, null, {
+    const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
         params,
         ...config,
     });
+
+    return response.data;
 };
 
 /**
  * # Applies a license to the given a user
  *
- * Applies a license key for the given user id.
+ * Applies a license code for the given user id.
  *
  * After applying the license, the user will be able to use the features of the license.
  * And send the email to the user to notify the license is applied.
@@ -82,30 +111,32 @@ export const applyLicenseToGivenUser = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.APPLY_LICENSE_TO_GIVEN_USER;
-    return await jfwAxios.post<HttpResponse<boolean>>(url, null, {
+    const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
         params,
         ...config,
     });
+
+    return response.data;
 };
 
 /**
- * # Checks a license key
+ * # Checks a license code
  *
- * Checks the license status for the given license key.
+ * Checks the license status for the given license code.
  *
- * @param licenseKey - The license key to check.
+ * @param licenseCode - The license code to check.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/checks-a-license}
  */
-export const checkLicenseKey = async (
-    licenseKey: string,
+export const checkLicenseCode = async (
+    licenseCode: string,
     config?: AxiosRequestConfig,
 ) => {
-    const url = LICENSE_PATH.CHECK_A_LICENSE_KEY;
+    const url = LICENSE_PATH.CHECK_A_LICENSE_CODE;
     const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
         ...config,
         params: {
-            licenseKey,
+            licenseCode,
         },
     });
 
@@ -147,6 +178,31 @@ export const countLicensesCreated = async (config?: AxiosRequestConfig) => {
     const url = LICENSE_PATH.COUNT_LICENSES_CREATED;
     const response = await jfwAxios.get<HttpResponse<ICountSuccessResponse>>(
         url,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Deactivate a license
+ *
+ * Deactivate a license
+ *
+ * @param id - The id of the license.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/deactivate-a-license}
+ */
+export const deactivateLicense = async (
+    id: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(LICENSE_PATH.DEACTIVATE_LICENSE, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<ILicense>>(
+        url,
+        null,
         config,
     );
 
@@ -212,21 +268,21 @@ export const getLicense = async (id: IdType, config?: AxiosRequestConfig) => {
 };
 
 /**
- * # Generate license key
+ * # Generate license code
  *
- * Generate the license key
+ * Generate the license code
  *
- * The license key is not stored in the system. It is generated by the system.
+ * The license code is not stored in the system. It is generated by the system.
  *
- * @param params - The params for generating license key.
+ * @param params - The params for generating license code.
  * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/generate-key}
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/generate-code}
  */
-export const generateLicenseKey = async (
-    params: IGenerateLicenseKeyParams,
+export const generateLicenseCode = async (
+    params: IGenerateLicenseCodeParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = LICENSE_PATH.GENERATE_LICENSE_KEY;
+    const url = LICENSE_PATH.GENERATE_LICENSE_CODE;
     const response = await jfwAxios.get<HttpResponse<string>>(url, {
         params,
         ...config,

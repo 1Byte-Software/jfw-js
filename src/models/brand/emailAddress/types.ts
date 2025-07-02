@@ -1,111 +1,120 @@
-import { IBaseObject } from '../../base';
+import { DateType, IdType } from '../../base';
 
 /**
- * #JFW-361
+ * This class provides the Brand Email Address Dto.
  */
-export interface IBrandEmailAddress extends IBaseObject {
-    supportEmailAddress: string | null;
-    supportTitleEmailAddress: string | null;
-    systemEmailAddress: string | null;
-    systemTitleEmailAddress: string | null;
-    loginNotificationEmailAddress: string | null;
-    purchaseNotificationEmailAddress: string | null;
-    orderNotificationEmailAddress: string | null;
-    chargebackNotificationEmailAddress: string | null;
-    refundNotificationEmailAddress: string | null;
-    loginNotificationTitleEmailAddress: string | null;
-    maintenanceTeamEmailAddress: string | null;
-    developerTeamEmailAddress: string | null;
+export interface IEmailAddress {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
+    id: IdType;
+
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType;
+
+    /**
+     * The placeholder key of the title, that value relate with email template.
+     */
+    placeholderKeyTitle?: string | null;
+
+    /**
+     * The title of the email address.
+     *
+     * @remarks min: 1
+     */
+    title: string;
+
+    /**
+     * The placeholder key of the email address, that value relate with email template.
+     */
+    placeholderKeyEmailAddress?: string | null;
+
+    /**
+     * The email address value.
+     *
+     * @remarks email - min: 1
+     */
+    emailAddress: string;
+
+    /**
+     * The description.
+     */
+    description?: string | null;
 }
 
 //#region API types
 /**
- * #JFW-361
+ * This class is used to create, update for the brand email address.
  */
-export interface IUpdateEmailAddressData {
+export interface ICreateEmailAddressParams {
     /**
-     * The support email of the Brand.
-     *
-     * @remarks string - email
+     *  The id of the brand.
      */
-    supportEmail?: string | null;
+    brandId: IdType;
 
     /**
-     * The support title email of the Brand.
-     *
-     * @remarks string - email
+     * The placeholder key of the title, that value relate with email template.
      */
-    supportTitleEmail?: string | null;
+    placeholderKeyTitle?: string | null;
 
     /**
-     * The system email of the Brand.
+     * The title of the email address.
      *
-     * @remarks string - email
+     * @remarks min: 1
      */
-    systemEmail?: string | null;
+    title: string;
 
     /**
-     * The system title email of the Brand.
-     *
-     * @remarks string - email
+     * The placeholder key of the email address, that value relate with email template.
      */
-    systemTitleEmail?: string | null;
+    placeholderKeyEmailAddress?: string | null;
 
     /**
-     * The login notification email of the Brand.
+     * The email address value.
      *
-     * @remarks string - email
+     * @remarks email - min: 1
      */
-    loginNotificationEmail?: string | null;
+    emailAddress: string;
 
     /**
-     * The purchase notification email of the Brand.
-     *
-     * @remarks string - email
+     * The description.
      */
-    purchaseNotificationEmail?: string | null;
+    description?: string | null;
+}
+
+/**
+ * This class is used to create, update for the brand email address.
+ */
+export type IUpdateEmailAddressParams = ICreateEmailAddressParams;
+
+export interface IDeleteEmailAddressParams {
+    /**
+     * The id of the brand.
+     */
+    brandId: IdType;
 
     /**
-     * The order notification email of the Brand.
-     *
-     * @remarks string - email
+     * The id of the email address to get.
      */
-    orderNotificationEmail?: string | null;
+    emailAddressId: IdType;
+}
+
+export interface IGetEmailAddressParams {
+    /**
+     * The id of the brand.
+     */
+    brandId: IdType;
 
     /**
-     * The chargeback notification email of the Brand.
-     *
-     * @remarks string - email
+     * The id of the email address to get.
      */
-    chargebackNotificationEmail?: string | null;
-
-    /**
-     * The refund notification email of the Brand.
-     *
-     * @remarks string - email
-     */
-    refundNotificationEmail?: string | null;
-
-    /**
-     * The login notification title email of the Brand.
-     *
-     * @remarks string - email
-     */
-    loginNotificationTitleEmail?: string | null;
-
-    /**
-     * The maintenance team email of the Brand.
-     *
-     * @remarks string - email
-     */
-    maintenanceTeamEmail?: string | null;
-
-    /**
-     * The developer team email of the Brand.
-     *
-     * @remarks string - email
-     */
-    developerTeamEmail?: string | null;
+    emailAddressId: IdType;
 }
 
 //#endregion
