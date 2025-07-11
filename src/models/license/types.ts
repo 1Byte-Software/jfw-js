@@ -232,6 +232,8 @@ export interface IGetLicensesParams extends IPageable, ISortable {
 
 /**
  * Contains the data for the license code create form.
+ * 
+ * #NOTE: Recheck create license params in developers.jframework.io
  */
 export interface ICreateLicensesParams {
     /**
@@ -249,17 +251,21 @@ export interface ICreateLicensesParams {
     subscriptionTypeId: IdType;
 
     /**
-     * The type of the license.
-     *
-     * @remarks enum
-     */
-    type: LicenseType;
-
-    /**
-     * The license code custom. 
+     * The license code custom.
      * If the license code has value, we create with the license otherwise auto generate license code.
      */
     code?: string | null;
+
+    /**
+     * The amount value of a license to be created.
+     */
+    amount: number;
+
+    /**
+     * The currency code in the ISO 4217 format, which is a three-letter uppercase code that identifies a specific currency.
+     * This value should strictly follow the ISO 4217 standard.
+     */
+    currencyCode: string;
 
     /**
      * The start date of the license.
