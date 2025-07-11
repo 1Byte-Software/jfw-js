@@ -143,14 +143,9 @@ export interface IGetDevicesParams extends IPageable, ISortable {
     code?: string;
 
     /**
-     * The device name to filter.
+     * The name to filter.
      */
-    deviceName?: string;
-
-    /**
-     * The device token to filter.
-     */
-    deviceToken?: string;
+    name?: string;
 
     /**
      * Filter with is mobile app.
@@ -168,6 +163,11 @@ export interface IGetDevicesParams extends IPageable, ISortable {
      * @remarks enum
      */
     status?: DeviceStatus;
+
+    /**
+     * The keywords to filter.
+     */
+    keywords?: string;
 }
 
 /**
