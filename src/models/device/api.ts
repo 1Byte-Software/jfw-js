@@ -17,6 +17,7 @@ import {
     IRefreshDeviceTokenParams,
     IUpdateDeviceParams,
 } from './types';
+import { IUser } from '../user';
 
 /**
  * # Checks user access device
@@ -205,6 +206,21 @@ export const updateDevice = async (
         params,
         config,
     );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future
+ */
+export const getUsersFromDevice = async (
+    deviceId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(DEVICE_PATH.GET_USERS_FROM_DEVICE, {
+        deviceId,
+    });
+    const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
 
     return response.data;
 };
