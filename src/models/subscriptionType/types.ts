@@ -1,5 +1,6 @@
+import { ISortable } from '../../core';
 import { DateType, IdType } from '../base';
-import { SubscriptionTypeStatus } from './constants';
+import { SubscriptionTypeStatus, SubscriptionTypeUnit } from './constants';
 
 /**
  * This class is used to define the data transfer object for the SubscriptionType entity class.
@@ -31,7 +32,7 @@ export interface ISubscriptionType {
      *
      * @remarks min: 1
      */
-    unit: string;
+    unit: SubscriptionTypeUnit;
 
     /**
      * The quantity of the subscription type.
@@ -72,6 +73,38 @@ export interface ISubscriptionType {
 
 //#region API types
 
+export interface IGetSubscriptionTypesParams extends ISortable<'zOrder'> {
+    /**
+     * The name to filter.
+     */
+    name?: string;
+
+    /**
+     * The unit to filter.
+     */
+    unit?: SubscriptionTypeUnit;
+
+    /**
+     * The status to filter.
+     */
+    status?: SubscriptionTypeStatus;
+
+    /**
+     * The tags to filter.
+     */
+    tags?: string;
+
+    /**
+     * The description to filter.
+     */
+    description?: string;
+
+    /**
+     * The keywords to filter.
+     */
+    keywords?: string;
+}
+
 /**
  * Data transfer object for creating or updating a subscription type
  */
@@ -88,7 +121,7 @@ export interface ICreateSubscriptionTypeParams {
      *
      * @remarks min: 1
      */
-    unit: string;
+    unit: SubscriptionTypeUnit;
 
     /**
      * The quantity of the subscription type.
