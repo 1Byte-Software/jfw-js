@@ -631,6 +631,16 @@ export interface IForgotPasswordParams {
 
 export interface IAddDeviceToUserParams {
     /**
+     * The id of the user
+     */
+    userId: IdType;
+
+    /**
+     * The id of the device to add.
+     */
+    deviceId: IdType;
+
+    /**
      * The token of the device data. This token is used when push notification for the device.
      */
     token?: string | null;
