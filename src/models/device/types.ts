@@ -266,7 +266,34 @@ export interface ICreateDeviceParams {
     simCardInfo?: string | null;
 }
 
-export type IUpdateDeviceParams = ICreateDeviceParams;
+/**
+ * #NOTE: Will update doc and check type in developers.jframework.io in future
+ */
+export interface IUpdateDeviceParams {
+    /**
+     * The name of the device.
+     *
+     * @remarks min: 1
+     */
+    name: string;
+
+    /**
+     * The phone number of the device.
+     */
+    phoneNumber?: string | null;
+
+    /**
+     * The tags of the device.
+     */
+    tags?: string | null;
+
+    /**
+     * The status of the device.
+     *
+     * @remarks enum
+     */
+    status?: DeviceStatus;
+}
 
 /**
  * Represents a request to refresh a mobile device token for Firebase push notifications.
