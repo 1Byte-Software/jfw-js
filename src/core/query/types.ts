@@ -21,7 +21,7 @@ export interface IPageable {
     pageNumber?: number;
 }
 
-export interface ISortable<T extends string = string> {
+export interface ISortable<T extends string = never> {
     /**
      * The sort data field of the data.
      */
