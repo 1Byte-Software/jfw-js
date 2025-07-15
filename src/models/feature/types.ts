@@ -82,8 +82,9 @@ export interface IFeature {
      */
     status: FeatureStatus;
 }
+
 //#region API types
-export interface IGetFeaturesParams extends IPageable, ISortable {
+export interface IGetFeaturesParams extends IPageable, ISortable<'zOrder'> {
     /**
      * Filter by the package id.
      */
