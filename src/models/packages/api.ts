@@ -11,6 +11,7 @@ import {
     ICalculateTotalPriceCheckoutResponse,
     ICreatePackageParams,
     IFeatureOfPackage,
+    IGetPackagesParams,
     IPackage,
     IRenewalOrUpgradeUserPackageParams,
     IRenewalOrUpgradeUserPackageResponse,
@@ -172,9 +173,15 @@ export const getFeaturesFromPackage = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/get-packages}
  */
-export const getPackages = async (config?: AxiosRequestConfig) => {
+export const getPackages = async (
+    params?: IGetPackagesParams,
+    config?: AxiosRequestConfig,
+) => {
     const url = PACKAGE_PATH.GET_PACKAGES;
-    const response = await jfwAxios?.get<HttpResponse<IPackage[]>>(url, config);
+    const response = await jfwAxios?.get<HttpResponse<IPackage[]>>(url, {
+        params: params,
+        ...config,
+    });
 
     return response.data;
 };

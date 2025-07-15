@@ -1,3 +1,4 @@
+import { ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { IFeature } from '../feature';
 import { IPrice } from '../price';
@@ -190,6 +191,40 @@ export interface ICalculateTotalPriceCheckoutResponse {
 export interface IFeatureOfPackage extends IFeature, IFeatureOfPackageBase {}
 
 //#region API types
+
+// #NOTE: Will update tsdoc in feature.
+export interface IGetPackagesParams extends ISortable<'zOrder'> {
+    /**
+     * Filter by the name.
+     */
+    name?: string;
+
+    /**
+     * Filter by the code.
+     */
+    code?: string;
+
+    /**
+     * Filter by the description
+     */
+    description?: string;
+
+    /**
+     * Filter by the tags.
+     */
+    tags?: string;
+
+    /**
+     * Filter by the default package
+     */
+    isDefault?: boolean;
+
+    /**
+     * Filter by the keywords.
+     */
+    keywords?: string;
+}
+
 /**
  * This class is used to present the package command request data transfer object.
  */
