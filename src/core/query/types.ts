@@ -21,14 +21,14 @@ export interface IPageable {
     pageNumber?: number;
 }
 
-export interface ISortable<T extends Record<string, any> = any> {
+export interface ISortable<T extends string = string> {
     /**
-     * The sort data field of the pagination.
+     * The sort data field of the data.
      */
-    sortDataField?: keyof T;
+    sortDataField?: 'id' | 'createdDate' | T;
 
     /**
-     * The sort order of the pagination.
+     * The sort order of the data.
      */
     sortOrder?: SortOrder;
 }
