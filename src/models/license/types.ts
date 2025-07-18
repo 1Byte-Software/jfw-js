@@ -301,7 +301,11 @@ export interface IApplyLicenseToGivenUserParams {
     userId: IdType;
 }
 
-export interface IGetLicensesParams extends IPageable, ISortable {
+export interface IGetLicensesParams
+    extends IPageable,
+        ISortable<
+            'code' | 'type' | 'amount' | 'description' | 'tags' | 'status'
+        > {
     /**
      * The package id filter.
      */
