@@ -131,7 +131,9 @@ export interface IOrganizationUser {
 }
 
 //#region API types
-export interface IGetOrganizationsParams extends IPageable, ISortable {
+export interface IGetOrganizationsParams
+    extends IPageable,
+        ISortable<'code' | 'name' | 'description' | 'avatar' | 'status'> {
     /**
      * The param UserId to apply filter.
      */
