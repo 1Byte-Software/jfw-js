@@ -344,7 +344,9 @@ export interface IAuthenticateResponse {
 
 export interface IStatisticsUsers extends IStatisticCommon {}
 //#region API types
-export interface IGetUsersParams extends IPageable, ISortable {
+export interface IGetUsersParams
+    extends IPageable,
+        ISortable<'code' | 'username' | 'status'> {
     /**
      * The role id of the user.
      */
