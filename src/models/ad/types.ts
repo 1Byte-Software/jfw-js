@@ -1,6 +1,7 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
 import { ICDNFile } from '../cdnFile';
+import { IDomain } from '../domain';
 import { AdPosition, AdStatus, AdType } from './constants';
 
 /**
@@ -78,9 +79,18 @@ export interface IAd {
     status: AdStatus;
 
     /**
-     * Gets or sets the list of image URLs for the advertisement. Allowed formats: JPG, PNG, GIF. Maximum allowed images: 5.
+     * Gets or sets the list of image URLs for the advertisement.
+     * Allowed formats: JPG, PNG, GIF.
+     * Maximum allowed images: 5
+     *
+     * @remarks max: 5
      */
-    images: ICDNFile[];
+    images?: ICDNFile[] | null;
+
+    /**
+     * The list of brand domains for the advertisement.
+     */
+    domains?: IDomain[] | null;
 }
 
 //#region API types
@@ -154,6 +164,11 @@ export interface ICreateAdParams {
     description?: string | null;
 
     /**
+     * Gets or sets the tags of the advertisement.
+     */
+    tags?: string | null;
+
+    /**
      * Gets or sets the start date and time when the advertisement becomes active. Format: yyyy-MM-dd HH:mm:ss
      *
      * @remarks date-time
@@ -190,6 +205,11 @@ export interface ICreateAdParams {
      * Allowed formats: JPG, PNG, GIF. Maximum allowed images: 5.
      */
     imageURLs?: string[] | null;
+
+    /**
+     * The list of brand domains for the advertisement.
+     */
+    brandDomainIds?: IdType[] | null;
 }
 
 /**
@@ -197,5 +217,5 @@ export interface ICreateAdParams {
  */
 export interface IUpdateAdParams extends ICreateAdParams {
     id: IdType;
-};
+}
 //#endregion
