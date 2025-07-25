@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
-import { ICDNFile } from '../cdnFile';
+import { ICDN, ICDNFile } from '../cdnFile';
 import { IDomain } from '../domain';
 import { AdPosition, AdStatus, AdType } from './constants';
 
@@ -51,6 +51,11 @@ export interface IAd {
     description: string | null;
 
     /**
+     * Gets or sets the tags of the advertisement.
+     */
+    tags: string | null;
+
+    /**
      * Gets or sets the start date and time when the advertisement becomes active. Format: yyyy-MM-dd HH:mm:ss
      *
      * @remarks date-time
@@ -85,7 +90,7 @@ export interface IAd {
      *
      * @remarks max: 5
      */
-    images?: ICDNFile[] | null;
+    images?: ICDN[] | null;
 
     /**
      * The list of brand domains for the advertisement.

@@ -5,6 +5,7 @@ import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { AD_PATH } from './paths';
 import { IAd, ICreateAdParams, IGetAdsParams, IUpdateAdParams } from './types';
+import { AdPosition } from './constants';
 
 /**
  * #NOTE: Will update tsdoc in future.
@@ -77,6 +78,57 @@ export const updateAd = async (
     const response = await jfwAxios.put<HttpResponse<boolean>>(
         url,
         bodyParams,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc in future.
+ */
+export const getAdsWithClientView = async (
+    position: AdPosition,
+    config?: AxiosRequestConfig,
+) => {
+    const url = AD_PATH.GET_ADS_WITH_CLIENT_VIEW;
+
+    const response = await jfwAxios.get<HttpResponse<IAd[]>>(url, {
+        params: {
+            position,
+        },
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc in future.
+ */
+export const deactivateAd = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(AD_PATH.DEACTIVATE_AD, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<boolean>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc in future.
+ */
+export const activateAd = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(AD_PATH.ACTIVATE_AD, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<boolean>>(
+        url,
+        null,
         config,
     );
 
