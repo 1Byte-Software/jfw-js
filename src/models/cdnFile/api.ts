@@ -5,7 +5,7 @@ import { HeaderKey } from '../../core/client/constants';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { CDN_PATH } from './paths';
-import { ICDNFile, IGetFilesCDNParams, IUploadFileParams } from './types';
+import { ICDN, ICDNFile, IGetFilesCDNParams, IUploadFileParams } from './types';
 
 /**
  * # Delete a file CDN
@@ -41,7 +41,7 @@ export const getFileCDN = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(CDN_PATH.GET_FILE_CDN, {
         id,
     });
-    const response = await jfwAxios.get<HttpResponse<ICDNFile>>(url, config);
+    const response = await jfwAxios.get<HttpResponse<ICDN>>(url, config);
 
     return response.data;
 };
@@ -60,7 +60,7 @@ export const getFilesCDN = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = CDN_PATH.GET_FILES_CDN;
-    const response = await jfwAxios.get<HttpResponseList<ICDNFile>>(url, {
+    const response = await jfwAxios.get<HttpResponseList<ICDN>>(url, {
         params,
         ...config,
     });

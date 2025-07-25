@@ -5,6 +5,81 @@ import { CDNFilePathType } from './constants';
 
 export interface ICDNFile {
     /**
+     * The file ID of the file.
+     *
+     * @remarks min: 1
+     */
+    fileId: string;
+
+    /**
+     * The filename of the file.
+     *
+     * @remarks min: 1
+     */
+    fileName: string;
+
+    /**
+     * The original filename of the file.
+     *
+     * @remarks min: 1
+     */
+    originalFilename: string;
+
+    /**
+     * The prefix folder of the file.
+     */
+    prefixFolder?: string | null;
+
+    /**
+     * The relative URL of the file.
+     *
+     * @remarks uri - min: 1
+     */
+    relativeURL: string;
+
+    /**
+     * The URL of the file.
+     *
+     * @remarks uri - min: 1
+     */
+    url: string;
+
+    /**
+     * The file URL of the file.
+     *
+     * @remarks uri - min: 1
+     */
+    fileURL: string;
+
+    /**
+     * The extension of the file. This name includes the ".".
+     *
+     * @remarks min: 1
+     */
+    fileExtension: string;
+
+    /**
+     * The MIME type text of the file.
+     *
+     * @remarks min: 1
+     */
+    mimeType: string;
+
+    /**
+     * The file size in bytes.
+     *
+     * @remarks int64
+     */
+    fileSize: number;
+
+    /**
+     * The test mode of the uploaded file.
+     */
+    testMode: boolean;
+}
+
+export interface ICDN {
+    /**
      * The id of the object.
      *
      * @remarks min: 1
