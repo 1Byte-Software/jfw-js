@@ -30,8 +30,16 @@ export type InitOption = {
      * - `'live'` will use `protocol.jframework.io`
      *
      * @defaultValue "development"
+     * @deprecated Use protocolURL instead.
      */
     environment?: EnvironmentOption;
+
+    /**
+     * The full URL of the protocol server. Overrides the default base URL determined by `environment`.
+     *
+     * @example "https://protocol.jframework.io/api"
+     */
+    protocolURL?: string;
 
     /**
      * A global error handler function for failed HTTP responses.
@@ -42,4 +50,4 @@ export type InitOption = {
     globalErrorHandler?: (error: AxiosError<HttpResponse>) => void;
 };
 
-export type RdAxiosRequestConfig = AxiosRequestConfig; 
+export type RdAxiosRequestConfig = AxiosRequestConfig;
