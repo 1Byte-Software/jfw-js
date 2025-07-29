@@ -6,9 +6,9 @@ import { IBaseUser } from '../user';
 import { PaymentStatus } from './constants';
 
 /**
- * The Package Data Transfer Object.
+ * This class represents the payment base data transfer object.
  */
-export interface IPayment {
+export interface IPaymentBase {
     /**
      * The id of the object.
      *
@@ -98,7 +98,12 @@ export interface IPayment {
      * @remarks enum
      */
     status: PaymentStatus;
+}
 
+/**
+ * This class represents the payment data transfer object.
+ */
+export interface IPayment extends IPaymentBase {
     /**
      * This class is used to return user information to client.
      */
