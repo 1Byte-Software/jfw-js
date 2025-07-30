@@ -98,6 +98,13 @@ export interface IPaymentBase {
      * @remarks enum
      */
     status: PaymentStatus;
+
+    /**
+     * The payment date.
+     *
+     * @remarks date-time
+     */
+    paymentDate?: DateType;
 }
 
 /**
@@ -132,13 +139,6 @@ export interface IPayment extends IPaymentBase {
      * @remarks double
      */
     amount: number;
-
-    /**
-     * The payment date.
-     *
-     * @remarks date-time
-     */
-    paymentDate?: DateType;
 }
 
 export interface IPaymentDashboard {
