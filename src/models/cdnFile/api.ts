@@ -81,7 +81,7 @@ export const getFilesCDN = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/upload-file}
  */
-export const uploadFileCDN = async (
+export const uploadFile = async (
     params: IUploadFileParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -94,17 +94,18 @@ export const uploadFileCDN = async (
         });
     }
 
-    const response = await jfwAxios.post<HttpResponse<ICDNFile>>(
-        url,
-        params,
-        {
-            headers: {
-                [HeaderKey.ContentType]: 'multipart/form-data',
-                ...config.headers,
-            },
-            ...config,
+    const response = await jfwAxios.post<HttpResponse<ICDNFile>>(url, params, {
+        headers: {
+            [HeaderKey.ContentType]: 'multipart/form-data',
+            ...config.headers,
         },
-    );
+        ...config,
+    });
 
     return response.data;
 };
+
+/**
+ * @deprecated use uploadFile instead
+ */
+export const uploadFileCDN = uploadFile;
