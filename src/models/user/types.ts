@@ -222,7 +222,7 @@ export interface IUser {
     /**
      * The package of the user.
      */
-    package: IPackage;
+    package?: IPackage | null;
 
     /**
      * The package id.
@@ -230,7 +230,7 @@ export interface IUser {
      * @remarks min: 1
      * @deprecated
      */
-    packageId: IdType;
+    packageId?: IdType | null;
 
     /**
      * The language code.
