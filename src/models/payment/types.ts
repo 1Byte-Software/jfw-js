@@ -148,6 +148,15 @@ export interface IPaymentDashboard {
     dailyRevenue: number;
 }
 
+export interface IPaymentGenerateCheckoutLinkResponse {
+    /**
+     * The checkout link to pay the payment.
+     * 
+     * @remarks min: 1
+     */
+    checkoutLink: string;
+}
+
 //#region API types
 /**
  * Parameters for getting payments
@@ -207,6 +216,19 @@ export interface IGetPaymentsParams
      * The payment request amount.
      */
     testMode?: boolean;
+}
+
+export interface IGeneratePaymentCheckoutLinkParams {
+    /**
+     * The id of the payment.
+     */
+    id: IdType;
+
+    /**
+     * (Optional) The identifier of the specific app integration payment gateway to use for generating the checkout link. If provided, this app integration will be used to handle the payment.
+     * If null, the system will use the default payment configuration associated with the payment.
+     */
+    appIntegrationId?: IdType;
 }
 
 //#endregion

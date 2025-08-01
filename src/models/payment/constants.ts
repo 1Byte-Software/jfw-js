@@ -1,6 +1,6 @@
 /**
  * Possible values:
- * - `0` - `Waiting`
+ * - `0` - `Created`
  * - `1` - `Completed`
  * - `2` - `Refunded`
  * - `3` - `Failed`
@@ -8,12 +8,11 @@
  * - `5` - `Denied`
  * - `6` - `Reserved`
  * - `7` - `CanceledReversal`
- * - `-3` - `Deleted`
- * - `-2` - `Voided`
- * - `-1` - `Expired`
+ * - `-2` - `Deleted`
+ * - `-1` - `Voided`
  */
 export enum PaymentStatus {
-    Waiting = 'Waiting',
+    Created = 'Created',
     Completed = 'Completed',
     Refunded = 'Refunded',
     Failed = 'Failed',
@@ -23,5 +22,4 @@ export enum PaymentStatus {
     CanceledReversal = 'CanceledReversal',
     Deleted = 'Deleted',
     Voided = 'Voided',
-    Expired = 'Expired',
 }

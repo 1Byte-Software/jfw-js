@@ -4,7 +4,13 @@ import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { PAYMENT_PATH } from './paths';
-import { IGetPaymentsParams, IPayment, IPaymentDashboard } from './types';
+import {
+    IGeneratePaymentCheckoutLinkParams,
+    IGetPaymentsParams,
+    IPayment,
+    IPaymentDashboard,
+    IPaymentGenerateCheckoutLinkResponse,
+} from './types';
 
 /**
  * Get a payment
@@ -15,10 +21,7 @@ import { IGetPaymentsParams, IPayment, IPaymentDashboard } from './types';
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/payments/get-a-payment}
  */
-export const getPayment = async (
-    id: IdType,
-    config?: AxiosRequestConfig,
-) => {
+export const getPayment = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(PAYMENT_PATH.GET_PAYMENT, {
         id,
     });
@@ -65,6 +68,41 @@ export const getOverviewSellDashboard = async (
     const response = await jfwAxios.get<HttpResponse<IPaymentDashboard>>(url, {
         params: {
             testMode,
+        },
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * # Generate checkout link
+ *
+ * Generate a direct checkout link for the price with the given id.
+ *
+ * Returns a checkout link that allows the user to place an order.
+ *
+ * After a successful checkout, JFW will redirect the user to the return URL configured in the app integration payment gateway management.
+ *
+ * A license will be sent to the purchaser's email, which can be used to apply the license and upgrade the user's package.
+ *
+ * @param params - The params for generating checkout link
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/prices/generate-checkout-link}
+ */
+export const generatePaymentCheckoutLink = async (
+    params: IGeneratePaymentCheckoutLinkParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { id, appIntegrationId } = params;
+    const url = generatePath(PAYMENT_PATH.GENERATE_PAYMENT_CHECKOUT_LINK, {
+        id,
+    });
+    const response = await jfwAxios.post<
+        HttpResponse<IPaymentGenerateCheckoutLinkResponse>
+    >(url, null, {
+        params: {
+            appIntegrationId,
         },
         ...config,
     });
