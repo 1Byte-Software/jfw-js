@@ -1,7 +1,6 @@
 import { HttpStatusCode } from 'axios';
 import { DateType, IdType } from '../../models';
 import { JFWError } from '../error';
-import { JFWHttpStatusCode } from '../http';
 import { SortOrder } from './constants';
 
 //#region Query params types
@@ -72,17 +71,17 @@ export interface HttpResponse<T = unknown> {
      * @remarks int32
      * @readonly
      */
-    statusCode: HttpStatusCode | JFWHttpStatusCode;
+    statusCode: HttpStatusCode;
 
     /**
      * @readonly
      */
-    message: string | null;
+    message: string;
 
     /**
      * @readonly
      */
-    errors: JFWError[] | null;
+    errors: JFWError[];
 
     /**
      * @readonly
