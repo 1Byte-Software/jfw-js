@@ -195,37 +195,6 @@ export interface IInvoiceItem {
     currencyCode?: string | null;
 }
 
-/**
- * Provides the file response.
- */
-export interface IExportInvoice {
-    /**
-     * The path of the file.
-     *
-     * @remarks min: 1
-     */
-    filePath: string;
-
-    /**
-     * The name of the file.
-     *
-     * @remarks min: 1
-     */
-    fileName: string;
-
-    /**
-     * The content type of the file.
-     *
-     * @remarks min: 1
-     */
-    contentType: string;
-
-    /**
-     * The file data. Base64 encoded file data
-     */
-    fileData?: string | null;
-}
-
 //#region API types
 export interface IGetInvoicesParams extends IPageable, ISortable {
     /**
