@@ -12,7 +12,7 @@
         "type": "git",
         "url": "git+https://github.com/1Byte-Software/jfw-js.git"
     },
-    "main": "src/index.ts",
+    "main": "dist/index.js",
     "scripts": {
         "build": "rollup -c",
         "watch": "npm run build -- --watch src",
