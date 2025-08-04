@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
-import { ICDN, ICDNFile } from '../cdnFile';
+import { ICDN } from '../cdnFile';
 import { IDomain } from '../domain';
 import { AdPosition, AdStatus, AdType } from './constants';
 
@@ -43,7 +43,7 @@ export interface IAd {
      *
      * @remarks uri - min: 1
      */
-    targetURL: string;
+    targetURL?: string | null;
 
     /**
      * Gets or sets the description of the advertisement.
@@ -66,6 +66,11 @@ export interface IAd {
      * Gets or sets the end date and time when the advertisement expires. Format: yyyy-MM-dd HH:mm:ss
      */
     endDate: DateType;
+
+    /**
+     * The metadata of the advertisement.
+     */
+    metadata?: string | null;
 
     /**
      * Gets or sets the list of supported language codes for targeting the advertisement.
@@ -161,7 +166,7 @@ export interface ICreateAdParams {
      *
      * @remarks uri - min: 1
      */
-    targetURL: string;
+    targetURL?: string | null;
 
     /**
      * Gets or sets the description of the advertisement.
@@ -186,6 +191,11 @@ export interface ICreateAdParams {
      * @remarks date-time
      */
     endDate: DateType;
+
+    /**
+     * Gets or sets the metadata of the advertisement.
+     */
+    metadata?: string | null;
 
     /**
      * Gets or sets the list of supported language codes for targeting the advertisement.
