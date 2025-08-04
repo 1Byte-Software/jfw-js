@@ -12,9 +12,12 @@ import {
     IGetLicensesParams,
     ILicense,
     ILicenseStatistic,
+    ILicenseStatisticsReportSummary,
     IPurchaseToAddLicensesByCheckoutLinkParams,
     IPurchaseToAddLicensesByWalletParams,
+    IStatisticMonthlyLicensesParams,
     IStatisticsPercentageLicensesUsedParams,
+    IUpdateLicenseParams,
 } from './types';
 
 /**
@@ -360,6 +363,53 @@ export const statisticsPercentageLicensesUsed = async (
         params,
         ...config,
     });
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc for this function in future, after this api update in docs.
+ *
+ * This endpoint returns a breakdown of license data grouped by date, including
+ * totals for licenses created, active, expired, used, unused, and financial details such as
+ * total amount, refund, and postpaid billing.
+ *
+ * Filters can be applied to narrow the result set by package, subscription type,
+ * license type (e.g., Prepaid/Postpaid), and license status (e.g., Active, Inactive).
+ *
+ */
+export const statisticsMonthlyLicenses = async (
+    params?: IStatisticMonthlyLicensesParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = LICENSE_PATH.STATISTICS_MONTHLY_LICENSES;
+    const response = await jfwAxios.get<
+        HttpResponse<ILicenseStatisticsReportSummary>
+    >(url, {
+        params,
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc for this api in future, after backend docs update.
+ */
+export const updateLicense = async (
+    params: IUpdateLicenseParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { id, ...bodyParams } = params;
+    const url = generatePath(LICENSE_PATH.UPDATE_LICENSE, {
+        id,
+    });
+    
+    const response = await jfwAxios.put<HttpResponse<ILicense>>(
+        url,
+        bodyParams,
+        config,
+    );
 
     return response.data;
 };

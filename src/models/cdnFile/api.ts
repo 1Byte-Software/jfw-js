@@ -5,7 +5,7 @@ import { HeaderKey } from '../../core/client/constants';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { CDN_PATH } from './paths';
-import { ICDNFile, ICDNFileUploadParams, IGetFilesCDNParams } from './types';
+import { ICDN, ICDNFile, IGetFilesCDNParams, IUploadFileParams } from './types';
 
 /**
  * # Delete a file CDN
@@ -41,7 +41,7 @@ export const getFileCDN = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(CDN_PATH.GET_FILE_CDN, {
         id,
     });
-    const response = await jfwAxios.get<HttpResponse<ICDNFile>>(url, config);
+    const response = await jfwAxios.get<HttpResponse<ICDN>>(url, config);
 
     return response.data;
 };
@@ -60,7 +60,7 @@ export const getFilesCDN = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = CDN_PATH.GET_FILES_CDN;
-    const response = await jfwAxios.get<HttpResponseList<ICDNFile>>(url, {
+    const response = await jfwAxios.get<HttpResponseList<ICDN>>(url, {
         params,
         ...config,
     });
@@ -71,7 +71,9 @@ export const getFilesCDN = async (
 /**
  * # Upload a file CDN
  *
- * The CdnPathType variable is the root folder of the uploaded file in the CDN. By default, it is set to "User". For further information, visit here: https://whitepaper.jframework.io/other-concepts/cdn/cdn-storage
+ * The CdnPathType variable is the root folder of the uploaded file in the CDN.
+ * By default, it is set to "User".
+ * For further information, visit here: https://whitepaper.jframework.io/other-concepts/cdn/cdn-storage
  *
  * Saves the specified file to the CDN folder with CDN file information.
  *
@@ -79,8 +81,8 @@ export const getFilesCDN = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/upload-file}
  */
-export const uploadFileCDN = async (
-    params: ICDNFileUploadParams,
+export const uploadFile = async (
+    params: IUploadFileParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = CDN_PATH.UPLOAD_FILE;
@@ -92,17 +94,18 @@ export const uploadFileCDN = async (
         });
     }
 
-    const response = await jfwAxios.post<HttpResponse<ICDNFileUploadParams>>(
-        url,
-        params,
-        {
-            headers: {
-                [HeaderKey.ContentType]: 'multipart/form-data',
-                ...config.headers,
-            },
-            ...config,
+    const response = await jfwAxios.post<HttpResponse<ICDNFile>>(url, params, {
+        headers: {
+            [HeaderKey.ContentType]: 'multipart/form-data',
+            ...config.headers,
         },
-    );
+        ...config,
+    });
 
     return response.data;
 };
+
+/**
+ * @deprecated use uploadFile instead
+ */
+export const uploadFileCDN = uploadFile;

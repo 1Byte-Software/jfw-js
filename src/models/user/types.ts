@@ -222,7 +222,7 @@ export interface IUser {
     /**
      * The package of the user.
      */
-    package: IPackage;
+    package?: IPackage | null;
 
     /**
      * The package id.
@@ -230,7 +230,7 @@ export interface IUser {
      * @remarks min: 1
      * @deprecated
      */
-    packageId: IdType;
+    packageId?: IdType | null;
 
     /**
      * The language code.
@@ -344,7 +344,9 @@ export interface IAuthenticateResponse {
 
 export interface IStatisticsUsers extends IStatisticCommon {}
 //#region API types
-export interface IGetUsersParams extends IPageable, ISortable {
+export interface IGetUsersParams
+    extends IPageable,
+        ISortable<'code' | 'username' | 'status'> {
     /**
      * The role id of the user.
      */
@@ -630,6 +632,16 @@ export interface IForgotPasswordParams {
 }
 
 export interface IAddDeviceToUserParams {
+    /**
+     * The id of the user
+     */
+    userId: IdType;
+
+    /**
+     * The id of the device to add.
+     */
+    deviceId: IdType;
+
     /**
      * The token of the device data. This token is used when push notification for the device.
      */

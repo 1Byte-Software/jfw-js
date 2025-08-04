@@ -29,7 +29,7 @@ export interface IPrice {
     /**
      * The name of the price.
      */
-    name?: string | null;
+    name: string;
 
     /**
      * The amount of the price.

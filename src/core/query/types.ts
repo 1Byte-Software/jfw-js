@@ -1,7 +1,6 @@
 import { HttpStatusCode } from 'axios';
 import { DateType, IdType } from '../../models';
 import { JFWError } from '../error';
-import { JFWHttpStatusCode } from '../http';
 import { SortOrder } from './constants';
 
 //#region Query params types
@@ -21,14 +20,14 @@ export interface IPageable {
     pageNumber?: number;
 }
 
-export interface ISortable<T extends Record<string, any> = any> {
+export interface ISortable<T extends string = string> {
     /**
-     * The sort data field of the pagination.
+     * The sort data field of the data.
      */
-    sortDataField?: keyof T;
+    sortDataField?: 'id' | 'createdDate' | T;
 
     /**
-     * The sort order of the pagination.
+     * The sort order of the data.
      */
     sortOrder?: SortOrder;
 }
@@ -72,17 +71,17 @@ export interface HttpResponse<T = unknown> {
      * @remarks int32
      * @readonly
      */
-    statusCode: HttpStatusCode | JFWHttpStatusCode;
+    statusCode: HttpStatusCode;
 
     /**
      * @readonly
      */
-    message: string | null;
+    message: string;
 
     /**
      * @readonly
      */
-    errors: JFWError[] | null;
+    errors: JFWError[];
 
     /**
      * @readonly

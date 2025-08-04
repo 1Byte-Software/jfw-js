@@ -63,25 +63,22 @@ export const activateUser = async (id: IdType, config?: AxiosRequestConfig) => {
  *
  * Add a device to a user.
  *
- * @param userId - The id of the user.
- * @param deviceId - The id of the device to add.
  * @param params - The params to adding a device to a user.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/add-a-device-to-a-user}
  */
 export const addDeviceToUser = async (
-    userId: IdType,
-    deviceId: IdType,
-    params?: IAddDeviceToUserParams,
+    params: IAddDeviceToUserParams,
     config?: AxiosRequestConfig,
 ) => {
+    const { userId, deviceId, ...bodyParams } = params;
     const url = generatePath(USER_PATH.ADD_DEVICE_TO_USER, {
         userId,
         deviceId,
     });
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
-        params,
+        bodyParams,
         config,
     );
 
@@ -807,12 +804,12 @@ export const removeDeviceFromUser = async (
     params: IRemoveDeviceFromUserParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.REGISTER_NEW_USER;
-    const response = await jfwAxios.post<HttpResponse<boolean>>(
-        url,
-        params,
-        config,
-    );
+    const { deviceId, userId } = params;
+    const url = generatePath(USER_PATH.REMOVE_DEVICE_FROM_USER, {
+        deviceId,
+        userId,
+    });
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
 
     return response.data;
 };

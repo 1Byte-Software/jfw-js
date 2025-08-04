@@ -3,9 +3,11 @@ import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { IPrice } from '../price';
 import { SUBSCRIPTION_TYPE_PATH } from './paths';
 import {
     ICreateSubscriptionTypeParams,
+    IGetSubscriptionTypesParams,
     ISubscriptionType,
     IUpdateSubscriptionTypeParams,
 } from './types';
@@ -86,11 +88,17 @@ export const getSubscriptionType = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/get-subscription-types}
  */
-export const getSubscriptionTypes = async (config?: AxiosRequestConfig) => {
+export const getSubscriptionTypes = async (
+    params?: IGetSubscriptionTypesParams,
+    config?: AxiosRequestConfig,
+) => {
     const url = SUBSCRIPTION_TYPE_PATH.GET_SUBSCRIPTION_TYPES;
     const response = await jfwAxios.get<HttpResponse<ISubscriptionType[]>>(
         url,
-        config,
+        {
+            params,
+            ...config,
+        },
     );
 
     return response.data;
@@ -119,6 +127,29 @@ export const updateSubscriptionType = async (
         params,
         config,
     );
+
+    return response.data;
+};
+
+// /**
+//  * # Get subscription types
+//  *
+//  * Gets a list of all subscription type.
+//  *
+//  * @param config - Optional axios request configuration object.
+//  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/get-subscription-types}
+//  */
+export const getPricesFromSubscriptionType = async (
+    subscriptionTypeId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(
+        SUBSCRIPTION_TYPE_PATH.GET_PRICES_FROM_SUBSCRIPTION_TYPE,
+        {
+            subscriptionTypeId,
+        },
+    );
+    const response = await jfwAxios.get<HttpResponse<IPrice[]>>(url, config);
 
     return response.data;
 };

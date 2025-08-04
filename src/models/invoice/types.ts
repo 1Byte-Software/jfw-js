@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IdType } from '../base';
-import { IPayment } from '../payment';
+import { IPayment, IPaymentBase } from '../payment';
 import { IBaseUser } from '../user';
 import { InvoiceStatus, InvoiceType } from './constants';
 
@@ -27,12 +27,13 @@ export interface IInvoice {
     /**
      * This class represents the payment base data transfer object.
      */
-    payment: IPayment;
+    payment: IPaymentBase;
 
     /**
      * The package code of the invoice.
      *
      * @remarks min: 1
+     * @deprecated
      */
     packageCode: string;
 
@@ -45,6 +46,7 @@ export interface IInvoice {
      * The subscription type id.
      *
      * @remarks min: 1
+     * @remarks
      */
     subscriptionTypeId: IdType;
 
@@ -109,11 +111,28 @@ export interface IInvoice {
     invoiceDate?: DateType | null;
 
     /**
+     * The due date.
+     *
+     * @remarks date-time
+     */
+    dueDate?: DateType | null;
+
+    /**
      * The due date of the invoice.
      *
      * @remarks date-time
      */
     overdueDate?: DateType | null;
+
+    /**
+     * The billing period end date of the invoice.
+     */
+    billingPeriodStartDate?: DateType | null;
+
+    /**
+     * The billing period start date of the invoice.
+     */
+    billingPeriodEndDate?: DateType | null;
 
     /**
      * The status of the invoice.
@@ -126,37 +145,54 @@ export interface IInvoice {
      * The test mode of the invoice.
      */
     testMode: boolean;
+
+    /**
+     * The items related to invoice detail.
+     */
+    items: IInvoiceItem[];
 }
 
 /**
- * Provides the file response.
+ * This class is used to define the data transfer object for the InvoiceItem entity class.
  */
-export interface IExportInvoice {
+export interface IInvoiceItem {
     /**
-     * The path of the file.
+     * The id of the object.
      *
      * @remarks min: 1
      */
-    filePath: string;
+    id: IdType;
 
     /**
-     * The name of the file.
+     * The created date of the object.
      *
-     * @remarks min: 1
+     * @remarks date-time
      */
-    fileName: string;
+    createdDate?: DateType | null;
 
     /**
-     * The content type of the file.
+     * The name of the item.
+     */
+    name?: string | null;
+
+    /**
+     * The quantity of the item.
      *
-     * @remarks min: 1
+     * @remarks int32
      */
-    contentType: string;
+    quantity?: number;
 
     /**
-     * The file data. Base64 encoded file data
+     * The amount of the item.
+     *
+     * @remarks double
      */
-    fileData?: string | null;
+    amount?: number;
+
+    /**
+     * The currency code of the item.
+     */
+    currencyCode?: string | null;
 }
 
 //#region API types

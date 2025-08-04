@@ -16,7 +16,7 @@ export let jfwAxios: Axios | null = null;
  */
 const init = (initOption: InitOption) => {
     jfwAxios = axios.create({
-        baseURL: getBaseURL(initOption.environment),
+        baseURL: initOption.protocolURL || getBaseURL(initOption.environment),
         headers: {
             [HeaderKey.BrandURL]: initOption.brandURL,
             [HeaderKey.ContentType]: 'application/json',

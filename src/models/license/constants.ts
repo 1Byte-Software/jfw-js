@@ -3,12 +3,14 @@
  * - `1` - `Normal`
  * - `2` - `Refunded`
  * - `3` - `Prepaid`
- * - `4` - `MailDelivery`
+ * - `4` - `Postpaid`
+ * - `5` - `MailDelivery`
  */
 export enum LicenseType {
     Normal = 'Normal',
     Refunded = 'Refunded',
     Prepaid = 'Prepaid',
+    Postpaid = 'Postpaid',
     MailDelivery = 'MailDelivery',
 }
 

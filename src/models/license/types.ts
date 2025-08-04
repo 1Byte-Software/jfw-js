@@ -46,7 +46,22 @@ export interface ILicense {
     type: LicenseType;
 
     /**
+     * The amount value of a license to be created.
+     *
+     * @remarks double
+     */
+    amount: number;
+
+    /**
+     * The currency code in the ISO 4217 format, which is a three-letter uppercase code that identifies a specific currency.
+     * This value should strictly follow the ISO 4217 standard.
+     */
+    currencyCode: string;
+
+    /**
      * The description of the license.
+     *
+     * @remarks min:1
      */
     description?: string | null;
 
@@ -108,6 +123,159 @@ export interface ILicenseStatistic {
     unavailableQuantity: number;
 }
 
+/**
+ * Represents detailed license statistics for a specific package and subscription type.
+ */
+export interface LicenseStatisticsItem {
+    /**
+     * The ID of the license package.
+     */
+    packageId: IdType | null;
+
+    /**
+     * The ID of the subscription type (e.g., 30 days, 90 days).
+     */
+    subscriptionTypeId: IdType | null;
+
+    /**
+     * Total number of licenses issued under this package and subscription type.
+     *
+     * @remarks int64
+     */
+    totalLicenses: number;
+
+    /**
+     * Total amount charged for these licenses.
+     *
+     * @remarks double
+     */
+    totalAmount: number;
+
+    /**
+     * The currency used for the total amount (e.g., USD, EUR).
+     */
+    currency: string | null;
+
+    /**
+     * Number of licenses that have been used.
+     *
+     * @remarks int32
+     */
+    usedLicenses: number;
+
+    /**
+     * Number of licenses that remain unused.
+     *
+     * @remarks int32
+     */
+    unusedLicenses: number;
+
+    /**
+     * The total normal (standard) amount before any discounts or refunds.
+     *
+     * @remarks double
+     */
+    totalNormalAmount: number;
+
+    /**
+     * Total amount refunded for licenses under this group.
+     *
+     * @remarks double
+     */
+    totalRefundAmount: number;
+
+    /**
+     * Total amount billed as postpaid .
+     *
+     * @remarks double
+     */
+    totalPostpaidAmount: number;
+
+    /**
+     * Total amount for licenses delivered via mail (if applicable).
+     *
+     * @remarks double
+     */
+    totalMailDeliveryAmount: number;
+
+    /**
+     * Number of licenses that are not yet started or activated.
+     *
+     * @remarks int32
+     */
+    notStartedLicenses: number;
+
+    /**
+     * Number of licenses that are currently inactive.
+     *
+     * @remarks int32
+     */
+    inactiveLicenses: number;
+
+    /**
+     * Number of licenses that are currently active.
+     *
+     * @remarks int32
+     */
+    activeLicenses: number;
+
+    /**
+     * Number of licenses that have expired.
+     *
+     * @remarks int32
+     */
+    expiredLicenses: number;
+}
+
+/**
+ * Represents license statistics data for a specific day.
+ */
+export interface ILicenseStatisticsReport {
+    /**
+     * The date for which the statistics apply.
+     */
+    date: DateType;
+
+    /**
+     * The list of license statistic items for the given date.
+     */
+    items: LicenseStatisticsItem[] | null;
+}
+
+/**
+ * Represents the summary report of license statistics.
+ *
+ * #NOTE: Will update tsdoc in future, after this api update in docs.
+ */
+export interface ILicenseStatisticsReportSummary {
+    /**
+     * Total number of licenses that are still remaining/available.
+     *
+     * @remarks int64
+     */
+    totalRemaining: number;
+
+    /**
+     * Total limit of licenses that the brand is allowed to create.
+     *
+     * @remarks int64
+     */
+    totalLimit: number;
+
+    /**
+     * Total number of licenses that have been created.
+     *
+     * @remarks int64
+     */
+
+    totalLicenses: number;
+
+    /**
+     * Collection of daily license statistics reports.
+     */
+    days: ILicenseStatisticsReport[];
+}
+
 //#region API types
 export interface IApplyLicenseToGivenLoginNameParams {
     /**
@@ -133,7 +301,11 @@ export interface IApplyLicenseToGivenUserParams {
     userId: IdType;
 }
 
-export interface IGetLicensesParams extends IPageable, ISortable {
+export interface IGetLicensesParams
+    extends IPageable,
+        ISortable<
+            'code' | 'type' | 'amount' | 'description' | 'tags' | 'status'
+        > {
     /**
      * The package id filter.
      */
@@ -232,6 +404,8 @@ export interface IGetLicensesParams extends IPageable, ISortable {
 
 /**
  * Contains the data for the license code create form.
+ *
+ * #NOTE: Recheck create license params in developers.jframework.io
  */
 export interface ICreateLicensesParams {
     /**
@@ -249,17 +423,23 @@ export interface ICreateLicensesParams {
     subscriptionTypeId: IdType;
 
     /**
-     * The type of the license.
-     *
-     * @remarks enum
-     */
-    type: LicenseType;
-
-    /**
-     * The license code custom. 
+     * The license code custom.
      * If the license code has value, we create with the license otherwise auto generate license code.
      */
     code?: string | null;
+
+    /**
+     * The amount value of a license to be created.
+     *
+     * @remarks double
+     */
+    amount: number;
+
+    /**
+     * The currency code in the ISO 4217 format, which is a three-letter uppercase code that identifies a specific currency.
+     * This value should strictly follow the ISO 4217 standard.
+     */
+    currencyCode: string;
 
     /**
      * The start date of the license.
@@ -306,6 +486,11 @@ export interface ICreateLicensesParams {
      * @remarks min: 1
      */
     userCode?: string | null;
+}
+
+export interface IUpdateLicenseParams
+    extends Omit<ICreateLicensesParams, 'code' | 'quantity' | 'userCode'> {
+    id: IdType;
 }
 
 export interface IGenerateLicenseCodeParams {
@@ -493,6 +678,17 @@ export interface IStatisticsPercentageLicensesUsedParams {
      * @defaultValue `false`
      */
     testMode?: boolean;
+}
+
+// #NOTE: Will update tsdoc in future.
+export interface IStatisticMonthlyLicensesParams {
+    packageId?: IdType;
+
+    subscriptionTypeId?: IdType;
+
+    type?: LicenseType;
+
+    status?: LicenseStatus;
 }
 
 //#endregion

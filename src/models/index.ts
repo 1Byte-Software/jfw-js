@@ -1,5 +1,6 @@
 export * from './base';
 
+export * from './ad';
 export * from './appIntegration';
 export * from './brand';
 export * from './cdnFile';

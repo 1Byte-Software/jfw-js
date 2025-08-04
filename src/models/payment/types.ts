@@ -6,9 +6,9 @@ import { IBaseUser } from '../user';
 import { PaymentStatus } from './constants';
 
 /**
- * The Package Data Transfer Object.
+ * This class represents the payment base data transfer object.
  */
-export interface IPayment {
+export interface IPaymentBase {
     /**
      * The id of the object.
      *
@@ -100,6 +100,18 @@ export interface IPayment {
     status: PaymentStatus;
 
     /**
+     * The payment date.
+     *
+     * @remarks date-time
+     */
+    paymentDate?: DateType;
+}
+
+/**
+ * This class represents the payment data transfer object.
+ */
+export interface IPayment extends IPaymentBase {
+    /**
      * This class is used to return user information to client.
      */
     user?: IBaseUser;
@@ -127,13 +139,6 @@ export interface IPayment {
      * @remarks double
      */
     amount: number;
-
-    /**
-     * The payment date.
-     *
-     * @remarks date-time
-     */
-    paymentDate?: DateType;
 }
 
 export interface IPaymentDashboard {
@@ -141,6 +146,15 @@ export interface IPaymentDashboard {
     totalRevenue: number;
     dailySells: number;
     dailyRevenue: number;
+}
+
+export interface IPaymentGenerateCheckoutLinkResponse {
+    /**
+     * The checkout link to pay the payment.
+     * 
+     * @remarks min: 1
+     */
+    checkoutLink: string;
 }
 
 //#region API types
@@ -202,6 +216,19 @@ export interface IGetPaymentsParams
      * The payment request amount.
      */
     testMode?: boolean;
+}
+
+export interface IGeneratePaymentCheckoutLinkParams {
+    /**
+     * The id of the payment.
+     */
+    id: IdType;
+
+    /**
+     * (Optional) The identifier of the specific app integration payment gateway to use for generating the checkout link. If provided, this app integration will be used to handle the payment.
+     * If null, the system will use the default payment configuration associated with the payment.
+     */
+    appIntegrationId?: IdType;
 }
 
 //#endregion

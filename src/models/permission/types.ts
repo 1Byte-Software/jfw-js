@@ -69,7 +69,9 @@ export interface IPermission {
 }
 
 //#region API types
-export interface IGetPermissionsParams extends IPageable, ISortable {
+export interface IGetPermissionsParams
+    extends IPageable,
+        ISortable<'code' | 'tags' | 'type'> {
     /**
      * Filter by resource type id.
      */
