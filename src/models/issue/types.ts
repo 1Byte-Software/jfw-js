@@ -328,6 +328,11 @@ export interface ICreateIssueParams {
  */
 export interface IUpdateIssueParams {
     /**
+     * The id of issue.
+     */
+    id: IdType;
+
+    /**
      * Assignee user id of the issue.
      */
     assigneeId?: IdType | null;

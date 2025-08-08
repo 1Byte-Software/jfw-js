@@ -1,11 +1,8 @@
-/**
- * Possible values:
- * - `0` - `Inactive`
- * - `1` - `Active`
- */
 export enum IssueStatus {
-    Inactive = 'Inactive',
-    Active = 'Active',
+    Open = 'Open',
+    InProgress = 'InProgress',
+    Pending = 'Pending',
+    Solved = 'Solved',
 }
 
 /**
