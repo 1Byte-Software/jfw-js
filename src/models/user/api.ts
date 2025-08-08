@@ -14,6 +14,7 @@ import {
     IAuthenticateResponse,
     IAuthenticationByGoogleParams,
     IAuthenticationByMagicLinkParams,
+    IAuthenticationByPhoneNumberParams,
     IAuthenticationParams,
     IBaseUser,
     IBrandPartnerAuthenticate,
@@ -187,6 +188,23 @@ export const authenticationByEmailOTP = async (
         {
             emailAddress,
         },
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const authenticationByPhoneNumber = async (
+    params: IAuthenticationByPhoneNumberParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.AUTHENTICATION_BY_PHONE_NUMBER;
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        params,
         config,
     );
 

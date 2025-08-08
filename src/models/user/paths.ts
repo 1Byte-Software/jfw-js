@@ -17,6 +17,7 @@ export const USER_PATH = {
     AUTHENTICATION_BY_EMAIL_OTP: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/email-otp`,
     AUTHENTICATION_BY_GOOGLE: `v1/${REST}/${REST_AUTH}/${REST_INTEGRATION}/google/authenticate-url`,
     AUTHENTICATION_BY_MAGIC_LINK: `v1/${REST}/auth/by-email`,
+    AUTHENTICATION_BY_PHONE_NUMBER: `v1/${REST}/auth/phone-number`,
     AUTHENTICATION_BY_SMS_OTP: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/sms-otp`,
     AUTHENTICATION: `v1/${REST}/auth`,
     CHANGE_PASSWORD: `v1/${REST}/change-password`,

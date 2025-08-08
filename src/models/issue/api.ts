@@ -146,22 +146,21 @@ export const getChildrenIssues = async (
  *
  * Update an issue by id.
  *
- * @param id - The id of issue.
  * @param params - The params for updating an issue.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/issues/update-an-issue}
  */
 export const updateIssue = async (
-    id: IdType,
     params: IUpdateIssueParams,
     config?: AxiosRequestConfig,
 ) => {
+    const { id, ...bodyParams } = params;
     const url = generatePath(ISSUE_PATH.UPDATE_ISSUE, {
         id,
     });
-    const response = await jfwAxios.patch<HttpResponse<IIssue>>(
+    const response = await jfwAxios.put<HttpResponse<IIssue>>(
         url,
-        params,
+        bodyParams,
         config,
     );
 

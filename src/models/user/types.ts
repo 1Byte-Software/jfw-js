@@ -423,6 +423,7 @@ export interface IGetUsersParams
 
     /**
      * The phone number 1
+     * @deprecated
      */
     phoneNumber?: string;
 
@@ -475,7 +476,7 @@ export interface IUpdateUserParams {
      * @example "example@jframework.io"
      * @remarks email - min: 1
      */
-    emailAddress: string;
+    emailAddress?: string | null;
 
     /**
      * The nickname of the user.
@@ -525,6 +526,7 @@ export interface IUpdateUserParams {
      *
      * @example "+1234567890"
      * @remarks tel
+     * @deprecated Will delete in future.
      */
     phoneNumber1?: string | null;
 
@@ -724,7 +726,7 @@ export interface IRegisterNewUserParams {
      * @example "example@jframework.io"
      * @remarks min: 1
      */
-    emailAddress: string;
+    emailAddress?: string | null;
 
     /**
      * The first name of the user.
@@ -795,6 +797,22 @@ export interface IAuthenticationByGoogleParams {
      * By default, the type is RedirectUrl.
      */
     typeResponse?: AuthenticationResponseType;
+}
+
+export interface IAuthenticationByPhoneNumberParams {
+    /**
+     * This represents the phone number of the user.
+     *
+     * @remarks min: 1
+     */
+    phoneNumber: string;
+
+    /**
+     * This represents the password of the user.
+     *
+     * @remarks min: 1
+     */
+    password: string;
 }
 
 /**

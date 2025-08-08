@@ -96,30 +96,36 @@ export interface IPackage {
 
 export interface IFeatureOfPackageBase {
     /**
-     * The title of the package feature. This title is used to display the feature in the UI.
+     * The title of the package feature.
+     * This title is used to display the feature in the UI.
      *
      * @remarks min: 1
      */
     title?: string | null;
 
     /**
-     * The unit of the package feature.
-     *
-     * @remarks min: 1
-     */
-    unit: string;
-
-    /**
-     * The quantity of the package feature. If the feature is unlimited, the quantity is not used.
+     * The quantity of the package feature.
+     * If the feature is unlimited, the quantity is not used.
      *
      * @remarks int32
+     * @deprecated Use value instead
      */
     quantity?: number | null;
 
     /**
-     * Flag to indicate if the feature is unlimited. If true, the feature is unlimited. If false, the feature is limited to the quantity.
+     * The value of the package feature.
+     * If the feature is unlimited, the value is null.
+     *
+     * @remarks int32
      */
-    isUnlimited?: boolean | null;
+    value?: number | null;
+
+    /**
+     * Flag to indicate if the feature is unlimited.
+     * If true, the feature is unlimited.
+     * If false, the feature is limited to the quantity.
+     */
+    isUnlimited: boolean;
 }
 
 export interface ICheckoutTax {
@@ -316,18 +322,11 @@ export interface IUpdatePackageFeatureDataParams {
     title?: string | null;
 
     /**
-     * The unit of the feature.
-     *
-     * @remarks min: 1
-     */
-    unit: string;
-
-    /**
-     * The quantity of the feature follow by package.
+     * The value of the feature follow by package.
      *
      * @remarks int32
      */
-    quantity?: number | null;
+    value?: number | null;
 
     /**
      * Flag to indicate if the feature is unlimited. Default is false.
