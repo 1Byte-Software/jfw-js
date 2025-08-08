@@ -59,7 +59,7 @@ export interface IFeature {
      *
      * @remarks int32
      */
-    defaultValue: string;
+    defaultValue: number;
 
     /**
      * The help URL of the feature.
