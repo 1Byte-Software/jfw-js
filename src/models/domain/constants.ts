@@ -4,12 +4,14 @@
  * - `2` - `CPanel`
  * - `3` - `Client`
  * - `4` - `Protocol`
+ * - `5` - `Documentation`
  */
 export enum DomainType {
     CPanel = 'CPanel',
     Admin = 'Admin',
     Client = 'Client',
     Protocol = 'Protocol',
+    Documentation = 'Documentation',
 }
 
 /**
