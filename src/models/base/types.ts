@@ -1,3 +1,5 @@
+import { SegmentConditionOperator } from './constants';
+
 /**
  * The id of the object.
  * @example Kd12AnplKdMd5s
@@ -25,4 +27,18 @@ export interface ICountSuccessResponse {
      * @remarks int32
      */
     countSuccess: number;
+}
+
+export interface ISegmentCondition {
+    /**
+     * @remarks min: 1
+     */
+    field: string;
+
+    operator: SegmentConditionOperator;
+
+    /**
+     * @remarks min: 1
+     */
+    value: string;
 }
