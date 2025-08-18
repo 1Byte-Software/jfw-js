@@ -9,12 +9,15 @@ import { IBrand } from '../brand';
 import { ICreateConfigurationParams } from '../configuration';
 import { ConfigurationStatus } from '../configuration/constants';
 import { IDevice } from '../device';
+import { INotification } from '../notification';
 import { IPackage } from '../packages';
 import { IRole } from '../role';
 import {
     AuthenticationResponseType,
     BrandPartnerAuthenticateStatus,
+    QRCodeParingDevicesAuthenticationStatus,
     UserDeviceStatus,
+    UserNotificationStatus,
     UserStatus,
     UserType,
 } from './constants';
@@ -343,6 +346,23 @@ export interface IAuthenticateResponse {
 }
 
 export interface IStatisticsUsers extends IStatisticCommon {}
+
+export interface IUserNotification extends Omit<INotification, 'status'> {
+    /**
+     * The seen at.
+     *
+     * @remarks date-time
+     */
+    seenAt?: DateType | null;
+
+    /**
+     * The status of the notification.
+     *
+     * @remarks enum
+     */
+    status: UserNotificationStatus;
+}
+
 //#region API types
 export interface IGetUsersParams
     extends IPageable,
@@ -982,4 +1002,92 @@ export interface IBrandPartnerAuthenticate {
      */
     brand: IBrand;
 }
+
+export interface IGetNotificationsByUserParams extends IPageable, ISortable {
+    /**
+     * The id of the user to get.
+     */
+    userId: IdType;
+
+    /**
+     * The status of the notification.
+     *
+     * @remarks enum
+     */
+    status?: UserNotificationStatus | null;
+}
+
+export interface IGetNotificationsByGivenUserIdAndNotificationParams {
+    /**
+     * The id of the user to get.
+     */
+    userId: IdType;
+
+    /**
+     * The id of the notification.
+     */
+    notificationId: IdType;
+}
+
+export interface IMarkNotificationAsReadByUserAndNotificationParams {
+    /**
+     * The id of the user to get.
+     */
+    userId: IdType;
+
+    /**
+     * The id of the notification.
+     */
+    notificationId: IdType;
+}
+
+export interface IGetQRCodeStatusResponse {
+    id: string;
+    status: QRCodeParingDevicesAuthenticationStatus;
+    approvedAt: DateType | null;
+}
+
+export interface IGenerateNewQRCodeForParingAuthenticationResponse
+    extends IGetQRCodeStatusResponse {
+    qrCodeBase64: string;
+}
+
+export interface IUserAuthVerifyOTPParams {
+    /**
+     * The token to verify. This is the token that was received from the request to send the OTP.
+     *
+     * @remarks min: 1
+     * @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjEzNDU2Nzg5MzIifQ.1J7
+     */
+    token: string;
+
+    /**
+     * The OTP to verify.
+     *
+     * @remarks min: 1
+     * @example 123456
+     */
+    otp: string;
+}
+
+export interface IGeneratePhoneOTPForAuthenticationParams {
+    /**
+     * The phone number. The phone number should be following the E.164 format.
+     *
+     * @remarks min: 1
+     * @example +1234567890
+     */
+    phoneNumber: string;
+}
+
+export interface IGenerateEmailAddressOTPForAuthenticationParams {
+    /**
+     * The email address.
+     *
+     * @remarks min: 1
+     * @example example@jframework.io
+     */
+    emailAddress: string;
+}
+
 //#endregion
