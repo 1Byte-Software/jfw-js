@@ -1,7 +1,7 @@
 {
     "name": "@jframework/jfw-js",
     "description": "The Javascript package for JFW",
-    "version": "5.4.2",
+    "version": "5.5.0",
     "author": "1byte devteam",
     "main": "dist/index.js",
     "module": "dist/index.js",

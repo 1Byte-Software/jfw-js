@@ -5,7 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [5.5.0]
+
+### Added
+
+-   Add ISegmentCondition interface.
+-   Add filter by ids for user and role object.
+-   Add generateNewQRCodeForPairingAuthentication, getCurrentStatusOfQRCodeParingRequest, loginUsingApprovedQRCodeParingRequest, generatePhoneOTPForAuthentication, verifyPhoneOTPForAuthentication, generateEmailOTPForAuthentication, getNotificationsByUser, getNotificationByGivenUserAndNotification, markNotificationAsReadByUserAndNotification, markAllNotificationsAsReadByUser apis.
+
+### Changed
+
+-   Change interfaces, apis, constants of notification object.
+
+### Deprecated
+
+-   Deprecate phoneNumber1 in User.
+
+### Removed
+
+-   Remove emailSubject, emailBody in INotification interface.
+-
+
+## [5.4.0]
 
 ### Added
 
