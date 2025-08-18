@@ -348,6 +348,11 @@ export interface IGetUsersParams
     extends IPageable,
         ISortable<'code' | 'username' | 'status'> {
     /**
+     * The list id of the user to filter.
+     */
+    ids?: string;
+
+    /**
      * The role id of the user.
      */
     roleId?: IdType;
