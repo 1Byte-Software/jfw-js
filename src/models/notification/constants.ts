@@ -1,13 +1,20 @@
-/**
- * Possible values:
- * - `0` - `Unread`
- * - `1` - `ReadEmailNotification`
- * - `2` - `ReadEmailNotificationButNotYetTakenAction`
- * - `3` - `ReadEmailNotificationAndClickedTakenAction`
- */
 export enum NotificationStatus {
-    Unread = 'Unread',
-    ReadEmailNotification = 'ReadEmailNotification',
-    ReadEmailNotificationButNotYetTakenAction = 'ReadEmailNotificationButNotYetTakenAction',
-    ReadEmailNotificationAndClickedTakenAction = 'ReadEmailNotificationAndClickedTakenAction',
+    Sent = 'Sent',
+    Processing = 'Processing',
+    Scheduled = 'Scheduled',
+}
+
+export enum NotificationType {
+    Broadcast = 'Broadcast',
+    Personal = 'Personal',
+    Segment = 'Segment',
+}
+
+export enum NotificationChannel {
+    Unknown = 'Unknown',
+    Email = 'Email',
+    SMS = 'SMS',
+    Push = 'Push',
+    InApp = 'InApp',
+    Webhook = 'Webhook',
 }
