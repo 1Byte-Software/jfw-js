@@ -23,9 +23,16 @@ import {
     ICreateConfigurationOfUserParams,
     IDeviceOfUser,
     IForgotPasswordParams,
+    IGenerateEmailAddressOTPForAuthenticationParams,
+    IGenerateNewQRCodeForParingAuthenticationResponse,
+    IGeneratePhoneOTPForAuthenticationParams,
     IGetAppIntegrationAuthenticateURLsParams,
     IGetConfigurationsOfUserParams,
+    IGetNotificationsByGivenUserIdAndNotificationParams,
+    IGetNotificationsByUserParams,
+    IGetQRCodeStatusResponse,
     IGetUsersParams,
+    IMarkNotificationAsReadByUserAndNotificationParams,
     IRegisterNewUserParams,
     IRemoveDeviceFromUserParams,
     IResetPasswordParams,
@@ -33,6 +40,8 @@ import {
     IStatisticsUsersParams,
     IUpdateUserParams,
     IUser,
+    IUserAuthVerifyOTPParams,
+    IUserNotification,
     IVerifySMSOTPToAuthenticationParams,
     IVerifyUserEmailAddressParams,
 } from './types';
@@ -1077,6 +1086,131 @@ export const verifySMSOTPToAuthentication = async (
 };
 
 /**
+ * #NOTE: Will update doc in future.
+ */
+export const generateNewQRCodeForPairingAuthentication = async (
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.GENERATE_NEW_QR_CODE_FOR_PARING_AUTHENTICATION;
+    const response = await jfwAxios.post<
+        HttpResponse<IGenerateNewQRCodeForParingAuthenticationResponse>
+    >(url, config);
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const getCurrentStatusOfQRCodeParingRequest = async (
+    qrCodeId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(
+        USER_PATH.GET_CURRENT_STATUS_OF_QRCODE_PARING_REQUEST,
+        {
+            qrCodeId,
+        },
+    );
+    const response = await jfwAxios.get<HttpResponse<IGetQRCodeStatusResponse>>(
+        url,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const loginUsingApprovedQRCodeParingRequest = async (
+    qrCodeId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(
+        USER_PATH.LOGIN_IN_USING_APPROVED_QR_CODE_PARING_REQUEST,
+        {
+            qrCodeId,
+        },
+    );
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const generatePhoneOTPForAuthentication = async (
+    params: IGeneratePhoneOTPForAuthenticationParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.GENERATE_PHONE_OTP_FOR_AUTHENTICATION;
+    const response = await jfwAxios.post<HttpResponse<string>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const verifyPhoneOTPForAuthentication = async (
+    params: IUserAuthVerifyOTPParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.VERIFY_PHONE_OTP_FOR_AUTHENTICATION;
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const generateEmailOTPForAuthentication = async (
+    params: IGenerateEmailAddressOTPForAuthenticationParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.GENERATE_EMAIL_OTP_FOR_AUTHENTICATION;
+    const response = await jfwAxios.post<HttpResponse<string>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const verifyEmailOTPForAuthentication = async (
+    params: IUserAuthVerifyOTPParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.VERIFY_EMAIL_OTP_FOR_AUTHENTICATION;
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
  * Check auth key available
  */
 export const checkAuthKeyAvailable = async (
@@ -1088,6 +1222,90 @@ export const checkAuthKeyAvailable = async (
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
         data,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc in future.
+ */
+export const getNotificationsByUser = async (
+    params: IGetNotificationsByUserParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { userId, ...restParams } = params;
+    const url = generatePath(USER_PATH.GET_NOTIFICATIONS_BY_USER, {
+        userId,
+    });
+    const response = await jfwAxios.get<
+        HttpResponseList<IUserNotification, { unreadCount: number }>
+    >(url, {
+        params: restParams,
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc in future.
+ */
+export const getNotificationByGivenUserAndNotification = async (
+    params: IGetNotificationsByGivenUserIdAndNotificationParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { userId, notificationId } = params;
+    const url = generatePath(
+        USER_PATH.GET_NOTIFICATION_BY_GIVEN_USER_AND_NOTIFICATION,
+        {
+            userId,
+            notificationId,
+        },
+    );
+    const response = await jfwAxios.get<HttpResponse<IUserNotification>>(url, {
+        params,
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc in future.
+ */
+export const markNotificationAsReadByUserAndNotification = async (
+    params: IMarkNotificationAsReadByUserAndNotificationParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { notificationId, userId } = params;
+    const url = generatePath(USER_PATH.MARK_NOTIFICATION_AS_READ_BY_USER, {
+        notificationId,
+        userId,
+    });
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update tsdoc in future.
+ */
+export const markAllNotificationsAsReadByUser = async (
+    userId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.MARK_ALL_NOTIFICATIONS_AS_READ_BY_USER, {
+        userId,
+    });
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
+        url,
+        null,
         config,
     );
 

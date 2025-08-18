@@ -2,6 +2,7 @@ export * from './base';
 
 export * from './ad';
 export * from './appIntegration';
+export * from './base';
 export * from './brand';
 export * from './cdnFile';
 export * from './city';

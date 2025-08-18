@@ -15,10 +15,17 @@ export const USER_PATH = {
     ASSIGN_ROLES_TO_USER: `v1/${REST}/{id}/${REST_ROLES}`,
     AUTHENTICATION_BY_APPLE: `v1/${REST}/${REST_AUTH}/${REST_INTEGRATION}/apple/authenticate-url`,
     AUTHENTICATION_BY_EMAIL_OTP: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/email-otp`,
+    GENERATE_EMAIL_OTP_FOR_AUTHENTICATION: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/email/generate-otp`,
+    GENERATE_PHONE_OTP_FOR_AUTHENTICATION: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/phone/generate-otp`,
+    VERIFY_EMAIL_OTP_FOR_AUTHENTICATION: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/email/verify-otp`,
+    VERIFY_PHONE_OTP_FOR_AUTHENTICATION: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/phone/verify-otp`,
     AUTHENTICATION_BY_GOOGLE: `v1/${REST}/${REST_AUTH}/${REST_INTEGRATION}/google/authenticate-url`,
     AUTHENTICATION_BY_MAGIC_LINK: `v1/${REST}/auth/by-email`,
     AUTHENTICATION_BY_PHONE_NUMBER: `v1/${REST}/auth/phone-number`,
     AUTHENTICATION_BY_SMS_OTP: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/sms-otp`,
+    GENERATE_NEW_QR_CODE_FOR_PARING_AUTHENTICATION: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/qrcode/generate`,
+    GET_CURRENT_STATUS_OF_QRCODE_PARING_REQUEST: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/qrcode/{qrCodeId}`,
+    LOGIN_IN_USING_APPROVED_QR_CODE_PARING_REQUEST: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/qrcode/{qrCodeId}/login`,
     AUTHENTICATION: `v1/${REST}/auth`,
     CHANGE_PASSWORD: `v1/${REST}/change-password`,
     CHECK_REFERRAL_USER_CODE: `v1/${REST}/${REST_REFERRAL}/{code}/check`,
@@ -56,4 +63,9 @@ export const USER_PATH = {
     VERIFY_SMS_OTP_TO_AUTHENTICATION: `v1/${REST}/${REST_AUTH}/${REST_PASSWORDLESS}/verify-sms-otp`,
 
     CHECK_AUTH_KEY_AVAILABLE: `v1/${REST}/check-auth-key-available`,
+
+    GET_NOTIFICATIONS_BY_USER: `v1/${REST}/{userId}/notifications`,
+    GET_NOTIFICATION_BY_GIVEN_USER_AND_NOTIFICATION: `v1/${REST}/{userId}/notifications/{notificationId}`,
+    MARK_NOTIFICATION_AS_READ_BY_USER: `v1/${REST}/{userId}/notifications/{notificationId}/read`,
+    MARK_ALL_NOTIFICATIONS_AS_READ_BY_USER: `v1/${REST}/{userId}/notifications/mark-all-as-read`,
 };

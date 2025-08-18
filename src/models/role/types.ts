@@ -72,6 +72,11 @@ export interface IRole {
 //#region API types
 export interface IGetRolesParams extends IPageable, ISortable {
     /**
+     * The list id of the role to filter.
+     */
+    ids?: string;
+
+    /**
      * The param code to apply filter.
      */
     code?: string;

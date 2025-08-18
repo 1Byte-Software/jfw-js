@@ -1,6 +1,10 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
-import { NotificationStatus } from './constants';
+import { DateType, IdType, ISegmentCondition } from '../base';
+import {
+    NotificationChannel,
+    NotificationStatus,
+    NotificationType,
+} from './constants';
 
 /**
  * Represents a notification object.
@@ -21,27 +25,15 @@ export interface INotification {
     createdDate?: DateType | null;
 
     /**
-     * The email subject.
-     *
-     * @remarks min: 1
-     * @deprecated
-     */
-    emailSubject: string;
-
-    /**
      * The title.
      *
      * @remarks min: 1
      */
     title: string;
 
-    /**
-     * The email body.
-     *
-     * @remarks min: 1
-     * @deprecated
-     */
-    emailBody: string;
+    type: NotificationType;
+
+    channel: NotificationChannel;
 
     /**
      * The content.
@@ -75,16 +67,18 @@ export interface INotification {
     sentTime?: DateType | null;
 
     /**
-     * The seen at.
-     *
-     * @remarks date-time
+     * Set of key-value pairs that you can attach to an object.
+     * This can be useful for storing additional information about the object in a structured format.
      */
-    seenAt?: DateType | null;
+    metadata?: Record<string, string> | null;
 
     /**
-     * The status of the notification.
-     *
-     * @remarks enum
+     * The scheduled date.
+     */
+    scheduledDate?: DateType | null;
+
+    /**
+     * #NOTE: Check me again in future. After complete docs.
      */
     status: NotificationStatus;
 
@@ -95,9 +89,17 @@ export interface INotification {
 }
 
 //#region API types
-export interface IGetNotificationsByUserAuthorizedParams
-    extends IPageable,
-        ISortable {
+export interface IGetNotificationsParams extends IPageable, ISortable {
+    /**
+     * The type of the notification.
+     */
+    type?: NotificationType;
+
+    /**
+     * The channel of the notification.
+     */
+    channel?: NotificationChannel;
+
     /**
      * The title of the notification.
      */
@@ -164,16 +166,58 @@ export interface IPushNotificationResponse {
     countSuccess: number;
 }
 
-export interface IUpdateStatusNotificationParams {
+export interface ICreateNotificationParams {
     /**
-     * The id of the notification.
+     * The main title of the notification. Displayed prominently to the user.
+     *
+     * @remarks min: 1
      */
-    notificationIds: string[];
+    title: string;
+
+    type: NotificationType;
+
+    channel: NotificationChannel;
 
     /**
-     * The status to update.
+     * The main message or body of the notification.
+     *
+     * @remarks min: 1
      */
-    status: NotificationStatus;
+    content: string;
+
+    /**
+     * The action url. Deep link URL for action buttons.
+     *
+     * @remarks uri
+     */
+    actionURL?: string | null;
+
+    /**
+     * A general grouping or category label for notifications, useful for organizing and filtering.
+     */
+    category?: string | null;
+
+    /**
+     * A more specific sub-label or theme related to the notification, such as a campaign name or feature tag.
+     */
+    topic?: string | null;
+
+    /**
+     * Set of key-value pairs that you can attach to an object.
+     * This can be useful for storing additional information about the object in a structured format.
+     */
+    metadata?: Record<string, string> | null;
+
+    /**
+     * The date and time at which the notification should be sent.
+     * If null, it will be sent immediately.
+     */
+    scheduledDate?: DateType | null;
+
+    /**
+     * The conditions to filter the recipients.
+     */
+    conditions?: Record<string, ISegmentCondition> | null;
 }
 
 //#endregion

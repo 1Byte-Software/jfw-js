@@ -59,3 +59,16 @@ export enum BrandPartnerAuthenticateStatus {
     Connected = 'Connected',
     Unconnected = 'Unconnected',
 }
+
+export enum UserNotificationStatus {
+    Unread = 'Unread',
+    ReadEmailNotification = 'ReadEmailNotification',
+    ReadEmailNotificationButNotYetTakenAction = 'ReadEmailNotificationButNotYetTakenAction',
+    ReadEmailNotificationAndClickedTakenAction = 'ReadEmailNotificationAndClickedTakenAction',
+}
+
+export enum QRCodeParingDevicesAuthenticationStatus {
+    New = 'New',
+    Approved = 'Approved',
+    Consumed = 'Consumed',
+}
