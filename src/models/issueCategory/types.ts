@@ -22,6 +22,11 @@ export interface IIssueCategory {
     groupCode?: string | null;
 
     /**
+     * The parent id of the issue category.
+     */
+    parentId?: IdType | null;
+
+    /**
      * The code of the issue category.
      *
      * @remarks min: 1
