@@ -16,7 +16,7 @@ import {
  *
  * Creates a new app integration SMS.
  *
- * @param params - The params for creating a new app integration payment gateway.
+ * @param params - The params for creating a new app integration SMS.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/creates-an-app-integration-sms}
  */
