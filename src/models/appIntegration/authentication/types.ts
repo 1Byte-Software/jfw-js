@@ -302,6 +302,22 @@ export interface ICreateAppIntegrationAuthenticationParams {
     isDefault?: boolean | null;
 }
 
+export interface ICreateAppIntegrationAuthenticationWithImportFileSettingsParams {
+    /**
+     * The app integration id.
+     *
+     * @remarks min: 1
+     */
+    appIntegrationId: string;
+
+    /**
+     * The file setting to import.
+     *
+     * @remarks binary
+     */
+    file: File;
+}
+
 export interface IUpdateAppIntegrationAuthenticationParams {
     /**
      * The app integration id.

@@ -7,6 +7,7 @@ import { APP_INTEGRATION_AUTHENTICATION_PATH } from './paths';
 import {
     IAppIntegrationAuthentication,
     ICreateAppIntegrationAuthenticationParams,
+    ICreateAppIntegrationAuthenticationWithImportFileSettingsParams,
     IGetAppIntegrationAuthenticationsWithBrandParams,
     ITestBuildingAuthenticationURLParams,
     IUpdateAppIntegrationAuthenticationParams,
@@ -27,6 +28,28 @@ export const createAppIntegrationAuthentication = async (
 ) => {
     const url =
         APP_INTEGRATION_AUTHENTICATION_PATH.CREATE_APP_INTEGRATION_AUTHENTICATION;
+    const response = await jfwAxios.post<
+        HttpResponse<IAppIntegrationAuthentication>
+    >(url, params, config);
+
+    return response.data;
+};
+
+/**
+ * # Creates an app integration authentication with import file settings
+ *
+ * Creates a new app integration authentication with import file setting.
+ *
+ * @param params - The params for creating a new app integration authentication with import file setting.
+ * @param config - Optional axios request configuration object.
+ * @link {@see https://developers.jframework.io/references/api-reference/endpoints/app-integrations/authentication/create-an-app-integration-authentication-by-import-file}
+ */
+export const createAppIntegrationAuthenticationWithImportFileSettings = async (
+    params: ICreateAppIntegrationAuthenticationWithImportFileSettingsParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url =
+        APP_INTEGRATION_AUTHENTICATION_PATH.CREATE_APP_INTEGRATION_AUTHENTICATION_WITH_IMPORT_FILE_SETTINGS;
     const response = await jfwAxios.post<
         HttpResponse<IAppIntegrationAuthentication>
     >(url, params, config);
