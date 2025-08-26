@@ -15,7 +15,7 @@ import { IRole } from '../role';
 import {
     AuthenticationResponseType,
     BrandPartnerAuthenticateStatus,
-    QRCodeParingDevicesAuthenticationStatus,
+    CodeParingDevicesAuthenticationStatus,
     UserDeviceStatus,
     UserNotificationStatus,
     UserStatus,
@@ -639,6 +639,27 @@ export interface IChangePasswordParams {
     confirmPassword: string;
 }
 
+export interface IChangePasswordForAnotherUserParams {
+    /**
+     * The id of the user to change.
+     */
+    id: IdType;
+
+    /**
+     * The new password of the user.
+     *
+     * @remarks min: 1
+     */
+    newPassword: string;
+
+    /**
+     * The confirm password of the user.
+     *
+     * @remarks min: 1
+     */
+    confirmPassword: string;
+}
+
 /**
  * This is the model class for ForgotPassword.
  */
@@ -1041,15 +1062,20 @@ export interface IMarkNotificationAsReadByUserAndNotificationParams {
     notificationId: IdType;
 }
 
-export interface IGetQRCodeStatusResponse {
+export interface IGetCodeStatusResponse {
     id: string;
-    status: QRCodeParingDevicesAuthenticationStatus;
+    status: CodeParingDevicesAuthenticationStatus;
     approvedAt: DateType | null;
 }
 
 export interface IGenerateNewQRCodeForParingAuthenticationResponse
-    extends IGetQRCodeStatusResponse {
+    extends IGetCodeStatusResponse {
     qrCodeBase64: string;
+}
+
+export interface IGenerateNewOTPForParingAuthenticationResponse
+    extends IGetCodeStatusResponse {
+    code: string;
 }
 
 export interface IUserAuthVerifyOTPParams {

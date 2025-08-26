@@ -18,19 +18,21 @@ import {
     IAuthenticationParams,
     IBaseUser,
     IBrandPartnerAuthenticate,
+    IChangePasswordForAnotherUserParams,
     IChangePasswordParams,
     ICheckAuthKeyAvailableParams,
     ICreateConfigurationOfUserParams,
     IDeviceOfUser,
     IForgotPasswordParams,
     IGenerateEmailAddressOTPForAuthenticationParams,
+    IGenerateNewOTPForParingAuthenticationResponse,
     IGenerateNewQRCodeForParingAuthenticationResponse,
     IGeneratePhoneOTPForAuthenticationParams,
     IGetAppIntegrationAuthenticateURLsParams,
+    IGetCodeStatusResponse,
     IGetConfigurationsOfUserParams,
     IGetNotificationsByGivenUserIdAndNotificationParams,
     IGetNotificationsByUserParams,
-    IGetQRCodeStatusResponse,
     IGetUsersParams,
     IMarkNotificationAsReadByUserAndNotificationParams,
     IRegisterNewUserParams,
@@ -332,6 +334,26 @@ export const changePassword = async (
     const response = await jfwAxios.put<HttpResponse<true>>(
         url,
         params,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Update doc in future.
+ */
+export const changePasswordForAnotherUser = async (
+    params: IChangePasswordForAnotherUserParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { id, ...bodyParams } = params;
+    const url = generatePath(USER_PATH.CHANGE_PASSWORD_BY_USER, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<true>>(
+        url,
+        bodyParams,
         config,
     );
 
@@ -1112,7 +1134,7 @@ export const getCurrentStatusOfQRCodeParingRequest = async (
             qrCodeId,
         },
     );
-    const response = await jfwAxios.get<HttpResponse<IGetQRCodeStatusResponse>>(
+    const response = await jfwAxios.get<HttpResponse<IGetCodeStatusResponse>>(
         url,
         config,
     );
@@ -1134,6 +1156,101 @@ export const loginUsingApprovedQRCodeParingRequest = async (
         },
     );
     const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const approveQRCodePairingRequest = async (
+    qrCodeId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.APPROVE_QR_CODE_PAIRING_REQUEST, {
+        qrCodeId,
+    });
+    const response = await jfwAxios.post<HttpResponse<IGetCodeStatusResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const generateNewOTPForPairingAuthentication = async (
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.GENERATE_NEW_OTP_FOR_PARING_AUTHENTICATION;
+    const response = await jfwAxios.post<
+        HttpResponse<IGenerateNewOTPForParingAuthenticationResponse>
+    >(url, config);
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const getCurrentStatusOfOTPParingRequest = async (
+    otpCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(
+        USER_PATH.GET_CURRENT_STATUS_OF_OTP_PARING_REQUEST,
+        {
+            otpCode,
+        },
+    );
+    const response = await jfwAxios.get<HttpResponse<IGetCodeStatusResponse>>(
+        url,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const loginUsingApprovedOTPParingRequest = async (
+    otpCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(
+        USER_PATH.LOGIN_IN_USING_APPROVED_OTP_PARING_REQUEST,
+        {
+            otpCode,
+        },
+    );
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * #NOTE: Will update doc in future.
+ */
+export const approveOTPPairingRequest = async (
+    otpCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.APPROVE_OTP_CODE_PAIRING_REQUEST, {
+        otpCode,
+    });
+    const response = await jfwAxios.post<HttpResponse<IGetCodeStatusResponse>>(
         url,
         null,
         config,

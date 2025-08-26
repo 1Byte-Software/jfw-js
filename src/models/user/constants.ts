@@ -67,7 +67,7 @@ export enum UserNotificationStatus {
     ReadEmailNotificationAndClickedTakenAction = 'ReadEmailNotificationAndClickedTakenAction',
 }
 
-export enum QRCodeParingDevicesAuthenticationStatus {
+export enum CodeParingDevicesAuthenticationStatus {
     New = 'New',
     Approved = 'Approved',
     Consumed = 'Consumed',

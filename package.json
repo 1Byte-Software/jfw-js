@@ -3,12 +3,7 @@
     "description": "The Javascript package for JFW",
     "version": "5.5.0",
     "author": "1byte devteam",
-    "main": "dist/index.js",
-    "module": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "files": [
-        "dist"
-    ],
+    "main": "src/index.ts",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/1Byte-Software/jfw-js/issues"
