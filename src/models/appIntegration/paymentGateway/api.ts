@@ -140,7 +140,7 @@ export const testCreatingCheckoutLink = async (
  * @param id - The app integration payment gateway id.
  * @param params - The params for updating an app integration payment gateway.
  * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/updates-an-app-integration-payment-gateway-copy}
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/payment-gateway/updates-an-app-integration-payment-gateway}
  */
 export const updateAppIntegrationPaymentGateway = async (
     id: IdType,
