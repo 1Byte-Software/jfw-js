@@ -32,7 +32,6 @@ export interface IInvoice extends IBaseObject {
      * The subscription type id.
      *
      * @remarks min: 1
-     * @remarks
      */
     subscriptionTypeId: IdType;
 
@@ -54,6 +53,69 @@ export interface IInvoice extends IBaseObject {
      * The name of the invoice.
      */
     name?: string | null;
+
+    /**
+     * The subtotal amount before discounts and taxes.
+     *
+     * @remarks double
+     */
+    subtotalAmount: number;
+
+    /**
+     * The discount rate applied to the subtotal (e.g., 0.1 for 10%).
+     *
+     * @remarks double
+     */
+    discountRate?: number | null;
+
+    /**
+     * The actual discount amount deducted from the subtotal.
+     *
+     * @remarks double
+     */
+    discountAmount?: number | null;
+
+    /**
+     * The tax rate applied to the subtotal (e.g., 0.1 for 10%).
+     *
+     * @remarks double
+     */
+    taxRate?: number | null;
+
+    /**
+     * The tax amount added to the invoice.
+     *
+     * @remarks double
+     */
+    taxAmount?: number | null;
+
+    /**
+     * The final total amount (subtotal - discount + tax).
+     *
+     * @remarks double
+     */
+    totalAmount: number;
+
+    /**
+     * The amount already paid by the user.
+     *
+     * @remarks double
+     */
+    amountPaid: number;
+
+    /**
+     * The remaining amount due on the invoice.
+     *
+     * @remarks double
+     */
+    amountDue: number;
+
+    /**
+     * The currency code used for payment (e.g., USD, VND).
+     *
+     * @remarks min1:
+     */
+    currencyCode: string;
 
     /**
      * The description of the invoice.
