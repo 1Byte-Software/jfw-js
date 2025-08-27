@@ -25,6 +25,13 @@ import {
  *
  * Activate a license
  *
+ * This method sets the license's status to Active based on its current state:
+ *  - NotStarted: Sets the StartDate to a valid date in the past.
+ *  - Expired: Sets the EndDate to a valid date in the future.
+ *  - Inactive: Sets both StartDate and EndDate if necessary.
+ *
+ * If the license has already been Used, the method does nothing.
+ *
  * @param id - The id of the license.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/activate-a-license}
@@ -404,7 +411,7 @@ export const updateLicense = async (
     const url = generatePath(LICENSE_PATH.UPDATE_LICENSE, {
         id,
     });
-    
+
     const response = await jfwAxios.put<HttpResponse<ILicense>>(
         url,
         bodyParams,
