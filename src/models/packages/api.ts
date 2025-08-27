@@ -145,16 +145,16 @@ export const getPackage = async (id: IdType, config?: AxiosRequestConfig) => {
  *
  * Get features from a package
  *
- * @param id - The id of the package.
+ * @param packageId - The id of the package.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/get-features-from-package}
  */
 export const getFeaturesFromPackage = async (
-    id: IdType,
+    packageId: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PACKAGE_PATH.GET_FEATURES_FROM_PACKAGE, {
-        id,
+        packageId,
     });
     const response = await jfwAxios?.get<HttpResponse<IFeatureOfPackage[]>>(
         url,
@@ -191,16 +191,16 @@ export const getPackages = async (
  *
  * Get prices by package id.
  *
- * @param id - The id of the package.
+ * @param packageId - The id of the package.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/packages/get-prices-from-a-package}
  */
 export const getPricesFromPackage = async (
-    id: IdType,
+    packageId: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PACKAGE_PATH.GET_PRICES_FROM_PACKAGE, {
-        id,
+        packageId,
     });
     const response = await jfwAxios?.get<HttpResponse<IPrice[]>>(url, config);
 
