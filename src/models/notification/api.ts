@@ -1,16 +1,87 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
 import { jfwAxios } from '../../core/client/client';
+import { generatePath } from '../../utils/path';
+import { ICountSuccessResponse, IdType } from '../base';
 import { NOTIFICATION_PATH } from './paths';
 import {
-    ICreateNotificationParams,
+    ICreateBroadcastParams,
     IGetNotificationsParams,
     INotification,
     IPushNotificationMessageForTokensParams,
     IPushNotificationResponse,
+    ITestPushNotificationDataMessageParams,
 } from './types';
-import { IdType } from '../base';
-import { generatePath } from '../../utils/path';
+
+/**
+ * # Create a broadcast
+ *
+ * Creates a new broadcast.
+ * When a broadcast is created, it generates individual notifications for relevant users.
+ *
+ * @param params - The params for creating a broadcast.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/create-broadcast}
+ */
+export const createBroadcast = async (
+    params: ICreateBroadcastParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = NOTIFICATION_PATH.CREATE_BROADCAST;
+    const response = await jfwAxios.post<HttpResponse<INotification>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Get a notification
+ *
+ * Get a notification
+ *
+ * @param params - The params for getting a notification.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/get-a-notification}
+ */
+export const getNotification = async (
+    notificationId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(NOTIFICATION_PATH.GET_NOTIFICATION, {
+        notificationId,
+    });
+    const response = await jfwAxios.get<HttpResponse<INotification>>(
+        url,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Get notifications
+ *
+ * Get notifications
+ *
+ * @param params - The params for getting notifications.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/get-notifications}
+ */
+export const getNotifications = async (
+    params?: IGetNotificationsParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = NOTIFICATION_PATH.GET_NOTIFICATIONS;
+    const response = await jfwAxios.get<HttpResponseList<INotification>>(url, {
+        params,
+        ...config,
+    });
+
+    return response.data;
+};
 
 /**
  * # Push notification message for tokens
@@ -72,48 +143,32 @@ export const pushNotificationDataMessageByTokens = async (
 };
 
 /**
- * #NOTE: Update tsdoc in future.
+ * # Test push notification data message
+ *
+ * Test with push notification message
+ *
+ * This is a test method to push a notification message to the given device tokens.
+ *
+ * @param params - The params for testing push notification data message.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/notifications/test-push-notification-data-message}
  */
-export const getNotifications = async (
-    params?: IGetNotificationsParams,
+export const testPushNotificationDataMessage = async (
+    params: ITestPushNotificationDataMessageParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = NOTIFICATION_PATH.GET_NOTIFICATIONS;
-    const response = await jfwAxios.get<HttpResponseList<INotification>>(url, {
-        params,
-        ...config,
-    });
+    const url = NOTIFICATION_PATH.TEST_PUSH_NOTIFICATION_DATA_MESSAGE;
 
-    return response.data;
-};
-
-/**
- * #NOTE: Update tsdoc in future.
- */
-export const getNotification = async (
-    notificationId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(NOTIFICATION_PATH.GET_NOTIFICATION, {
-        notificationId,
-    });
-    const response = await jfwAxios.get<HttpResponse<INotification>>(
+    const response = await jfwAxios.post<HttpResponse<ICountSuccessResponse>>(
         url,
-        config,
-    );
-
-    return response.data;
-};
-
-export const createNotification = async (
-    params: ICreateNotificationParams,
-    config?: AxiosRequestConfig,
-) => {
-    const url = NOTIFICATION_PATH.CREATE_NOTIFICATION;
-    const response = await jfwAxios.post<HttpResponse<INotification>>(
-        url,
-        params,
-        config,
+        null,
+        {
+            params,
+            paramsSerializer: {
+                indexes: true, // use brackets with indexes
+            },
+            ...config,
+        },
     );
 
     return response.data;

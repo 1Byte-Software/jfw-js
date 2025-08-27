@@ -152,7 +152,7 @@ export interface IPushNotificationResponse {
     countSuccess: number;
 }
 
-export interface ICreateNotificationParams {
+export interface ICreateBroadcastParams {
     /**
      * The main title of the notification. Displayed prominently to the user.
      *
@@ -204,6 +204,38 @@ export interface ICreateNotificationParams {
      * The conditions to filter the recipients.
      */
     conditions?: Record<string, ISegmentCondition> | null;
+}
+
+export interface ITestPushNotificationDataMessageParams {
+    /**
+     * The id of the project in the notification app.
+     */
+    projectId: string;
+
+    /**
+     * The privateKey in the notification app.
+     */
+    privateKey: string;
+
+    /**
+     * The clientEmail in the notification app.
+     */
+    clientEmail: string;
+
+    /**
+     * The title of the notification.
+     */
+    title: string;
+
+    /**
+     * The body of the notification.
+     */
+    body: string;
+
+    /**
+     * The list tokens.
+     */
+    tokens: string[];
 }
 
 //#endregion
