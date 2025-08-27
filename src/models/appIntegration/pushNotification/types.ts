@@ -1,21 +1,8 @@
-import { DateType, IdType } from '../../base';
+import { IBaseObject, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationPushNotificationStatus } from './constants';
 
-export interface IAppIntegrationPushNotification {
-    /**
-     * The id of the object.
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IAppIntegrationPushNotification extends IBaseObject {
     /**
      * The app integration dto.
      */
@@ -280,7 +267,8 @@ export interface ICreateAppIntegrationPushNotificationWithImportFileSettingsPara
 /**
  * The request data transfer object for the push notification integration when updating.
  */
-export interface IUpdateAppIntegrationPushNotificationParams extends ICreateAppIntegrationPushNotificationParams {
+export interface IUpdateAppIntegrationPushNotificationParams
+    extends ICreateAppIntegrationPushNotificationParams {
     /**
      * The id of the app integration push notification.
      */

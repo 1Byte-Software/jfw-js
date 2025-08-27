@@ -1,23 +1,10 @@
+import { IBaseObject } from '../base';
 import { AppIntegrationStatus, AppIntegrationType } from './constants';
 
 /**
  * The app integration dto.
  */
-export interface IAppIntegration {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: string;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: string | null;
-
+export interface IAppIntegration extends IBaseObject {
     /**
      * The type of the app integration.
      *

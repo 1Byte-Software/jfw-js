@@ -1,23 +1,11 @@
-import { DateType, IdType } from '../../base';
+import { DateType, IBaseObject, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationSMSStatus } from './constants';
 
 /**
  * Provides a data transfer object for the SMS integration.
  */
-export interface IAppIntegrationSMS {
-    /**
-     * The id of the object.
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IAppIntegrationSMS extends IBaseObject {
     /**
      * The app integration dto.
      */

@@ -1,23 +1,11 @@
-import { DateType, IdType } from '../../base';
+import { DateType, IBaseObject, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationReCAPTCHAStatus } from './constants';
 
 /**
  * Provides a data transfer object for the ReCAPTCHA integration.
  */
-export interface IAppIntegrationReCAPTCHA {
-    /**
-     * The id of the object.
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IAppIntegrationReCAPTCHA extends IBaseObject {
     /**
      * The app integration dto.
      */

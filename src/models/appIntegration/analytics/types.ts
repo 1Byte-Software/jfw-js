@@ -1,21 +1,8 @@
-import { DateType, IdType } from '../../base';
+import { IBaseObject, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationAnalyticsStatus } from './constants';
 
-export interface IAppIntegrationAnalytics {
-    /**
-     * The id of the object.
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IAppIntegrationAnalytics extends IBaseObject {
     /**
      * The app integration dto.
      */

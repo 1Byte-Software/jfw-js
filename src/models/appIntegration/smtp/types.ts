@@ -1,20 +1,8 @@
-import { DateType, IdType } from '../../base';
+import { DateType, IBaseObject, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import { AppIntegrationSMTPStatus } from './constants';
 
-export interface IAppIntegrationSMTP {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     */
-    createdDate?: DateType | null;
-
+export interface IAppIntegrationSMTP extends IBaseObject {
     /**
      * The app integration dto.
      */
