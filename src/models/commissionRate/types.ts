@@ -1,24 +1,12 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IBaseUser } from '../user';
 import { CommissionRateType } from './constants';
 
 /**
  * This class represents the commission rate DTO.
  */
-export interface ICommissionRate {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     */
-    createdDate?: DateType | null;
-
+export interface ICommissionRate extends IBaseObject {
     /**
      * The id of the brand.
      */
