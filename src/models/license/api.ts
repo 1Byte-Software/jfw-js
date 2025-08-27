@@ -11,12 +11,10 @@ import {
     IGenerateLicenseCodeParams,
     IGetLicensesParams,
     ILicense,
-    ILicenseStatistic,
     ILicenseStatisticsReportSummary,
     IPurchaseToAddLicensesByCheckoutLinkParams,
     IPurchaseToAddLicensesByWalletParams,
-    IStatisticMonthlyLicensesParams,
-    IStatisticsPercentageLicensesUsedParams,
+    IStatisticLicensesMonthlyParams,
     IUpdateLicenseParams,
 } from './types';
 
@@ -353,29 +351,7 @@ export const purchaseToAddLicensesByWallet = async (
 };
 
 /**
- * # Statistics the percentage licenses used
- *
- * Statistics the percentage licenses used.
- *
- * @param params - The params for purchasing to add licenses by wallet.
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/statistics-the-percentage-licenses-used}
- */
-export const statisticsPercentageLicensesUsed = async (
-    params: IStatisticsPercentageLicensesUsedParams,
-    config?: AxiosRequestConfig,
-) => {
-    const url = LICENSE_PATH.STATISTICS_PERCENTAGE_LICENSES_USED;
-    const response = await jfwAxios.get<HttpResponse<ILicenseStatistic>>(url, {
-        params,
-        ...config,
-    });
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update tsdoc for this function in future, after this api update in docs.
+ * # Retrieves monthly license usage statistics for reporting and analysis by the user authorized.
  *
  * This endpoint returns a breakdown of license data grouped by date, including
  * totals for licenses created, active, expired, used, unused, and financial details such as
@@ -384,9 +360,12 @@ export const statisticsPercentageLicensesUsed = async (
  * Filters can be applied to narrow the result set by package, subscription type,
  * license type (e.g., Prepaid/Postpaid), and license status (e.g., Active, Inactive).
  *
+ * @param params - The params for get statistics licenses monthly.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/statistics-licenses-monthly}
  */
-export const statisticsMonthlyLicenses = async (
-    params?: IStatisticMonthlyLicensesParams,
+export const statisticsLicensesMonthly = async (
+    params?: IStatisticLicensesMonthlyParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = LICENSE_PATH.STATISTICS_MONTHLY_LICENSES;
@@ -401,7 +380,13 @@ export const statisticsMonthlyLicenses = async (
 };
 
 /**
- * #NOTE: Will update tsdoc for this api in future, after backend docs update.
+ * # Updates a license
+ *
+ * Updates a license.
+ *
+ * @param params - The params for update a license.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/update-a-license}
  */
 export const updateLicense = async (
     params: IUpdateLicenseParams,

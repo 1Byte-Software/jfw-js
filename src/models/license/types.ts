@@ -643,37 +643,26 @@ export interface IPurchaseToAddLicensesByWalletParams {
     userCode: string;
 }
 
-export interface IStatisticsPercentageLicensesUsedParams {
-    /**
-     * The start date.
-     *
-     * @remarks date-time
-     */
-    startDate?: DateType;
-
-    /**
-     * The end date.
-     *
-     * @remarks date-time
-     */
-    endDate?: DateType;
-
-    /**
-     * The test mode.
-     *
-     * @defaultValue `false`
-     */
-    testMode?: boolean;
-}
-
 // #NOTE: Will update tsdoc in future.
-export interface IStatisticMonthlyLicensesParams {
+export interface IStatisticLicensesMonthlyParams {
+    /**
+     * The id of the package.
+     */
     packageId?: IdType;
 
+    /**
+     * The id of the subscription type.
+     */
     subscriptionTypeId?: IdType;
 
+    /**
+     * The type of the license.
+     */
     type?: LicenseType;
 
+    /**
+     * The status of the license.
+     */
     status?: LicenseStatus;
 }
 
