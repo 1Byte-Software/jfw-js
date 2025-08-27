@@ -32,8 +32,6 @@ export interface IExchangeRate {
      */
     lastUpdate?: DateType | null;
 }
-
-export type IUserExchange = Omit<IExchangeRate, 'rate'>;
 //#region API types
 
 export interface IConvertCurrencyParams {
