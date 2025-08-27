@@ -1,9 +1,9 @@
 import { IPageable, ISortable } from '../../core';
-import { IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IUser } from '../user';
 import { CDNFilePathType } from './constants';
 
-export interface ICDNFile {
+export interface IUploadedFileCDN {
     /**
      * The file ID of the file.
      *
@@ -78,21 +78,7 @@ export interface ICDNFile {
     testMode: boolean;
 }
 
-export interface ICDN {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: string | null;
-
+export interface IFileCDN extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
@@ -130,6 +116,13 @@ export interface ICDN {
      * @remarks min: 1
      */
     originalFilename: string;
+
+    /**
+     * The size of the file.
+     *
+     * @remarks int64
+     */
+    fileSize?: number | null;
 
     /**
      * The notes of the file.
