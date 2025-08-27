@@ -132,18 +132,18 @@ export const getRoles = async (
  *
  * This endpoint allows you to grants (add) one or more permissions with a specific role.
  *
- * @param id - The id of the role to delete.
+ * @param roleId - The id of the role.
  * @param permissionIds - The list of permission ids.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/roles/grant-permissions-to-a-role}
  */
 export const grantPermissionsToRole = async (
-    id: IdType,
+    roleId: IdType,
     permissionIds: IdType[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ROLE_PATH.GRANT_PERMISSIONS_TO_ROLE, {
-        id,
+        roleId,
     });
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
