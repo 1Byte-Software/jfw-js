@@ -12,7 +12,7 @@ import {
 } from './types';
 
 /**
- * # Delete a Coupon
+ * # Delete a domain
  *
  * Delete a domain
  *

@@ -3,7 +3,6 @@ import { HttpResponse } from '../../../core';
 import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
-import { BrandLinkType } from './constants';
 import { BRAND_LINK_PATH } from './paths';
 import {
     IBrandLink,

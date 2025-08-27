@@ -1,23 +1,7 @@
-import { DateType, IdType } from '../../base';
+import { IBaseObject, IdType } from '../../base';
 import { BrandLinkStatus, BrandLinkType } from './constants';
 
-export interface IBrandLink {
-    /**
-     * The id of the object.
-     *
-     * @example "Kd12AnplKdMd5s"
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IBrandLink extends IBaseObject {
     /**
      * The brand id.
      *
@@ -25,12 +9,14 @@ export interface IBrandLink {
      *
      * @remarks min: 1
      */
-    brandId: string;
+    brandId: IdType;
 
     /**
      * The parent brand link id.
      *
      * @example "5f7b3b3b-0b3b-4b3b-8b3b-3b0b3b4b3b0b"
+     *
+     * @remarks min: 1
      */
     parentBrandLinkId?: string | null;
 
