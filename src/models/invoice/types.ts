@@ -1,24 +1,10 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
-import { IPayment, IPaymentBase } from '../payment';
+import { DateType, IBaseObject, IdType } from '../base';
+import { IPaymentBase } from '../payment';
 import { IBaseUser } from '../user';
 import { InvoiceStatus, InvoiceType } from './constants';
 
-export interface IInvoice {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IInvoice extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
@@ -155,21 +141,7 @@ export interface IInvoice {
 /**
  * This class is used to define the data transfer object for the InvoiceItem entity class.
  */
-export interface IInvoiceItem {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IInvoiceItem extends IBaseObject {
     /**
      * The name of the item.
      */

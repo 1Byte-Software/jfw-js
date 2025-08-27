@@ -1,23 +1,9 @@
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 
 /**
  * This class represents the language data transfer object.
  */
-export interface ILanguage {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface ILanguage extends IBaseObject {
     /**
      * The country code.
      *

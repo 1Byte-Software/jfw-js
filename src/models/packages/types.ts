@@ -1,23 +1,9 @@
 import { ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IFeature } from '../feature';
 import { IPrice } from '../price';
 
-export interface IPackage {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface IPackage extends IBaseObject {
     /**
      * The code of the package.
      *

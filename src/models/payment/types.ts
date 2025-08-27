@@ -1,5 +1,5 @@
 import { ICreatedDateFilter, IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IPackage } from '../packages';
 import { IPrice } from '../price';
 import { IBaseUser } from '../user';
@@ -8,21 +8,7 @@ import { PaymentStatus } from './constants';
 /**
  * This class represents the payment base data transfer object.
  */
-export interface IPaymentBase {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface IPaymentBase extends IBaseObject {
     /**
      * The payment code.
      *
@@ -151,7 +137,7 @@ export interface IPaymentDashboard {
 export interface IPaymentGenerateCheckoutLinkResponse {
     /**
      * The checkout link to pay the payment.
-     * 
+     *
      * @remarks min: 1
      */
     checkoutLink: string;

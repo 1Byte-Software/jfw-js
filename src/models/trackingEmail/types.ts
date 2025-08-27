@@ -1,26 +1,12 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import {
     TrackingEmailNotificationChannelType,
     TrackingEmailNotificationType,
     TrackingEmailStatus,
 } from './constants';
 
-export interface ITrackingEmail {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: string;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface ITrackingEmail extends IBaseObject {
     /**
      * The country code.
      */

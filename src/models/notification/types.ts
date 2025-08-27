@@ -1,5 +1,5 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType, ISegmentCondition } from '../base';
+import { DateType, IBaseObject, ISegmentCondition } from '../base';
 import {
     NotificationChannel,
     NotificationStatus,
@@ -9,21 +9,7 @@ import {
 /**
  * Represents a notification object.
  */
-export interface INotification {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface INotification extends IBaseObject {
     /**
      * The title.
      *

@@ -1,21 +1,7 @@
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IssueCategoryStatus } from './constants';
 
-export interface IIssueCategory {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface IIssueCategory extends IBaseObject {
     /**
      * The group code of the issue category.
      */

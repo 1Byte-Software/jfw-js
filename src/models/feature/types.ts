@@ -1,24 +1,12 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IFeatureOfPackageBase } from '../packages';
 import { FeatureStatus, FeatureType } from './constants';
 
 /**
  * This class represents the feature data transfer object.
  */
-export interface IFeature {
-    /**
-     * The id of the object.
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IFeature extends IBaseObject {
     /**
      * The id of the brand that owns the feature.
      */

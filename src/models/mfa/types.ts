@@ -1,20 +1,6 @@
-import { DateType, IdType } from '../base';
+import { IBaseObject } from '../base';
 
-export interface IMFA {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IMFA extends IBaseObject {
     /**
      * The code of the multiple factor authentication.
      *

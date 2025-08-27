@@ -1,23 +1,9 @@
-import { DateType, IdType } from '../base';
+import { IBaseObject } from '../base';
 
 /**
  * This class represents the timezone data transfer object.
  */
-export interface ITimezone {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface ITimezone extends IBaseObject {
     /**
      * The timezone code.
      *

@@ -1,22 +1,8 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { LicenseStatus, LicenseType } from './constants';
 
-export interface ILicense {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface ILicense extends IBaseObject {
     /**
      * The id of the package.
      *

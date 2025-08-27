@@ -4,7 +4,7 @@ import {
     IStatisticCommon,
     IStatisticCommonParams,
 } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IBrand } from '../brand';
 import { ICreateConfigurationParams } from '../configuration';
 import { ConfigurationStatus } from '../configuration/constants';
@@ -25,21 +25,7 @@ import {
 /**
  * This class is used to return user information to client.
  */
-export interface IBaseUser {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IBaseUser extends IBaseObject {
     /**
      * The code of the user.
      *
@@ -82,21 +68,7 @@ export interface IBaseUser {
     roles?: string[] | null;
 }
 
-export interface IUser {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IUser extends IBaseObject {
     /**
      * The brand id.
      *
