@@ -140,6 +140,53 @@ export const getDevices = async (
 };
 
 /**
+ * # Get users from a device id
+ *
+ * Get users from a device.
+ *
+ * @param deviceId - The id of the device to get.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-users-from-a-device}
+ */
+export const getUsersFromDeviceID = async (
+    deviceId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(DEVICE_PATH.GET_USERS_FROM_DEVICE_ID, {
+        deviceId,
+    });
+    const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * @deprecated Use getUsersFromDeviceID instead.
+ */
+export const getUsersFromDevice = getUsersFromDeviceID;
+
+/**
+ * # Get users from a device id
+ *
+ * Get users from a device.
+ *
+ * @param deviceCode - The code of the device to get.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-users-from-a-device-code}
+ */
+export const getUsersFromDeviceCode = async (
+    deviceCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(DEVICE_PATH.GET_USERS_FROM_DEVICE_CODE, {
+        deviceCode,
+    });
+    const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
+
+    return response.data;
+};
+
+/**
  * # Refresh device token
  *
  * Refresh new token for device
@@ -206,21 +253,6 @@ export const updateDevice = async (
         params,
         config,
     );
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update doc in future
- */
-export const getUsersFromDevice = async (
-    deviceId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(DEVICE_PATH.GET_USERS_FROM_DEVICE, {
-        deviceId,
-    });
-    const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
 
     return response.data;
 };
