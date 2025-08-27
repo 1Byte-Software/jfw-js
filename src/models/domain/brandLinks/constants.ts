@@ -1,40 +1,3 @@
-/**
- * Possible values:
- * - `0` - `Unknown`
- * ### Header
- * - `1` - `Header`
- * - `2` - `HeaderMenu`
- * - `3` - `HeaderSlider`
- * - `4` - `HeaderSearch`
- * - `5` - `HeaderAvatar`
- * - `6` - `HeaderCustomLogo`
- *
- * ### Footer
- * - `10` - `Footer`
- * - `11` - `FooterWidget`
- * - `12` - `FooterLogo`
- * - `13` - `FooterDescription`
- * - `14` - `FooterCopyRight`
- * - `15` - `FooterPrivacyPolicy`
- * - `16` - `FooterTermsOfUse`
- * - `17` - `FooterChangeLogs`
- *
- * ### Navigation
- * - `20` - `Navigation`
- * - `21` - `NavigationMenu`
- * - `23` - `NavigationSearch`
- * - `24` - `NavigationCopyRight`
- *
- * ### Body
- * - `30` - `Slider`
- * - `40` - `Body`
- * - `41` - `BodyNavigation`
- * - `42` - `BodyHeaderSlider`
- * - `43` - `BodyFooter`
- *
- * ### Reference
- * - `50` - `ReferenceLink`
- */
 export enum BrandLinkType {
     Unknown = 'Unknown',
 
@@ -68,11 +31,6 @@ export enum BrandLinkType {
     ReferenceLink = 'ReferenceLink',
 }
 
-/**
- * Possible values:
- * - `0` - `Inactive`
- * - `1` - `Active`
- */
 export enum BrandLinkStatus {
     Inactive = 'Inactive',
     Active = 'Active',
