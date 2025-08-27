@@ -1,5 +1,5 @@
 import { ISortable } from '../../core';
-import { DateType, IBaseObject, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IFeature } from '../feature';
 import { IPrice } from '../price';
 
