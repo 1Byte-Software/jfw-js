@@ -18,6 +18,24 @@ import {
 } from './types';
 
 /**
+ * # Get an event
+ *
+ * Get events
+ *
+ * @param id - The id of the event.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/events/get-an-event}
+ */
+export const getEvent = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(EVENT_PATH.GET_EVENT, {
+        id,
+    });
+    const response = await jfwAxios.get<HttpResponse<IEvent>>(url, config);
+
+    return response.data;
+};
+
+/**
  * # Get email template default by event
  *
  * Get email template default by event id and specified language code.
@@ -66,24 +84,6 @@ export const getEmailTemplateByEvent = async (
         url,
         config,
     );
-
-    return response.data;
-};
-
-/**
- * # Get an event
- *
- * Get events
- *
- * @param id - The id of the event.
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/events/get-an-event}
- */
-export const getEvent = async (id: IdType, config?: AxiosRequestConfig) => {
-    const url = generatePath(EVENT_PATH.GET_EVENT, {
-        id,
-    });
-    const response = await jfwAxios.get<HttpResponse<IEvent>>(url, config);
 
     return response.data;
 };
@@ -205,7 +205,7 @@ export const getPhoneTemplateDefaultByEvent = async (
     params: IGetPhoneTemplateDefaultByEventParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(EVENT_PATH.GET_PHONE_TEMPLATE_BY_EVENT, {
+    const url = generatePath(EVENT_PATH.GET_PHONE_TEMPLATE_DEFAULT_BY_EVENT, {
         eventId,
     });
     const response = await jfwAxios.get<HttpResponse<IDefaultPhoneTemplate>>(

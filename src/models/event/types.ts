@@ -1,25 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { EventStatus, PhoneTemplateStatus } from './constants';
 
 /**
  * This class represents the EventDto class.
  */
-export interface IEvent {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IEvent extends IBaseObject {
     /**
      * The guid of the event.
      *
