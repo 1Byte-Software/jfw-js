@@ -1,21 +1,7 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType } from '../base';
+import { DateType, IBaseObject } from '../base';
 
-export interface ICurrency {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: string;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate: DateType | null;
-
+export interface ICurrency extends IBaseObject {
     /**
      * The code of the Currency.
      *
