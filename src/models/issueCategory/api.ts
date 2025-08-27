@@ -113,7 +113,7 @@ export const getIssueCategory = async (
  */
 export const updateIssueCategory = async (
     id: IdType,
-    data: IUpdateIssueCategoryParams,
+    params: IUpdateIssueCategoryParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(ISSUE_CATEGORY_PATH.UPDATE_ISSUE_CATEGORY, {
@@ -121,7 +121,7 @@ export const updateIssueCategory = async (
     });
     const response = await jfwAxios.patch<HttpResponse<IIssueCategory>>(
         url,
-        data,
+        params,
         config,
     );
 
