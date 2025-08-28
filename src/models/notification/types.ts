@@ -63,9 +63,6 @@ export interface INotification extends IBaseObject {
      */
     scheduledDate?: DateType | null;
 
-    /**
-     * #NOTE: Check me again in future. After complete docs.
-     */
     status: NotificationStatus;
 
     /**
