@@ -32,10 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `authWithApprovedOTPCode` API.
 -   Added `authWithApprovedQRCode` API.
 -   Added tsdoc for `createAd`, `deleteAd`, `getAdsClientView`, `getAds`, `getAd` and `updateAd` API.
+-   Added tsdoc for `activateAd` and `deactivateAd` API.
 
 ### Changed
 
--   Renamed params of `updateAppIntegrationPushNotification` API.
 -   Changed `AppIntegrationType` enum.
 -   Changed to extend the IBaseObject interface for all objects that have ID and CreatedDate fields.
 -   Renamed the `ICDNFile` interface to `IUploadedFileCDN`.
@@ -46,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Changed tsdoc for `getLanguages` API.
 -   Changed tsdoc for `activateLicense` API.
 -   Renamed `statisticsMonthlyLicenses` API to `statisticsLicensesMonthly`.
--   Renamed `IStatisticLicensesMonthlyParams` interface to `IStatisticLicensesMonthlyParams`.
+-   Renamed `IStatisticMonthlyLicensesParams` interface to `IStatisticLicensesMonthlyParams`.
 -   Renamed `id` in params and path to `organizationId` in organization APIs.
 -   Renamed `createNotification` API to `createBroadcast`.
 -   Renamed `ICreateNotificationParams` interface to `ICreateBroadcastParams`.
@@ -68,7 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Renamed `verifyPhoneOTPForAuthentication` API to `verifySMSOTPCode`.
 -   Renamed `generateNewQRCodeForPairingAuthentication` API to `generateNewQRCode`.
 -   Renamed `getCurrentStatusOfQRCodeParingRequest` API to `getCurrentStatusOfQRCode`.
--   Renamed `approveQRCodePairingRequest` API to `getCurrentStatusOfQRCode`.
+-   Renamed `approveQRCodePairingRequest` API to `approveQRCode`.
 -   Renamed `loginUsingApprovedQRCodeParingRequest` API to `loginUsingApprovedQRCode`.
 -   Renamed `generateNewOTPForPairingAuthentication` API to `generateNewOTPCode`.
 -   Renamed `getCurrentStatusOfOTPParingRequest` API to `getCurrentStatusOfOTPCode`.
