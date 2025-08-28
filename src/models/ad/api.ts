@@ -8,6 +8,50 @@ import { IAd, ICreateAdParams, IGetAdsParams, IUpdateAdParams } from './types';
 import { AdPosition } from './constants';
 
 /**
+ * # Activate an ad
+ *
+ * Activate an ad.
+ *
+ * @param id - The id of the ads to activate.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/activate-an-ad}
+ */
+export const activateAd = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(AD_PATH.ACTIVATE_AD, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<boolean>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Deactivate an ad
+ *
+ * Deactivate an ad
+ *
+ * @param id - The id of the ads to deactivate.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/deactivate-an-ad}
+ */
+export const deactivateAd = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(AD_PATH.DEACTIVATE_AD, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<boolean>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
  * # Creates an ad
  *
  * Create an ad.
@@ -139,31 +183,3 @@ export const updateAd = async (
 
     return response.data;
 };
-
-// Not implemented yet. Will implement in the future if the set status of ad feature is added.
-// export const deactivateAd = async (id: IdType, config?: AxiosRequestConfig) => {
-//     const url = generatePath(AD_PATH.DEACTIVATE_AD, {
-//         id,
-//     });
-//     const response = await jfwAxios.put<HttpResponse<boolean>>(
-//         url,
-//         null,
-//         config,
-//     );
-
-//     return response.data;
-// };
-
-// Not implemented yet. Will implement in the future if the set status of ad feature is added.
-// export const activateAd = async (id: IdType, config?: AxiosRequestConfig) => {
-//     const url = generatePath(AD_PATH.ACTIVATE_AD, {
-//         id,
-//     });
-//     const response = await jfwAxios.put<HttpResponse<boolean>>(
-//         url,
-//         null,
-//         config,
-//     );
-
-//     return response.data;
-// };
