@@ -85,6 +85,7 @@ export const getSubscriptionType = async (
  *
  * Gets a list of all subscription type.
  *
+ * @param params - The params for getting subscription types.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/subscription-types/get-subscription-types}
  */
