@@ -970,8 +970,6 @@ export interface IVerifyUserEmailAddressParams {
     otp: string;
 }
 
-export type IVerifySMSOTPToAuthenticationParams = IVerifyUserEmailAddressParams;
-
 export interface ICreateConfigurationOfUserParams
     extends ICreateConfigurationParams {}
 
@@ -1010,7 +1008,7 @@ export interface IGetNotificationsByUserParams extends IPageable, ISortable {
     status?: UserNotificationStatus | null;
 }
 
-export interface IGetNotificationsByGivenUserIdAndNotificationParams {
+export interface IGetNotificationRelatedToUserParams {
     /**
      * The id of the user to get.
      */
@@ -1022,7 +1020,7 @@ export interface IGetNotificationsByGivenUserIdAndNotificationParams {
     notificationId: IdType;
 }
 
-export interface IMarkNotificationAsReadByUserAndNotificationParams {
+export interface IMarkNotificationAsReadParams {
     /**
      * The id of the user to get.
      */
@@ -1050,7 +1048,7 @@ export interface IGenerateNewOTPForParingAuthenticationResponse
     code: string;
 }
 
-export interface IUserAuthVerifyOTPParams {
+export interface IVerifyOTPCodeParams {
     /**
      * The token to verify. This is the token that was received from the request to send the OTP.
      *
@@ -1068,7 +1066,7 @@ export interface IUserAuthVerifyOTPParams {
     otp: string;
 }
 
-export interface IGeneratePhoneOTPForAuthenticationParams {
+export interface IGenerateSMSOTPParams {
     /**
      * The phone number. The phone number should be following the E.164 format.
      *
@@ -1086,6 +1084,14 @@ export interface IGenerateEmailAddressOTPForAuthenticationParams {
      * @example example@jframework.io
      */
     emailAddress: string;
+}
+
+export interface IGenerateNewQRCodeParams {
+    /**
+     * Optional URL for the QR Code link.
+     * If provided, the QR Code will encode this URL with a query id for the pairing session.
+     */
+    callbackUrl?: string;
 }
 
 //#endregion
