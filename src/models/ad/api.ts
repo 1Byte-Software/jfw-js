@@ -8,7 +8,13 @@ import { IAd, ICreateAdParams, IGetAdsParams, IUpdateAdParams } from './types';
 import { AdPosition } from './constants';
 
 /**
- * #NOTE: Will update tsdoc in future.
+ * # Creates an ad
+ *
+ * Create an ad.
+ *
+ * @param params - The params for creating an ad.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/create-an-ad}
  */
 export const createAd = async (
     params: ICreateAdParams,
@@ -25,7 +31,56 @@ export const createAd = async (
 };
 
 /**
- * #NOTE: Will update tsdoc in future.
+ * # Deletes an ad
+ *
+ * Deletes an ad
+ *
+ * @param params - The params for deleting an ad.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/delete-an-ad}
+ */
+export const deleteAd = async (id: IdType, config?: AxiosRequestConfig) => {
+    const url = generatePath(AD_PATH.DELETE_AD, {
+        id,
+    });
+    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
+
+    return response.data;
+};
+
+/**
+ * # Gets ads client view
+ *
+ * Get ads with the client view.
+ *
+ * @param params - The params for getting ads with the client view.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/get-ads-client-view}
+ */
+export const getAdsClientView = async (
+    position: AdPosition,
+    config?: AxiosRequestConfig,
+) => {
+    const url = AD_PATH.GET_ADS_WITH_CLIENT_VIEW;
+
+    const response = await jfwAxios.get<HttpResponse<IAd[]>>(url, {
+        params: {
+            position,
+        },
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * # Gets ads
+ *
+ * Get ads.
+ *
+ * @param params - The params for getting ads.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/get-ads}
  */
 export const getAds = async (
     params?: IGetAdsParams,
@@ -41,7 +96,13 @@ export const getAds = async (
 };
 
 /**
- * #NOTE: Will update tsdoc in future.
+ * # Gets an ad
+ *
+ * Get an ad.
+ *
+ * @param params - The params for getting an ad.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/get-an-ad}
  */
 export const getAd = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(AD_PATH.GET_AD, {
@@ -53,19 +114,14 @@ export const getAd = async (id: IdType, config?: AxiosRequestConfig) => {
 };
 
 /**
- * #NOTE: Will update tsdoc in future.
- */
-export const deleteAd = async (id: IdType, config?: AxiosRequestConfig) => {
-    const url = generatePath(AD_PATH.DELETE_AD, {
-        id,
-    });
-    const response = await jfwAxios.delete<HttpResponse<boolean>>(url, config);
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update tsdoc in future.
+ * # Updates an ad
+ *
+ * Update an ad
+ *
+ * @param id - The id of the ads to update.
+ * @param params - The params for updating an ad.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/ads/update-an-ad}
  */
 export const updateAd = async (
     params: IUpdateAdParams,
@@ -84,53 +140,30 @@ export const updateAd = async (
     return response.data;
 };
 
-/**
- * #NOTE: Will update tsdoc in future.
- */
-export const getAdsWithClientView = async (
-    position: AdPosition,
-    config?: AxiosRequestConfig,
-) => {
-    const url = AD_PATH.GET_ADS_WITH_CLIENT_VIEW;
+// Not implemented yet. Will implement in the future if the set status of ad feature is added.
+// export const deactivateAd = async (id: IdType, config?: AxiosRequestConfig) => {
+//     const url = generatePath(AD_PATH.DEACTIVATE_AD, {
+//         id,
+//     });
+//     const response = await jfwAxios.put<HttpResponse<boolean>>(
+//         url,
+//         null,
+//         config,
+//     );
 
-    const response = await jfwAxios.get<HttpResponse<IAd[]>>(url, {
-        params: {
-            position,
-        },
-        ...config,
-    });
+//     return response.data;
+// };
 
-    return response.data;
-};
+// Not implemented yet. Will implement in the future if the set status of ad feature is added.
+// export const activateAd = async (id: IdType, config?: AxiosRequestConfig) => {
+//     const url = generatePath(AD_PATH.ACTIVATE_AD, {
+//         id,
+//     });
+//     const response = await jfwAxios.put<HttpResponse<boolean>>(
+//         url,
+//         null,
+//         config,
+//     );
 
-/**
- * #NOTE: Will update tsdoc in future.
- */
-export const deactivateAd = async (id: IdType, config?: AxiosRequestConfig) => {
-    const url = generatePath(AD_PATH.DEACTIVATE_AD, {
-        id,
-    });
-    const response = await jfwAxios.put<HttpResponse<boolean>>(
-        url,
-        null,
-        config,
-    );
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update tsdoc in future.
- */
-export const activateAd = async (id: IdType, config?: AxiosRequestConfig) => {
-    const url = generatePath(AD_PATH.ACTIVATE_AD, {
-        id,
-    });
-    const response = await jfwAxios.put<HttpResponse<boolean>>(
-        url,
-        null,
-        config,
-    );
-
-    return response.data;
-};
+//     return response.data;
+// };
