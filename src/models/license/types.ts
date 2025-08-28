@@ -389,20 +389,18 @@ export interface IGetLicensesParams
 }
 
 /**
- * Contains the data for the license code create form.
- *
- * #NOTE: Recheck create license params in developers.jframework.io
+ * Contains the data for the license key create form.
  */
 export interface ICreateLicensesParams {
     /**
-     * The package Id of the license.
+     * The id of the package.
      *
      * @remarks min: 1
      */
     packageId: IdType;
 
     /**
-     * The SubscriptionType Id of the license.
+     * The id of the subscription type.
      *
      * @remarks min: 1
      */
@@ -411,6 +409,7 @@ export interface ICreateLicensesParams {
     /**
      * The license code custom.
      * If the license code has value, we create with the license otherwise auto generate license code.
+     * Cannot be used when creating multiple licenses.
      */
     code?: string | null;
 
