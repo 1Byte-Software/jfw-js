@@ -153,15 +153,6 @@ export interface ICreateBrandSettingParams {
      */
     domain: string;
 }
-export interface ICreateBrandProfileParams {
-    /**
-     * The domain of the brand. The value is the subdomain of the brand.
-     *
-     * @remarks min: 1
-     * @example jframework.dev
-     */
-    domain: string;
-}
 
 export interface ICreateBrandProfileParams {
     /**
