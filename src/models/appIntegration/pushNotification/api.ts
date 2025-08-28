@@ -131,15 +131,16 @@ export const getAppIntegrationPushNotificationsWithBrand = async (
  *
  * Update an app integration push notification by the given id.
  *
+ * @param id - The id of the app integration push notification.
  * @param params - The params for updating an app integration push notification.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/push-notification/update-an-app-integration-push-notification}
  */
 export const updateAppIntegrationPushNotification = async (
+    id: IdType,
     params: IUpdateAppIntegrationPushNotificationParams,
     config?: AxiosRequestConfig,
 ) => {
-    const { id, ...bodyParams } = params;
     const url = generatePath(
         APP_INTEGRATION_PUSH_NOTIFICATION_PATH.UPDATE_APP_INTEGRATION_PUSH_NOTIFICATION,
         {
@@ -148,7 +149,7 @@ export const updateAppIntegrationPushNotification = async (
     );
     const response = await jfwAxios.put<
         HttpResponse<IAppIntegrationPushNotification>
-    >(url, bodyParams, config);
+    >(url, params, config);
 
     return response.data;
 };

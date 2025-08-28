@@ -261,12 +261,7 @@ export interface ICreateAppIntegrationPaymentGatewayParams {
  * The request data transfer object for the payment gateway integration. This DTO is used when creating or updating an integration with payment providers like PayPal and Stripe.
  */
 export interface IUpdateAppIntegrationPaymentGatewayParams
-    extends ICreateAppIntegrationPaymentGatewayParams {
-    /**
-     * The app integration payment gateway id.
-     */
-    id: IdType;
-}
+    extends ICreateAppIntegrationPaymentGatewayParams {}
 
 export interface ITestCreatingCheckoutLinkParams {
     /**

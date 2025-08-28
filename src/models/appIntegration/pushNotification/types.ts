@@ -268,11 +268,6 @@ export interface ICreateAppIntegrationPushNotificationWithImportFileSettingsPara
  * The request data transfer object for the push notification integration when updating.
  */
 export interface IUpdateAppIntegrationPushNotificationParams
-    extends ICreateAppIntegrationPushNotificationParams {
-    /**
-     * The id of the app integration push notification.
-     */
-    id: IdType;
-}
+    extends ICreateAppIntegrationPushNotificationParams {}
 
 //#endregion
