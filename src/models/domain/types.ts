@@ -87,19 +87,17 @@ export interface IGetDomainsParams extends IPageable, ISortable {
     isPrimary?: boolean;
 }
 
-/**
- * #NOTE: Will update api in feature
- */
-export interface ICreateDomainParams {
-    id: IdType;
+// Not implemented yet. Will implement in the future if the domain feature is created.
+// export interface ICreateDomainParams {
+//     id: IdType;
 
-    domain: string;
-    isDefault?: boolean | null;
-    isPrimary?: boolean | null;
-    protocol: string;
-    type: DomainType;
-}
+//     domain: string;
+//     isDefault?: boolean | null;
+//     isPrimary?: boolean | null;
+//     protocol: string;
+//     type: DomainType;
+// }
 
-export type IUpdateDomainParams = ICreateDomainParams;
+// export type IUpdateDomainParams = ICreateDomainParams;
 
 //#endregion

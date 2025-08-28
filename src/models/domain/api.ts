@@ -4,12 +4,7 @@ import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { DOMAIN_PATH } from './paths';
-import {
-    ICreateDomainParams,
-    IDomain,
-    IGetDomainsParams,
-    IUpdateDomainParams,
-} from './types';
+import { IDomain, IGetDomainsParams } from './types';
 
 /**
  * # Delete a domain
@@ -69,44 +64,46 @@ export const getDomain = async (id: IdType, config?: AxiosRequestConfig) => {
     return response.data;
 };
 
-/**
- * # Create a Domain
- *
- * Creates a new domain.
- *
- * @param params - The params for creating a domain.
- * @param config - Optional axios request configuration object.
- * @see {@link }
- */
-export const createDomain = async (
-    data: ICreateDomainParams,
-    config?: AxiosRequestConfig,
-) => {
-    const url = DOMAIN_PATH.CREATE_DOMAIN;
-    const response = await jfwAxios.post<HttpResponse<IDomain>>(
-        url,
-        data,
-        config,
-    );
+// Not implemented yet. Will implement in the future if the domain feature is created.
+// /**
+//  * # Create a Domain
+//  *
+//  * Creates a new domain.
+//  *
+//  * @param params - The params for creating a domain.
+//  * @param config - Optional axios request configuration object.
+//  * @see {@link }
+//  */
+// export const createDomain = async (
+//     data: ICreateDomainParams,
+//     config?: AxiosRequestConfig,
+// ) => {
+//     const url = DOMAIN_PATH.CREATE_DOMAIN;
+//     const response = await jfwAxios.post<HttpResponse<IDomain>>(
+//         url,
+//         data,
+//         config,
+//     );
 
-    return response.data;
-};
+//     return response.data;
+// };
 
-/**
- * # Update a Domain
- *
- * Updates a domain by the given id.
- *
- * @param id - The id of the domain.
- * @param params - The params for updating a domain.
- * @param config - Optional axios request configuration object.
- * @see {@link }
- */
-export const updateDomain = async (id: IdType, data: IUpdateDomainParams) => {
-    const url = generatePath(DOMAIN_PATH.UPDATE_DOMAIN, {
-        id,
-    });
-    const response = await jfwAxios.put<HttpResponse<boolean>>(url, data);
+// Not implemented yet. Will implement in the future if the domain feature is created.
+// /**
+//  * # Update a Domain
+//  *
+//  * Updates a domain by the given id.
+//  *
+//  * @param id - The id of the domain.
+//  * @param params - The params for updating a domain.
+//  * @param config - Optional axios request configuration object.
+//  * @see {@link }
+//  */
+// export const updateDomain = async (id: IdType, data: IUpdateDomainParams) => {
+//     const url = generatePath(DOMAIN_PATH.UPDATE_DOMAIN, {
+//         id,
+//     });
+//     const response = await jfwAxios.put<HttpResponse<boolean>>(url, data);
 
-    return response.data;
-};
+//     return response.data;
+// };
