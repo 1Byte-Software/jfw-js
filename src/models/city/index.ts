@@ -1,2 +1,6 @@
-export * from './api';
-export * from './types'
+import { getCities } from './api';
+export * from './types';
+
+export const city = {
+    getCities,
+};
