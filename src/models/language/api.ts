@@ -5,7 +5,7 @@ import { LANGUAGE_PATH } from './paths';
 import { ILanguage } from './types';
 
 /**
- * The Languages API provides access to a list of supported languages in the system. This API allows clients to retrieve language data efficiently for localization purposes.
+ * # Gets all languages.
  *
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/languages}

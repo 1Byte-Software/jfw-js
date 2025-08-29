@@ -17,18 +17,18 @@ import {
  *
  * Add roles to a permission
  *
- * @param id - The id of the permission.
+ * @param permissionId - The id of the permission.
  * @param roleIds - The list of role ids.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/permissions/add-roles-to-a-permission}
  */
 export const addRolesToPermission = async (
-    id: IdType,
+    permissionId: IdType,
     roleIds: IdType[],
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(PERMISSION_PATH.ADD_ROLES_TO_PERMISSION, {
-        id,
+        permissionId,
     });
     const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,

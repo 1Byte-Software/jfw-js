@@ -9,12 +9,19 @@ export type IdType = string;
 export type DateType = Date | string;
 
 export interface IBaseObject {
+    /**
+     * The id of the object.
+     *
+     * @remarks min: 1
+     */
     id: IdType;
 
-    createdBy?: IdType;
-    createdDate: DateType;
-    modifiedBy?: IdType;
-    modifiedDate: DateType;
+    /**
+     * The created date of the object.
+     *
+     * @remarks date-time
+     */
+    createdDate?: DateType | null;
 }
 
 /**

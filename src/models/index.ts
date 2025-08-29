@@ -4,7 +4,7 @@ export * from './ad';
 export * from './appIntegration';
 export * from './base';
 export * from './brand';
-export * from './cdnFile';
+export * from './cdn';
 export * from './city';
 export * from './configuration';
 export * from './constant';

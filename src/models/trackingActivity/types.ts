@@ -1,26 +1,12 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IEvent } from '../event';
 import { IBaseUser } from '../user';
 
 /**
  * This class represents the data transfer object for the tracking activity.
  */
-export interface ITrackingActivity {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface ITrackingActivity extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */

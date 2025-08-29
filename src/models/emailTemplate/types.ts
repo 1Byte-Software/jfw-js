@@ -1,25 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IEvent } from '../event';
 
 /**
  * This class represents the data transfer object for the email template.
  */
-export interface IEmailTemplate {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: string;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IEmailTemplate extends IBaseObject {
     /**
      * The country code of the email.
      * This value is used to determine the country of the email.

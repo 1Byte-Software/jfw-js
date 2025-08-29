@@ -90,16 +90,6 @@ const changeBrandURL = (brandURL: string) => {
 };
 
 /**
- * Sets the device code in the request headers.
- * Useful for tracking which device is making the request.
- *
- * @param deviceCode - A string representing the device making the API call.
- */
-const changeDeviceCode = (deviceCode: string) => {
-    jfwAxios.defaults.headers.common[HeaderKey.DeviceCode] = deviceCode;
-};
-
-/**
  * Resolves the base API URL based on the environment setting.
  *
  * @param environment - Either 'live' or 'development'.
@@ -120,7 +110,6 @@ const jfwjs = {
     changeAuthKey,
     clearAuthKey,
     changeBrandURL,
-    changeDeviceCode,
     getBaseURL,
 };
 

@@ -1,6 +1,5 @@
 const REST = 'licenses';
 const REST_PURCHASE = 'purchase';
-const REST_STATISTIC = 'statistics';
 
 export const LICENSE_PATH = {
     ACTIVATE_LICENSE: `v1/${REST}/{id}/activate`,
@@ -23,9 +22,7 @@ export const LICENSE_PATH = {
 
     PURCHASE_TO_ADD_LICENSES_BY_CHECKOUT_LINK: `v1/${REST}/${REST_PURCHASE}/checkout-link`,
     PURCHASE_TO_ADD_LICENSES_BY_WALLET: `v1/${REST}/${REST_PURCHASE}/wallet`,
-    STATISTICS_PERCENTAGE_LICENSES_USED: `v1/${REST}/${REST_STATISTIC}/percentage-used`,
 
-    // #NOTE: Will rename path in feature, after doc update this api.
     STATISTICS_MONTHLY_LICENSES: `v1/${REST}/statistics/monthly`,
     UPDATE_LICENSE: `v1/${REST}/{id}`,
 };

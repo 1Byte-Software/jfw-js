@@ -1,24 +1,10 @@
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { ResourceTypeType, ResourceTypeTypeFilter } from './constants';
 
 /**
  * This class represents the ResourceType data transfer object.
  */
-export interface IResourceType {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IResourceType extends IBaseObject {
     /**
      * The parent brand id.
      */

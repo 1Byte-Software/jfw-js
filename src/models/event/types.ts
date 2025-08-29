@@ -1,25 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { EventStatus, PhoneTemplateStatus } from './constants';
 
 /**
  * This class represents the EventDto class.
  */
-export interface IEvent {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IEvent extends IBaseObject {
     /**
      * The guid of the event.
      *
@@ -88,21 +74,7 @@ export interface IEvent {
 /**
  * This class represents the Phone Template Data Transfer Object.
  */
-export interface IPhoneTemplate {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IPhoneTemplate extends IBaseObject {
     /**
      * This class represents the EventDto class.
      */
@@ -133,21 +105,7 @@ export interface IPhoneTemplate {
 /**
  * This class is used to represent the wallet earning event DTO.
  */
-export interface IWalletEarningEvent {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IWalletEarningEvent extends IBaseObject {
     /**
      * The id of the event.
      *

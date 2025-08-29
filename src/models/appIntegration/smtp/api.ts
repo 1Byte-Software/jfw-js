@@ -115,7 +115,7 @@ export const getAppsIntegrationSMTPWithBrand = async (
  *
  * @param params - The params for test sending email address.
  * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/sms/send-sms-test-message}
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/smtp/send-test-email}
  */
 export const testSendingEmailAddress = async (
     params: ITestSendingEmailAddressParams,

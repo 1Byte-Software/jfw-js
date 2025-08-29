@@ -1,25 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { DeviceStatus, DeviceType } from './constants';
 
 /**
  * This class represents the device DTO.
  */
-export interface IDevice {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IDevice extends IBaseObject {
     /**
      * The type of the device.
      *
@@ -136,6 +122,11 @@ export interface IGetDevicesParams extends IPageable, ISortable {
      * Filter by id of the user.
      */
     userId?: string;
+
+    /**
+     * Filter by type of the device
+     */
+    type?: DeviceType;
 
     /**
      * The code to filter.

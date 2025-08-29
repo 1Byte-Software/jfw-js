@@ -1,22 +1,8 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { DomainProtocol, DomainType } from './constants';
 
-export interface IDomain {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IDomain extends IBaseObject {
     /**
      * @remarks enum
      */
@@ -101,19 +87,17 @@ export interface IGetDomainsParams extends IPageable, ISortable {
     isPrimary?: boolean;
 }
 
-/**
- * #NOTE: Will update api in feature
- */
-export interface ICreateDomainParams {
-    id: IdType;
+// Not implemented yet. Will implement in the future if the domain feature is created.
+// export interface ICreateDomainParams {
+//     id: IdType;
 
-    domain: string;
-    isDefault?: boolean | null;
-    isPrimary?: boolean | null;
-    protocol: string;
-    type: DomainType;
-}
+//     domain: string;
+//     isDefault?: boolean | null;
+//     isPrimary?: boolean | null;
+//     protocol: string;
+//     type: DomainType;
+// }
 
-export type IUpdateDomainParams = ICreateDomainParams;
+// export type IUpdateDomainParams = ICreateDomainParams;
 
 //#endregion

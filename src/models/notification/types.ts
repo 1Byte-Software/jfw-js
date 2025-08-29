@@ -1,5 +1,5 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType, ISegmentCondition } from '../base';
+import { DateType, IBaseObject, ISegmentCondition } from '../base';
 import {
     NotificationChannel,
     NotificationStatus,
@@ -9,21 +9,7 @@ import {
 /**
  * Represents a notification object.
  */
-export interface INotification {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface INotification extends IBaseObject {
     /**
      * The title.
      *
@@ -77,9 +63,6 @@ export interface INotification {
      */
     scheduledDate?: DateType | null;
 
-    /**
-     * #NOTE: Check me again in future. After complete docs.
-     */
     status: NotificationStatus;
 
     /**
@@ -166,7 +149,7 @@ export interface IPushNotificationResponse {
     countSuccess: number;
 }
 
-export interface ICreateNotificationParams {
+export interface ICreateBroadcastParams {
     /**
      * The main title of the notification. Displayed prominently to the user.
      *
@@ -218,6 +201,38 @@ export interface ICreateNotificationParams {
      * The conditions to filter the recipients.
      */
     conditions?: Record<string, ISegmentCondition> | null;
+}
+
+export interface ITestPushNotificationDataMessageParams {
+    /**
+     * The id of the project in the notification app.
+     */
+    projectId: string;
+
+    /**
+     * The privateKey in the notification app.
+     */
+    privateKey: string;
+
+    /**
+     * The clientEmail in the notification app.
+     */
+    clientEmail: string;
+
+    /**
+     * The title of the notification.
+     */
+    title: string;
+
+    /**
+     * The body of the notification.
+     */
+    body: string;
+
+    /**
+     * The list tokens.
+     */
+    tokens: string[];
 }
 
 //#endregion

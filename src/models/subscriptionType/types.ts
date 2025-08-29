@@ -1,25 +1,11 @@
 import { ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IBaseObject } from '../base';
 import { SubscriptionTypeStatus, SubscriptionTypeUnit } from './constants';
 
 /**
  * This class is used to define the data transfer object for the SubscriptionType entity class.
  */
-export interface ISubscriptionType {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface ISubscriptionType extends IBaseObject {
     /**
      * The name of the subscription type.
      *

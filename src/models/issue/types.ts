@@ -1,5 +1,5 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IBaseUser } from '../user';
 import {
     IssuePriority,
@@ -8,21 +8,7 @@ import {
     IssueStatus,
 } from './constants';
 
-export interface IIssue {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface IIssue extends IBaseObject {
     /**
      * The assignee user id of the issue.
      */
@@ -134,21 +120,7 @@ export interface IIssue {
 /**
  * The reactions of the issue.
  */
-export interface IIssueReaction {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface IIssueReaction extends IBaseObject {
     /**
      * The type of the reaction.
      *

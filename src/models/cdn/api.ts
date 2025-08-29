@@ -5,7 +5,12 @@ import { HeaderKey } from '../../core/client/constants';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { CDN_PATH } from './paths';
-import { ICDN, ICDNFile, IGetFilesCDNParams, IUploadFileParams } from './types';
+import {
+    IFileCDN,
+    IUploadedFileCDN,
+    IGetFilesCDNParams,
+    IUploadFileParams,
+} from './types';
 
 /**
  * # Delete a file CDN
@@ -41,7 +46,7 @@ export const getFileCDN = async (id: IdType, config?: AxiosRequestConfig) => {
     const url = generatePath(CDN_PATH.GET_FILE_CDN, {
         id,
     });
-    const response = await jfwAxios.get<HttpResponse<ICDN>>(url, config);
+    const response = await jfwAxios.get<HttpResponse<IFileCDN>>(url, config);
 
     return response.data;
 };
@@ -60,7 +65,7 @@ export const getFilesCDN = async (
     config?: AxiosRequestConfig,
 ) => {
     const url = CDN_PATH.GET_FILES_CDN;
-    const response = await jfwAxios.get<HttpResponseList<ICDN>>(url, {
+    const response = await jfwAxios.get<HttpResponseList<IFileCDN>>(url, {
         params,
         ...config,
     });
@@ -81,7 +86,7 @@ export const getFilesCDN = async (
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/cdn/upload-file}
  */
-export const uploadFile = async (
+export const uploadFileCDN = async (
     params: IUploadFileParams,
     config?: AxiosRequestConfig,
 ) => {
@@ -94,18 +99,22 @@ export const uploadFile = async (
         });
     }
 
-    const response = await jfwAxios.post<HttpResponse<ICDNFile>>(url, params, {
-        headers: {
-            [HeaderKey.ContentType]: 'multipart/form-data',
-            ...config.headers,
+    const response = await jfwAxios.post<HttpResponse<IUploadedFileCDN>>(
+        url,
+        params,
+        {
+            headers: {
+                [HeaderKey.ContentType]: 'multipart/form-data',
+                ...config.headers,
+            },
+            ...config,
         },
-        ...config,
-    });
+    );
 
     return response.data;
 };
 
 /**
- * @deprecated use uploadFile instead
+ * @deprecated use uploadFileCDN instead
  */
-export const uploadFileCDN = uploadFile;
+export const uploadFile = uploadFileCDN;

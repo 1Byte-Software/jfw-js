@@ -1,24 +1,10 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 
 /**
  * This class presents the Price Data Transfer Object.
  */
-export interface IPrice {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface IPrice extends IBaseObject {
     /**
      * The code of the price.
      *

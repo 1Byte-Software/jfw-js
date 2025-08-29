@@ -1,24 +1,10 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
-import { IPayment, IPaymentBase } from '../payment';
+import { DateType, IBaseObject, IdType } from '../base';
+import { IPaymentBase } from '../payment';
 import { IBaseUser } from '../user';
 import { InvoiceStatus, InvoiceType } from './constants';
 
-export interface IInvoice {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IInvoice extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
@@ -46,7 +32,6 @@ export interface IInvoice {
      * The subscription type id.
      *
      * @remarks min: 1
-     * @remarks
      */
     subscriptionTypeId: IdType;
 
@@ -68,6 +53,69 @@ export interface IInvoice {
      * The name of the invoice.
      */
     name?: string | null;
+
+    /**
+     * The subtotal amount before discounts and taxes.
+     *
+     * @remarks double
+     */
+    subtotalAmount: number;
+
+    /**
+     * The discount rate applied to the subtotal (e.g., 0.1 for 10%).
+     *
+     * @remarks double
+     */
+    discountRate?: number | null;
+
+    /**
+     * The actual discount amount deducted from the subtotal.
+     *
+     * @remarks double
+     */
+    discountAmount?: number | null;
+
+    /**
+     * The tax rate applied to the subtotal (e.g., 0.1 for 10%).
+     *
+     * @remarks double
+     */
+    taxRate?: number | null;
+
+    /**
+     * The tax amount added to the invoice.
+     *
+     * @remarks double
+     */
+    taxAmount?: number | null;
+
+    /**
+     * The final total amount (subtotal - discount + tax).
+     *
+     * @remarks double
+     */
+    totalAmount: number;
+
+    /**
+     * The amount already paid by the user.
+     *
+     * @remarks double
+     */
+    amountPaid: number;
+
+    /**
+     * The remaining amount due on the invoice.
+     *
+     * @remarks double
+     */
+    amountDue: number;
+
+    /**
+     * The currency code used for payment (e.g., USD, VND).
+     *
+     * @remarks min1:
+     */
+    currencyCode: string;
 
     /**
      * The description of the invoice.
@@ -155,21 +203,7 @@ export interface IInvoice {
 /**
  * This class is used to define the data transfer object for the InvoiceItem entity class.
  */
-export interface IInvoiceItem {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IInvoiceItem extends IBaseObject {
     /**
      * The name of the item.
      */

@@ -1,26 +1,12 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IBaseUser } from '../user';
 import { OrganizationStatus, OrganizationUserStatus } from './constants';
 
 /**
  * The Organization Data Transfer Object.
  */
-export interface IOrganization {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IOrganization extends IBaseObject {
     /**
      * The code of the organization
      *

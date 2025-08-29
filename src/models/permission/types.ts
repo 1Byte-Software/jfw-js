@@ -1,22 +1,8 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { PermissionType, PermissionTypeFilter } from './constants';
 
-export interface IPermission {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IPermission extends IBaseObject {
     /**
      * The parent brand id.
      */

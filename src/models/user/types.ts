@@ -4,7 +4,7 @@ import {
     IStatisticCommon,
     IStatisticCommonParams,
 } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { IBrand } from '../brand';
 import { ICreateConfigurationParams } from '../configuration';
 import { ConfigurationStatus } from '../configuration/constants';
@@ -15,7 +15,7 @@ import { IRole } from '../role';
 import {
     AuthenticationResponseType,
     BrandPartnerAuthenticateStatus,
-    QRCodeParingDevicesAuthenticationStatus,
+    CodeParingDevicesAuthenticationStatus,
     UserDeviceStatus,
     UserNotificationStatus,
     UserStatus,
@@ -25,21 +25,7 @@ import {
 /**
  * This class is used to return user information to client.
  */
-export interface IBaseUser {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IBaseUser extends IBaseObject {
     /**
      * The code of the user.
      *
@@ -82,21 +68,7 @@ export interface IBaseUser {
     roles?: string[] | null;
 }
 
-export interface IUser {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IUser extends IBaseObject {
     /**
      * The brand id.
      *
@@ -639,6 +611,27 @@ export interface IChangePasswordParams {
     confirmPassword: string;
 }
 
+export interface IChangePasswordForAnotherUserParams {
+    /**
+     * The id of the user to change.
+     */
+    id: IdType;
+
+    /**
+     * The new password of the user.
+     *
+     * @remarks min: 1
+     */
+    newPassword: string;
+
+    /**
+     * The confirm password of the user.
+     *
+     * @remarks min: 1
+     */
+    confirmPassword: string;
+}
+
 /**
  * This is the model class for ForgotPassword.
  */
@@ -977,8 +970,6 @@ export interface IVerifyUserEmailAddressParams {
     otp: string;
 }
 
-export type IVerifySMSOTPToAuthenticationParams = IVerifyUserEmailAddressParams;
-
 export interface ICreateConfigurationOfUserParams
     extends ICreateConfigurationParams {}
 
@@ -1017,7 +1008,7 @@ export interface IGetNotificationsByUserParams extends IPageable, ISortable {
     status?: UserNotificationStatus | null;
 }
 
-export interface IGetNotificationsByGivenUserIdAndNotificationParams {
+export interface IGetNotificationRelatedToUserParams {
     /**
      * The id of the user to get.
      */
@@ -1029,7 +1020,7 @@ export interface IGetNotificationsByGivenUserIdAndNotificationParams {
     notificationId: IdType;
 }
 
-export interface IMarkNotificationAsReadByUserAndNotificationParams {
+export interface IMarkNotificationAsReadParams {
     /**
      * The id of the user to get.
      */
@@ -1041,18 +1032,23 @@ export interface IMarkNotificationAsReadByUserAndNotificationParams {
     notificationId: IdType;
 }
 
-export interface IGetQRCodeStatusResponse {
+export interface IGetCodeStatusResponse {
     id: string;
-    status: QRCodeParingDevicesAuthenticationStatus;
+    status: CodeParingDevicesAuthenticationStatus;
     approvedAt: DateType | null;
 }
 
 export interface IGenerateNewQRCodeForParingAuthenticationResponse
-    extends IGetQRCodeStatusResponse {
+    extends IGetCodeStatusResponse {
     qrCodeBase64: string;
 }
 
-export interface IUserAuthVerifyOTPParams {
+export interface IGenerateNewOTPForParingAuthenticationResponse
+    extends IGetCodeStatusResponse {
+    code: string;
+}
+
+export interface IVerifyOTPCodeParams {
     /**
      * The token to verify. This is the token that was received from the request to send the OTP.
      *
@@ -1070,7 +1066,7 @@ export interface IUserAuthVerifyOTPParams {
     otp: string;
 }
 
-export interface IGeneratePhoneOTPForAuthenticationParams {
+export interface IGenerateSMSOTPParams {
     /**
      * The phone number. The phone number should be following the E.164 format.
      *
@@ -1088,6 +1084,14 @@ export interface IGenerateEmailAddressOTPForAuthenticationParams {
      * @example example@jframework.io
      */
     emailAddress: string;
+}
+
+export interface IGenerateNewQRCodeParams {
+    /**
+     * Optional URL for the QR Code link.
+     * If provided, the QR Code will encode this URL with a query id for the pairing session.
+     */
+    callbackUrl?: string;
 }
 
 //#endregion

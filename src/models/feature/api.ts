@@ -129,16 +129,16 @@ export const getFeatures = async (
  *
  * Get packages from a feature
  *
- * @param id - The id of the feature.
+ * @param featureId - The id of the feature.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/features/get-packages-from-feature}
  */
 export const getPackagesFromFeature = async (
-    id: IdType,
+    featureId: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(FEATURE_PATH.GET_PACKAGES_FROM_FEATURE, {
-        id,
+        featureId,
     });
     const response = await jfwAxios.get<HttpResponse<IPackage[]>>(url, config);
 

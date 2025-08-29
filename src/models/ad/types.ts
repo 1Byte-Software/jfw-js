@@ -1,27 +1,13 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
-import { ICDN } from '../cdnFile';
+import { DateType, IBaseObject, IdType } from '../base';
+import { IFileCDN } from '../cdn';
 import { IDomain } from '../domain';
 import { AdPosition, AdStatus, AdType } from './constants';
 
 /**
  * Represents a data transfer object (DTO) used to response Ad.
  */
-export interface IAd {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: string;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate: DateType;
-
+export interface IAd extends IBaseObject {
     type: AdType;
 
     /**
@@ -95,7 +81,7 @@ export interface IAd {
      *
      * @remarks max: 5
      */
-    images?: ICDN[] | null;
+    images?: IFileCDN[] | null;
 
     /**
      * The list of brand domains for the advertisement.

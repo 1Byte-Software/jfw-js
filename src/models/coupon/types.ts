@@ -1,25 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject } from '../base';
 import { CouponStatus } from './constants';
 
 /**
  * This class represents the coupon dto.
  */
-export interface ICoupon {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface ICoupon extends IBaseObject {
     /**
      * The code of the coupon.
      *

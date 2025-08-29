@@ -7,6 +7,7 @@ import { APP_INTEGRATION_PUSH_NOTIFICATION_PATH } from './paths';
 import {
     IAppIntegrationPushNotification,
     ICreateAppIntegrationPushNotificationParams,
+    ICreateAppIntegrationPushNotificationWithImportFileSettingsParams,
     IUpdateAppIntegrationPushNotificationParams,
 } from './types';
 
@@ -31,6 +32,29 @@ export const createAppIntegrationPushNotification = async (
 
     return response.data;
 };
+
+/**
+ * # Creates an app integration push notification with import file settings
+ *
+ * Create a new app integration push notification from file settings.
+ *
+ * @param params - The params for creating a new app integration push notification from file settings.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/app-integrations/push-notification/create-an-app-integration-push-notification-by-import-file}
+ */
+export const createAppIntegrationPushNotificationWithImportFileSettings =
+    async (
+        params: ICreateAppIntegrationPushNotificationWithImportFileSettingsParams,
+        config?: AxiosRequestConfig,
+    ) => {
+        const url =
+            APP_INTEGRATION_PUSH_NOTIFICATION_PATH.CREATE_APP_INTEGRATION_PUSH_NOTIFICATION_WITH_IMPORT_FILE_SETTINGS;
+        const response = await jfwAxios.post<
+            HttpResponse<IAppIntegrationPushNotification>
+        >(url, params, config);
+
+        return response.data;
+    };
 
 /**
  * # Delete an app integration push notification

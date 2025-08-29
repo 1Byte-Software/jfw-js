@@ -1,25 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { RoleType, RoleTypeFilter } from './constants';
 
 /**
  * This class is used to define the structure of the RoleDto.
  */
-export interface IRole {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType;
-
+export interface IRole extends IBaseObject {
     /**
      * The parent brand id of the Role.
      */

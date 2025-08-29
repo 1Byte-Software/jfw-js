@@ -1,25 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { DateType, IBaseObject, IdType } from '../base';
 import { WalletHistoryStatus, WalletHistoryType } from './constants';
 
 /**
  * The wallet data transfer object.
  */
-export interface IWallet {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IWallet extends IBaseObject {
     /**
      * The wallet code.
      *
@@ -62,21 +48,7 @@ export interface IWallet {
 /**
  * Wallet transaction history information.
  */
-export interface IWalletHistory {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: IdType;
-
-    /**
-     * The created date of the object.
-     *
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IWalletHistory extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */

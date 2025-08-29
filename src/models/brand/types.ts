@@ -1,24 +1,11 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { IDomain } from '../domain';
 import { BrandStatus } from './constants';
 import { IBrandProfile } from './profile';
 import { IBrandSetting } from './setting';
 
-export interface IBrand {
-    /**
-     * The id of the object.
-     *
-     * @remarks min: 1
-     */
-    id: string;
-
-    /**
-     * The created date of the object.
-     * @remarks date-time
-     */
-    createdDate?: DateType | null;
-
+export interface IBrand extends IBaseObject {
     /**
      * The parent Id of the Brand.
      */
@@ -89,10 +76,6 @@ export interface IBrand {
 }
 
 //#region API types
-export interface IGetBrandDetailPath {
-    brandCode: string;
-}
-
 export interface IGetBrandsParams extends IPageable, ISortable {
     /**
      * The code of the brand.
@@ -161,11 +144,43 @@ export interface IGeneratedDomain {
     fullDomain: string;
 }
 
+export interface ICreateBrandSettingParams {
+    /**
+     * The domain of the brand. The value is the subdomain of the brand.
+     *
+     * @remarks min: 1
+     * @example jframework.dev
+     */
+    domain: string;
+}
+
+export interface ICreateBrandProfileParams {
+    /**
+     * The logo url of the brand.
+     *
+     * @remarks uri
+     */
+    logoUrl?: string | null;
+
+    /**
+     * The favicon url of the brand.
+     *
+     * @remarks uri
+     */
+    faviconUrl?: string | null;
+
+    /**
+     * The slogan of the brand. This value is used to combine with the name of the brand to display in the title of the page.
+     */
+    slogan?: string | null;
+}
+
 export interface ICreateBrandParams {
     /**
      * The name of the brand.
      *
      * @remarks min: 1
+     * @example JFramework
      */
     name: string;
 
@@ -173,50 +188,26 @@ export interface ICreateBrandParams {
      * The abbreviation of the brand. The value is the abbreviation of the brand.
      *
      * @remarks min: 1
+     * @example JFW
      */
     abbr: string;
 
     /**
      * The description of the brand.
+     *
+     * @example JFramework is a powerful framework for building web applications.
      */
     description?: string | null;
 
     /**
      * The setting of the brand.
      */
-    setting: {
-        /**
-         * The domain of the brand. The value is the subdomain of the brand.
-         *
-         * @remarks min: 1
-         * @example jframework.dev
-         */
-        domain: string;
-    };
+    setting: ICreateBrandSettingParams;
 
     /**
      * The profile of the brand.
      */
-    profile: {
-        /**
-         * The logo url of the brand.
-         *
-         * @remarks uri
-         */
-        logoUrl?: string | null;
-
-        /**
-         * The favicon url of the brand.
-         *
-         * @remarks uri
-         */
-        faviconUrl?: string | null;
-
-        /**
-         * The slogan of the brand. This value is used to combine with the name of the brand to display in the title of the page.
-         */
-        slogan?: string | null;
-    };
+    profile: ICreateBrandProfileParams;
 }
 
 export interface IUpdateBrandParams {

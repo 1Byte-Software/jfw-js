@@ -1,26 +1,96 @@
-import { DateType, IdType } from '../../base';
+import { DateType, IBaseObject, IdType } from '../../base';
 import { IAppIntegration } from '../types';
 import {
     AppIntegrationPaymentGatewayStatus,
     PaymentGatewayProductCurrencyCode,
 } from './constants';
 
-export interface IAppIntegrationPaymentGateway {
-    id: IdType;
+export interface IAppIntegrationPaymentGateway extends IBaseObject {
+    /**
+     * The app integration dto.
+     */
     appIntegration: IAppIntegration;
+
+    /**
+     * The name of the app integration
+     *
+     * @remarks min: 1
+     */
     name: string;
+
+    /**
+     * The IPN (Instant Payment Notification) listener link of the payment gateway.
+     * This endpoint will receive payment notifications from the gateway.
+     * For PayPal: This is your IPN listener URL for payment status updates.
+     * For Stripe: This would be your webhook URL for payment events.
+     *
+     * @remarks min: 1
+     */
     ipnListenerLink: string;
-    cancelLinkWithoutLogin: string | null;
+
+    /**
+     * The payment link of the payment gateway. This is used when unauthenticated users cancel payment and need to be redirected. For PayPal/Stripe: Fallback URL when session is lost or user isn't logged in.
+     *
+     * @remarks uri - min: 1
+     */
+    cancelLinkWithoutLogin: string;
+
+    /**
+     * The cancel link of the payment gateway. Users will be redirected here when they cancel a payment. For PayPal: Set as the cancel_url in PayPal checkout. For Stripe: Used as cancel_url in Stripe Checkout sessions.
+     *
+     * @remarks uri - min: 1
+     */
     cancelLink: string;
+
+    /**
+     * The return link of the payment gateway. Users will be redirected here after successful payment. For PayPal: Set as the return_url in PayPal checkout. For Stripe: Used as success_url in Stripe Checkout sessions.
+     *
+     * @remarks uri - min: 1
+     */
     returnLink: string;
+
+    /**
+     * The public key of the payment gateway. For PayPal: Client ID from your PayPal app credentials. For Stripe: Publishable key from your Stripe dashboard.
+     *
+     * @remarks min: 1
+     */
     publicKey: string;
+
+    /**
+     * The private key of the payment gateway. For PayPal: Secret from your PayPal app credentials. For Stripe: Secret key from your Stripe dashboard.
+     *
+     * @remarks min: 1
+     */
     privateKey: string;
-    description: string | null;
-    notes: string | null;
+
+    /**
+     * Description of the payment gateway. For PayPal/Stripe: Optional description that appears in your dashboard.
+     */
+    description?: string | null;
+
+    /**
+     * The notes of the payment gateway. For PayPal/Stripe: Internal notes about this integration.
+     */
+    notes?: string | null;
+
+    /**
+     * Flag to indicate if the payment gateway is in test mode. When true, transactions will use the provider's sandbox environment. For PayPal: Uses https://api.sandbox.paypal.com instead of production. For Stripe: Uses test mode keys and endpoints.
+     *
+     * @defaultValue `false` (production mode)
+     */
+    testMode: boolean;
+
+    /**
+     * Flag to indicate if the payment gateway integration is the default.
+     */
     isDefault: boolean;
-    testMode: boolean | null;
+
+    /**
+     * The status of the payment gateway integration.
+     *
+     * @remarks enum
+     */
     status: AppIntegrationPaymentGatewayStatus;
-    createdDate: DateType;
 }
 
 /**
@@ -190,92 +260,8 @@ export interface ICreateAppIntegrationPaymentGatewayParams {
 /**
  * The request data transfer object for the payment gateway integration. This DTO is used when creating or updating an integration with payment providers like PayPal and Stripe.
  */
-export interface IUpdateAppIntegrationPaymentGatewayParams {
-    /**
-     * The app integration id of the payment gateway.
-     *
-     * @remarks min: 1
-     */
-    appIntegrationId: string;
-
-    /**
-     * The name of the payment gateway integration.
-     *
-     * @remarks min: 1
-     */
-    name: string;
-
-    /**
-     * The IPN (Instant Payment Notification) listener link of the payment gateway. This endpoint will receive payment notifications from the gateway. For PayPal: This is your IPN listener URL for payment status updates. For Stripe: This would be your webhook URL for payment events.
-     *
-     * @remarks uri - min: 1
-     */
-    ipnListenerLink: string;
-
-    /**
-     * The payment link of the payment gateway. This is used when unauthenticated users cancel payment and need to be redirected. For PayPal/Stripe: Fallback URL when session is lost or user isn't logged in.
-     *
-     * @remarks uri
-     */
-    cancelLinkWithoutLogin?: string | null;
-
-    /**
-     * The cancel link of the payment gateway. Users will be redirected here when they cancel a payment. For PayPal: Set as the cancel_url in PayPal checkout. For Stripe: Used as cancel_url in Stripe Checkout sessions.
-     *
-     * @remarks uri - min: 1
-     */
-    cancelLink: string;
-
-    /**
-     * The return link of the payment gateway. Users will be redirected here after successful payment. For PayPal: Set as the return_url in PayPal checkout. For Stripe: Used as success_url in Stripe Checkout sessions.
-     *
-     * @remarks uri - min: 1
-     */
-    returnLink: string;
-
-    /**
-     * The public key of the payment gateway. For PayPal: Client ID from your PayPal app credentials. For Stripe: Publishable key from your Stripe dashboard.
-     *
-     * @remarks min: 1
-     */
-    publicKey: string;
-
-    /**
-     * The private key of the payment gateway. For PayPal: Secret from your PayPal app credentials. For Stripe: Secret key from your Stripe dashboard.
-     *
-     * @remarks min: 1
-     */
-    privateKey: string;
-
-    /**
-     * Description of the payment gateway. For PayPal/Stripe: Optional description that appears in your dashboard.
-     */
-    description?: string | null;
-
-    /**
-     * The notes of the payment gateway. For PayPal/Stripe: Internal notes about this integration.
-     */
-    notes?: string | null;
-
-    /**
-     * Flag to indicate if the payment gateway is in test mode. When true, transactions will use the provider's sandbox environment. For PayPal: Uses https://api.sandbox.paypal.com instead of production. For Stripe: Uses test mode keys and endpoints.
-     *
-     * @defaultValue `false`
-     */
-    testMode?: boolean | null;
-
-    /**
-     * Flag to indicate if the payment gateway integration is the default.
-     */
-    isDefault?: boolean;
-
-    /**
-     * The status of the payment gateway integration.
-     *
-     * @remarks enum
-     */
-    status?: AppIntegrationPaymentGatewayStatus;
-}
+export interface IUpdateAppIntegrationPaymentGatewayParams
+    extends ICreateAppIntegrationPaymentGatewayParams {}
 
 export interface ITestCreatingCheckoutLinkParams {
     /**

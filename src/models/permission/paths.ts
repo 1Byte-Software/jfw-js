@@ -2,7 +2,7 @@ const REST = 'permissions';
 const REST_ROLES = 'roles';
 
 export const PERMISSION_PATH = {
-    ADD_ROLES_TO_PERMISSION: `v1/${REST}/{id}/${REST_ROLES}`,
+    ADD_ROLES_TO_PERMISSION: `v1/${REST}/{permissionId}/${REST_ROLES}`,
     CREATE_PERMISSION: `v1/${REST}`,
     DELETE_PERMISSION: `v1/${REST}/{id}`,
     GET_PERMISSION: `v1/${REST}/{id}`,

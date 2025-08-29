@@ -18,21 +18,24 @@ import {
     IAuthenticationParams,
     IBaseUser,
     IBrandPartnerAuthenticate,
+    IChangePasswordForAnotherUserParams,
     IChangePasswordParams,
     ICheckAuthKeyAvailableParams,
     ICreateConfigurationOfUserParams,
     IDeviceOfUser,
     IForgotPasswordParams,
     IGenerateEmailAddressOTPForAuthenticationParams,
+    IGenerateNewOTPForParingAuthenticationResponse,
     IGenerateNewQRCodeForParingAuthenticationResponse,
-    IGeneratePhoneOTPForAuthenticationParams,
+    IGenerateNewQRCodeParams,
+    IGenerateSMSOTPParams,
     IGetAppIntegrationAuthenticateURLsParams,
+    IGetCodeStatusResponse,
     IGetConfigurationsOfUserParams,
-    IGetNotificationsByGivenUserIdAndNotificationParams,
+    IGetNotificationRelatedToUserParams,
     IGetNotificationsByUserParams,
-    IGetQRCodeStatusResponse,
     IGetUsersParams,
-    IMarkNotificationAsReadByUserAndNotificationParams,
+    IMarkNotificationAsReadParams,
     IRegisterNewUserParams,
     IRemoveDeviceFromUserParams,
     IResetPasswordParams,
@@ -40,10 +43,8 @@ import {
     IStatisticsUsersParams,
     IUpdateUserParams,
     IUser,
-    IUserAuthVerifyOTPParams,
     IUserNotification,
-    IVerifySMSOTPToAuthenticationParams,
-    IVerifyUserEmailAddressParams,
+    IVerifyOTPCodeParams,
 } from './types';
 
 /**
@@ -177,50 +178,6 @@ export const authenticationByApple = async (
 };
 
 /**
- * # Authentication by email OTP
- *
- * Authenticates the user with the given email
- *
- * We send an OTP to the user's email address.
- *
- * @param emailAddress - The email address.
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/authentication-email-otp-code}
- */
-export const authenticationByEmailOTP = async (
-    emailAddress: string,
-    config?: AxiosRequestConfig,
-) => {
-    const url = USER_PATH.AUTHENTICATION_BY_EMAIL_OTP;
-    const response = await jfwAxios.post<HttpResponse<string>>(
-        url,
-        {
-            emailAddress,
-        },
-        config,
-    );
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update doc in future.
- */
-export const authenticationByPhoneNumber = async (
-    params: IAuthenticationByPhoneNumberParams,
-    config?: AxiosRequestConfig,
-) => {
-    const url = USER_PATH.AUTHENTICATION_BY_PHONE_NUMBER;
-    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
-        url,
-        params,
-        config,
-    );
-
-    return response.data;
-};
-
-/**
  * # Authentication by Google
  *
  * Gets the Google login URL.
@@ -243,51 +200,24 @@ export const authenticationByGoogle = async (
 };
 
 /**
- * # Authentication by magic link
+ * # Authentication by phone number
  *
- * Authenticates the user with the given email and brand URL.
+ * Authenticates the user with the given phone number and password.
  *
- * We send an email to the user with a link to authenticate.
- *
- * @param params - The params for authentication by magic link
+ * @param params - The params for authentication by phone number
  * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/authentication-by-email}
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/authentication-by-phone}
  */
-export const authenticationByMagicLink = async (
-    params: IAuthenticationByMagicLinkParams,
+export const authenticationByPhoneNumber = async (
+    params: IAuthenticationByPhoneNumberParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.AUTHENTICATION_BY_MAGIC_LINK;
-    const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
-        ...config,
+    const url = USER_PATH.AUTHENTICATION_BY_PHONE_NUMBER;
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
         params,
-    });
-
-    return response.data;
-};
-
-/**
- * # Authentication by SMS OTP
- *
- * Authenticates the user with the given phone number and we send an OTP to the user's phone number.
- *
- * We send an email to the user with a link to authenticate.
- *
- * @param phoneNumber - The phone number. The phone number should be following the E.164 format.
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/authentication-sms-otp-code}
- */
-export const authenticationBySMSOTP = async (
-    phoneNumber: string,
-    config?: AxiosRequestConfig,
-) => {
-    const url = USER_PATH.AUTHENTICATION_BY_SMS_OTP;
-    const response = await jfwAxios.get<HttpResponse<string>>(url, {
-        params: {
-            phoneNumber,
-        },
-        ...config,
-    });
+        config,
+    );
 
     return response.data;
 };
@@ -320,7 +250,7 @@ export const authentication = async (
  *
  * Changes the user's password.
  *
- * @param options - The options for change password.
+ * @param params - The params for changing password.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/change-password}
  */
@@ -332,6 +262,32 @@ export const changePassword = async (
     const response = await jfwAxios.put<HttpResponse<true>>(
         url,
         params,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Change password for another user
+ *
+ * Change password for another user.
+ *
+ * @param params - The params for changing password for another user.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/change-password-by-user-id}
+ */
+export const changePasswordForAnotherUser = async (
+    params: IChangePasswordForAnotherUserParams,
+    config?: AxiosRequestConfig,
+) => {
+    const { id, ...bodyParams } = params;
+    const url = generatePath(USER_PATH.CHANGE_PASSWORD_FOR_ANOTHER_USER, {
+        id,
+    });
+    const response = await jfwAxios.put<HttpResponse<true>>(
+        url,
+        bodyParams,
         config,
     );
 
@@ -360,20 +316,44 @@ export const checkReferralUserCode = async (
 };
 
 /**
+ * # Check AuthKey available
+ *
+ * Check if the authKey is available.
+ *
+ * @param params - The params for checking auth key available.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/check-auth-key-available}
+ */
+export const checkAuthKeyAvailable = async (
+    params: ICheckAuthKeyAvailableParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.CHECK_AUTH_KEY_AVAILABLE;
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
+};
+
+//#region Configurations
+/**
  * Creates a new configuration for the user.
  *
- * @param id - The id of the user.
+ * @param userId - The id of the user.
  * @param params - The params for creating a new configuration for the user.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/configurations#post-api-users-id-configurations}
  */
 export const createNewConfigurationForUser = async (
-    id: IdType,
+    userId: IdType,
     params: ICreateConfigurationOfUserParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.CREATE_NEW_CONFIGURATION_FOR_USER, {
-        id,
+        userId,
     });
     const response = await jfwAxios.post<HttpResponse<IConfiguration>>(
         url,
@@ -387,18 +367,18 @@ export const createNewConfigurationForUser = async (
 /**
  * # Gets the user's configurations.
  *
- * @param id - The id of the user.
+ * @param userId - The id of the user.
  * @param params - The params for getting the user's configurations.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/configurations#get-api-v1-users-id-configurations}
  */
 export const getConfigurationsOfUser = async (
-    id: IdType,
+    userId: IdType,
     params?: IGetConfigurationsOfUserParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.GET_CONFIGURATION_OF_USER, {
-        id,
+        userId,
     });
     const response = await jfwAxios.get<HttpResponse<IConfiguration[]>>(url, {
         params,
@@ -411,24 +391,25 @@ export const getConfigurationsOfUser = async (
 /**
  * # Deletes the user's configuration by ID.
  *
- * @param id - The id of the user.
+ * @param userId - The id of the user.
  * @param configurationId - The id of the configuration.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/configurations#delete-api-v1-users-id-configurations-configurationid}
  */
 export const deleteConfigurationOfUserByID = async (
-    id: IdType,
+    userId: IdType,
     configurationId: IdType,
     config?: AxiosRequestConfig,
 ) => {
     const url = generatePath(USER_PATH.DELETE_CONFIGURATION_OF_USER_BY_ID, {
-        id,
+        userId,
         configurationId,
     });
     const response = await jfwAxios.get<HttpResponse<boolean>>(url, config);
 
     return response.data;
 };
+//#endregion
 
 /**
  * # Deactivate a user
@@ -474,6 +455,7 @@ export const deleteUser = async (id: IdType, config?: AxiosRequestConfig) => {
     return response.data;
 };
 
+//#region Email address verification
 /**
  * # Verify user email address
  *
@@ -489,12 +471,9 @@ export const sendEmailToVerifyEmailAddressOfUser = async (
     returnURL: string,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(
-        USER_PATH.SEND_EMAIL_TO_VERIFY_EMAIL_ADDRESS_OF_USER,
-        {
-            id,
-        },
-    );
+    const url = generatePath(USER_PATH.SEND_EMAIL_TO_VERIFY, {
+        id,
+    });
     const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
         params: {
             returnURL,
@@ -530,6 +509,8 @@ export const activeUserEmailAddress = async (
 
     return response.data;
 };
+
+//#endregion
 
 /**
  * # Forgot password
@@ -646,6 +627,33 @@ export const getDevicesFromUser = async (
 /**
  * # Get users
  *
+ * Gets the users by id list.
+ *
+ * @param ids - The ids to get the users.The maximum number of ids is 100.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/get-users#get-api-v1-users-by-list-id}
+ */
+export const getUsersByListIDs = async (
+    ids: IdType[],
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.GET_USERS_BY_LIST_IDS;
+    const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, {
+        params: {
+            ids,
+        },
+        paramsSerializer: {
+            indexes: true,
+        },
+        ...config,
+    });
+
+    return response.data;
+};
+
+/**
+ * # Get users
+ *
  * Get users in your system.
  *
  * A subset of users can be returned that match a supported filter expression or search criteria.
@@ -658,33 +666,6 @@ export const getUsers = async (params: IGetUsersParams) => {
     const url = USER_PATH.GET_USERS;
     const response = await jfwAxios.get<HttpResponseList<IUser>>(url, {
         params,
-    });
-
-    return response.data;
-};
-
-/**
- * # Get users
- *
- * Gets the users by id list.
- *
- * @param ids - The ids to get the users.The maximum number of ids is 100.
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/get-users#get-api-v1-users-by-list-id}
- */
-export const getUsersByIdList = async (
-    ids: IdType[],
-    config?: AxiosRequestConfig,
-) => {
-    const url = USER_PATH.GET_USERS_BY_ID_LIST;
-    const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, {
-        params: {
-            ids,
-        },
-        paramsSerializer: {
-            indexes: true,
-        },
-        ...config,
     });
 
     return response.data;
@@ -795,6 +776,9 @@ export const lockUser = async (id: IdType, config?: AxiosRequestConfig) => {
     return response.data;
 };
 
+// Not implemented yet
+const refreshAuthKey = () => {};
+
 /**
  * # Register a new user
  *
@@ -817,6 +801,11 @@ export const registerNewUser = async (
 
     return response.data;
 };
+
+// Not implemented yet
+const registerNewUserByEmail = () => {};
+// Not implemented yet
+const registerNewUserByPhone = () => {};
 
 /**
  * # Remove a device from a user
@@ -1039,101 +1028,88 @@ export const updateUserType = async (
     return response.data;
 };
 
+// Not implemented yet
+const updateUserDevice = () => {};
+// Not implemented yet
+const updateDeviceDataRelatedAuthorizedUser = () => {};
+
+//#region Notification
+
 /**
- * # Verify email address OTP to authentication
+ * # Get a notification related to a user
  *
- * Verifies the OTP code that was sent to the user's email.
+ * Get a notification detail by the given userId and notificationId.
  *
- * @param params - The params for verifying the email address OTP to authentication.
+ * This endpoint allows you to update the user type for a specific user by their id.
+ * Just Super Admins can update the user type.
+ *
+ * @param params - The params for getting a notification related to user.
  * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-email-otp-code}
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/notification/get-a-notification}
  */
-export const verifyUserEmailAddress = async (
-    params: IVerifyUserEmailAddressParams,
+export const getNotificationRelatedToUser = async (
+    params: IGetNotificationRelatedToUserParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.VERIFY_EMAIL_ADDRESS_OTP_TO_AUTHENTICATION;
-    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
-        url,
+    const { userId, notificationId } = params;
+    const url = generatePath(USER_PATH.GET_NOTIFICATION_RELATED_TO_USER, {
+        userId,
+        notificationId,
+    });
+    const response = await jfwAxios.get<HttpResponse<IUserNotification>>(url, {
         params,
-        config,
-    );
+        ...config,
+    });
 
     return response.data;
 };
 
 /**
- * # Verify SMS OTP to authentication
+ * # Get notifications by the user's id
  *
- * Verifies the OTP code that was sent to the user's phone number.
+ * Get notifications by the user's id.
  *
- * @param params - The params for verifying the SMS OTP to authentication.
+ * @param params - The params for getting notifications by the user's id
  * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/verify-sms-otp-code}
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/notification/get-notifications-from-a-user}
  */
-export const verifySMSOTPToAuthentication = async (
-    params: IVerifySMSOTPToAuthenticationParams,
+export const getNotificationsByUser = async (
+    params: IGetNotificationsByUserParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.VERIFY_SMS_OTP_TO_AUTHENTICATION;
-    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
-        url,
-        params,
-        config,
-    );
+    const { userId, ...restParams } = params;
+    const url = generatePath(USER_PATH.GET_NOTIFICATIONS_BY_USER_ID, {
+        userId,
+    });
+    const response = await jfwAxios.get<
+        HttpResponseList<IUserNotification, { unreadCount: number }>
+    >(url, {
+        params: restParams,
+        ...config,
+    });
 
     return response.data;
 };
 
 /**
- * #NOTE: Will update doc in future.
+ * # Mark a notification as read
+ *
+ * Marks the notification as read for the user.
+ *
+ * @param params - The params for marking a notifications as read.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/notification/mark-as-read}
  */
-export const generateNewQRCodeForPairingAuthentication = async (
+export const markNotificationAsRead = async (
+    params: IMarkNotificationAsReadParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.GENERATE_NEW_QR_CODE_FOR_PARING_AUTHENTICATION;
-    const response = await jfwAxios.post<
-        HttpResponse<IGenerateNewQRCodeForParingAuthenticationResponse>
-    >(url, config);
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update doc in future.
- */
-export const getCurrentStatusOfQRCodeParingRequest = async (
-    qrCodeId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(
-        USER_PATH.GET_CURRENT_STATUS_OF_QRCODE_PARING_REQUEST,
-        {
-            qrCodeId,
-        },
-    );
-    const response = await jfwAxios.get<HttpResponse<IGetQRCodeStatusResponse>>(
-        url,
-        config,
-    );
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update doc in future.
- */
-export const loginUsingApprovedQRCodeParingRequest = async (
-    qrCodeId: IdType,
-    config?: AxiosRequestConfig,
-) => {
-    const url = generatePath(
-        USER_PATH.LOGIN_IN_USING_APPROVED_QR_CODE_PARING_REQUEST,
-        {
-            qrCodeId,
-        },
-    );
-    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+    const { notificationId, userId } = params;
+    const url = generatePath(USER_PATH.MARK_NOTIFICATION_AS_READ, {
+        notificationId,
+        userId,
+    });
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
         null,
         config,
@@ -1143,41 +1119,69 @@ export const loginUsingApprovedQRCodeParingRequest = async (
 };
 
 /**
- * #NOTE: Will update doc in future.
+ * # Mark all notifications read
+ *
+ * Marks all notifications as read for the user.
+ *
+ * @param params - The params for marking a notifications as read.
+ * @param config - Optional axios request configuration object.
+ * @see {@link httpshttps://developers.jframework.io/references/api-reference/endpoints/users/notification/mark-all-notifications-read}
  */
-export const generatePhoneOTPForAuthentication = async (
-    params: IGeneratePhoneOTPForAuthenticationParams,
+export const markAllNotificationsAsRead = async (
+    userId: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.GENERATE_PHONE_OTP_FOR_AUTHENTICATION;
-    const response = await jfwAxios.post<HttpResponse<string>>(
+    const url = generatePath(USER_PATH.MARK_ALL_NOTIFICATIONS_AS_READ, {
+        userId,
+    });
+    const response = await jfwAxios.post<HttpResponse<boolean>>(
         url,
-        params,
+        null,
         config,
     );
 
     return response.data;
 };
+//#endregion
+
+//#region Passwordless
+
+//#region Email
 
 /**
- * #NOTE: Will update doc in future.
+ * # Authentication by magic link
+ *
+ * Authenticates the user with the given email and brand URL.
+ *
+ * We send an email to the user with a link to authenticate.
+ *
+ * @param params - The params for authentication by magic link
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/authentication-by-email}
  */
-export const verifyPhoneOTPForAuthentication = async (
-    params: IUserAuthVerifyOTPParams,
+export const authenticationByMagicLink = async (
+    params: IAuthenticationByMagicLinkParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.VERIFY_PHONE_OTP_FOR_AUTHENTICATION;
-    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
-        url,
+    const url = USER_PATH.AUTHENTICATION_BY_EMAIL_MAGIC_LINK;
+    const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
+        ...config,
         params,
-        config,
-    );
+    });
 
     return response.data;
 };
 
 /**
- * #NOTE: Will update doc in future.
+ * # Authentication by magic link
+ *
+ * Authenticates the user with the given email and brand URL.
+ *
+ * We send an email to the user with a link to authenticate.
+ *
+ * @param params - The params for authentication by magic link
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/authentication-by-email}
  */
 export const generateEmailOTPForAuthentication = async (
     params: IGenerateEmailAddressOTPForAuthenticationParams,
@@ -1194,10 +1198,16 @@ export const generateEmailOTPForAuthentication = async (
 };
 
 /**
- * #NOTE: Will update doc in future.
+ * # Verify email address OTP to authentication
+ *
+ * Verifies the OTP code that was sent to the user's email.
+ *
+ * @param params - The params for verifying email address OTP to authentication.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/email/verify-email-otp-code}
  */
-export const verifyEmailOTPForAuthentication = async (
-    params: IUserAuthVerifyOTPParams,
+export const verifyEmailAddressOTPToAuthentication = async (
+    params: IVerifyOTPCodeParams,
     config?: AxiosRequestConfig,
 ) => {
     const url = USER_PATH.VERIFY_EMAIL_OTP_FOR_AUTHENTICATION;
@@ -1209,82 +1219,130 @@ export const verifyEmailOTPForAuthentication = async (
 
     return response.data;
 };
+//#endregion
 
+//#region Phone
 /**
- * Check auth key available
+ * # Generate SMS OTP
+ *
+ * Authenticates the user with the given phone number and we send an OTP to the user's phone number.
+ *
+ * @param params - The params for generating SMS OTP.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/phone/authentication-sms-otp-code}
  */
-export const checkAuthKeyAvailable = async (
-    data: ICheckAuthKeyAvailableParams,
+export const generateSMSOTP = async (
+    params: IGenerateSMSOTPParams,
     config?: AxiosRequestConfig,
 ) => {
-    const url = USER_PATH.CHECK_AUTH_KEY_AVAILABLE;
-
-    const response = await jfwAxios.post<HttpResponse<boolean>>(
+    const url = USER_PATH.GENERATE_SMS_OTP;
+    const response = await jfwAxios.post<HttpResponse<string>>(
         url,
-        data,
-        config,
-    );
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update tsdoc in future.
- */
-export const getNotificationsByUser = async (
-    params: IGetNotificationsByUserParams,
-    config?: AxiosRequestConfig,
-) => {
-    const { userId, ...restParams } = params;
-    const url = generatePath(USER_PATH.GET_NOTIFICATIONS_BY_USER, {
-        userId,
-    });
-    const response = await jfwAxios.get<
-        HttpResponseList<IUserNotification, { unreadCount: number }>
-    >(url, {
-        params: restParams,
-        ...config,
-    });
-
-    return response.data;
-};
-
-/**
- * #NOTE: Will update tsdoc in future.
- */
-export const getNotificationByGivenUserAndNotification = async (
-    params: IGetNotificationsByGivenUserIdAndNotificationParams,
-    config?: AxiosRequestConfig,
-) => {
-    const { userId, notificationId } = params;
-    const url = generatePath(
-        USER_PATH.GET_NOTIFICATION_BY_GIVEN_USER_AND_NOTIFICATION,
-        {
-            userId,
-            notificationId,
-        },
-    );
-    const response = await jfwAxios.get<HttpResponse<IUserNotification>>(url, {
         params,
-        ...config,
-    });
+        config,
+    );
 
     return response.data;
 };
 
 /**
- * #NOTE: Will update tsdoc in future.
+ * # Verify SMS OTP code
+ *
+ * Verifies the OTP code that was sent to the user's phone number.
+ *
+ * @param params - The params for verifying SMS OTP code.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/phone/verify-sms-otp-code}
  */
-export const markNotificationAsReadByUserAndNotification = async (
-    params: IMarkNotificationAsReadByUserAndNotificationParams,
+export const verifyPhoneOTPForAuthentication = async (
+    params: IVerifyOTPCodeParams,
     config?: AxiosRequestConfig,
 ) => {
-    const { notificationId, userId } = params;
-    const url = generatePath(USER_PATH.MARK_NOTIFICATION_AS_READ_BY_USER, {
-        notificationId,
-        userId,
+    const url = USER_PATH.VERIFY_SMS_OTP_CODE;
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        params,
+        config,
+    );
+
+    return response.data;
+};
+
+//#endregion
+
+//#region QR Code
+
+/**
+ * # Generate a new QR code
+ *
+ * Generate a new QR Code for pairing authentication between two devices.
+ *
+ * This endpoint is called by the initiating device (Admin or Client) to start the pairing process. The generated QR Code contains a link with pairing session ID as a parameter.
+ * Example Flow:
+ * Device A calls this endpoint to get QR Code data.
+ * Device B scans the QR Code and calls POST api/v1/users/auth/passwordless/qrcode/:qrCodeId/approve to approve.
+ *
+ * @param params - The params for generating a new QR code.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/qrcode/generate-qr-code-auth}
+ */
+export const generateNewQRCode = async (
+    params?: IGenerateNewQRCodeParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.GENERATE_NEW_QR_CODE;
+    const response = await jfwAxios.post<
+        HttpResponse<IGenerateNewQRCodeForParingAuthenticationResponse>
+    >(url, { params, ...config });
+
+    return response.data;
+};
+
+/**
+ * # Get the current status of a QR code
+ *
+ * Get the current status of a QR Code pairing request.
+ *
+ * Possible statuses: pending, approved, expired, rejected. This endpoint is usually polled every few seconds by the initiating device until the QR Code is approved or expired.
+ *
+ * @param qrCodeId - The unique identifier of the QR Code session.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/qrcode/get-qr-code}
+ */
+export const getCurrentStatusOfQRCode = async (
+    qrCodeId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.GET_CURRENT_STATUS_OF_QR_CODE, {
+        qrCodeId,
     });
-    const response = await jfwAxios.post<HttpResponse<boolean>>(
+    const response = await jfwAxios.get<HttpResponse<IGetCodeStatusResponse>>(
+        url,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Approve a QR code
+ *
+ * Approve a QR Code pairing request.
+ *
+ * This endpoint is called after scanning a QR Code generated by POST api/v1/users/auth/passwordless/qrcode/generate. Once approved, the QR Code's status changes to "approved" and can be used for login.
+ *
+ * @param qrCodeId - The unique identifier of the QR Code session.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/qrcode/get-qr-code}
+ */
+export const approveQRCode = async (
+    qrCodeId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.APPROVE_QR_CODE, {
+        qrCodeId,
+    });
+    const response = await jfwAxios.post<HttpResponse<IGetCodeStatusResponse>>(
         url,
         null,
         config,
@@ -1294,16 +1352,33 @@ export const markNotificationAsReadByUserAndNotification = async (
 };
 
 /**
- * #NOTE: Will update tsdoc in future.
+ * # Log in using an approved QR code
+ *
+ * Log in using an approved QR Code pairing request.
+ *
+ * This endpoint is called by the initiating device after the QR Code status is "Approved" to retrieve the authentication key (AuthKey) for the paired account.
+ * After a successful authentication, the following headers must be included to register or update the user’s device:
+ *
+ * - X-Device-Code: A unique identifier for the device.
+ * - X-Device-Token: The Firebase device token used for push notifications.
+ * - X-Device-Name: The name/model of the device.
+ * - X-App-Version-Number: The version of the application.
+ * - X-Os-Device: The operating system of the device (iOS, Android).
+ *
+ * @param qrCodeId - The unique identifier of the approved QR Code session.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/qrcode/get-qr-code}
+ *
+ * @deprecated Use `authWithApprovedQRCode` instead
  */
-export const markAllNotificationsAsReadByUser = async (
-    userId: IdType,
+export const loginUsingApprovedQRCode = async (
+    qrCodeId: IdType,
     config?: AxiosRequestConfig,
 ) => {
-    const url = generatePath(USER_PATH.MARK_ALL_NOTIFICATIONS_AS_READ_BY_USER, {
-        userId,
+    const url = generatePath(USER_PATH.LOGIN_IN_USING_APPROVED_QR_CODE, {
+        qrCodeId,
     });
-    const response = await jfwAxios.post<HttpResponse<boolean>>(
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
         url,
         null,
         config,
@@ -1311,3 +1386,197 @@ export const markAllNotificationsAsReadByUser = async (
 
     return response.data;
 };
+
+/**
+ * # Auth with an approved QR code
+ *
+ * Log in using an approved QR Code pairing request.
+ *
+ * This endpoint is called by the initiating device after the QR Code status is "Approved" to retrieve the authentication key (AuthKey) for the paired account.
+ * After a successful authentication, the following headers must be included to register or update the user’s device:
+ *
+ * - X-Device-Code: A unique identifier for the device.
+ * - X-Device-Token: The Firebase device token used for push notifications.
+ * - X-Device-Name: The name/model of the device.
+ * - X-App-Version-Number: The version of the application.
+ * - X-Os-Device: The operating system of the device (iOS, Android).
+ *
+ * @param qrCodeId - The unique identifier of the approved QR Code session.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/qrcode/auth-with-qr-code}
+ *
+ * @deprecated Use `authWithApprovedQRCode` instead
+ */
+export const authWithApprovedQRCode = async (
+    qrCodeId: IdType,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.AUTH_WITH_APPROVED_QR_CODE, {
+        qrCodeId,
+    });
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+//#endregion
+
+//#region OTP Code
+/**
+ *
+ * # Generate a new OTP Code
+ *
+ * Generate a new OTP Code for pairing authentication between two devices.
+ *
+ * Similar to QR Code pairing but uses a numeric or alphanumeric code instead.
+ * The OTP Code should have a short TTL (e.g., 60 seconds).
+ *
+ * @param params - The params for generating a new OTP code.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/otp-code/generate-otp-code-auth}
+ */
+export const generateNewOTPCode = async (
+    params?: IGenerateNewQRCodeParams,
+    config?: AxiosRequestConfig,
+) => {
+    const url = USER_PATH.GENERATE_NEW_OTP_CODE;
+    const response = await jfwAxios.post<
+        HttpResponse<IGenerateNewOTPForParingAuthenticationResponse>
+    >(url, { params, ...config });
+
+    return response.data;
+};
+
+//#endregion
+
+/**
+ * # Get the current status of a OTP code
+ *
+ * Get the current status of an OTP Code pairing request.
+ *
+ * Possible statuses: pending, approved, expired, rejected.
+ * This endpoint is usually polled every few seconds by the initiating device until the OTP Code is approved or expired.
+ *
+ * @param otpCode - Get the current status of a OTP code
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/otp-code/get-otp-code}
+ */
+export const getCurrentStatusOfOTPCode = async (
+    otpCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.GET_CURRENT_STATUS_OF_OTP_CODE, {
+        otpCode,
+    });
+    const response = await jfwAxios.get<HttpResponse<IGetCodeStatusResponse>>(
+        url,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Approve a OTP Code
+ *
+ * Approve an OTP Code pairing request.
+ *
+ * This endpoint is called by the target device after receiving the OTP code generated by POST api/v1/users/auth/passwordless/otp/generate.
+ * Once approved, the OTP Code's status changes to "Approved".
+ *
+ * @param otpCode - The OTP code value.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/otp-code/approve-otp-code}
+ */
+export const approveOTPCode = async (
+    otpCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.APPROVE_OTP_CODE, {
+        otpCode,
+    });
+    const response = await jfwAxios.post<HttpResponse<IGetCodeStatusResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Log in using an approved OTP code
+ *
+ * Log in using an approved OTP Code pairing request.
+ *
+ * This endpoint is called by the initiating device after the OTP Code status is "Approved" to retrieve the authentication key (AuthKey) for the paired account.
+ *
+ * After a successful authentication, the following headers must be included to register or update the user’s device:
+ *
+ * - X-Device-Code: A unique identifier for the device.
+ * - X-Device-Token: The Firebase device token used for push notifications.
+ * - X-Device-Name: The name/model of the device.
+ * - X-App-Version-Number: The version of the application.
+ * - X-Os-Device: The operating system of the device (iOS, Android).
+ *
+ * @param otpCode - The OTP code value.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/otp-code/login-otp-code}
+ *
+ * @deprecated Use `authWithApprovedOTPCode` instead
+ */
+export const loginUsingApprovedOTPCode = async (
+    otpCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.LOGIN_IN_USING_APPROVED_OTP_CODE, {
+        otpCode,
+    });
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+
+/**
+ * # Auth with an approved OTP code
+ *
+ * Log in using an approved OTP Code pairing request.
+ *
+ * This endpoint is called by the initiating device after the OTP Code status is "Approved" to retrieve the authentication key (AuthKey) for the paired account.
+ *
+ * After a successful authentication, the following headers must be included to register or update the user’s device:
+ *
+ * - X-Device-Code: A unique identifier for the device.
+ * - X-Device-Token: The Firebase device token used for push notifications.
+ * - X-Device-Name: The name/model of the device.
+ * - X-App-Version-Number: The version of the application.
+ * - X-Os-Device: The operating system of the device (iOS, Android).
+ *
+ * @param otpCode - The OTP code value.
+ * @param config - Optional axios request configuration object.
+ * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/otp-code/auth-with-otp-code}
+ */
+export const authWithApprovedOTPCode = async (
+    otpCode: string,
+    config?: AxiosRequestConfig,
+) => {
+    const url = generatePath(USER_PATH.AUTH_WITH_APPROVED_OTP_CODE, {
+        otpCode,
+    });
+    const response = await jfwAxios.post<HttpResponse<IAuthenticateResponse>>(
+        url,
+        null,
+        config,
+    );
+
+    return response.data;
+};
+//#endregion
