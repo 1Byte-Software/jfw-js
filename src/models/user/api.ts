@@ -1404,8 +1404,6 @@ export const loginUsingApprovedQRCode = async (
  * @param qrCodeId - The unique identifier of the approved QR Code session.
  * @param config - Optional axios request configuration object.
  * @see {@link https://developers.jframework.io/references/api-reference/endpoints/users/passwordless/qrcode/auth-with-qr-code}
- *
- * @deprecated Use `authWithApprovedQRCode` instead
  */
 export const authWithApprovedQRCode = async (
     qrCodeId: IdType,
