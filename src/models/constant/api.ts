@@ -1,389 +1,459 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { CONSTANT_PATH } from './paths';
 
-/**
- * # Brand Link
- *
- * Gets all the brand link types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/brand-link}
- */
-export const getBrandLinkTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_BRAND_LINK_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+export class ConstantAPI extends AbstractAPI {
+    /**
+     * # Brand Link
+     *
+     * Gets all the brand link types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/brand-link}
+     */
+    public async getBrandLinkTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_BRAND_LINK_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Black List
- *
- * Gets all the black list types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/black-list}
- */
-export const getBlackListTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_BLACK_LIST_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Black List
+     *
+     * Gets all the black list types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/black-list}
+     */
+    public async getBlackListTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_BLACK_LIST_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Coupon
- *
- * Gets all the coupon statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/coupon}
- */
-export const getCouponStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_COUPON_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Coupon
+     *
+     * Gets all the coupon statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/coupon}
+     */
+    public async getCouponStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_COUPON_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Commission Rate
- *
- * Gets all the commission rate types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/commission-rate#get-api-v1-constants-commission-rate-types}
- */
-export const getCommissionRateTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_COMMISSION_RATE_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Commission Rate
+     *
+     * Gets all the commission rate types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/commission-rate#get-api-v1-constants-commission-rate-types}
+     */
+    public async getCommissionRateTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_COMMISSION_RATE_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Device
- *
- * Gets all the device status.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/device#get-api-v1-constants-device-status}
- */
-export const getDeviceStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_DEVICE_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Device
+     *
+     * Gets all the device status.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/device#get-api-v1-constants-device-status}
+     */
+    public async getDeviceStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_DEVICE_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Device
- *
- * Gets all the device types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/device#get-api-v1-constants-device-types}
- */
-export const getDeviceTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_DEVICE_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Device
+     *
+     * Gets all the device types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/device#get-api-v1-constants-device-types}
+     */
+    public async getDeviceTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_DEVICE_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Invoice
- *
- * Gets all the invoice status.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/invoice#get-api-v1-constants-invoice-status}
- */
-export const getInvoiceStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_INVOICE_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Invoice
+     *
+     * Gets all the invoice status.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/invoice#get-api-v1-constants-invoice-status}
+     */
+    public async getInvoiceStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_INVOICE_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Invoice
- *
- * Gets all the invoice types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/invoice#get-api-v1-constants-invoice-types}
- */
-export const getInvoiceTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_INVOICE_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Invoice
+     *
+     * Gets all the invoice types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/invoice#get-api-v1-constants-invoice-types}
+     */
+    public async getInvoiceTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_INVOICE_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Issue
- *
- * Gets all the issue priorities..
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/issue}
- */
-export const getIssuePriorities = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_ISSUE_PRIORITIES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Issue
+     *
+     * Gets all the issue priorities..
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/issue}
+     */
+    public async getIssuePriorities(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_ISSUE_PRIORITIES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # License
- *
- * Gets all the licenses sources.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/license#get-api-v1-constants-license-sources}
- */
-export const getLicenseSources = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_LICENSE_SOURCES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # License
+     *
+     * Gets all the licenses sources.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/license#get-api-v1-constants-license-sources}
+     */
+    public async getLicenseSources(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_LICENSE_SOURCES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # License
- *
- * Gets all the licenses types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/license#get-api-v1-constants-license-types}
- */
-export const getLicenseTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_LICENSE_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # License
+     *
+     * Gets all the licenses types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/license#get-api-v1-constants-license-types}
+     */
+    public async getLicenseTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_LICENSE_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # License
- *
- * Gets all the licenses statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/license#get-api-v1-constants-license-status}
- */
-export const getLicenseStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_LICENSE_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # License
+     *
+     * Gets all the licenses statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/license#get-api-v1-constants-license-status}
+     */
+    public async getLicenseStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_LICENSE_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Organization
- *
- * Gets all the organization user statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/organization}
- */
-export const getOrganizationUserStatuses = async (
-    config?: AxiosRequestConfig,
-) => {
-    const url = CONSTANT_PATH.GET_ORGANIZATION_USER_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Organization
+     *
+     * Gets all the organization user statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/organization}
+     */
+    public async getOrganizationUserStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_ORGANIZATION_USER_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Payment
- *
- * Gets all the payment statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/payment}
- */
-export const getPaymentStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_PAYMENT_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Payment
+     *
+     * Gets all the payment statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/payment}
+     */
+    public async getPaymentStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_PAYMENT_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Transaction
- *
- * Gets all the transaction statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/transaction#get-api-v1-constants-transaction-status}
- */
-export const getTransactionStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_TRANSACTION_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Transaction
+     *
+     * Gets all the transaction statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/transaction#get-api-v1-constants-transaction-status}
+     */
+    public async getTransactionStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_TRANSACTION_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Transaction
- *
- * Gets all the transaction types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/transaction#get-api-v1-constants-transaction-types}
- */
-export const getTransactionTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_TRANSACTION_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Transaction
+     *
+     * Gets all the transaction types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/transaction#get-api-v1-constants-transaction-types}
+     */
+    public async getTransactionTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_TRANSACTION_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Tracking Event
- *
- * Gets all the transaction types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-event}
- */
-export const getTrackingEventTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_TRACKING_EVENT_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Tracking Event
+     *
+     * Gets all the transaction types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-event}
+     */
+    public async getTrackingEventTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_TRACKING_EVENT_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Tracking Notification
- *
- * Gets all the notification types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-notification#get-api-v1-constants-tracking-notification-types}
- */
-export const getTrackingNotificationTypes = async (
-    config?: AxiosRequestConfig,
-) => {
-    const url = CONSTANT_PATH.GET_TRACKING_NOTIFICATION_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Tracking Notification
+     *
+     * Gets all the notification types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-notification#get-api-v1-constants-tracking-notification-types}
+     */
+    public async getTrackingNotificationTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_TRACKING_NOTIFICATION_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Tracking Notification
- *
- * Gets all the notification channel types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-notification#get-api-v1-constants-tracking-notification-channel-types}
- */
-export const getTrackingNotificationChannelTypes = async (
-    config?: AxiosRequestConfig,
-) => {
-    const url = CONSTANT_PATH.GET_TRACKING_NOTIFICATION_CHANNEL_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Tracking Notification
+     *
+     * Gets all the notification channel types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-notification#get-api-v1-constants-tracking-notification-channel-types}
+     */
+    public async getTrackingNotificationChannelTypes(
+        config?: AxiosRequestConfig,
+    ) {
+        const url = CONSTANT_PATH.GET_TRACKING_NOTIFICATION_CHANNEL_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Tracking Notification
- *
- * Gets all the tracking notification reaction statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-notification#get-api-v1-constants-tracking-notification-reaction-status}
- */
-export const getTrackingNotificationReactionStatuses = async (
-    config?: AxiosRequestConfig,
-) => {
-    const url = CONSTANT_PATH.GET_TRACKING_NOTIFICATION_REACTION_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Tracking Notification
+     *
+     * Gets all the tracking notification reaction statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/tracking-notification#get-api-v1-constants-tracking-notification-reaction-status}
+     */
+    public async getTrackingNotificationReactionStatuses(
+        config?: AxiosRequestConfig,
+    ) {
+        const url = CONSTANT_PATH.GET_TRACKING_NOTIFICATION_REACTION_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Feature
- *
- * Gets all the feature types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/feature}
- */
-export const getFeatureTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_FEATURE_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Feature
+     *
+     * Gets all the feature types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/feature}
+     */
+    public async getFeatureTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_FEATURE_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # User
- *
- * Gets all the user statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/user#get-api-v1-constants-user-status}
- */
-export const getUserStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_USER_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # User
+     *
+     * Gets all the user statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/user#get-api-v1-constants-user-status}
+     */
+    public async getUserStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_USER_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # User
- *
- * Gets all the user types.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/user#get-api-v1-constants-user-types}
- */
-export const getUserTypes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_USER_TYPES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # User
+     *
+     * Gets all the user types.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/user#get-api-v1-constants-user-types}
+     */
+    public async getUserTypes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_USER_TYPES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Wallet
- *
- * Gets all the wallet statuses.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/wallet}
- */
-export const getWalletStatuses = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_WALLET_STATUSES;
-    const response = await jfwAxios.get<HttpResponse<string[]>>(url, config);
+    /**
+     * # Wallet
+     *
+     * Gets all the wallet statuses.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/wallet}
+     */
+    public async getWalletStatuses(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_WALLET_STATUSES;
+        const response = await this.axios.get<HttpResponse<string[]>>(
+            url,
+            config,
+        );
 
-    return response.data;
-};
+        return response.data;
+    }
 
-/**
- * # Error
- *
- * Gets all the error codes in the system.
- *
- * @param config - Optional axios request configuration object.
- * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/error}
- */
-export const getErrorCodes = async (config?: AxiosRequestConfig) => {
-    const url = CONSTANT_PATH.GET_ERRORS;
-    const response = await jfwAxios.get<
-        HttpResponse<Record<string, Record<string, number>>>
-    >(url, config);
+    /**
+     * # Error
+     *
+     * Gets all the error codes in the system.
+     *
+     * @param config - Optional axios request configuration object.
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/constants/error}
+     */
+    public async getErrorCodes(config?: AxiosRequestConfig) {
+        const url = CONSTANT_PATH.GET_ERRORS;
+        const response = await this.axios.get<
+            HttpResponse<Record<string, Record<string, number>>>
+        >(url, config);
 
-    return response.data;
-};
+        return response.data;
+    }
+}

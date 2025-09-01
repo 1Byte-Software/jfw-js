@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { IPermission } from '../permission';
 import { ROLE_PATH } from './paths';
 import {
@@ -12,7 +12,7 @@ import {
     IUpdateRoleParams,
 } from './types';
 
-export class RoleAPI {
+export class RoleAPI extends AbstractAPI {
     /**
      * # Assign users to a role
      *
@@ -31,7 +31,7 @@ export class RoleAPI {
         const url = generatePath(ROLE_PATH.ASSIGN_USERS_TO_ROLE, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             {
                 userIds,
@@ -58,7 +58,7 @@ export class RoleAPI {
         const url = generatePath(ROLE_PATH.DELETE_ROLE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -82,7 +82,7 @@ export class RoleAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ROLE_PATH.CREATE_ROLE;
-        const response = await jfwAxios.post<HttpResponse<IRole>>(
+        const response = await this.axios.post<HttpResponse<IRole>>(
             url,
             params,
             config,
@@ -104,7 +104,7 @@ export class RoleAPI {
         const url = generatePath(ROLE_PATH.GET_ROLE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IRole>>(url, config);
+        const response = await this.axios.get<HttpResponse<IRole>>(url, config);
 
         return response.data;
     }
@@ -123,7 +123,7 @@ export class RoleAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ROLE_PATH.GET_ROLES;
-        const response = await jfwAxios.get<HttpResponseList<IRole>>(url, {
+        const response = await this.axios.get<HttpResponseList<IRole>>(url, {
             params,
             ...config,
         });
@@ -149,7 +149,7 @@ export class RoleAPI {
         const url = generatePath(ROLE_PATH.GRANT_PERMISSIONS_TO_ROLE, {
             roleId,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             {
                 permissionIds,
@@ -178,7 +178,7 @@ export class RoleAPI {
         const url = generatePath(ROLE_PATH.GET_PERMISSIONS_GRANTED_BY_ROLE, {
             roleId,
         });
-        const response = await jfwAxios.get<HttpResponse<IPermission[]>>(
+        const response = await this.axios.get<HttpResponse<IPermission[]>>(
             url,
             config,
         );
@@ -206,7 +206,7 @@ export class RoleAPI {
         const url = generatePath(ROLE_PATH.REMOVE_PERMISSIONS_FROM_ROLE, {
             roleId,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
+        const response = await this.axios.delete<HttpResponse<boolean>>(url, {
             data: {
                 permissionIds,
             },
@@ -234,7 +234,7 @@ export class RoleAPI {
         const url = generatePath(ROLE_PATH.UPDATE_ROLE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IRole>>(
+        const response = await this.axios.put<HttpResponse<IRole>>(
             url,
             params,
             config,

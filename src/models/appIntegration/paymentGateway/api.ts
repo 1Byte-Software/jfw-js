@@ -11,7 +11,7 @@ import {
     IUpdateAppIntegrationPaymentGatewayParams,
 } from './types';
 
-export class AppIntegrationPaymentGatewayAPI {
+export class AppIntegrationPaymentGatewayAPI extends AbstractAPI {
     /**
      * # Create an app integration payment gateway
      *
@@ -27,7 +27,7 @@ export class AppIntegrationPaymentGatewayAPI {
     ) {
         const url =
             APP_INTEGRATION_PAYMENT_GATEWAY_PATH.CREATE_APP_INTEGRATION_PAYMENT_GATEWAY;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAppIntegrationPaymentGateway>
         >(url, params, config);
 
@@ -51,7 +51,7 @@ export class AppIntegrationPaymentGatewayAPI {
             APP_INTEGRATION_PAYMENT_GATEWAY_PATH.DELETE_APP_INTEGRATION_PAYMENT_GATEWAY,
             { id },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -76,7 +76,7 @@ export class AppIntegrationPaymentGatewayAPI {
             APP_INTEGRATION_PAYMENT_GATEWAY_PATH.GET_APP_INTEGRATION_PAYMENT_GATEWAY,
             { id },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationPaymentGateway>
         >(url, config);
 
@@ -96,7 +96,7 @@ export class AppIntegrationPaymentGatewayAPI {
     ) {
         const url =
             APP_INTEGRATION_PAYMENT_GATEWAY_PATH.GET_APPS_INTEGRATION_PAYMENT_GATEWAY_WITH_BRAND;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationPaymentGateway[]>
         >(url, config);
 
@@ -128,7 +128,7 @@ export class AppIntegrationPaymentGatewayAPI {
                 appIntegrationId,
             },
         );
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             params,
             config,
@@ -158,7 +158,7 @@ export class AppIntegrationPaymentGatewayAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<
+        const response = await this.axios.put<
             HttpResponse<IAppIntegrationPaymentGateway>
         >(url, params, config);
 

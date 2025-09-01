@@ -10,8 +10,9 @@ import {
     ITestSendingEmailAddressParams,
     IUpdateAppIntegrationSMTPParams,
 } from './types';
+import { AbstractAPI } from '../../base/AbstractAPI';
 
-export class AppIntegrationSMTPAPI {
+export class AppIntegrationSMTPAPI extends AbstractAPI {
     /**
      * # Create an app integration SMTP
      *
@@ -26,11 +27,9 @@ export class AppIntegrationSMTPAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = APP_INTEGRATION_SMTP_PATH.CREATE_APP_INTEGRATION_SMTP;
-        const response = await jfwAxios.post<HttpResponse<IAppIntegrationSMTP>>(
-            url,
-            params,
-            config,
-        );
+        const response = await this.axios.post<
+            HttpResponse<IAppIntegrationSMTP>
+        >(url, params, config);
 
         return response.data;
     }
@@ -54,7 +53,7 @@ export class AppIntegrationSMTPAPI {
                 id,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -81,10 +80,9 @@ export class AppIntegrationSMTPAPI {
                 id,
             },
         );
-        const response = await jfwAxios.get<HttpResponse<IAppIntegrationSMTP>>(
-            url,
-            config,
-        );
+        const response = await this.axios.get<
+            HttpResponse<IAppIntegrationSMTP>
+        >(url, config);
 
         return response.data;
     }
@@ -100,7 +98,7 @@ export class AppIntegrationSMTPAPI {
     public async getAppsIntegrationSMTPWithBrand(config?: AxiosRequestConfig) {
         const url =
             APP_INTEGRATION_SMTP_PATH.GET_APPS_INTEGRATION_SMTP_WITH_BRAND;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationSMTP[]>
         >(url, config);
 
@@ -125,7 +123,7 @@ export class AppIntegrationSMTPAPI {
     ) {
         const url =
             APP_INTEGRATION_SMTP_PATH.TEST_SENDING_EMAIL_ADDRESS_MESSAGE;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -155,11 +153,9 @@ export class AppIntegrationSMTPAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<HttpResponse<IAppIntegrationSMTP>>(
-            url,
-            params,
-            config,
-        );
+        const response = await this.axios.put<
+            HttpResponse<IAppIntegrationSMTP>
+        >(url, params, config);
 
         return response.data;
     }

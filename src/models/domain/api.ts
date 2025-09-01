@@ -1,17 +1,18 @@
-import { AxiosRequestConfig } from 'axios';
+import { Axios, AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
+import { BrandLinksAPI } from './brandLinks/api';
 import { DOMAIN_PATH } from './paths';
 import { IDomain, IGetDomainsParams } from './types';
-import { BrandLinksAPI } from './brandLinks/api';
 
-export class DomainAPI {
+export class DomainAPI extends AbstractAPI {
     public brandLinks: BrandLinksAPI;
 
-    public constructor() {
-        this.brandLinks = new BrandLinksAPI();
+    public constructor(axios: Axios) {
+        super(axios);
+        this.brandLinks = new BrandLinksAPI(axios);
     }
 
     /**
@@ -27,7 +28,7 @@ export class DomainAPI {
         const url = generatePath(DOMAIN_PATH.DELETE_DOMAIN, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -49,7 +50,7 @@ export class DomainAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = DOMAIN_PATH.GET_DOMAINS;
-        const response = await jfwAxios.get<HttpResponseList<IDomain>>(url, {
+        const response = await this.axios.get<HttpResponseList<IDomain>>(url, {
             params,
             ...config,
         });
@@ -70,7 +71,10 @@ export class DomainAPI {
         const url = generatePath(DOMAIN_PATH.GET_DOMAIN, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IDomain>>(url, config);
+        const response = await this.axios.get<HttpResponse<IDomain>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -90,7 +94,7 @@ export class DomainAPI {
     //     config?: AxiosRequestConfig,
     // ) {
     //     const url = DOMAIN_PATH.CREATE_DOMAIN;
-    //     const response = await jfwAxios.post<HttpResponse<IDomain>>(
+    //     const response = await this.axios.post<HttpResponse<IDomain>>(
     //         url,
     //         data,
     //         config,
@@ -114,7 +118,7 @@ export class DomainAPI {
     //     const url = generatePath(DOMAIN_PATH.UPDATE_DOMAIN, {
     //         id,
     //     });
-    //     const response = await jfwAxios.put<HttpResponse<boolean>>(url, data);
+    //     const response = await this.axios.put<HttpResponse<boolean>>(url, data);
 
     //     return response.data;
     // }

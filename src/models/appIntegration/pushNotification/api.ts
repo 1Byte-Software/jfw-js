@@ -10,8 +10,9 @@ import {
     ICreateAppIntegrationPushNotificationWithImportFileSettingsParams,
     IUpdateAppIntegrationPushNotificationParams,
 } from './types';
+import { AbstractAPI } from '../../base/AbstractAPI';
 
-export class AppIntegrationPushNotificationAPI {
+export class AppIntegrationPushNotificationAPI extends AbstractAPI extends AbstractAPI {
     /**
      * # Create an app integration push notification
      *
@@ -27,7 +28,7 @@ export class AppIntegrationPushNotificationAPI {
     ) {
         const url =
             APP_INTEGRATION_PUSH_NOTIFICATION_PATH.CREATE_APP_INTEGRATION_PUSH_NOTIFICATION;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAppIntegrationPushNotification>
         >(url, params, config);
 
@@ -49,7 +50,7 @@ export class AppIntegrationPushNotificationAPI {
     ) {
         const url =
             APP_INTEGRATION_PUSH_NOTIFICATION_PATH.CREATE_APP_INTEGRATION_PUSH_NOTIFICATION_WITH_IMPORT_FILE_SETTINGS;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAppIntegrationPushNotification>
         >(url, params, config);
 
@@ -75,7 +76,7 @@ export class AppIntegrationPushNotificationAPI {
                 id,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -102,7 +103,7 @@ export class AppIntegrationPushNotificationAPI {
                 id,
             },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationPushNotification>
         >(url, config);
 
@@ -122,7 +123,7 @@ export class AppIntegrationPushNotificationAPI {
     ) {
         const url =
             APP_INTEGRATION_PUSH_NOTIFICATION_PATH.GET_APP_INTEGRATION_PUSH_NOTIFICATIONS_WITH_BRAND;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationPushNotification[]>
         >(url, config);
 
@@ -150,7 +151,7 @@ export class AppIntegrationPushNotificationAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<
+        const response = await this.axios.put<
             HttpResponse<IAppIntegrationPushNotification>
         >(url, params, config);
 

@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { TIMEZONE_PATH } from './paths';
 import { ITimezone } from './types';
 
-export class TimezoneAPI {
+export class TimezoneAPI extends AbstractAPI {
     /**
      * # Time zones
      *
@@ -15,7 +15,7 @@ export class TimezoneAPI {
      */
     public async getTimezones(config?: AxiosRequestConfig) {
         const url = TIMEZONE_PATH.GET_TIMEZONES;
-        const response = await jfwAxios.get<HttpResponse<ITimezone[]>>(
+        const response = await this.axios.get<HttpResponse<ITimezone[]>>(
             url,
             config,
         );

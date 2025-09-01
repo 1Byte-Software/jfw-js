@@ -1,9 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { CRYPTOGRAPHY_PATH } from './paths';
 
-export class CryptographyAPI {
+export class CryptographyAPI extends AbstractAPI {
     /**
      * # Decrypt
      *
@@ -18,7 +18,7 @@ export class CryptographyAPI {
      */
     public async decrypt(cipherText: string, config?: AxiosRequestConfig) {
         const url = CRYPTOGRAPHY_PATH.DECRYPT;
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             {
                 cipherText,
@@ -43,7 +43,7 @@ export class CryptographyAPI {
      */
     public async encrypt(plainText: string, config?: AxiosRequestConfig) {
         const url = CRYPTOGRAPHY_PATH.ENCRYPT;
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             {
                 plainText,

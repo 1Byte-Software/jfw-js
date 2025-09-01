@@ -1,18 +1,18 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { HeaderKey } from '../../core/client/constants';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { CDN_PATH } from './paths';
 import {
     IFileCDN,
-    IUploadedFileCDN,
     IGetFilesCDNParams,
+    IUploadedFileCDN,
     IUploadFileParams,
 } from './types';
 
-export class CDNAPI {
+export class CDNAPI extends AbstractAPI {
     /**
      * # Delete a file CDN
      *
@@ -26,7 +26,7 @@ export class CDNAPI {
         const url = generatePath(CDN_PATH.DELETE_FILE_CDN, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -47,7 +47,7 @@ export class CDNAPI {
         const url = generatePath(CDN_PATH.GET_FILE_CDN, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IFileCDN>>(
+        const response = await this.axios.get<HttpResponse<IFileCDN>>(
             url,
             config,
         );
@@ -69,7 +69,7 @@ export class CDNAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = CDN_PATH.GET_FILES_CDN;
-        const response = await jfwAxios.get<HttpResponseList<IFileCDN>>(url, {
+        const response = await this.axios.get<HttpResponseList<IFileCDN>>(url, {
             params,
             ...config,
         });
@@ -103,7 +103,7 @@ export class CDNAPI {
             });
         }
 
-        const response = await jfwAxios.post<HttpResponse<IUploadedFileCDN>>(
+        const response = await this.axios.post<HttpResponse<IUploadedFileCDN>>(
             url,
             params,
             {

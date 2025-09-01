@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { PAYMENT_PATH } from './paths';
 import {
     IGeneratePaymentCheckoutLinkParams,
@@ -12,7 +12,7 @@ import {
     IPaymentGenerateCheckoutLinkResponse,
 } from './types';
 
-export class PaymentAPI {
+export class PaymentAPI extends AbstractAPI {
     /**
      * # Generate checkout link to pay payment
      *
@@ -30,7 +30,7 @@ export class PaymentAPI {
         const url = generatePath(PAYMENT_PATH.GENERATE_PAYMENT_CHECKOUT_LINK, {
             id,
         });
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IPaymentGenerateCheckoutLinkResponse>
         >(url, null, {
             params: {
@@ -55,7 +55,7 @@ export class PaymentAPI {
         const url = generatePath(PAYMENT_PATH.GET_PAYMENT, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IPayment>>(
+        const response = await this.axios.get<HttpResponse<IPayment>>(
             url,
             config,
         );
@@ -77,7 +77,7 @@ export class PaymentAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PAYMENT_PATH.GET_PAYMENTS;
-        const response = await jfwAxios.get<HttpResponseList<IPayment>>(url, {
+        const response = await this.axios.get<HttpResponseList<IPayment>>(url, {
             params,
             ...config,
         });
@@ -98,7 +98,7 @@ export class PaymentAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PAYMENT_PATH.GET_OVERVIEW_SELL_DASHBOARD;
-        const response = await jfwAxios.get<HttpResponse<IPaymentDashboard>>(
+        const response = await this.axios.get<HttpResponse<IPaymentDashboard>>(
             url,
             {
                 params: {

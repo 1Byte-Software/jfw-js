@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { ICountSuccessResponse, IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { LICENSE_PATH } from './paths';
 import {
     IApplyLicenseToGivenLoginNameParams,
@@ -18,7 +18,7 @@ import {
     IUpdateLicenseParams,
 } from './types';
 
-export class LicenseAPI {
+export class LicenseAPI extends AbstractAPI {
     /**
      * # Activate a license
      *
@@ -39,7 +39,7 @@ export class LicenseAPI {
         const url = generatePath(LICENSE_PATH.ACTIVATE_LICENSE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<ILicense>>(
+        const response = await this.axios.put<HttpResponse<ILicense>>(
             url,
             null,
             config,
@@ -65,12 +65,16 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.APPLY_LICENSE_TO_LOGGED_USER;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
-            params: {
-                licenseCode,
+        const response = await this.axios.post<HttpResponse<boolean>>(
+            url,
+            null,
+            {
+                params: {
+                    licenseCode,
+                },
+                ...config,
             },
-            ...config,
-        });
+        );
 
         return response.data;
     }
@@ -92,10 +96,14 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.APPLY_LICENSE_TO_GIVEN_LOGIN_NAME;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
-            params,
-            ...config,
-        });
+        const response = await this.axios.post<HttpResponse<boolean>>(
+            url,
+            null,
+            {
+                params,
+                ...config,
+            },
+        );
 
         return response.data;
     }
@@ -117,10 +125,14 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.APPLY_LICENSE_TO_GIVEN_USER;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
-            params,
-            ...config,
-        });
+        const response = await this.axios.post<HttpResponse<boolean>>(
+            url,
+            null,
+            {
+                params,
+                ...config,
+            },
+        );
 
         return response.data;
     }
@@ -139,7 +151,7 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.CHECK_A_LICENSE_CODE;
-        const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
+        const response = await this.axios.get<HttpResponse<boolean>>(url, {
             ...config,
             params: {
                 licenseCode,
@@ -163,7 +175,7 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.CREATE_LICENSES;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<ICountSuccessResponse>
         >(url, params, config);
 
@@ -180,7 +192,7 @@ export class LicenseAPI {
      */
     public async countLicensesCreated(config?: AxiosRequestConfig) {
         const url = LICENSE_PATH.COUNT_LICENSES_CREATED;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<ICountSuccessResponse>
         >(url, config);
 
@@ -200,7 +212,7 @@ export class LicenseAPI {
         const url = generatePath(LICENSE_PATH.DEACTIVATE_LICENSE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<ILicense>>(
+        const response = await this.axios.put<HttpResponse<ILicense>>(
             url,
             null,
             config,
@@ -222,7 +234,7 @@ export class LicenseAPI {
         const url = generatePath(LICENSE_PATH.DELETE_LICENSE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(url);
+        const response = await this.axios.delete<HttpResponse<boolean>>(url);
 
         return response.data;
     }
@@ -241,7 +253,7 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.GET_LICENSES;
-        const response = await jfwAxios.get<HttpResponseList<ILicense>>(url, {
+        const response = await this.axios.get<HttpResponseList<ILicense>>(url, {
             params,
             ...config,
         });
@@ -262,7 +274,7 @@ export class LicenseAPI {
         const url = generatePath(LICENSE_PATH.GET_LICENSE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<ILicense>>(
+        const response = await this.axios.get<HttpResponse<ILicense>>(
             url,
             config,
         );
@@ -286,7 +298,7 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.GENERATE_LICENSE_CODE;
-        const response = await jfwAxios.get<HttpResponse<string>>(url, {
+        const response = await this.axios.get<HttpResponse<string>>(url, {
             params,
             ...config,
         });
@@ -308,7 +320,7 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.PURCHASE_TO_ADD_LICENSES_BY_CHECKOUT_LINK;
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             params,
             config,
@@ -332,7 +344,7 @@ export class LicenseAPI {
     ) {
         const url = LICENSE_PATH.PURCHASE_TO_ADD_LICENSES_BY_WALLET;
         const { walletId, ...restParams } = params;
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             restParams,
             {
@@ -364,7 +376,7 @@ export class LicenseAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = LICENSE_PATH.STATISTICS_MONTHLY_LICENSES;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<ILicenseStatisticsReportSummary>
         >(url, {
             params,
@@ -392,7 +404,7 @@ export class LicenseAPI {
             id,
         });
 
-        const response = await jfwAxios.put<HttpResponse<ILicense>>(
+        const response = await this.axios.put<HttpResponse<ILicense>>(
             url,
             bodyParams,
             config,

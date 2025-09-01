@@ -1,8 +1,8 @@
-import { AxiosRequestConfig } from 'axios';
+import { Axios, AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { BRAND_PATH } from './paths';
 import {
     IBrand,
@@ -11,19 +11,20 @@ import {
     IGetBrandsParams,
     IUpdateBrandParams,
 } from './types';
-import { BrandProfileAPI } from './profile';
-import { BrandSettingAPI } from './setting';
-import { EmailAddressAPI } from './emailAddress';
+import { BrandProfileAPI } from './profile/api';
+import { BrandSettingAPI } from './setting/api';
+import { EmailAddressAPI } from './emailAddress/api';
 
-export class BrandAPI {
+export class BrandAPI extends AbstractAPI {
     public brandProfile: BrandProfileAPI;
     public brandSetting: BrandSettingAPI;
     public emailAddress: EmailAddressAPI;
 
-    constructor() {
-        this.brandProfile = new BrandProfileAPI();
-        this.brandSetting = new BrandSettingAPI();
-        this.emailAddress = new EmailAddressAPI();
+    constructor(protected axios: Axios) {
+        super(axios);
+        this.brandProfile = new BrandProfileAPI(axios);
+        this.brandSetting = new BrandSettingAPI(axios);
+        this.emailAddress = new EmailAddressAPI(axios);
     }
 
     /**
@@ -44,7 +45,10 @@ export class BrandAPI {
         const url = generatePath(BRAND_PATH.CHECK_DOMAIN_IF_EXISTS, {
             domain,
         });
-        const response = await jfwAxios.get<HttpResponse<boolean>>(url, config);
+        const response = await this.axios.get<HttpResponse<boolean>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -63,7 +67,7 @@ export class BrandAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = BRAND_PATH.CREATE_BRAND;
-        const response = await jfwAxios.post<HttpResponse<IBrand>>(
+        const response = await this.axios.post<HttpResponse<IBrand>>(
             url,
             params,
             config,
@@ -84,7 +88,7 @@ export class BrandAPI {
      */
     public async generateNewDomain(config?: AxiosRequestConfig) {
         const url = BRAND_PATH.GENERATE_NEW_DOMAIN;
-        const response = await jfwAxios.get<HttpResponse<IGeneratedDomain>>(
+        const response = await this.axios.get<HttpResponse<IGeneratedDomain>>(
             url,
             config,
         );
@@ -105,7 +109,10 @@ export class BrandAPI {
         const url = generatePath(BRAND_PATH.GET_BRAND, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IBrand>>(url, config);
+        const response = await this.axios.get<HttpResponse<IBrand>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -128,7 +135,10 @@ export class BrandAPI {
      */
     public async getBrandByURL(config?: AxiosRequestConfig) {
         const url = BRAND_PATH.GET_BRAND_BY_URL;
-        const response = await jfwAxios.get<HttpResponse<IBrand>>(url, config);
+        const response = await this.axios.get<HttpResponse<IBrand>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -147,7 +157,7 @@ export class BrandAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = BRAND_PATH.GET_BRANDS;
-        const response = await jfwAxios.get<HttpResponseList<IBrand>>(url, {
+        const response = await this.axios.get<HttpResponseList<IBrand>>(url, {
             ...config,
             params,
         });
@@ -173,7 +183,7 @@ export class BrandAPI {
         const url = generatePath(BRAND_PATH.UPDATE_BRAND, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             params,
             config,

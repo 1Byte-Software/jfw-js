@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { ISSUE_CATEGORY_PATH } from './paths';
 import {
     ICreateIssueCategoryParams,
@@ -11,7 +11,7 @@ import {
     IUpdateIssueCategoryParams,
 } from './types';
 
-export class IssueCategoryAPI {
+export class IssueCategoryAPI extends AbstractAPI {
     /**
      * # Create an issue category
      *
@@ -26,7 +26,7 @@ export class IssueCategoryAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ISSUE_CATEGORY_PATH.CREATE_ISSUE_CATEGORY;
-        const response = await jfwAxios.post<HttpResponse<IIssueCategory>>(
+        const response = await this.axios.post<HttpResponse<IIssueCategory>>(
             url,
             params,
             config,
@@ -48,7 +48,7 @@ export class IssueCategoryAPI {
         const url = generatePath(ISSUE_CATEGORY_PATH.DELETE_ISSUE_CATEGORY, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -70,7 +70,7 @@ export class IssueCategoryAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ISSUE_CATEGORY_PATH.GET_ISSUE_CATEGORIES;
-        const response = await jfwAxios.get<HttpResponse<IIssueCategory[]>>(
+        const response = await this.axios.get<HttpResponse<IIssueCategory[]>>(
             url,
             {
                 params,
@@ -94,7 +94,7 @@ export class IssueCategoryAPI {
         const url = generatePath(ISSUE_CATEGORY_PATH.GET_ISSUE_CATEGORY, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IIssueCategory>>(
+        const response = await this.axios.get<HttpResponse<IIssueCategory>>(
             url,
             config,
         );
@@ -120,7 +120,7 @@ export class IssueCategoryAPI {
         const url = generatePath(ISSUE_CATEGORY_PATH.UPDATE_ISSUE_CATEGORY, {
             id,
         });
-        const response = await jfwAxios.patch<HttpResponse<IIssueCategory>>(
+        const response = await this.axios.patch<HttpResponse<IIssueCategory>>(
             url,
             params,
             config,

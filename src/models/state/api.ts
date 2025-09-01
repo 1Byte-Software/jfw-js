@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { STATE_PATH } from './paths';
 import { IState } from './types';
 
-export class StateAPI {
+export class StateAPI extends AbstractAPI {
     /**
      * # States
      *
@@ -15,7 +15,7 @@ export class StateAPI {
      */
     public async getStates(config?: AxiosRequestConfig) {
         const url = STATE_PATH.GET_STATES;
-        const response = await jfwAxios.get<HttpResponse<IState[]>>(
+        const response = await this.axios.get<HttpResponse<IState[]>>(
             url,
             config,
         );

@@ -24,7 +24,7 @@ export * from './language';
 export * from './license';
 export * from './notification';
 export * from './organization';
-export * from './packages';
+export * from './package';
 export * from './payment';
 export * from './permission';
 export * from './price';

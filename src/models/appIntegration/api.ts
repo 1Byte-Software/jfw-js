@@ -1,24 +1,26 @@
-import { AxiosRequestConfig } from 'axios';
+import { Axios, AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { APP_INTEGRATION_PATH } from './paths';
-import { AppIntegrationPushNotificationAPI } from './pushNotification';
-import { AppIntegrationReCAPTCHAAPI } from './recaptcha';
-import { AppIntegrationSMSAPI } from './sms';
-import { AppIntegrationSMTPAPI } from './smtp';
 import { IAppIntegration, IGetAppIntegrationsParams } from './types';
+import { AbstractAPI } from '../base/AbstractAPI';
+import { AppIntegrationSMSAPI } from './sms/api';
+import { AppIntegrationPushNotificationAPI } from './pushNotification/api';
+import { AppIntegrationSMTPAPI } from './smtp/api';
+import { AppIntegrationReCAPTCHAAPI } from './recaptcha/api';
 
-export class AppIntegrationAPI {
+export class AppIntegrationAPI extends AbstractAPI {
     public sms: AppIntegrationSMSAPI;
     public pushNotification: AppIntegrationPushNotificationAPI;
     public smtp: AppIntegrationSMTPAPI;
     public reCAPTCHA: AppIntegrationReCAPTCHAAPI;
 
-    constructor() {
-        this.sms = new AppIntegrationSMSAPI();
-        this.pushNotification = new AppIntegrationPushNotificationAPI();
-        this.smtp = new AppIntegrationSMTPAPI();
-        this.reCAPTCHA = new AppIntegrationReCAPTCHAAPI();
+    constructor(protected axios: Axios) {
+        super(axios);
+        this.sms = new AppIntegrationSMSAPI(axios);
+        this.pushNotification = new AppIntegrationPushNotificationAPI(axios);
+        this.smtp = new AppIntegrationSMTPAPI(axios);
+        this.reCAPTCHA = new AppIntegrationReCAPTCHAAPI(axios);
     }
 
     /**
@@ -35,7 +37,7 @@ export class AppIntegrationAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = APP_INTEGRATION_PATH.GET_APP_INTEGRATIONS;
-        const response = await jfwAxios.get<HttpResponse<IAppIntegration[]>>(
+        const response = await this.axios.get<HttpResponse<IAppIntegration[]>>(
             url,
             {
                 params,

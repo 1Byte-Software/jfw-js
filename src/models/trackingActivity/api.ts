@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { TRACKING_ACTIVITY_PATH } from './paths';
 import { IGetTrackingActivitiesParams, ITrackingActivity } from './types';
 
-export class TrackingActivityAPI {
+export class TrackingActivityAPI extends AbstractAPI {
     /**
      * # Get activities
      *
@@ -21,7 +21,7 @@ export class TrackingActivityAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = TRACKING_ACTIVITY_PATH.GET_ACTIVITIES;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponseList<ITrackingActivity>
         >(url, {
             params,
@@ -44,7 +44,7 @@ export class TrackingActivityAPI {
         const url = generatePath(TRACKING_ACTIVITY_PATH.GET_ACTIVITY, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<ITrackingActivity>>(
+        const response = await this.axios.get<HttpResponse<ITrackingActivity>>(
             url,
             config,
         );

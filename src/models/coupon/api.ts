@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { COUPON_PATH } from './paths';
 import {
     ICoupon,
@@ -11,7 +11,7 @@ import {
     IUpdateCouponParams,
 } from './types';
 
-export class CouponAPI {
+export class CouponAPI extends AbstractAPI {
     /**
      * # Create a Coupon
      *
@@ -26,7 +26,7 @@ export class CouponAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = COUPON_PATH.CREATE_COUPON;
-        const response = await jfwAxios.post<HttpResponse<ICoupon>>(
+        const response = await this.axios.post<HttpResponse<ICoupon>>(
             url,
             params,
             config,
@@ -48,7 +48,7 @@ export class CouponAPI {
         const url = generatePath(COUPON_PATH.DELETE_COUPON, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -69,7 +69,10 @@ export class CouponAPI {
         const url = generatePath(COUPON_PATH.GET_COUPON, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<ICoupon>>(url, config);
+        const response = await this.axios.get<HttpResponse<ICoupon>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -88,7 +91,7 @@ export class CouponAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = COUPON_PATH.GET_COUPONS;
-        const response = await jfwAxios.get<HttpResponseList<ICoupon>>(url, {
+        const response = await this.axios.get<HttpResponseList<ICoupon>>(url, {
             params,
             ...config,
         });
@@ -114,7 +117,7 @@ export class CouponAPI {
         const url = generatePath(COUPON_PATH.UPDATE_COUPON, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<ICoupon>>(
+        const response = await this.axios.put<HttpResponse<ICoupon>>(
             url,
             params,
             config,

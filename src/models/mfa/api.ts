@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { MFA_PATH } from './paths';
 import { IMFA } from './types';
 
-export class MFAAPI {
+export class MFAAPI extends AbstractAPI {
     /**
      * # Get a list of MFA
      *
@@ -15,7 +15,10 @@ export class MFAAPI {
      */
     public async getListOfMFA(config?: AxiosRequestConfig) {
         const url = MFA_PATH.GET_LIST_OF_MFA;
-        const response = await jfwAxios.get<HttpResponse<IMFA[]>>(url, config);
+        const response = await this.axios.get<HttpResponse<IMFA[]>>(
+            url,
+            config,
+        );
 
         return response.data;
     }

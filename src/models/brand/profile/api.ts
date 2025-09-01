@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
 import { BRAND_PROFILE_PATH } from './paths';
 import { IUpdateBrandProfileParams } from './types';
+import { AbstractAPI } from '../../base/AbstractAPI';
 
-export class BrandProfileAPI {
+export class BrandProfileAPI extends AbstractAPI {
     /**
      * # Update a brand's profile
      *
@@ -25,7 +25,7 @@ export class BrandProfileAPI {
         const url = generatePath(BRAND_PROFILE_PATH.UPDATE_BRAND_PROFILE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             params,
             config,

@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { PRICE_PATH } from './paths';
 import {
     ICreatePriceParams,
@@ -12,7 +12,7 @@ import {
     IUpdatePriceParams,
 } from './types';
 
-export class PriceAPI {
+export class PriceAPI extends AbstractAPI {
     /**
      * # Create a price
      *
@@ -27,7 +27,7 @@ export class PriceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PRICE_PATH.CREATE_PRICE;
-        const response = await jfwAxios.post<HttpResponse<IPrice>>(
+        const response = await this.axios.post<HttpResponse<IPrice>>(
             url,
             params,
             config,
@@ -49,7 +49,7 @@ export class PriceAPI {
         const url = generatePath(PRICE_PATH.DELETE_PRICE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -80,12 +80,16 @@ export class PriceAPI {
         const url = generatePath(PRICE_PATH.GENERATE_CHECKOUT_LINK, {
             priceId,
         });
-        const response = await jfwAxios.post<HttpResponse<string>>(url, null, {
-            params: {
-                appIntegrationId,
+        const response = await this.axios.post<HttpResponse<string>>(
+            url,
+            null,
+            {
+                params: {
+                    appIntegrationId,
+                },
+                ...config,
             },
-            ...config,
-        });
+        );
 
         return response.data;
     }
@@ -103,7 +107,10 @@ export class PriceAPI {
         const url = generatePath(PRICE_PATH.GET_PRICE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IPrice>>(url, config);
+        const response = await this.axios.get<HttpResponse<IPrice>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -122,7 +129,7 @@ export class PriceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PRICE_PATH.GET_PRICES;
-        const response = await jfwAxios.get<HttpResponse<IPrice[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IPrice[]>>(url, {
             params,
             ...config,
         });
@@ -148,7 +155,7 @@ export class PriceAPI {
         const url = generatePath(PRICE_PATH.UPDATE_PRICE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IPrice>>(
+        const response = await this.axios.put<HttpResponse<IPrice>>(
             url,
             params,
             config,

@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { TRACKING_EMAIL_PATH } from './paths';
 import { IGetTrackingEmailsParams, ITrackingEmail } from './types';
 
-export class TrackingEmailAPI {
+export class TrackingEmailAPI extends AbstractAPI {
     /**
      * # Get a tracking email
      *
@@ -20,7 +20,7 @@ export class TrackingEmailAPI {
         const url = generatePath(TRACKING_EMAIL_PATH.GET_EMAIL, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<ITrackingEmail>>(
+        const response = await this.axios.get<HttpResponse<ITrackingEmail>>(
             url,
             config,
         );
@@ -40,7 +40,7 @@ export class TrackingEmailAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = TRACKING_EMAIL_PATH.GET_EMAILS;
-        const response = await jfwAxios.get<HttpResponseList<ITrackingEmail>>(
+        const response = await this.axios.get<HttpResponseList<ITrackingEmail>>(
             url,
             {
                 params,

@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { ICountSuccessResponse, IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { NOTIFICATION_PATH } from './paths';
 import {
     ICreateBroadcastParams,
@@ -13,7 +13,7 @@ import {
     ITestPushNotificationDataMessageParams,
 } from './types';
 
-export class NotificationAPI {
+export class NotificationAPI extends AbstractAPI {
     /**
      * # Create a broadcast
      *
@@ -29,7 +29,7 @@ export class NotificationAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = NOTIFICATION_PATH.CREATE_BROADCAST;
-        const response = await jfwAxios.post<HttpResponse<INotification>>(
+        const response = await this.axios.post<HttpResponse<INotification>>(
             url,
             params,
             config,
@@ -54,7 +54,7 @@ export class NotificationAPI {
         const url = generatePath(NOTIFICATION_PATH.GET_NOTIFICATION, {
             notificationId,
         });
-        const response = await jfwAxios.get<HttpResponse<INotification>>(
+        const response = await this.axios.get<HttpResponse<INotification>>(
             url,
             config,
         );
@@ -76,7 +76,7 @@ export class NotificationAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = NOTIFICATION_PATH.GET_NOTIFICATIONS;
-        const response = await jfwAxios.get<HttpResponseList<INotification>>(
+        const response = await this.axios.get<HttpResponseList<INotification>>(
             url,
             {
                 params,
@@ -101,7 +101,7 @@ export class NotificationAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = NOTIFICATION_PATH.PUSH_NOTIFICATION_MESSAGE_FOR_TOKENS;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IPushNotificationResponse>
         >(url, null, {
             params,
@@ -131,7 +131,7 @@ export class NotificationAPI {
     ) {
         const url = NOTIFICATION_PATH.PUSH_NOTIFICATION_DATA_MESSAGE_BY_TOKENS;
 
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IPushNotificationResponse>
         >(url, data, {
             params: {
@@ -163,7 +163,7 @@ export class NotificationAPI {
     ) {
         const url = NOTIFICATION_PATH.TEST_PUSH_NOTIFICATION_DATA_MESSAGE;
 
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<ICountSuccessResponse>
         >(url, null, {
             params,

@@ -1,12 +1,12 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { INVOICE_PATH } from './paths';
 import { IGetInvoicesParams, IInvoice } from './types';
 
-export class InvoiceAPI {
+export class InvoiceAPI extends AbstractAPI {
     /**
      * # Delete an invoice
      *
@@ -20,7 +20,7 @@ export class InvoiceAPI {
         const url = generatePath(INVOICE_PATH.DELETE_INVOICE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -42,7 +42,7 @@ export class InvoiceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = INVOICE_PATH.GET_INVOICES;
-        const response = await jfwAxios.get<HttpResponseList<IInvoice>>(url, {
+        const response = await this.axios.get<HttpResponseList<IInvoice>>(url, {
             params,
             ...config,
         });
@@ -63,7 +63,7 @@ export class InvoiceAPI {
         const url = generatePath(INVOICE_PATH.GET_INVOICE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IInvoice>>(
+        const response = await this.axios.get<HttpResponse<IInvoice>>(
             url,
             config,
         );
@@ -78,7 +78,7 @@ export class InvoiceAPI {
         const url = generatePath(INVOICE_PATH.DOWNLOAD_INVOICE, {
             id,
         });
-        const response = await jfwAxios.post<Blob>(url, null, config);
+        const response = await this.axios.post<Blob>(url, null, config);
 
         return response.data;
     }

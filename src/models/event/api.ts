@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { IEmailTemplate } from '../emailTemplate';
 import { EVENT_PATH } from './paths';
 import {
@@ -17,7 +17,7 @@ import {
     IWalletEarningEvent,
 } from './types';
 
-export class EventAPI {
+export class EventAPI extends AbstractAPI {
     /**
      * # Get an event
      *
@@ -31,7 +31,10 @@ export class EventAPI {
         const url = generatePath(EVENT_PATH.GET_EVENT, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IEvent>>(url, config);
+        const response = await this.axios.get<HttpResponse<IEvent>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -57,7 +60,7 @@ export class EventAPI {
                 eventId,
             },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IDefaultEmailTemplate>
         >(url, {
             params,
@@ -86,7 +89,7 @@ export class EventAPI {
                 eventId,
             },
         );
-        const response = await jfwAxios.get<HttpResponse<IEmailTemplate>>(
+        const response = await this.axios.get<HttpResponse<IEmailTemplate>>(
             url,
             config,
         );
@@ -108,7 +111,7 @@ export class EventAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = EVENT_PATH.GET_EVENTS;
-        const response = await jfwAxios.get<HttpResponseList<IEvent>>(url, {
+        const response = await this.axios.get<HttpResponseList<IEvent>>(url, {
             params,
             ...config,
         });
@@ -130,7 +133,7 @@ export class EventAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = EVENT_PATH.GET_EVENTS;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponseList<IWalletEarningEvent>
         >(url, {
             params,
@@ -152,7 +155,7 @@ export class EventAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = EVENT_PATH.GET_EVENTS_ASSOCIATED_WITH_EMAIL_TEMPLATES;
-        const response = await jfwAxios.get<HttpResponse<IEvent[]>>(
+        const response = await this.axios.get<HttpResponse<IEvent[]>>(
             url,
             config,
         );
@@ -170,7 +173,7 @@ export class EventAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = EVENT_PATH.GET_EVENTS_ASSOCIATED_WITH_PHONE_TEMPLATES;
-        const response = await jfwAxios.get<HttpResponse<IEvent[]>>(
+        const response = await this.axios.get<HttpResponse<IEvent[]>>(
             url,
             config,
         );
@@ -194,7 +197,7 @@ export class EventAPI {
         const url = generatePath(EVENT_PATH.GET_PHONE_TEMPLATE_BY_EVENT, {
             eventId,
         });
-        const response = await jfwAxios.get<HttpResponse<IPhoneTemplate>>(
+        const response = await this.axios.get<HttpResponse<IPhoneTemplate>>(
             url,
             config,
         );
@@ -222,7 +225,7 @@ export class EventAPI {
                 eventId,
             },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IDefaultPhoneTemplate>
         >(url, {
             params,

@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { APP_INTEGRATION_RECAPTCHA_PATH } from './paths';
 import {
     IAppIntegrationReCAPTCHA,
@@ -10,7 +10,7 @@ import {
     IUpdateAppIntegrationReCAPTCHAParams,
 } from './types';
 
-export class AppIntegrationReCAPTCHAAPI {
+export class AppIntegrationReCAPTCHAAPI extends AbstractAPI {
     /**
      * # Creates an app integration reCAPTCHA
      *
@@ -26,7 +26,7 @@ export class AppIntegrationReCAPTCHAAPI {
     ) {
         const url =
             APP_INTEGRATION_RECAPTCHA_PATH.CREATE_APP_INTEGRATION_RECAPTCHA;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAppIntegrationReCAPTCHA>
         >(url, params, config);
 
@@ -52,7 +52,7 @@ export class AppIntegrationReCAPTCHAAPI {
                 id,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -79,7 +79,7 @@ export class AppIntegrationReCAPTCHAAPI {
                 id,
             },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationReCAPTCHA>
         >(url, config);
 
@@ -99,7 +99,7 @@ export class AppIntegrationReCAPTCHAAPI {
     ) {
         const url =
             APP_INTEGRATION_RECAPTCHA_PATH.GET_APPS_INTEGRATION_RECAPTCHA_WITH_BRAND;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationReCAPTCHA[]>
         >(url, config);
 
@@ -126,7 +126,7 @@ export class AppIntegrationReCAPTCHAAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<
+        const response = await this.axios.put<
             HttpResponse<IAppIntegrationReCAPTCHA>
         >(url, bodyParams, config);
 

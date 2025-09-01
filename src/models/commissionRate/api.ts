@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { COMMISSION_RATE_PATH } from './paths';
 import {
     ICommissionRate,
@@ -11,7 +11,7 @@ import {
     IUpdateCommissionRateParams,
 } from './types';
 
-export class CommissionRateAPI {
+export class CommissionRateAPI extends AbstractAPI {
     /**
      * # Creates a commission rate
      *
@@ -26,7 +26,7 @@ export class CommissionRateAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = COMMISSION_RATE_PATH.CREATE_COMMISSION_RATE;
-        const response = await jfwAxios.post<HttpResponse<ICommissionRate>>(
+        const response = await this.axios.post<HttpResponse<ICommissionRate>>(
             url,
             params,
             config,
@@ -48,7 +48,7 @@ export class CommissionRateAPI {
         const url = generatePath(COMMISSION_RATE_PATH.DELETE_COMMISSION_RATE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -69,7 +69,7 @@ export class CommissionRateAPI {
         const url = generatePath(COMMISSION_RATE_PATH.GET_COMMISSION_RATE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<ICommissionRate>>(
+        const response = await this.axios.get<HttpResponse<ICommissionRate>>(
             url,
             config,
         );
@@ -95,7 +95,7 @@ export class CommissionRateAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = COMMISSION_RATE_PATH.GET_DISCOUNT_VALUE;
-        const response = await jfwAxios.get<HttpResponse<number>>(url, {
+        const response = await this.axios.get<HttpResponse<number>>(url, {
             params: {
                 quantity,
             },
@@ -119,7 +119,7 @@ export class CommissionRateAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = COMMISSION_RATE_PATH.GET_COMMISSION_RATES;
-        const response = await jfwAxios.get<HttpResponse<ICommissionRate[]>>(
+        const response = await this.axios.get<HttpResponse<ICommissionRate[]>>(
             url,
             {
                 params,
@@ -148,7 +148,7 @@ export class CommissionRateAPI {
         const url = generatePath(COMMISSION_RATE_PATH.UPDATE_COMMISSION_RATE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             params,
             config,

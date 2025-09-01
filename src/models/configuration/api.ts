@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { CONFIGURATION_PATH } from './paths';
 import {
     IConfiguration,
@@ -11,7 +11,7 @@ import {
     IUpdateConfigurationParams,
 } from './types';
 
-export class ConfigurationAPI {
+export class ConfigurationAPI extends AbstractAPI {
     /**
      * # Create a configuration
      *
@@ -26,7 +26,7 @@ export class ConfigurationAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = CONFIGURATION_PATH.CREATE_CONFIGURATION;
-        const response = await jfwAxios.post<HttpResponse<IConfiguration>>(
+        const response = await this.axios.post<HttpResponse<IConfiguration>>(
             url,
             params,
             config,
@@ -48,7 +48,7 @@ export class ConfigurationAPI {
         const url = generatePath(CONFIGURATION_PATH.DELETE_CONFIGURATION, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -70,7 +70,7 @@ export class ConfigurationAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = CONFIGURATION_PATH.GET_CONFIGURATIONS;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<HttpResponse<IConfiguration[]>>
         >(url, {
             params,
@@ -93,7 +93,7 @@ export class ConfigurationAPI {
         const url = generatePath(CONFIGURATION_PATH.GET_CONFIGURATION, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IConfiguration>>(
+        const response = await this.axios.get<HttpResponse<IConfiguration>>(
             url,
             config,
         );
@@ -119,7 +119,7 @@ export class ConfigurationAPI {
         const url = generatePath(CONFIGURATION_PATH.UPDATE_CONFIGURATION, {
             id,
         });
-        const response = await jfwAxios.put(url, params, config);
+        const response = await this.axios.put(url, params, config);
 
         return response.data;
     }

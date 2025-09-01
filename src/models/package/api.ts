@@ -3,6 +3,7 @@ import { HttpResponse } from '../../core';
 import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { IPrice } from '../price';
 import { PACKAGE_PATH } from './paths';
 import {
@@ -20,7 +21,7 @@ import {
     IUpdatePackageParams,
 } from './types';
 
-export class PackageAPI {
+export class PackageAPI extends AbstractAPI {
     /**
      * # Add features to a package
      *

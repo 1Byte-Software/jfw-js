@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { IPrice } from '../price';
 import { SUBSCRIPTION_TYPE_PATH } from './paths';
 import {
@@ -12,7 +12,7 @@ import {
     IUpdateSubscriptionTypeParams,
 } from './types';
 
-export class SubscriptionTypeAPI {
+export class SubscriptionTypeAPI extends AbstractAPI {
     /**
      * # Create a subscription type
      *
@@ -27,7 +27,7 @@ export class SubscriptionTypeAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = SUBSCRIPTION_TYPE_PATH.CREATE_SUBSCRIPTION_TYPE;
-        const response = await jfwAxios.post<HttpResponse<ISubscriptionType>>(
+        const response = await this.axios.post<HttpResponse<ISubscriptionType>>(
             url,
             params,
             config,
@@ -55,7 +55,7 @@ export class SubscriptionTypeAPI {
                 id,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -76,7 +76,7 @@ export class SubscriptionTypeAPI {
         const url = generatePath(SUBSCRIPTION_TYPE_PATH.GET_SUBSCRIPTION_TYPE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<ISubscriptionType>>(
+        const response = await this.axios.get<HttpResponse<ISubscriptionType>>(
             url,
             config,
         );
@@ -103,7 +103,7 @@ export class SubscriptionTypeAPI {
                 subscriptionTypeId,
             },
         );
-        const response = await jfwAxios.get<HttpResponse<IPrice[]>>(
+        const response = await this.axios.get<HttpResponse<IPrice[]>>(
             url,
             config,
         );
@@ -125,13 +125,12 @@ export class SubscriptionTypeAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = SUBSCRIPTION_TYPE_PATH.GET_SUBSCRIPTION_TYPES;
-        const response = await jfwAxios.get<HttpResponse<ISubscriptionType[]>>(
-            url,
-            {
-                params,
-                ...config,
-            },
-        );
+        const response = await this.axios.get<
+            HttpResponse<ISubscriptionType[]>
+        >(url, {
+            params,
+            ...config,
+        });
 
         return response.data;
     }
@@ -157,7 +156,7 @@ export class SubscriptionTypeAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<HttpResponse<ISubscriptionType>>(
+        const response = await this.axios.put<HttpResponse<ISubscriptionType>>(
             url,
             params,
             config,

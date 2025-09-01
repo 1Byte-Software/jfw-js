@@ -1,11 +1,11 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { BRAND_SETTING_PATH } from './paths';
 import { IUpdateBrandSettingParams } from './types';
-export class BrandSettingAPI {
+export class BrandSettingAPI extends AbstractAPI {
     /**
      * # Update a brand's setting
      *
@@ -24,7 +24,7 @@ export class BrandSettingAPI {
         const url = generatePath(BRAND_SETTING_PATH.UPDATE_BRAND_SETTING, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             params,
             config,

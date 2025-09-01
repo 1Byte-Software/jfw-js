@@ -5,9 +5,10 @@ import {
     IStatisticCommon,
     IStatisticCommonParams,
 } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
+import { IUser } from '../user';
 import { DEVICE_PATH } from './paths';
 import {
     ICheckUserAccessDeviceParams,
@@ -17,9 +18,8 @@ import {
     IRefreshDeviceTokenParams,
     IUpdateDeviceParams,
 } from './types';
-import { IUser } from '../user';
 
-export class DeviceAPI {
+export class DeviceAPI extends AbstractAPI {
     /**
      * # Checks user access device
      *
@@ -34,7 +34,7 @@ export class DeviceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = DEVICE_PATH.CHECK_USER_ACCESS_DEVICE;
-        const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
+        const response = await this.axios.get<HttpResponse<boolean>>(url, {
             ...config,
             params,
         });
@@ -56,7 +56,7 @@ export class DeviceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = DEVICE_PATH.CREATE_DEVICE;
-        const response = await jfwAxios.post<HttpResponse<IDevice>>(
+        const response = await this.axios.post<HttpResponse<IDevice>>(
             url,
             params,
             config,
@@ -78,7 +78,7 @@ export class DeviceAPI {
         const url = generatePath(DEVICE_PATH.DELETE_DEVICE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -99,7 +99,10 @@ export class DeviceAPI {
         const url = generatePath(DEVICE_PATH.GET_DEVICE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IDevice>>(url, config);
+        const response = await this.axios.get<HttpResponse<IDevice>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -114,7 +117,10 @@ export class DeviceAPI {
      */
     public async getCurrentDeviceOfUserAuthorized(config?: AxiosRequestConfig) {
         const url = DEVICE_PATH.GET_CURRENT_DEVICE_OF_USER_AUTHORIZED;
-        const response = await jfwAxios.get<HttpResponse<IDevice>>(url, config);
+        const response = await this.axios.get<HttpResponse<IDevice>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -133,7 +139,7 @@ export class DeviceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = DEVICE_PATH.GET_DEVICES;
-        const response = await jfwAxios.get<HttpResponseList<IDevice>>(url, {
+        const response = await this.axios.get<HttpResponseList<IDevice>>(url, {
             params,
             ...config,
         });
@@ -157,7 +163,10 @@ export class DeviceAPI {
         const url = generatePath(DEVICE_PATH.GET_USERS_FROM_DEVICE_ID, {
             deviceId,
         });
-        const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
+        const response = await this.axios.get<HttpResponse<IUser[]>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -183,7 +192,10 @@ export class DeviceAPI {
         const url = generatePath(DEVICE_PATH.GET_USERS_FROM_DEVICE_CODE, {
             deviceCode,
         });
-        const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, config);
+        const response = await this.axios.get<HttpResponse<IUser[]>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -202,7 +214,7 @@ export class DeviceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = DEVICE_PATH.REFRESH_DEVICE_TOKEN;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -225,7 +237,7 @@ export class DeviceAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = DEVICE_PATH.STATISTICS;
-        const response = await jfwAxios.get<HttpResponse<IStatisticCommon[]>>(
+        const response = await this.axios.get<HttpResponse<IStatisticCommon[]>>(
             url,
             {
                 params,
@@ -253,7 +265,7 @@ export class DeviceAPI {
         const url = generatePath(DEVICE_PATH.UPDATE_DEVICE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IDevice>>(
+        const response = await this.axios.put<HttpResponse<IDevice>>(
             url,
             params,
             config,

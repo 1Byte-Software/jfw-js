@@ -10,7 +10,7 @@ import {
     IUpdateAppIntegrationAnalyticsParams,
 } from './types';
 
-export class AppIntegrationAnalyticsAPI {
+export class AppIntegrationAnalyticsAPI extends AbstractAPI {
     /**
      * # Creates an app integration analytics
      *
@@ -26,7 +26,7 @@ export class AppIntegrationAnalyticsAPI {
     ) {
         const url =
             APP_INTEGRATION_ANALYTICS_PATH.CREATE_APP_INTEGRATION_ANALYTICS;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAppIntegrationAnalytics>
         >(url, params, config);
 
@@ -52,7 +52,7 @@ export class AppIntegrationAnalyticsAPI {
                 id,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -79,7 +79,7 @@ export class AppIntegrationAnalyticsAPI {
                 id,
             },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationAnalytics>
         >(url, config);
 
@@ -99,7 +99,7 @@ export class AppIntegrationAnalyticsAPI {
     ) {
         const url =
             APP_INTEGRATION_ANALYTICS_PATH.GET_APP_INTEGRATION_ANALYTICS_WITH_BRAND;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationAnalytics[]>
         >(url, config);
 
@@ -126,7 +126,7 @@ export class AppIntegrationAnalyticsAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<
+        const response = await this.axios.put<
             HttpResponse<IAppIntegrationAnalytics>
         >(url, bodyParams, config);
 

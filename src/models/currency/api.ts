@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { CURRENCY_PATH } from './paths';
 import { ICurrency, IGetCurrenciesParams } from './types';
 
-export class CurrencyAPI {
+export class CurrencyAPI extends AbstractAPI {
     /**
      * # Currencies
      *
@@ -19,10 +19,13 @@ export class CurrencyAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = CURRENCY_PATH.GET_CURRENCIES;
-        const response = await jfwAxios.get<HttpResponseList<ICurrency>>(url, {
-            ...config,
-            params,
-        });
+        const response = await this.axios.get<HttpResponseList<ICurrency>>(
+            url,
+            {
+                ...config,
+                params,
+            },
+        );
 
         return response.data;
     }

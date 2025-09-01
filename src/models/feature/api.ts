@@ -1,9 +1,9 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
-import { IPackage } from '../packages';
+import { AbstractAPI } from '../base/AbstractAPI';
+import { IPackage } from '../package';
 import { FEATURE_PATH } from './paths';
 import {
     IAddPackageToFeatureParams,
@@ -13,7 +13,7 @@ import {
     IUpdateFeatureParams,
 } from './types';
 
-export class FeatureAPI {
+export class FeatureAPI extends AbstractAPI {
     /**
      * # Add packages to a feature
      *
@@ -32,7 +32,7 @@ export class FeatureAPI {
         const url = generatePath(FEATURE_PATH.ADD_PACKAGES_TO_FEATURE, {
             featureId,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -55,7 +55,7 @@ export class FeatureAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = FEATURE_PATH.CREATE_FEATURE;
-        const response = await jfwAxios.post<HttpResponse<IFeature>>(
+        const response = await this.axios.post<HttpResponse<IFeature>>(
             url,
             params,
             config,
@@ -77,7 +77,7 @@ export class FeatureAPI {
         const url = generatePath(FEATURE_PATH.DELETE_FEATURE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -98,7 +98,7 @@ export class FeatureAPI {
         const url = generatePath(FEATURE_PATH.GET_FEATURE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IFeature>>(
+        const response = await this.axios.get<HttpResponse<IFeature>>(
             url,
             config,
         );
@@ -120,7 +120,7 @@ export class FeatureAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = FEATURE_PATH.GET_FEATURES;
-        const response = await jfwAxios.get<HttpResponseList<IFeature>>(url, {
+        const response = await this.axios.get<HttpResponseList<IFeature>>(url, {
             params,
             ...config,
         });
@@ -144,7 +144,7 @@ export class FeatureAPI {
         const url = generatePath(FEATURE_PATH.GET_PACKAGES_FROM_FEATURE, {
             featureId,
         });
-        const response = await jfwAxios.get<HttpResponse<IPackage[]>>(
+        const response = await this.axios.get<HttpResponse<IPackage[]>>(
             url,
             config,
         );
@@ -170,7 +170,7 @@ export class FeatureAPI {
         const url = generatePath(FEATURE_PATH.REMOVE_PACKAGES_FROM_FEATURE, {
             featureId,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
+        const response = await this.axios.delete<HttpResponse<boolean>>(url, {
             params: {
                 packageIds,
             },
@@ -201,7 +201,7 @@ export class FeatureAPI {
         const url = generatePath(FEATURE_PATH.UPDATE_FEATURE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IFeature>>(
+        const response = await this.axios.put<HttpResponse<IFeature>>(
             url,
             params,
             config,

@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { EMAIL_TEMPLATE_PATH } from './paths';
 import {
     ICreateEmailTemplateParams,
@@ -11,7 +11,7 @@ import {
     IUpdateEmailTemplateParams,
 } from './types';
 
-export class EmailTemplateAPI {
+export class EmailTemplateAPI extends AbstractAPI {
     /**
      * # Create an email template
      *
@@ -26,7 +26,7 @@ export class EmailTemplateAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = EMAIL_TEMPLATE_PATH.CREATE_EMAIL_TEMPLATE;
-        const response = await jfwAxios.post<HttpResponse<IEmailTemplate>>(
+        const response = await this.axios.post<HttpResponse<IEmailTemplate>>(
             url,
             params,
             config,
@@ -48,7 +48,7 @@ export class EmailTemplateAPI {
         const url = generatePath(EMAIL_TEMPLATE_PATH.DELETE_EMAIL_TEMPLATE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -69,7 +69,7 @@ export class EmailTemplateAPI {
         const url = generatePath(EMAIL_TEMPLATE_PATH.GET_EMAIL_TEMPLATE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IEmailTemplate>>(
+        const response = await this.axios.get<HttpResponse<IEmailTemplate>>(
             url,
             config,
         );
@@ -91,7 +91,7 @@ export class EmailTemplateAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = EMAIL_TEMPLATE_PATH.GET_EMAIL_TEMPLATES;
-        const response = await jfwAxios.get<HttpResponseList<IEmailTemplate>>(
+        const response = await this.axios.get<HttpResponseList<IEmailTemplate>>(
             url,
             {
                 params,
@@ -112,7 +112,7 @@ export class EmailTemplateAPI {
      */
     public async getAllPlaceHolderKeysAvailable(config?: AxiosRequestConfig) {
         const url = EMAIL_TEMPLATE_PATH.GET_ALL_PLACEHOLDER_KEYS_AVAILABLE;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<Record<string, string[]>>
         >(url, config);
 
@@ -137,7 +137,7 @@ export class EmailTemplateAPI {
         const url = generatePath(EMAIL_TEMPLATE_PATH.UPDATE_EMAIL_TEMPLATE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IEmailTemplate>>(
+        const response = await this.axios.put<HttpResponse<IEmailTemplate>>(
             url,
             params,
             config,

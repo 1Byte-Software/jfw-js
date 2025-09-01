@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { ISSUE_PATH } from './paths';
 import {
     ICreateIssueParams,
@@ -12,7 +12,7 @@ import {
     IUpdateIssueParams,
 } from './types';
 
-export class IssueAPI {
+export class IssueAPI extends AbstractAPI {
     /**
      * # Create an issue
      *
@@ -27,7 +27,7 @@ export class IssueAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ISSUE_PATH.CREATE_ISSUE;
-        const response = await jfwAxios.post<HttpResponse<IIssue>>(
+        const response = await this.axios.post<HttpResponse<IIssue>>(
             url,
             params,
             config,
@@ -49,7 +49,7 @@ export class IssueAPI {
         const url = generatePath(ISSUE_PATH.DELETE_ISSUE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -71,7 +71,7 @@ export class IssueAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ISSUE_PATH.GET_ISSUES;
-        const response = await jfwAxios.get<HttpResponseList<IIssue>>(url, {
+        const response = await this.axios.get<HttpResponseList<IIssue>>(url, {
             params,
             ...config,
         });
@@ -92,7 +92,10 @@ export class IssueAPI {
         const url = generatePath(ISSUE_PATH.GET_ISSUE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IIssue>>(url, config);
+        const response = await this.axios.get<HttpResponse<IIssue>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -108,7 +111,7 @@ export class IssueAPI {
      */
     public async getIssuesByListId(ids: IdType[], config?: AxiosRequestConfig) {
         const url = ISSUE_PATH.GET_ISSUES_BY_LIST_ID;
-        const response = await jfwAxios.get<HttpResponse<IIssue[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IIssue[]>>(url, {
             params: {
                 ids,
             },
@@ -134,7 +137,7 @@ export class IssueAPI {
         const url = generatePath(ISSUE_PATH.GET_CHILDREN_ISSUES, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IIssue[]>>(
+        const response = await this.axios.get<HttpResponse<IIssue[]>>(
             url,
             config,
         );
@@ -159,7 +162,7 @@ export class IssueAPI {
         const url = generatePath(ISSUE_PATH.UPDATE_ISSUE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IIssue>>(
+        const response = await this.axios.put<HttpResponse<IIssue>>(
             url,
             bodyParams,
             config,
@@ -182,7 +185,7 @@ export class IssueAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ISSUE_PATH.CREATE_ISSUE_REACTION;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -202,7 +205,7 @@ export class IssueAPI {
         const url = generatePath(ISSUE_PATH.DELETE_ISSUE_REACTION, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );

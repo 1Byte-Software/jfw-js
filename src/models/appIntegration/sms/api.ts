@@ -10,8 +10,9 @@ import {
     ITestSendingSMSMessageParams,
     IUpdateAppIntegrationSMSParams,
 } from './types';
+import { AbstractAPI } from '../../base/AbstractAPI';
 
-export class AppIntegrationSMSAPI {
+export class AppIntegrationSMSAPI extends AbstractAPI extends AbstractAPI {
     /**
      * # Create an app integration SMS
      *
@@ -26,11 +27,9 @@ export class AppIntegrationSMSAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = APP_INTEGRATION_SMS_PATH.CREATE_APP_INTEGRATION_SMS;
-        const response = await jfwAxios.post<HttpResponse<IAppIntegrationSMS>>(
-            url,
-            params,
-            config,
-        );
+        const response = await this.axios.post<
+            HttpResponse<IAppIntegrationSMS>
+        >(url, params, config);
 
         return response.data;
     }
@@ -54,7 +53,7 @@ export class AppIntegrationSMSAPI {
                 id,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -78,7 +77,7 @@ export class AppIntegrationSMSAPI {
                 id,
             },
         );
-        const response = await jfwAxios.get<HttpResponse<IAppIntegrationSMS>>(
+        const response = await this.axios.get<HttpResponse<IAppIntegrationSMS>>(
             url,
             config,
         );
@@ -97,10 +96,9 @@ export class AppIntegrationSMSAPI {
     public async getAppsIntegrationSMSWithBrand(config?: AxiosRequestConfig) {
         const url =
             APP_INTEGRATION_SMS_PATH.GET_APPS_INTEGRATION_SMS_WITH_BRAND;
-        const response = await jfwAxios.get<HttpResponse<IAppIntegrationSMS[]>>(
-            url,
-            config,
-        );
+        const response = await this.axios.get<
+            HttpResponse<IAppIntegrationSMS[]>
+        >(url, config);
 
         return response.data;
     }
@@ -130,7 +128,7 @@ export class AppIntegrationSMSAPI {
                 appIntegrationId,
             },
         );
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -160,7 +158,7 @@ export class AppIntegrationSMSAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<HttpResponse<IAppIntegrationSMS>>(
+        const response = await this.axios.put<HttpResponse<IAppIntegrationSMS>>(
             url,
             params,
             config,

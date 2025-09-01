@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { ORGANIZATION_PATH } from './paths';
 import {
     IAssignRoleForUserInOrganizationParams,
@@ -15,7 +15,7 @@ import {
     IUpdateUserStatusInOrganizationParams,
 } from './types';
 
-export class OrganizationAPI {
+export class OrganizationAPI extends AbstractAPI {
     /**
      * # Adds a new user to the organization
      *
@@ -38,7 +38,7 @@ export class OrganizationAPI {
                 userId,
             },
         );
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -68,12 +68,16 @@ export class OrganizationAPI {
                 userId,
             },
         );
-        const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
-            params: {
-                languageCode,
+        const response = await this.axios.post<HttpResponse<boolean>>(
+            url,
+            null,
+            {
+                params: {
+                    languageCode,
+                },
+                ...config,
             },
-            ...config,
-        });
+        );
 
         return response.data;
     }
@@ -99,7 +103,7 @@ export class OrganizationAPI {
                 organizationId,
             },
         );
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -122,7 +126,7 @@ export class OrganizationAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = ORGANIZATION_PATH.CREATE_ORGANIZATION;
-        const response = await jfwAxios.post<HttpResponse<IOrganization>>(
+        const response = await this.axios.post<HttpResponse<IOrganization>>(
             url,
             params,
             config,
@@ -144,7 +148,7 @@ export class OrganizationAPI {
         const url = generatePath(ORGANIZATION_PATH.DELETE_ORGANIZATION, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -165,7 +169,7 @@ export class OrganizationAPI {
         const url = generatePath(ORGANIZATION_PATH.GET_ORGANIZATION, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IOrganization>>(
+        const response = await this.axios.get<HttpResponse<IOrganization>>(
             url,
             config,
         );
@@ -188,7 +192,7 @@ export class OrganizationAPI {
     ) {
         const url = ORGANIZATION_PATH.GET_ORGANIZATIONS;
 
-        const response = await jfwAxios.get<HttpResponseList<IOrganization>>(
+        const response = await this.axios.get<HttpResponseList<IOrganization>>(
             url,
             {
                 params,
@@ -217,7 +221,7 @@ export class OrganizationAPI {
         const url = generatePath(ORGANIZATION_PATH.GET_USERS_OF_ORGANIZATION, {
             organizationId,
         });
-        const response = await jfwAxios.get<HttpResponse<IOrganizationUser>>(
+        const response = await this.axios.get<HttpResponse<IOrganizationUser>>(
             url,
             {
                 params,
@@ -250,7 +254,7 @@ export class OrganizationAPI {
                 userId,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -275,7 +279,7 @@ export class OrganizationAPI {
         const url = generatePath(ORGANIZATION_PATH.UPDATE_ORGANIZATION, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -304,7 +308,7 @@ export class OrganizationAPI {
             },
         );
 
-        const response = await jfwAxios.patch<HttpResponse<boolean>>(
+        const response = await this.axios.patch<HttpResponse<boolean>>(
             url,
             params,
             config,

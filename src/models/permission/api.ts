@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { IRole } from '../role';
 import { PERMISSION_PATH } from './paths';
 import {
@@ -12,7 +12,7 @@ import {
     IUpdatePermissionParams,
 } from './types';
 
-export class PermissionAPI {
+export class PermissionAPI extends AbstractAPI {
     /**
      * # Add roles to a permission
      *
@@ -31,7 +31,7 @@ export class PermissionAPI {
         const url = generatePath(PERMISSION_PATH.ADD_ROLES_TO_PERMISSION, {
             permissionId,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             {
                 roleIds,
@@ -56,7 +56,7 @@ export class PermissionAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PERMISSION_PATH.CREATE_PERMISSION;
-        const response = await jfwAxios.post<HttpResponse<IPermission>>(
+        const response = await this.axios.post<HttpResponse<IPermission>>(
             url,
             params,
             config,
@@ -78,7 +78,7 @@ export class PermissionAPI {
         const url = generatePath(PERMISSION_PATH.DELETE_PERMISSION, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -99,7 +99,7 @@ export class PermissionAPI {
         const url = generatePath(PERMISSION_PATH.GET_PERMISSION, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IPermission>>(
+        const response = await this.axios.get<HttpResponse<IPermission>>(
             url,
             config,
         );
@@ -121,7 +121,7 @@ export class PermissionAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PERMISSION_PATH.GET_PERMISSIONS;
-        const response = await jfwAxios.get<HttpResponseList<IPermission>>(
+        const response = await this.axios.get<HttpResponseList<IPermission>>(
             url,
             {
                 ...config,
@@ -148,7 +148,10 @@ export class PermissionAPI {
         const url = generatePath(PERMISSION_PATH.GET_ROLES_FROM_PERMISSION, {
             permissionId,
         });
-        const response = await jfwAxios.get<HttpResponse<IRole[]>>(url, config);
+        const response = await this.axios.get<HttpResponse<IRole[]>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -171,7 +174,7 @@ export class PermissionAPI {
         const url = generatePath(PERMISSION_PATH.REMOVE_ROLES_FROM_PERMISSION, {
             permissionId,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
+        const response = await this.axios.delete<HttpResponse<boolean>>(url, {
             data: {
                 roleIds,
             },
@@ -199,7 +202,7 @@ export class PermissionAPI {
         const url = generatePath(PERMISSION_PATH.UPDATE_PERMISSION, {
             id,
         });
-        const response = await jfwAxios.put(url, params, config);
+        const response = await this.axios.put(url, params, config);
 
         return response.data;
     }

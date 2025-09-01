@@ -1,13 +1,13 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { AD_PATH } from './paths';
 import { IAd, ICreateAdParams, IGetAdsParams, IUpdateAdParams } from './types';
 import { AdPosition } from './constants';
+import { AbstractAPI } from '../base/AbstractAPI';
 
-export class AdAPI {
+export class AdAPI extends AbstractAPI extends AbstractAPI {
     /**
      * # Activate an ad
      *
@@ -21,7 +21,7 @@ export class AdAPI {
         const url = generatePath(AD_PATH.ACTIVATE_AD, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -43,7 +43,7 @@ export class AdAPI {
         const url = generatePath(AD_PATH.DEACTIVATE_AD, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -66,7 +66,7 @@ export class AdAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = AD_PATH.CREATE_AD;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -88,7 +88,7 @@ export class AdAPI {
         const url = generatePath(AD_PATH.DELETE_AD, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -111,7 +111,7 @@ export class AdAPI {
     ) {
         const url = AD_PATH.GET_ADS_WITH_CLIENT_VIEW;
 
-        const response = await jfwAxios.get<HttpResponse<IAd[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IAd[]>>(url, {
             params: {
                 position,
             },
@@ -132,7 +132,7 @@ export class AdAPI {
      */
     public async getAds(params?: IGetAdsParams, config?: AxiosRequestConfig) {
         const url = AD_PATH.GET_ADS;
-        const response = await jfwAxios.get<HttpResponseList<IAd>>(url, {
+        const response = await this.axios.get<HttpResponseList<IAd>>(url, {
             ...config,
             params,
         });
@@ -153,7 +153,7 @@ export class AdAPI {
         const url = generatePath(AD_PATH.GET_AD, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IAd>>(url, config);
+        const response = await this.axios.get<HttpResponse<IAd>>(url, config);
 
         return response.data;
     }
@@ -175,7 +175,7 @@ export class AdAPI {
         const url = generatePath(AD_PATH.UPDATE_AD, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             bodyParams,
             config,

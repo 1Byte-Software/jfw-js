@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { WALLET_PATH } from './paths';
 import {
     IAddMoneyToWalletWithCheckoutLinkParams,
@@ -14,7 +14,7 @@ import {
     IWalletHistory,
 } from './types';
 
-export class WalletAPI {
+export class WalletAPI extends AbstractAPI {
     /**
      * # Add money to a Wallet with checkout link
      *
@@ -29,10 +29,14 @@ export class WalletAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = WALLET_PATH.ADD_MONEY_TO_WALLET_WITH_CHECKOUT_LINK;
-        const response = await jfwAxios.post<HttpResponse<string>>(url, null, {
-            params,
-            ...config,
-        });
+        const response = await this.axios.post<HttpResponse<string>>(
+            url,
+            null,
+            {
+                params,
+                ...config,
+            },
+        );
 
         return response.data;
     }
@@ -59,7 +63,7 @@ export class WalletAPI {
             redeemCode,
         });
 
-        return await jfwAxios.post(url, null, config);
+        return await this.axios.post(url, null, config);
     }
 
     /**
@@ -80,7 +84,7 @@ export class WalletAPI {
         const url = generatePath(WALLET_PATH.CREATE_WALLET_DEFAULT, {
             currencyCode,
         });
-        return await jfwAxios.post<HttpResponse<IWallet>>(url, null, {
+        return await this.axios.post<HttpResponse<IWallet>>(url, null, {
             params: {
                 testMode,
             },
@@ -102,7 +106,7 @@ export class WalletAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = WALLET_PATH.CONVERT_WALLET_MONEY;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -124,12 +128,16 @@ export class WalletAPI {
         const url = generatePath(WALLET_PATH.CLOSE_WALLET, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(url, null, {
-            params: {
-                id,
+        const response = await this.axios.put<HttpResponse<boolean>>(
+            url,
+            null,
+            {
+                params: {
+                    id,
+                },
+                ...config,
             },
-            ...config,
-        });
+        );
 
         return response.data;
     }
@@ -148,7 +156,7 @@ export class WalletAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = WALLET_PATH.GET_WALLETS;
-        const response = await jfwAxios.get<HttpResponse<IWallet[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IWallet[]>>(url, {
             params,
             ...config,
         });
@@ -174,7 +182,7 @@ export class WalletAPI {
         const url = generatePath(WALLET_PATH.GET_WALLET_HISTORIES, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponseList<IWalletHistory>>(
+        const response = await this.axios.get<HttpResponseList<IWalletHistory>>(
             url,
             {
                 params,

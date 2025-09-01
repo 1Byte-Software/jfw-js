@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { IConfiguration } from '../configuration';
 import { IRole } from '../role';
 import { UserType } from './constants';
@@ -47,7 +47,7 @@ import {
     IVerifyOTPCodeParams,
 } from './types';
 
-export class UserAPI {
+export class UserAPI extends AbstractAPI {
     /**
      * # Activate a user
      *
@@ -61,7 +61,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.ACTIVATE_USER, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -88,7 +88,7 @@ export class UserAPI {
             userId,
             deviceId,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             bodyParams,
             config,
@@ -115,10 +115,14 @@ export class UserAPI {
         const url = generatePath(USER_PATH.APPLY_REFERRAL_CODE_TO_USER, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
-            ...config,
-            params,
-        });
+        const response = await this.axios.post<HttpResponse<boolean>>(
+            url,
+            null,
+            {
+                ...config,
+                params,
+            },
+        );
 
         return response.data;
     }
@@ -141,7 +145,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.ASSIGN_ROLES_TO_USER, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<true>>(url, null, {
+        const response = await this.axios.post<HttpResponse<true>>(url, null, {
             params: {
                 roleIds,
             },
@@ -168,12 +172,16 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.AUTHENTICATION_BY_APPLE;
-        const response = await jfwAxios.post<HttpResponse<string>>(url, null, {
-            params: {
-                callbackURL,
+        const response = await this.axios.post<HttpResponse<string>>(
+            url,
+            null,
+            {
+                params: {
+                    callbackURL,
+                },
+                ...config,
             },
-            ...config,
-        });
+        );
 
         return response.data;
     }
@@ -192,7 +200,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.AUTHENTICATION_BY_GOOGLE;
-        const response = await jfwAxios.get<HttpResponse<string>>(url, {
+        const response = await this.axios.get<HttpResponse<string>>(url, {
             ...config,
             params,
         });
@@ -214,7 +222,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.AUTHENTICATION_BY_PHONE_NUMBER;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, params, config);
 
@@ -235,7 +243,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.AUTHENTICATION;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, params, config);
 
@@ -256,7 +264,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.CHANGE_PASSWORD;
-        const response = await jfwAxios.put<HttpResponse<true>>(
+        const response = await this.axios.put<HttpResponse<true>>(
             url,
             params,
             config,
@@ -282,7 +290,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.CHANGE_PASSWORD_FOR_ANOTHER_USER, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<true>>(
+        const response = await this.axios.put<HttpResponse<true>>(
             url,
             bodyParams,
             config,
@@ -307,7 +315,10 @@ export class UserAPI {
         const url = generatePath(USER_PATH.CHECK_REFERRAL_USER_CODE, {
             code,
         });
-        const response = await jfwAxios.get<HttpResponse<boolean>>(url, config);
+        const response = await this.axios.get<HttpResponse<boolean>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -326,7 +337,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.CHECK_AUTH_KEY_AVAILABLE;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -352,7 +363,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.CREATE_NEW_CONFIGURATION_FOR_USER, {
             userId,
         });
-        const response = await jfwAxios.post<HttpResponse<IConfiguration>>(
+        const response = await this.axios.post<HttpResponse<IConfiguration>>(
             url,
             params,
             config,
@@ -377,7 +388,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_CONFIGURATION_OF_USER, {
             userId,
         });
-        const response = await jfwAxios.get<HttpResponse<IConfiguration[]>>(
+        const response = await this.axios.get<HttpResponse<IConfiguration[]>>(
             url,
             {
                 params,
@@ -405,7 +416,10 @@ export class UserAPI {
             userId,
             configurationId,
         });
-        const response = await jfwAxios.get<HttpResponse<boolean>>(url, config);
+        const response = await this.axios.get<HttpResponse<boolean>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -425,7 +439,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.DEACTIVATE_USER, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -447,7 +461,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.DELETE_USER, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -474,12 +488,16 @@ export class UserAPI {
         const url = generatePath(USER_PATH.SEND_EMAIL_TO_VERIFY, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(url, null, {
-            params: {
-                returnURL,
+        const response = await this.axios.post<HttpResponse<boolean>>(
+            url,
+            null,
+            {
+                params: {
+                    returnURL,
+                },
+                ...config,
             },
-            ...config,
-        });
+        );
 
         return response.data;
     }
@@ -499,7 +517,7 @@ export class UserAPI {
     ) {
         const url = USER_PATH.ACTIVE_USER_EMAIL_ADDRESS;
 
-        const response = await jfwAxios.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             {
                 token,
@@ -525,7 +543,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.FORGOT_PASSWORD;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -550,7 +568,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_USER_BY_USERNAME, {
             username,
         });
-        const response = await jfwAxios.get<HttpResponse<IUser>>(url, config);
+        const response = await this.axios.get<HttpResponse<IUser>>(url, config);
 
         return response.data;
     }
@@ -568,7 +586,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_USER, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IUser>>(url, config);
+        const response = await this.axios.get<HttpResponse<IUser>>(url, config);
 
         return response.data;
     }
@@ -589,7 +607,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.GET_APP_INTEGRATION_AUTHENTICATE_URLS;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationAuthenticateURL[]>
         >(url, {
             params,
@@ -615,7 +633,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_DEVICES_FROM_USER, {
             userId,
         });
-        const response = await jfwAxios.get<HttpResponse<IDeviceOfUser[]>>(
+        const response = await this.axios.get<HttpResponse<IDeviceOfUser[]>>(
             url,
             config,
         );
@@ -634,7 +652,7 @@ export class UserAPI {
      */
     public async getUsersByListIDs(ids: IdType[], config?: AxiosRequestConfig) {
         const url = USER_PATH.GET_USERS_BY_LIST_IDS;
-        const response = await jfwAxios.get<HttpResponse<IUser[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IUser[]>>(url, {
             params: {
                 ids,
             },
@@ -663,7 +681,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.GET_USERS;
-        const response = await jfwAxios.get<HttpResponseList<IUser>>(url, {
+        const response = await this.axios.get<HttpResponseList<IUser>>(url, {
             params,
             ...config,
         });
@@ -685,7 +703,10 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = generatePath(USER_PATH.GET_ROLES_ASSIGNED_TO_USER, { id });
-        const response = await jfwAxios.get<HttpResponse<IRole[]>>(url, config);
+        const response = await this.axios.get<HttpResponse<IRole[]>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -700,7 +721,7 @@ export class UserAPI {
      */
     public async getCurrentUserLoggedIn(config?: AxiosRequestConfig) {
         const url = USER_PATH.GET_CURRENT_USER_LOGGED_IN;
-        const response = await jfwAxios.get<HttpResponse<IUser>>(url, config);
+        const response = await this.axios.get<HttpResponse<IUser>>(url, config);
 
         return response.data;
     }
@@ -718,7 +739,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_REFEREES_OF_USER, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IBaseUser[]>>(
+        const response = await this.axios.get<HttpResponse<IBaseUser[]>>(
             url,
             config,
         );
@@ -745,7 +766,7 @@ export class UserAPI {
                 userId,
             },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IBrandPartnerAuthenticate>
         >(url, config);
 
@@ -769,7 +790,7 @@ export class UserAPI {
             id,
         });
 
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -799,7 +820,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.REGISTER_NEW_USER;
-        const response = await jfwAxios.post<HttpResponse<IUser>>(
+        const response = await this.axios.post<HttpResponse<IUser>>(
             url,
             params,
             config,
@@ -840,7 +861,7 @@ export class UserAPI {
             deviceId,
             userId,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -862,7 +883,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.RESET_PASSWORD;
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -889,7 +910,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.REVOKE_ROLES_FROM_USER, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(url, {
+        const response = await this.axios.delete<HttpResponse<boolean>>(url, {
             params: {
                 roleIds,
             },
@@ -916,7 +937,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.STATISTIC_USERS;
-        const response = await jfwAxios.get<HttpResponse<IStatisticsUsers[]>>(
+        const response = await this.axios.get<HttpResponse<IStatisticsUsers[]>>(
             url,
             {
                 ...config,
@@ -942,7 +963,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.SUSPEND_USER, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<true>>(
+        const response = await this.axios.post<HttpResponse<true>>(
             url,
             null,
             config,
@@ -965,7 +986,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.UNLOCK_USER, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -987,7 +1008,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.UNSUSPEND_USER, {
             id,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -1014,7 +1035,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.UPDATE_USER, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IUser>>(
+        const response = await this.axios.put<HttpResponse<IUser>>(
             url,
             params,
             config,
@@ -1045,7 +1066,10 @@ export class UserAPI {
             id,
             type,
         });
-        const response = await jfwAxios.put<HttpResponse<boolean>>(url, config);
+        const response = await this.axios.put<HttpResponse<boolean>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
@@ -1086,7 +1110,7 @@ export class UserAPI {
             userId,
             notificationId,
         });
-        const response = await jfwAxios.get<HttpResponse<IUserNotification>>(
+        const response = await this.axios.get<HttpResponse<IUserNotification>>(
             url,
             {
                 params,
@@ -1114,7 +1138,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_NOTIFICATIONS_BY_USER_ID, {
             userId,
         });
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponseList<IUserNotification, { unreadCount: number }>
         >(url, {
             params: restParams,
@@ -1142,7 +1166,7 @@ export class UserAPI {
             notificationId,
             userId,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -1167,7 +1191,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.MARK_ALL_NOTIFICATIONS_AS_READ, {
             userId,
         });
-        const response = await jfwAxios.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             null,
             config,
@@ -1195,7 +1219,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.AUTHENTICATION_BY_EMAIL_MAGIC_LINK;
-        const response = await jfwAxios.get<HttpResponse<boolean>>(url, {
+        const response = await this.axios.get<HttpResponse<boolean>>(url, {
             ...config,
             params,
         });
@@ -1219,7 +1243,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.GENERATE_EMAIL_OTP_FOR_AUTHENTICATION;
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             params,
             config,
@@ -1242,7 +1266,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.VERIFY_EMAIL_OTP_FOR_AUTHENTICATION;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, params, config);
 
@@ -1265,7 +1289,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.GENERATE_SMS_OTP;
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             params,
             config,
@@ -1288,7 +1312,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.VERIFY_SMS_OTP_CODE;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, params, config);
 
@@ -1316,7 +1340,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.GENERATE_NEW_QR_CODE;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IGenerateNewQRCodeForParingAuthenticationResponse>
         >(url, { params, ...config });
 
@@ -1341,7 +1365,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_CURRENT_STATUS_OF_QR_CODE, {
             qrCodeId,
         });
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IGetCodeStatusResponse>
         >(url, config);
 
@@ -1363,7 +1387,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.APPROVE_QR_CODE, {
             qrCodeId,
         });
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IGetCodeStatusResponse>
         >(url, null, config);
 
@@ -1397,7 +1421,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.LOGIN_IN_USING_APPROVED_QR_CODE, {
             qrCodeId,
         });
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, null, config);
 
@@ -1429,7 +1453,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.AUTH_WITH_APPROVED_QR_CODE, {
             qrCodeId,
         });
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, null, config);
 
@@ -1456,7 +1480,7 @@ export class UserAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = USER_PATH.GENERATE_NEW_OTP_CODE;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IGenerateNewOTPForParingAuthenticationResponse>
         >(url, { params, ...config });
 
@@ -1482,7 +1506,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.GET_CURRENT_STATUS_OF_OTP_CODE, {
             otpCode,
         });
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IGetCodeStatusResponse>
         >(url, config);
 
@@ -1505,7 +1529,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.APPROVE_OTP_CODE, {
             otpCode,
         });
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IGetCodeStatusResponse>
         >(url, null, config);
 
@@ -1540,7 +1564,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.LOGIN_IN_USING_APPROVED_OTP_CODE, {
             otpCode,
         });
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, null, config);
 
@@ -1573,7 +1597,7 @@ export class UserAPI {
         const url = generatePath(USER_PATH.AUTH_WITH_APPROVED_OTP_CODE, {
             otpCode,
         });
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAuthenticateResponse>
         >(url, null, config);
 

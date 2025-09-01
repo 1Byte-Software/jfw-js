@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { BRAND_LINK_PATH } from './paths';
 import {
     IBrandLink,
@@ -13,7 +13,7 @@ import {
     IUpdateBrandLinkParams,
 } from './types';
 
-export class BrandLinksAPI {
+export class BrandLinksAPI extends AbstractAPI {
     /**
      * # Create a brand link
      *
@@ -32,7 +32,7 @@ export class BrandLinksAPI {
         const url = generatePath(BRAND_LINK_PATH.CREATE_BRAND_LINK, {
             domainId,
         });
-        const response = await jfwAxios.post<HttpResponse<IBrandLink>>(
+        const response = await this.axios.post<HttpResponse<IBrandLink>>(
             url,
             params,
             config,
@@ -60,7 +60,7 @@ export class BrandLinksAPI {
             domainId,
             brandLinkId,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -86,7 +86,7 @@ export class BrandLinksAPI {
             domainId,
             brandLinkId,
         });
-        const response = await jfwAxios.get<HttpResponse<IBrandLink>>(
+        const response = await this.axios.get<HttpResponse<IBrandLink>>(
             url,
             config,
         );
@@ -113,7 +113,7 @@ export class BrandLinksAPI {
             domainId,
             type,
         });
-        const response = await jfwAxios.get<HttpResponse<IBrandLink[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IBrandLink[]>>(url, {
             params: queryParameters,
             ...config,
         });
@@ -141,7 +141,7 @@ export class BrandLinksAPI {
         const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINKS, {
             domainId,
         });
-        const response = await jfwAxios.get<HttpResponse<IBrandLink[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IBrandLink[]>>(url, {
             params,
             ...config,
         });
@@ -170,7 +170,7 @@ export class BrandLinksAPI {
             id,
             brandLinkId,
         });
-        const response = await jfwAxios.put<HttpResponse<IBrandLink>>(
+        const response = await this.axios.put<HttpResponse<IBrandLink>>(
             url,
             params,
             config,

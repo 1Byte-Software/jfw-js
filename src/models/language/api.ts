@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { LANGUAGE_PATH } from './paths';
 import { ILanguage } from './types';
 
-export class LanguageAPI {
+export class LanguageAPI extends AbstractAPI {
     /**
      * # Gets all languages.
      *
@@ -13,7 +13,7 @@ export class LanguageAPI {
      */
     public async getLanguages(config?: AxiosRequestConfig) {
         const url = LANGUAGE_PATH.GET_LANGUAGES;
-        const response = await jfwAxios.get<HttpResponse<ILanguage[]>>(
+        const response = await this.axios.get<HttpResponse<ILanguage[]>>(
             url,
             config,
         );

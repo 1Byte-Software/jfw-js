@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { EMAIL_ADDRESS_PATH } from './paths';
 import {
     ICreateEmailAddressParams,
@@ -12,7 +12,7 @@ import {
     IUpdateEmailAddressParams,
 } from './types';
 
-export class EmailAddressAPI {
+export class EmailAddressAPI extends AbstractAPI {
     /**
      * # Create an email address
      *
@@ -30,7 +30,7 @@ export class EmailAddressAPI {
         const url = generatePath(EMAIL_ADDRESS_PATH.CREATE_EMAIL_ADDRESS, {
             brandId,
         });
-        const response = await jfwAxios.post<HttpResponse<IEmailAddress>>(
+        const response = await this.axios.post<HttpResponse<IEmailAddress>>(
             url,
             params,
             config,
@@ -56,7 +56,7 @@ export class EmailAddressAPI {
             EMAIL_ADDRESS_PATH.DELETE_EMAIL_ADDRESS,
             params,
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -78,7 +78,7 @@ export class EmailAddressAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = generatePath(EMAIL_ADDRESS_PATH.GET_EMAIL_ADDRESS, params);
-        const response = await jfwAxios.get<HttpResponse<IEmailAddress>>(
+        const response = await this.axios.get<HttpResponse<IEmailAddress>>(
             url,
             config,
         );
@@ -102,7 +102,7 @@ export class EmailAddressAPI {
         const url = generatePath(EMAIL_ADDRESS_PATH.GET_EMAIL_ADDRESSES, {
             brandId,
         });
-        const response = await jfwAxios.get<HttpResponse<IEmailAddress[]>>(
+        const response = await this.axios.get<HttpResponse<IEmailAddress[]>>(
             url,
             config,
         );
@@ -130,7 +130,7 @@ export class EmailAddressAPI {
             brandId,
             emailAddressId,
         });
-        const response = await jfwAxios.put<HttpResponse<IEmailAddress>>(
+        const response = await this.axios.put<HttpResponse<IEmailAddress>>(
             url,
             restParams,
             config,

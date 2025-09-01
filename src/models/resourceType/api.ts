@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { RESOURCE_TYPE_PATH } from './paths';
 import {
     ICreateResourceTypeParams,
@@ -11,7 +11,7 @@ import {
     IUpdateResourceTypeParams,
 } from './types';
 
-export class ResourceTypeAPI {
+export class ResourceTypeAPI extends AbstractAPI {
     /**
      * # Create a resource type
      *
@@ -26,7 +26,7 @@ export class ResourceTypeAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = RESOURCE_TYPE_PATH.CREATE_RESOURCE_TYPE;
-        const response = await jfwAxios.post<HttpResponse<IResourceType>>(
+        const response = await this.axios.post<HttpResponse<IResourceType>>(
             url,
             params,
             config,
@@ -48,7 +48,7 @@ export class ResourceTypeAPI {
         const url = generatePath(RESOURCE_TYPE_PATH.DELETE_RESOURCE_TYPE, {
             id,
         });
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -69,7 +69,7 @@ export class ResourceTypeAPI {
         const url = generatePath(RESOURCE_TYPE_PATH.GET_RESOURCE_TYPE, {
             id,
         });
-        const response = await jfwAxios.get<HttpResponse<IResourceType>>(
+        const response = await this.axios.get<HttpResponse<IResourceType>>(
             url,
             config,
         );
@@ -92,7 +92,7 @@ export class ResourceTypeAPI {
     ) {
         const url = RESOURCE_TYPE_PATH.GET_RESOURCE_TYPES;
 
-        const response = await jfwAxios.get<HttpResponse<IResourceType[]>>(
+        const response = await this.axios.get<HttpResponse<IResourceType[]>>(
             url,
             {
                 ...config,
@@ -121,7 +121,7 @@ export class ResourceTypeAPI {
         const url = generatePath(RESOURCE_TYPE_PATH.UPDATE_RESOURCE_TYPE, {
             id,
         });
-        const response = await jfwAxios.put<HttpResponse<IResourceType>>(
+        const response = await this.axios.put<HttpResponse<IResourceType>>(
             url,
             params,
             config,

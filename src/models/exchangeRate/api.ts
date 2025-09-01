@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { EXCHANGE_RATE_PATH } from './paths';
 import { IConvertCurrencyParams, IExchangeRate } from './types';
 
-export class ExchangeRateAPI {
+export class ExchangeRateAPI extends AbstractAPI {
     /**
      * # Get exchange rates
      *
@@ -18,7 +18,7 @@ export class ExchangeRateAPI {
      */
     public async getExchangeRates(config?: AxiosRequestConfig) {
         const url = EXCHANGE_RATE_PATH.GET_EXCHANGE_RATES;
-        const response = await jfwAxios.get<HttpResponse<IExchangeRate[]>>(
+        const response = await this.axios.get<HttpResponse<IExchangeRate[]>>(
             url,
             config,
         );
@@ -42,7 +42,7 @@ export class ExchangeRateAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = EXCHANGE_RATE_PATH.CONVERT_CURRENCY;
-        const response = await jfwAxios.get<HttpResponse<number>>(url, {
+        const response = await this.axios.get<HttpResponse<number>>(url, {
             params,
             ...config,
         });

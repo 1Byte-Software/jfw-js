@@ -13,7 +13,7 @@ import {
     IUpdateAppIntegrationAuthenticationParams,
 } from './types';
 
-export class AppIntegrationAuthenticationAPI {
+export class AppIntegrationAuthenticationAPI extends AbstractAPI {
     /**
      * # Creates an app integration authentication
      *
@@ -29,7 +29,7 @@ export class AppIntegrationAuthenticationAPI {
     ) {
         const url =
             APP_INTEGRATION_AUTHENTICATION_PATH.CREATE_APP_INTEGRATION_AUTHENTICATION;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAppIntegrationAuthentication>
         >(url, params, config);
 
@@ -51,7 +51,7 @@ export class AppIntegrationAuthenticationAPI {
     ) {
         const url =
             APP_INTEGRATION_AUTHENTICATION_PATH.CREATE_APP_INTEGRATION_AUTHENTICATION_WITH_IMPORT_FILE_SETTINGS;
-        const response = await jfwAxios.post<
+        const response = await this.axios.post<
             HttpResponse<IAppIntegrationAuthentication>
         >(url, params, config);
 
@@ -77,7 +77,7 @@ export class AppIntegrationAuthenticationAPI {
                 id,
             },
         );
-        const response = await jfwAxios.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -104,7 +104,7 @@ export class AppIntegrationAuthenticationAPI {
                 id,
             },
         );
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationAuthentication>
         >(url, config);
 
@@ -126,7 +126,7 @@ export class AppIntegrationAuthenticationAPI {
     ) {
         const url =
             APP_INTEGRATION_AUTHENTICATION_PATH.GET_APPS_INTEGRATION_AUTHENTICATION_WITH_BRAND;
-        const response = await jfwAxios.get<
+        const response = await this.axios.get<
             HttpResponse<IAppIntegrationAuthentication[]>
         >(url, {
             params,
@@ -160,7 +160,7 @@ export class AppIntegrationAuthenticationAPI {
                 appIntegrationId,
             },
         );
-        const response = await jfwAxios.post<HttpResponse<string>>(
+        const response = await this.axios.post<HttpResponse<string>>(
             url,
             params,
             config,
@@ -190,7 +190,7 @@ export class AppIntegrationAuthenticationAPI {
                 id,
             },
         );
-        const response = await jfwAxios.put<
+        const response = await this.axios.put<
             HttpResponse<IAppIntegrationAuthentication>
         >(url, params, config);
 

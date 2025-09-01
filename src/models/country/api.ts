@@ -1,10 +1,10 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponseList } from '../../core';
-import { jfwAxios } from '../../core/client/client';
+import { AbstractAPI } from '../base/AbstractAPI';
 import { COUNTRY_PATH } from './paths';
 import { ICountry, IGetCountriesParams } from './types';
 
-export class CountryAPI {
+export class CountryAPI extends AbstractAPI {
     /**
      * # Countries
      *
@@ -19,7 +19,7 @@ export class CountryAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = COUNTRY_PATH.GET_COUNTRIES;
-        const response = await jfwAxios.get<HttpResponseList<ICountry>>(url, {
+        const response = await this.axios.get<HttpResponseList<ICountry>>(url, {
             params,
             ...config,
         });
