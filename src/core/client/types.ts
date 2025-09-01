@@ -12,7 +12,7 @@ declare module 'axios' {
 
 export type EnvironmentOption = 'live' | 'development';
 
-export type InitOption = {
+export type JFWOptions = {
     /**
      * The brand URL of the request. This value is included in the request headers
      * and used by the server to identify which brand the request is coming from.
