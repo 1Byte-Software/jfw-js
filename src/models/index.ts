@@ -10,7 +10,6 @@ export * from './configuration';
 export * from './constant';
 export * from './country';
 export * from './coupon';
-export * from './cryptography';
 export * from './currency';
 export * from './device';
 export * from './domain';

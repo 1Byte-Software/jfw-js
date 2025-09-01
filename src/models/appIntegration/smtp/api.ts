@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { APP_INTEGRATION_SMTP_PATH } from './paths';
 import {
     IAppIntegrationSMTP,
@@ -10,7 +10,6 @@ import {
     ITestSendingEmailAddressParams,
     IUpdateAppIntegrationSMTPParams,
 } from './types';
-import { AbstractAPI } from '../../base/AbstractAPI';
 
 export class AppIntegrationSMTPAPI extends AbstractAPI {
     /**

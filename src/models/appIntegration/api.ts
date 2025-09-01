@@ -1,26 +1,34 @@
 import { Axios, AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
-import { APP_INTEGRATION_PATH } from './paths';
-import { IAppIntegration, IGetAppIntegrationsParams } from './types';
 import { AbstractAPI } from '../base/AbstractAPI';
-import { AppIntegrationSMSAPI } from './sms/api';
+import { APP_INTEGRATION_PATH } from './paths';
 import { AppIntegrationPushNotificationAPI } from './pushNotification/api';
-import { AppIntegrationSMTPAPI } from './smtp/api';
 import { AppIntegrationReCAPTCHAAPI } from './recaptcha/api';
+import { AppIntegrationSMSAPI } from './sms/api';
+import { AppIntegrationSMTPAPI } from './smtp/api';
+import { IAppIntegration, IGetAppIntegrationsParams } from './types';
+import { AppIntegrationAnalyticsAPI } from './analytics/api';
+import { AppIntegrationAuthenticationAPI } from './authentication/api';
+import { AppIntegrationPaymentGatewayAPI } from './paymentGateway/api';
 
 export class AppIntegrationAPI extends AbstractAPI {
-    public sms: AppIntegrationSMSAPI;
+    public analytics: AppIntegrationAnalyticsAPI;
+    public authentication: AppIntegrationAuthenticationAPI;
+    public paymentGateway: AppIntegrationPaymentGatewayAPI;
     public pushNotification: AppIntegrationPushNotificationAPI;
-    public smtp: AppIntegrationSMTPAPI;
     public reCAPTCHA: AppIntegrationReCAPTCHAAPI;
+    public sms: AppIntegrationSMSAPI;
+    public smtp: AppIntegrationSMTPAPI;
 
     constructor(protected axios: Axios) {
         super(axios);
-        this.sms = new AppIntegrationSMSAPI(axios);
+        this.analytics = new AppIntegrationAnalyticsAPI(axios);
+        this.authentication = new AppIntegrationAuthenticationAPI(axios);
+        this.paymentGateway = new AppIntegrationPaymentGatewayAPI(axios);
         this.pushNotification = new AppIntegrationPushNotificationAPI(axios);
-        this.smtp = new AppIntegrationSMTPAPI(axios);
         this.reCAPTCHA = new AppIntegrationReCAPTCHAAPI(axios);
+        this.sms = new AppIntegrationSMSAPI(axios);
+        this.smtp = new AppIntegrationSMTPAPI(axios);
     }
 
     /**

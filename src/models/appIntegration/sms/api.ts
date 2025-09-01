@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { APP_INTEGRATION_SMS_PATH } from './paths';
 import {
     IAppIntegrationSMS,
@@ -10,9 +10,8 @@ import {
     ITestSendingSMSMessageParams,
     IUpdateAppIntegrationSMSParams,
 } from './types';
-import { AbstractAPI } from '../../base/AbstractAPI';
 
-export class AppIntegrationSMSAPI extends AbstractAPI extends AbstractAPI {
+export class AppIntegrationSMSAPI extends AbstractAPI {
     /**
      * # Create an app integration SMS
      *

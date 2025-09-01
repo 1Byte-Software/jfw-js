@@ -1,6 +1,6 @@
 import { ICreatedDateFilter, IPageable, ISortable } from '../../core';
 import { DateType, IBaseObject, IdType } from '../base';
-import { IPackage } from '../packages';
+import { IPackage } from '../package';
 import { IPrice } from '../price';
 import { IBaseUser } from '../user';
 import { PaymentStatus } from './constants';

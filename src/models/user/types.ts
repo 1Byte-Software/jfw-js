@@ -10,7 +10,7 @@ import { ICreateConfigurationParams } from '../configuration';
 import { ConfigurationStatus } from '../configuration/constants';
 import { IDevice } from '../device';
 import { INotification } from '../notification';
-import { IPackage } from '../packages';
+import { IPackage } from '../package';
 import { IRole } from '../role';
 import {
     AuthenticationResponseType,

@@ -1,6 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../core';
-import { jfwAxios } from '../../core/client/client';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { AbstractAPI } from '../base/AbstractAPI';
@@ -40,7 +39,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.ADD_FEATURE_TO_PACKAGE, {
             packageId,
         });
-        const response = await jfwAxios?.post<HttpResponse<boolean>>(
+        const response = await this.axios.post<HttpResponse<boolean>>(
             url,
             params,
             config,
@@ -70,7 +69,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.CALCULATE_TOTAL_PRICE_CHECKOUT, {
             packageId,
         });
-        const response = await jfwAxios?.post<
+        const response = await this.axios.post<
             HttpResponse<ICalculateTotalPriceCheckoutResponse>
         >(url, params, {
             params: searchParams,
@@ -94,7 +93,7 @@ export class PackageAPI extends AbstractAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PACKAGE_PATH.CREATE_PACKAGE;
-        const response = await jfwAxios?.post<HttpResponse<IPackage>>(
+        const response = await this.axios.post<HttpResponse<IPackage>>(
             url,
             params,
             config,
@@ -116,7 +115,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.DELETE_PACKAGE, {
             id,
         });
-        const response = await jfwAxios?.delete<HttpResponse<boolean>>(
+        const response = await this.axios.delete<HttpResponse<boolean>>(
             url,
             config,
         );
@@ -137,7 +136,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.GET_PACKAGE, {
             id,
         });
-        const response = await jfwAxios?.get<HttpResponse<IPackage>>(
+        const response = await this.axios.get<HttpResponse<IPackage>>(
             url,
             config,
         );
@@ -161,10 +160,9 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.GET_FEATURES_FROM_PACKAGE, {
             packageId,
         });
-        const response = await jfwAxios?.get<HttpResponse<IFeatureOfPackage[]>>(
-            url,
-            config,
-        );
+        const response = await this.axios.get<
+            HttpResponse<IFeatureOfPackage[]>
+        >(url, config);
 
         return response.data;
     }
@@ -183,7 +181,7 @@ export class PackageAPI extends AbstractAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = PACKAGE_PATH.GET_PACKAGES;
-        const response = await jfwAxios?.get<HttpResponse<IPackage[]>>(url, {
+        const response = await this.axios.get<HttpResponse<IPackage[]>>(url, {
             params: params,
             ...config,
         });
@@ -207,7 +205,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.GET_PRICES_FROM_PACKAGE, {
             packageId,
         });
-        const response = await jfwAxios?.get<HttpResponse<IPrice[]>>(
+        const response = await this.axios.get<HttpResponse<IPrice[]>>(
             url,
             config,
         );
@@ -233,7 +231,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.REMOVE_FEATURES_FROM_PACKAGE, {
             packageId,
         });
-        const response = await jfwAxios?.delete<HttpResponse<boolean>>(url, {
+        const response = await this.axios.delete<HttpResponse<boolean>>(url, {
             params: {
                 featureIds,
             },
@@ -264,7 +262,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.RENEWAL_OR_UPGRADE_USER_PACKAGE, {
             packageId,
         });
-        const response = await jfwAxios?.post<
+        const response = await this.axios.post<
             HttpResponse<IRenewalOrUpgradeUserPackageResponse>
         >(url, searchParams, config);
 
@@ -289,7 +287,7 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.UPDATE_PACKAGE, {
             id,
         });
-        const response = await jfwAxios?.put<HttpResponse<IPackage>>(
+        const response = await this.axios.put<HttpResponse<IPackage>>(
             url,
             params,
             config,
@@ -317,7 +315,7 @@ export class PackageAPI extends AbstractAPI {
             PACKAGE_PATH.UPDATE_PACKAGE_FEATURE_DATA,
             pathParams,
         );
-        const response = await jfwAxios?.put<HttpResponse<boolean>>(
+        const response = await this.axios.put<HttpResponse<boolean>>(
             url,
             params,
             config,

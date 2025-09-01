@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { APP_INTEGRATION_PUSH_NOTIFICATION_PATH } from './paths';
 import {
     IAppIntegrationPushNotification,
@@ -10,9 +10,8 @@ import {
     ICreateAppIntegrationPushNotificationWithImportFileSettingsParams,
     IUpdateAppIntegrationPushNotificationParams,
 } from './types';
-import { AbstractAPI } from '../../base/AbstractAPI';
 
-export class AppIntegrationPushNotificationAPI extends AbstractAPI extends AbstractAPI {
+export class AppIntegrationPushNotificationAPI extends AbstractAPI {
     /**
      * # Create an app integration push notification
      *

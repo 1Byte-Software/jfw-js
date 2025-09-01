@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 import { HttpResponse } from '../../../core';
-import { jfwAxios } from '../../../core/client/client';
 import { generatePath } from '../../../utils/path';
 import { IdType } from '../../base';
+import { AbstractAPI } from '../../base/AbstractAPI';
 import { APP_INTEGRATION_ANALYTICS_PATH } from './paths';
 import {
     IAppIntegrationAnalytics,

@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
-import { IFeatureOfPackageBase } from '../packages';
+import { IFeatureOfPackageBase } from '../package';
 import { FeatureStatus, FeatureType } from './constants';
 
 /**

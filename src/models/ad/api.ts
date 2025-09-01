@@ -2,12 +2,12 @@ import { AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
+import { AbstractAPI } from '../base/AbstractAPI';
+import { AdPosition } from './constants';
 import { AD_PATH } from './paths';
 import { IAd, ICreateAdParams, IGetAdsParams, IUpdateAdParams } from './types';
-import { AdPosition } from './constants';
-import { AbstractAPI } from '../base/AbstractAPI';
 
-export class AdAPI extends AbstractAPI extends AbstractAPI {
+export class AdAPI extends AbstractAPI {
     /**
      * # Activate an ad
      *
