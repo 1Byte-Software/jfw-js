@@ -40,6 +40,22 @@ import { WalletAPI } from '../../models/wallet/api';
 
 export type ApiClient = ReturnType<typeof createBackendApiClient>;
 
+/**
+ * Creates a strongly-typed API client that aggregates
+ * all domain-specific API modules into a single object.
+ *
+ * Each module is initialized with the provided Axios instance (`jfwAxios`),
+ * which allows them to share the same configuration, interceptors, and headers.
+ *
+ * @param jfwAxios - The Axios instance used for making HTTP requests.
+ * @returns An object containing grouped API clients for different domains.
+ *
+ * @example
+ * ```ts
+ * const client = createBackendApiClient(jfwAxios);
+ * const users = await client.user.getUsers();
+ * ```
+ */
 export function createBackendApiClient(jfwAxios: Axios) {
     return {
         ad: new AdAPI(jfwAxios),

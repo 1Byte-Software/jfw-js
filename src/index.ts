@@ -1,28 +1,20 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { EnvironmentOption, HttpResponse, JFWOptions } from './core';
+import { HttpResponse, JFWOptions } from './core';
 import { ApiClient, createBackendApiClient } from './core/client/client';
-import { BaseURL, HeaderKey } from './core/client/constants';
+import { HeaderKey } from './core/client/constants';
 export * from './core';
 export * from './models';
 
+/**
+ * Creates a configured JFW Axios instance along with utility methods
+ * for managing authentication keys, brand URLs, and base API URL resolution.
+ *
+ * @param options - The configuration options for initializing JFW.
+ * @returns An object containing the Axios instance and helper methods.
+ */
 export const createJFWConfig = (options: JFWOptions) => {
-    /**
-     * Resolves the base API URL based on the environment setting.
-     *
-     * @param environment - Either 'live' or 'development'.
-     * @returns A base URL string appropriate for the given environment.
-     */
-    const getBaseURL = (environment: EnvironmentOption): string => {
-        switch (environment) {
-            case 'live':
-                return BaseURL.live;
-            default:
-                return BaseURL.development;
-        }
-    };
-
     const jfwAxios = axios.create({
-        baseURL: options.protocolURL || getBaseURL(options.environment),
+        baseURL: options.protocolURL,
         headers: {
             [HeaderKey.BrandURL]: options.brandURL,
             [HeaderKey.ContentType]: 'application/json',
@@ -96,15 +88,25 @@ export const createJFWConfig = (options: JFWOptions) => {
 
     return {
         jfwAxios,
-        getBaseURL,
         changeBrandURL,
         changeAuthKey,
         clearAuthKey,
     };
 };
 
+/**
+ * JFW client type that combines the API client methods and JFW configuration helpers.
+ */
 export type JFWClient = ApiClient & ReturnType<typeof createJFWConfig>;
 
+/**
+ * Creates a fully configured JFW client, including both:
+ * - The backend API client for interacting with endpoints,
+ * - And the configuration helpers for managing headers and base URL.
+ *
+ * @param options - The configuration options for initializing JFW.
+ * @returns A combined client instance with API methods and configuration utilities.
+ */
 export function createJFWClient(options: JFWOptions): JFWClient {
     const jfwConfigs = createJFWConfig(options);
     const apiClient = createBackendApiClient(jfwConfigs.jfwAxios);
