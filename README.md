@@ -1,8 +1,8 @@
-# JFramework (JFW) - jfw-js
+# JFramework (JFW) - @jframework/jfw-js
 
 ## About
 
-JFramework (JFW) is a comprehensive backend API client library for JavaScript, part of the JFW ecosystem. It provides a set of APIs to interact with various resources such as brands, users, roles and more, enabling developers to build robust applications with features like authentication, payments, and content management. The `jfw-js` package is designed for client-side and server-side JavaScript environments and integrates seamlessly with Axios for HTTP requests.
+JFramework (JFW) is a comprehensive backend API client library for JavaScript, part of the JFW ecosystem. It provides a set of APIs to interact with various resources such as brands, users, roles and more, enabling developers to build robust applications with features like authentication, payments, and content management. The `@jframework/jfw-js` package is designed for client-side and server-side JavaScript environments and integrates seamlessly with Axios for HTTP requests.
 
 ## Table of Contents
 
@@ -370,16 +370,16 @@ This setup ensures your API calls are associated with your brand for proper auth
 
 #### Installation
 
-Install the `jfw-js` package using your preferred package manager:
+Install the `@jframework/jfw-js` package using your preferred package manager:
 
 ```bash
-npm install jfw-js
+npm install @jframework/jfw-js
 ```
 
 Or with Yarn:
 
 ```bash
-yarn add jfw-js
+yarn add @jframework/jfw-js
 ```
 
 This package depends on Axios for HTTP requests, so ensure Axios is installed in your project:
