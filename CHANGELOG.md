@@ -8,11 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.0.0]
 
 ### Added
+
 -   Classification for APIs.
 
 ### Changed
+
 -   Update README.md.
--   Refactor code.
 
 ## [5.7.1]
 
