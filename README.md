@@ -395,17 +395,12 @@ To initialize the backend API client, create an instance using your Axios instan
 Example in Node.js:
 
 ```javascript
-import axios from 'axios';
-import { createBackendApiClient } from 'jfw-js';
+import { createJFWClient } from '@jframework/jfw-js';
 
-const jfwAxios = axios.create({
-    baseURL: 'https://api.jframework.io', // Replace with your JFW API base URL
-    headers: {
-        Authorization: `Bearer ${process.env.JFW_SECRET_KEY}`, // Use your secret key
-    },
+export const jfwClient = createJFWClient({
+    brandURL: 'https://api.jframework.io', // Replace with your brandURL you created in Setup Your Brand.
+    protocolURL: 'https://protocol.jframework.io/api', // Replace with your protocolURL if you have custom protocol URL of JFW.
 });
-
-const jfwClient = createBackendApiClient(jfwAxios);
 
 // Now you can use the client, e.g., to get ads
 const ads = await jfwClient.ad.getAds();
