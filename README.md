@@ -427,74 +427,187 @@ The `ad` object manages advertisements.
 
 #### `activateAd(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
 
-Activates an ad.
+**Activates an ad.**
 
--   **Parameters**:
-    -   `id`: The ID of the ad to activate (type: IdType).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `id` _IdType_  
+        _The ID of the ad to activate._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
 -   **See**: [Activate an Ad](https://developers.jframework.io/references/api-reference/endpoints/ads/activate-an-ad)
 
 #### `deactivateAd(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
 
-Deactivates an ad.
+**Deactivates an ad.**
 
--   **Parameters**:
-    -   `id`: The ID of the ad to deactivate (type: IdType).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `id` _IdType_  
+        _The ID of the ad to deactivate._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
 -   **See**: [Deactivate an Ad](https://developers.jframework.io/references/api-reference/endpoints/ads/deactivate-an-ad)
 
 #### `createAd(params: ICreateAdParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
 
-Creates an ad.
+**Creates an ad.**
 
--   **Parameters**:
-    -   `params`: Parameters for creating an ad (type: ICreateAdParams).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `params` _ICreateAdParams_  
+        _The parameters for creating an ad._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **ICreateAdParams Fields:**
+
+    -   `type` _AdType_  
+        _The type of the advertisement._
+    -   `title` _string_ - _min: 1_  
+        _The title of the advertisement._
+    -   `position` _AdPosition_ - _min: 1_  
+        _The display position of the advertisement (e.g., homepage-top, sidebar)._
+    -   `targetURL` _string_  
+        _The target URL that the ad points to when clicked. uri - min: 1_
+    -   `description` _string_  
+        _The description of the advertisement._
+    -   `tags` _string_  
+        _The tags of the advertisement._
+    -   `startDate` _DateType_  
+        _The start date and time when the advertisement becomes active. Format: yyyy-MM-dd HH:mm:ss date-time_
+    -   `endDate` _DateType_  
+        _The end date and time when the advertisement expires. Format: yyyy-MM-dd HH:mm:ss date-time_
+    -   `metadata` _string_  
+        _The metadata of the advertisement._
+    -   `languageCodes` _string[]_  
+        _The list of supported language codes (ISO 639-1, e.g., "en", "vi"). If null, available for all languages._
+    -   `countryCodes` _string[]_  
+        _The list of supported country codes (ISO 3166-1 alpha-2, e.g., "US", "VN"). If null, available in all countries._
+    -   `status` _AdStatus_  
+        _The status of the advertisement._
+    -   `imageURLs` _string[]_  
+        _The list of image URLs. Allowed formats: JPG, PNG, GIF. Maximum: 5._
+    -   `brandDomainIds` _IdType[]_  
+        _The list of brand domains for the advertisement._
+
 -   **See**: [Create an Ad](https://developers.jframework.io/references/api-reference/endpoints/ads/create-an-ad)
 
 #### `deleteAd(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
 
-Deletes an ad.
+**Deletes an ad.**
 
--   **Parameters**:
-    -   `id`: The ID of the ad (type: IdType).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `id` _IdType_  
+        _The ID of the ad to delete._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
 -   **See**: [Delete an Ad](https://developers.jframework.io/references/api-reference/endpoints/ads/delete-an-ad)
 
 #### `getAdsClientView(position: AdPosition, config?: AxiosRequestConfig) => Promise<HttpResponse<IAd[]>>`
 
-Gets ads with the client view.
+**Gets ads with the client view.**
 
--   **Parameters**:
-    -   `position`: The position for getting ads (type: AdPosition).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `position` _AdPosition_  
+        _The position for getting ads._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
 -   **See**: [Get Ads Client View](https://developers.jframework.io/references/api-reference/endpoints/ads/get-ads-client-view)
 
 #### `getAds(params?: IGetAdsParams, config?: AxiosRequestConfig) => Promise<HttpResponseList<IAd>>`
 
-Gets ads.
+**Gets ads.**
 
--   **Parameters**:
-    -   `params`: Parameters for getting ads (type: IGetAdsParams, optional).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `params` _IGetAdsParams_  
+        _The parameters for getting ads._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **IGetAdsParams Fields:**
+
+    -   `type` _AdType_  
+        _The type to filter._
+    -   `title` _string_  
+        _The title to filter._
+    -   `position` _AdPosition_  
+        _The position to filter._
+    -   `targetURL` _string_  
+        _The target URL to filter._
+    -   `description` _string_  
+        _The description to filter._
+    -   `status` _AdStatus_  
+        _The status to filter._
+    -   `keywords` _string_  
+        _The keywords to filter._
+
 -   **See**: [Get Ads](https://developers.jframework.io/references/api-reference/endpoints/ads/get-ads)
 
 #### `getAd(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<IAd>>`
 
-Gets an ad.
+**Gets an ad.**
 
--   **Parameters**:
-    -   `id`: The ID of the ad (type: IdType).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `id` _IdType_  
+        _The ID of the ad to get._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
 -   **See**: [Get an Ad](https://developers.jframework.io/references/api-reference/endpoints/ads/get-an-ad)
 
 #### `updateAd(params: IUpdateAdParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
 
-Updates an ad.
+**Updates an ad.**
 
--   **Parameters**:
-    -   `params`: Parameters for updating an ad (type: IUpdateAdParams).
-    -   `config`: Optional Axios request configuration.
+-   **Parameters:**
+
+    -   `params` _IUpdateAdParams_  
+        _The parameters for updating an ad._
+    -   `config` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **IUpdateAdParams Fields:**
+
+    -   `id` _IdType_  
+        _The ID of the ad to update._
+    -   `type` _AdType_  
+        _The type of the advertisement._
+    -   `title` _string_ - _min: 1_  
+        _The title of the advertisement._
+    -   `position` _AdPosition_ - _min: 1_  
+        _The display position of the advertisement (e.g., homepage-top, sidebar)._
+    -   `targetURL` _string_  
+        _The target URL that the ad points to when clicked. uri - min: 1_
+    -   `description` _string_  
+        _The description of the advertisement._
+    -   `tags` _string_  
+        _The tags of the advertisement._
+    -   `startDate` _DateType_  
+        _The start date and time when the advertisement becomes active. Format: yyyy-MM-dd HH:mm:ss date-time_
+    -   `endDate` _DateType_  
+        _The end date and time when the advertisement expires. Format: yyyy-MM-dd HH:mm:ss date-time_
+    -   `metadata` _string_  
+        _The metadata of the advertisement._
+    -   `languageCodes` _string[]_  
+        _The list of supported language codes (ISO 639-1, e.g., "en", "vi"). If null, available for all languages._
+    -   `countryCodes` _string[]_  
+        _The list of supported country codes (ISO 3166-1 alpha-2, e.g., "US", "VN"). If null, available in all countries._
+    -   `status` _AdStatus_  
+        _The status of the advertisement._
+    -   `imageURLs` _string[]_  
+        _The list of image URLs. Allowed formats: JPG, PNG, GIF. Maximum: 5._
+    -   `brandDomainIds` _IdType[]_  
+        _The list of brand domains for the advertisement._
+
 -   **See**: [Update an Ad](https://developers.jframework.io/references/api-reference/endpoints/ads/update-an-ad)
 
 ### App Integration API
