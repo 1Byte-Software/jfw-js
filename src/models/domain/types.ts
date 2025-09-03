@@ -1,5 +1,5 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IBaseObject, IdType } from '../base';
+import { DateType, IBaseObject } from '../base';
 import { DomainProtocol, DomainType } from './constants';
 
 export interface IDomain extends IBaseObject {

@@ -1,4 +1,4 @@
-import { DateType, IBaseObject, IdType } from '../base';
+import { IBaseObject } from '../base';
 import { ConfigurationStatus } from './constants';
 
 /**

@@ -1,5 +1,5 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IBaseObject } from '../base';
+import { IBaseObject } from '../base';
 
 export interface ICurrency extends IBaseObject {
     /**

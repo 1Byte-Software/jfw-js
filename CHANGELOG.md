@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Changed
+
+-   Changed the way jfw-js library API is used.
+
+## [5.7.0]
+
+### Added
+
 -   Added `createAppIntegrationAuthenticationWithImportFileSettings` API.
 -   Added `createAppIntegrationReCAPTCHA` API.
 -   Added `deleteAppIntegrationReCAPTCHA` API.

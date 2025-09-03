@@ -10,9 +10,7 @@ declare module 'axios' {
     }
 }
 
-export type EnvironmentOption = 'live' | 'development';
-
-export type InitOption = {
+export type JFWOptions = {
     /**
      * The brand URL of the request. This value is included in the request headers
      * and used by the server to identify which brand the request is coming from.
@@ -22,17 +20,6 @@ export type InitOption = {
      * @example "https://example-brand.com"
      */
     brandURL?: string;
-
-    /**
-     * Specifies which API environment to use. This determines the base URL for all HTTP requests.
-     *
-     * - `'development'` will use `protocol.jframework.dev`
-     * - `'live'` will use `protocol.jframework.io`
-     *
-     * @defaultValue "development"
-     * @deprecated Use protocolURL instead.
-     */
-    environment?: EnvironmentOption;
 
     /**
      * The full URL of the protocol server. Overrides the default base URL determined by `environment`.

@@ -74,7 +74,6 @@ export interface IBrand extends IBaseObject {
      */
     domains: IDomain[];
 }
-
 //#region API types
 export interface IGetBrandsParams extends IPageable, ISortable {
     /**

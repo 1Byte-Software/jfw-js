@@ -1,116 +1,101 @@
-import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
-import { HttpResponse } from '../query';
-import { BaseURL, HeaderKey } from './constants';
-import { EnvironmentOption, InitOption } from './types';
+import { Axios } from 'axios';
+import { ConstantAPI, IssueCategoryAPI } from '../../models';
+import { AdAPI } from '../../models/ad/api';
+import { AppIntegrationAPI } from '../../models/appIntegration/api';
+import { BrandAPI } from '../../models/brand/api';
+import { CDNAPI } from '../../models/cdn/api';
+import { CityAPI } from '../../models/city/api';
+import { CommissionRateAPI } from '../../models/commissionRate/api';
+import { ConfigurationAPI } from '../../models/configuration/api';
+import { CountryAPI } from '../../models/country/api';
+import { CouponAPI } from '../../models/coupon/api';
+import { CryptographyAPI } from '../../models/cryptography/api';
+import { CurrencyAPI } from '../../models/currency/api';
+import { DeviceAPI } from '../../models/device/api';
+import { DomainAPI } from '../../models/domain/api';
+import { EmailTemplateAPI } from '../../models/emailTemplate/api';
+import { EventAPI } from '../../models/event/api';
+import { ExchangeRateAPI } from '../../models/exchangeRate/api';
+import { FeatureAPI } from '../../models/feature/api';
+import { InvoiceAPI } from '../../models/invoice/api';
+import { IssueAPI } from '../../models/issue/api';
+import { LanguageAPI } from '../../models/language/api';
+import { LicenseAPI } from '../../models/license/api';
+import { MFAAPI } from '../../models/mfa/api';
+import { NotificationAPI } from '../../models/notification/api';
+import { OrganizationAPI } from '../../models/organization/api';
+import { PackageAPI } from '../../models/package/api';
+import { PaymentAPI } from '../../models/payment/api';
+import { PermissionAPI } from '../../models/permission/api';
+import { PriceAPI } from '../../models/price/api';
+import { ResourceTypeAPI } from '../../models/resourceType/api';
+import { RoleAPI } from '../../models/role/api';
+import { StateAPI } from '../../models/state/api';
+import { SubscriptionTypeAPI } from '../../models/subscriptionType/api';
+import { TimezoneAPI } from '../../models/timezone/api';
+import { TrackingActivityAPI } from '../../models/trackingActivity/api';
+import { TrackingEmailAPI } from '../../models/trackingEmail/api';
+import { UserAPI } from '../../models/user/api';
+import { WalletAPI } from '../../models/wallet/api';
 
-// Singleton instance of Axios used throughout the application
-export let jfwAxios: Axios | null = null;
-
-/**
- * Initializes the Axios instance (`jfwAxios`) with a base URL and default headers.
- * It also sets up global response interceptors to handle successful responses
- * and errors in a standardized way.
- *
- * @param initOption - Configuration options used to initialize Axios,
- * including environment and brandURL. Optionally includes a global error handler.
- */
-const init = (initOption: InitOption) => {
-    jfwAxios = axios.create({
-        baseURL: initOption.protocolURL || getBaseURL(initOption.environment),
-        headers: {
-            [HeaderKey.BrandURL]: initOption.brandURL,
-            [HeaderKey.ContentType]: 'application/json',
-        },
-    });
-
-    /**
-     * A response interceptor that simply returns the response without modification.
-     *
-     * @param response - The Axios response object.
-     * @returns The unmodified Axios response.
-     */
-    function responseHandler<T = any>(response: AxiosResponse<T>) {
-        return response;
-    }
-
-    /**
-     * A response error interceptor that either:
-     * - Returns the error directly if the request config contains a `raw` flag,
-     * - Delegates to a custom global error handler if provided,
-     * - Or does nothing (commented out fallback).
-     *
-     * @param error - The Axios error object containing request and response info.
-     * @returns Either the original error or the result of the global error handler.
-     */
-    function responseErrorHandler(error: AxiosError<HttpResponse>) {
-        const config = error?.config;
-        if (config.raw) {
-            return error;
-        }
-
-        if (initOption.globalErrorHandler) {
-            return initOption.globalErrorHandler(error);
-        }
-    }
-
-    jfwAxios.interceptors.response.use(responseHandler, responseErrorHandler);
-};
+export type ApiClient = ReturnType<typeof createBackendApiClient>;
 
 /**
- * Changes the authentication key for all subsequent requests.
+ * Creates a strongly-typed API client that aggregates
+ * all domain-specific API modules into a single object.
  *
- * @param authKey - A string used to authenticate API requests.
- * Required for endpoints that enforce authentication (e.g., returns 401 if missing).
+ * Each module is initialized with the provided Axios instance (`jfwAxios`),
+ * which allows them to share the same configuration, interceptors, and headers.
+ *
+ * @param jfwAxios - The Axios instance used for making HTTP requests.
+ * @returns An object containing grouped API clients for different domains.
+ *
+ * @example
+ * ```ts
+ * const client = createBackendApiClient(jfwAxios);
+ * const users = await client.user.getUsers();
+ * ```
  */
-const changeAuthKey = (authKey: string) => {
-    jfwAxios.defaults.headers.common[HeaderKey.AuthKey] = authKey;
-};
-
-/**
- * Removes the authentication key from the request headers.
- * Typically used when the user logs out or their session is cleared.
- */
-const clearAuthKey = () => {
-    delete jfwAxios.defaults.headers.common[HeaderKey.AuthKey];
-};
-
-/**
- * Updates the `brandURL` in the headers for all subsequent requests.
- *
- * `brandURL` is used to explicitly specify which brand the request is targeting.
- * This is especially useful in multi-brand systems where a single frontend may serve multiple brands.
- *
- * If you do not manually provide this value (i.e., you don't call `changeBrandURL`),
- * the backend will automatically detect the brand based on your origin domain (e.g., `window.location.origin`).
- *
- * @param brandURL - The brand URL to set in the request headers. Used to identify the target brand for the request.
- */
-const changeBrandURL = (brandURL: string) => {
-    jfwAxios.defaults.headers.common[HeaderKey.BrandURL] = brandURL;
-};
-
-/**
- * Resolves the base API URL based on the environment setting.
- *
- * @param environment - Either 'live' or 'development'.
- * @returns A base URL string appropriate for the given environment.
- */
-const getBaseURL = (environment: EnvironmentOption): string => {
-    switch (environment) {
-        case 'live':
-            return BaseURL.live;
-        default:
-            return BaseURL.development;
-    }
-};
-
-// Exported API to be used across the app for centralized axios configuration
-const jfwjs = {
-    init,
-    changeAuthKey,
-    clearAuthKey,
-    changeBrandURL,
-    getBaseURL,
-};
-
-export default jfwjs;
+export function createBackendApiClient(jfwAxios: Axios) {
+    return {
+        ad: new AdAPI(jfwAxios),
+        appIntegration: new AppIntegrationAPI(jfwAxios),
+        brand: new BrandAPI(jfwAxios),
+        cdn: new CDNAPI(jfwAxios),
+        city: new CityAPI(jfwAxios),
+        commissionRate: new CommissionRateAPI(jfwAxios),
+        configuration: new ConfigurationAPI(jfwAxios),
+        constant: new ConstantAPI(jfwAxios),
+        country: new CountryAPI(jfwAxios),
+        coupon: new CouponAPI(jfwAxios),
+        cryptography: new CryptographyAPI(jfwAxios),
+        currency: new CurrencyAPI(jfwAxios),
+        device: new DeviceAPI(jfwAxios),
+        domain: new DomainAPI(jfwAxios),
+        emailTemplate: new EmailTemplateAPI(jfwAxios),
+        event: new EventAPI(jfwAxios),
+        exchangeRate: new ExchangeRateAPI(jfwAxios),
+        feature: new FeatureAPI(jfwAxios),
+        invoice: new InvoiceAPI(jfwAxios),
+        issue: new IssueAPI(jfwAxios),
+        issueCategory: new IssueCategoryAPI(jfwAxios),
+        language: new LanguageAPI(jfwAxios),
+        license: new LicenseAPI(jfwAxios),
+        mfa: new MFAAPI(jfwAxios),
+        notification: new NotificationAPI(jfwAxios),
+        organization: new OrganizationAPI(jfwAxios),
+        package: new PackageAPI(jfwAxios),
+        payment: new PaymentAPI(jfwAxios),
+        permission: new PermissionAPI(jfwAxios),
+        price: new PriceAPI(jfwAxios),
+        resourceType: new ResourceTypeAPI(jfwAxios),
+        role: new RoleAPI(jfwAxios),
+        state: new StateAPI(jfwAxios),
+        subscriptionType: new SubscriptionTypeAPI(jfwAxios),
+        timezone: new TimezoneAPI(jfwAxios),
+        trackingActivity: new TrackingActivityAPI(jfwAxios),
+        trackingEmail: new TrackingEmailAPI(jfwAxios),
+        user: new UserAPI(jfwAxios),
+        wallet: new WalletAPI(jfwAxios),
+    };
+}

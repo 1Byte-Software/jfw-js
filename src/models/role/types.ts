@@ -1,5 +1,5 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IBaseObject, IdType } from '../base';
+import { IBaseObject, IdType } from '../base';
 import { RoleType, RoleTypeFilter } from './constants';
 
 /**
