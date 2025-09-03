@@ -382,12 +382,6 @@ Or with Yarn:
 yarn add @jframework/jfw-js
 ```
 
-This package depends on Axios for HTTP requests, so ensure Axios is installed in your project:
-
-```bash
-npm install axios
-```
-
 #### Configuration
 
 To initialize the backend API client, create an instance using your Axios instance configured with your JFW API base URL and authentication headers (e.g., using your secret key from the brand setup).
