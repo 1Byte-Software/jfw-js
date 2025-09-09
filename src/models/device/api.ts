@@ -289,11 +289,10 @@ export class DeviceAPI extends AbstractAPI {
             deviceCode,
         });
 
-        const response = await this.axios.get<HttpResponse<IDevice>>(
+        const response = await this.axios.get<HttpResponse<IDevice[]>>(
             url,
             config,
         );
-
         return response.data;
     }
 }
