@@ -35,7 +35,7 @@ import { SubscriptionTypeAPI } from '../../models/subscriptionType/api';
 import { TimezoneAPI } from '../../models/timezone/api';
 import { TrackingActivityAPI } from '../../models/trackingActivity/api';
 import { TrackingEmailAPI } from '../../models/trackingEmail/api';
-import { UserAPI } from '../../models/user/api';
+import { UserClient } from '../../models/user/client';
 import { WalletAPI } from '../../models/wallet/api';
 
 export type ApiClient = ReturnType<typeof createBackendApiClient>;
@@ -95,7 +95,7 @@ export function createBackendApiClient(jfwAxios: Axios) {
         timezone: new TimezoneAPI(jfwAxios),
         trackingActivity: new TrackingActivityAPI(jfwAxios),
         trackingEmail: new TrackingEmailAPI(jfwAxios),
-        user: new UserAPI(jfwAxios),
+        user: new UserClient(jfwAxios),
         wallet: new WalletAPI(jfwAxios),
     };
 }
