@@ -1,6 +1,7 @@
 import { Axios } from 'axios';
 import { ConstantAPI, IssueCategoryAPI } from '../../models';
 import { AdAPI } from '../../models/ad/api';
+import { AnalyticAPI } from '../../models/analytic/api';
 import { AppIntegrationAPI } from '../../models/appIntegration/api';
 import { BrandAPI } from '../../models/brand/api';
 import { CDNAPI } from '../../models/cdn/api';
@@ -59,6 +60,7 @@ export type ApiClient = ReturnType<typeof createBackendApiClient>;
 export function createBackendApiClient(jfwAxios: Axios) {
     return {
         ad: new AdAPI(jfwAxios),
+        analytic: new AnalyticAPI(jfwAxios),
         appIntegration: new AppIntegrationAPI(jfwAxios),
         brand: new BrandAPI(jfwAxios),
         cdn: new CDNAPI(jfwAxios),
