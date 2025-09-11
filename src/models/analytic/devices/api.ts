@@ -17,4 +17,18 @@ export class AnalyticDevicesAPI extends AbstractAPI {
             path: ANALYTIC_DEVICE_PATH.GET_SUMMARY_DEVICES,
         });
     }
+
+    /**
+     * # Retrieves daily device analytics.
+     *
+     * Returns the number of active devices within the specified date range. If no dates are provided, defaults to the current period.
+     *
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/analytics/devices#get-api-v1-analytics-devices-daily}
+     */
+    public async getDailyDevices() {
+        return this.callAPI<HttpResponse<unknown>>({
+            method: 'GET',
+            path: ANALYTIC_DEVICE_PATH.GET_DAILY_DEVICES,
+        });
+    }
 }
