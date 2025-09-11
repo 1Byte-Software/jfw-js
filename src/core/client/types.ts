@@ -24,9 +24,9 @@ export type JFWOptions = {
     /**
      * The full URL of the protocol server. Overrides the default base URL determined by `environment`.
      *
-     * @example "https://protocol.jframework.io/api"
+     * @example "protocol.jframework.io"
      */
-    protocolURL?: string;
+    protocolDomain?: string;
 
     /**
      * A global error handler function for failed HTTP responses.
