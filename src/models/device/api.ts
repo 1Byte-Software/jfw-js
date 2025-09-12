@@ -149,10 +149,10 @@ export class DeviceAPI extends AbstractAPI {
     }
 
     /**
-     * Get devices by a list of device codes
+     * Get devices by list code
      * 
      * 
-     * @param deviceCodes - The list of device codes.
+     * @param codes - The list of codes.
      * @param config - Optional axios request configuration object.
      * @see {@link https://developers.jframework.io/references/api-reference/endpoints/devices/get-devices-by-list-code}
      */
@@ -160,7 +160,7 @@ export class DeviceAPI extends AbstractAPI {
         codes: string[],
         config?: AxiosRequestConfig,
     ) {
-        const url = DEVICE_PATH.GET_DEVICES_BY_LIST_OF_DEVICE_CODES;
+        const url = DEVICE_PATH.GET_DEVICES_BY_LIST_OF_CODES;
         const response = await this.axios.get<HttpResponse<IDevice[]>>(
             url,
             {
