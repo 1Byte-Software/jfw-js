@@ -130,6 +130,9 @@ JFramework (JFW) is a comprehensive backend API client library for JavaScript, p
         -   [getCoupon(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse\<ICoupon>>](#getcouponid-idtype-config-axiosrequestconfig--promisehttpresponseicoupon)
         -   [getCoupons(params?: IGetCouponsParams, config?: AxiosRequestConfig) => Promise<HttpResponse\<ICoupon[]>>](#getcouponsparams-igetcouponsparams-config-axiosrequestconfig--promisehttpresponseicoupon)
         -   [updateCoupon(id: IdType, params: IUpdateCouponParams, config?: AxiosRequestConfig) => Promise<HttpResponse\<ICoupon>>](#updatecouponid-idtype-params-iupdatecouponparams-config-axiosrequestconfig--promisehttpresponseicoupon)
+    -   [Cryptography API](#cryptography-api)
+        -   [decrypt(cipherText: string, config?: AxiosRequestConfig) => Promise<HttpResponse<string>>](#decryptciphertext-string-config-axiosrequestconfig--promisehttpresponsestring)
+        -   [encrypt(plainText: string, config?: AxiosRequestConfig) => Promise<HttpResponse<string>>](#encryptplaintext-string-config-axiosrequestconfig--promisehttpresponsestring)
     -   [State API](#state-api)
         -   [getStates(config?: AxiosRequestConfig) => Promise<HttpResponse\<IState[]>>](#getstatesconfig-axiosrequestconfig--promisehttpresponseistate)
     -   [Subscription Type API](#subscription-type-api)
@@ -2613,18 +2616,37 @@ The `coupon` object manages coupons.
 
 ### Cryptography API
 
-The `cryptography` object manages cryptographic operations.
+The `cryptography` object provides simple encryption and decryption utilities.
 
-#### `generateRSAKeyPair(config?: AxiosRequestConfig) => Promise<HttpResponse<IRSAKeyPair>>`
+> ⚠️ These methods are **not secure** and should not be used for sensitive data.
 
-**Generates an RSA key pair.**
+#### `decrypt(cipherText: string, config?: AxiosRequestConfig) => Promise<HttpResponse<string>>`
+
+**Decrypts a string.**
 
 -   **Parameters**:
 
+    -   `cipherText` _string_ - min: 1  
+        _The cipher text to decrypt._
     -   `config?` _AxiosRequestConfig_  
         _Optional Axios request configuration._
 
--   **See**: [Generate RSA Key Pair](https://developers.jframework.io/references/api-reference/endpoints/cryptography/generate-rsa-key-pair)
+-   **See**: [Decrypt](https://developers.jframework.io/references/api-reference/endpoints/reame/decrypt)
+
+---
+
+#### `encrypt(plainText: string, config?: AxiosRequestConfig) => Promise<HttpResponse<string>>`
+
+**Encrypts a string.**
+
+-   **Parameters**:
+
+    -   `plainText` _string_  
+        _The plain text to encrypt._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **See**: [Encrypt](https://developers.jframework.io/references/api-reference/endpoints/reame/encrypt)
 
 ### Currency API
 
