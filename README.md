@@ -133,6 +133,8 @@ JFramework (JFW) is a comprehensive backend API client library for JavaScript, p
     -   [Cryptography API](#cryptography-api)
         -   [decrypt(cipherText: string, config?: AxiosRequestConfig) => Promise<HttpResponse<string>>](#decryptciphertext-string-config-axiosrequestconfig--promisehttpresponsestring)
         -   [encrypt(plainText: string, config?: AxiosRequestConfig) => Promise<HttpResponse<string>>](#encryptplaintext-string-config-axiosrequestconfig--promisehttpresponsestring)
+    -   [Currency API](#currency-api)
+        -   [getCurrencies(config?: AxiosRequestConfig) => Promise<HttpResponse<ICurrency[]>>](#getcurrenciesconfig-axiosrequestconfig--promisehttpresponseicurrency)
     -   [State API](#state-api)
         -   [getStates(config?: AxiosRequestConfig) => Promise<HttpResponse\<IState[]>>](#getstatesconfig-axiosrequestconfig--promisehttpresponseistate)
     -   [Subscription Type API](#subscription-type-api)
