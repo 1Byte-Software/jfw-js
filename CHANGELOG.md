@@ -5,13 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [6.1.0]
 
 ### Added
 
+-   Add `getDevicesByListOfDeviceCodes` API into `DeviceAPI`.
+-   Add `getDeviceByCode` API into `DeviceAPI`.
+
+## [6.0.0]
+
+### Added
+
+-   Classification for APIs.
+
 ### Changed
 
--   Changed the way jfw-js library API is used.
+-   Update README.md.
 
 ## [5.7.0]
 

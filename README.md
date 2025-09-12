@@ -2727,6 +2727,19 @@ The `device` object manages device data.
 
 -   **See**: [Delete a Device](https://developers.jframework.io/references/api-reference/endpoints/devices/delete-a-device)
 
+#### `getDeviceByCode(deviceCode: string, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>`
+
+**Gets a device by its code.**
+
+-   **Parameters**:
+
+    -   `deviceCode` _string_  
+        _The code of the device._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **See**: [Get Device by Code](https://developers.jframework.io/references/api-reference/endpoints/devices/get-a-device-by-code)
+
 #### `getDevice(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>`
 
 **Gets a device by ID.**
@@ -2739,6 +2752,19 @@ The `device` object manages device data.
         _Optional Axios request configuration._
 
 -   **See**: [Get a Device](https://developers.jframework.io/references/api-reference/endpoints/devices/get-a-device)
+
+#### `getDevicesByListOfDeviceCodes(codes: string[], config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice[]>>`
+
+**Gets devices by a list of device codes.**
+
+-   **Parameters**:
+
+    -   `codes` _string[]_  
+        _The list of device codes._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **See**: [Get Devices by List of Codes](https://developers.jframework.io/references/api-reference/endpoints/devices/get-devices-by-list-code)
 
 #### `getDevices(params?: IGetDevicesParams, config?: AxiosRequestConfig) => Promise<HttpResponseList<IDevice>>`
 
