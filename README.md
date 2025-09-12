@@ -135,6 +135,20 @@ JFramework (JFW) is a comprehensive backend API client library for JavaScript, p
         -   [encrypt(plainText: string, config?: AxiosRequestConfig) => Promise<HttpResponse<string>>](#encryptplaintext-string-config-axiosrequestconfig--promisehttpresponsestring)
     -   [Currency API](#currency-api)
         -   [getCurrencies(config?: AxiosRequestConfig) => Promise<HttpResponse<ICurrency[]>>](#getcurrenciesconfig-axiosrequestconfig--promisehttpresponseicurrency)
+    -   [Device API](#device-api)
+        -   [checkUserAccessDevice(params: ICheckUserAccessDeviceParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>](#checkuseraccessdeviceparams-icheckuseraccessdeviceparams-config-axiosrequestconfig--promisehttpresponseboolean)
+        -   [createDevice(params: ICreateDeviceParams, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>](#createdeviceparams-icreatedeviceparams-config-axiosrequestconfig--promisehttpresponseidevice)
+        -   [deleteDevice(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>](#deletedeviceid-idtype-config-axiosrequestconfig--promisehttpresponseboolean)
+        -   [getDeviceByCode(deviceCode: string, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>](#getdevicebycodedevicecode-string-config-axiosrequestconfig--promisehttpresponseidevice)
+        -   [getDevice(id: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>](#getdeviceid-idtype-config-axiosrequestconfig--promisehttpresponseidevice)
+        -   [getCurrentDeviceOfUserAuthorized(config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>](#getcurrentdeviceofuserauthorizedconfig-axiosrequestconfig--promisehttpresponseidevice)
+        -   [getDevicesByListOfDeviceCodes(codes: string[], config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice[]>>](#getdevicesbylistofdevicecodescodes-string-config-axiosrequestconfig--promisehttpresponseidevice)
+        -   [getDevices(params?: IGetDevicesParams, config?: AxiosRequestConfig) => Promise<HttpResponseList<IDevice>>](#getdevicesparams-igetdevicesparams-config-axiosrequestconfig--promisehttpresponselistidevice)
+        -   [getUsersFromDeviceID(deviceId: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<IUser[]>>](#getusersfromdeviceiddeviceid-idtype-config-axiosrequestconfig--promisehttpresponseiuser)
+        -   [getUsersFromDeviceCode(deviceCode: string, config?: AxiosRequestConfig) => Promise<HttpResponse<IUser[]>>](#getusersfromdevicecodedevicecode-string-config-axiosrequestconfig--promisehttpresponseiuser)
+        -   [refreshDeviceToken(params: IRefreshDeviceTokenParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>](#refreshdevicetokenparams-irefreshdevicetokenparams-config-axiosrequestconfig--promisehttpresponseboolean)
+        -   [deviceStatistic(params?: IStatisticCommonParams, config?: AxiosRequestConfig) => Promise<HttpResponse<IStatisticCommon[]>>](#devicestatisticparams-istatisticcommonparams-config-axiosrequestconfig--promisehttpresponseistaticcommon)
+        -   [updateDevice(id: IdType, params: IUpdateDeviceParams, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>](#updatedeviceid-idtype-params-iupdatedeviceparams-config-axiosrequestconfig--promisehttpresponseidevice)
     -   [State API](#state-api)
         -   [getStates(config?: AxiosRequestConfig) => Promise<HttpResponse\<IState[]>>](#getstatesconfig-axiosrequestconfig--promisehttpresponseistate)
     -   [Subscription Type API](#subscription-type-api)
@@ -2692,6 +2706,26 @@ The `currency` object manages currency data.
 
 The `device` object manages device data.
 
+#### `checkUserAccessDevice(params: ICheckUserAccessDeviceParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
+
+**Checks if a user has access to a device.**
+
+-   **Parameters**:
+
+    -   `params` _ICheckUserAccessDeviceParams_  
+        _Parameters for checking user access to a device._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **ICheckUserAccessDeviceParams Fields**:
+
+    -   `userId` _IdType_  
+        _The ID of the user._
+    -   `deviceCode` _string_  
+        _The device code of the user._
+
+-   **See**: [Check User Access Device](https://developers.jframework.io/references/api-reference/endpoints/devices/check-user-access-device)
+
 #### `createDevice(params: ICreateDeviceParams, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>`
 
 **Creates a new device.**
@@ -2777,6 +2811,17 @@ The `device` object manages device data.
 
 -   **See**: [Get a Device](https://developers.jframework.io/references/api-reference/endpoints/devices/get-a-device)
 
+#### `getCurrentDeviceOfUserAuthorized(config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>`
+
+**Gets the current device of the authorized user.**
+
+-   **Parameters**:
+
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **See**: [Get Current Device of User Authorized](https://developers.jframework.io/references/api-reference/endpoints/devices/get-current-device-access)
+
 #### `getDevicesByListOfDeviceCodes(codes: string[], config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice[]>>`
 
 **Gets devices by a list of device codes.**
@@ -2822,6 +2867,65 @@ The `device` object manages device data.
 
 -   **See**: [Get Devices](https://developers.jframework.io/references/api-reference/endpoints/devices/get-devices)
 
+#### `getUsersFromDeviceID(deviceId: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse<IUser[]>>`
+
+**Gets users associated with a device by ID.**
+
+-   **Parameters**:
+
+    -   `deviceId` _IdType_  
+        _The ID of the device._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **See**: [Get Users from a Device](https://developers.jframework.io/references/api-reference/endpoints/devices/get-users-from-a-device)
+
+#### `getUsersFromDeviceCode(deviceCode: string, config?: AxiosRequestConfig) => Promise<HttpResponse<IUser[]>>`
+
+**Gets users associated with a device by its code.**
+
+-   **Parameters**:
+
+    -   `deviceCode` _string_  
+        _The code of the device._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **See**: [Get Users from a Device Code](https://developers.jframework.io/references/api-reference/endpoints/devices/get-users-from-a-device-code)
+
+#### `refreshDeviceToken(params: IRefreshDeviceTokenParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
+
+**Refreshes a mobile device token for Firebase push notifications.**
+
+-   **Parameters**:
+
+    -   `params` _IRefreshDeviceTokenParams_  
+        _Parameters for refreshing a device token._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **IRefreshDeviceTokenParams Fields**:
+
+    -   `oldToken` _string_ - min: 1  
+        _The previous Firebase device token that is now obsolete._
+    -   `newToken` _string_ - min: 1  
+        _The new Firebase device token to replace the old one._
+
+-   **See**: [Refresh Device Token](https://developers.jframework.io/references/api-reference/endpoints/devices/refresh-device-token)
+
+#### `deviceStatistic(params?: IStatisticCommonParams, config?: AxiosRequestConfig) => Promise<HttpResponse<IStatisticCommon[]>>`
+
+**Gets statistics about devices.**
+
+-   **Parameters**:
+
+    -   `params?` _IStatisticCommonParams_  
+        _Parameters for getting device statistics._
+    -   `config?` _AxiosRequestConfig_  
+        _Optional Axios request configuration._
+
+-   **See**: [Statistics Device](https://developers.jframework.io/references/api-reference/endpoints/devices/statistics)
+
 #### `updateDevice(id: IdType, params: IUpdateDeviceParams, config?: AxiosRequestConfig) => Promise<HttpResponse<IDevice>>`
 
 **Updates a device by ID.**
@@ -2847,46 +2951,6 @@ The `device` object manages device data.
         _The status of the device._
 
 -   **See**: [Update a Device](https://developers.jframework.io/references/api-reference/endpoints/devices/update-a-device)
-
-#### `checkUserAccessDevice(params: ICheckUserAccessDeviceParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
-
-**Checks if a user has access to a device.**
-
--   **Parameters**:
-
-    -   `params` _ICheckUserAccessDeviceParams_  
-        _Parameters for checking user access to a device._
-    -   `config?` _AxiosRequestConfig_  
-        _Optional Axios request configuration._
-
--   **ICheckUserAccessDeviceParams Fields**:
-
-    -   `userId` _IdType_  
-        _The ID of the user._
-    -   `deviceCode` _string_  
-        _The device code of the user._
-
--   **See**: [Check User Access Device](https://developers.jframework.io/references/api-reference/endpoints/devices/check-user-access-device)
-
-#### `refreshDeviceToken(params: IRefreshDeviceTokenParams, config?: AxiosRequestConfig) => Promise<HttpResponse<boolean>>`
-
-**Refreshes a mobile device token for Firebase push notifications.**
-
--   **Parameters**:
-
-    -   `params` _IRefreshDeviceTokenParams_  
-        _Parameters for refreshing a device token._
-    -   `config?` _AxiosRequestConfig_  
-        _Optional Axios request configuration._
-
--   **IRefreshDeviceTokenParams Fields**:
-
-    -   `oldToken` _string_ - min: 1  
-        _The previous Firebase device token that is now obsolete._
-    -   `newToken` _string_ - min: 1  
-        _The new Firebase device token to replace the old one._
-
--   **See**: [Refresh Device Token](https://developers.jframework.io/references/api-reference/endpoints/devices/refresh-device-token)
 
 ### Domain API
 
