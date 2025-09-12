@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IBaseObject } from '../base';
-import { DomainProtocol, DomainType } from './constants';
+import { DNSRecordType, DomainProtocol, DomainType } from './constants';
 
 export interface IDomain extends IBaseObject {
     /**
@@ -43,6 +43,39 @@ export interface IDomain extends IBaseObject {
      * Flag to indicate if the domain is the primary domain.
      */
     isPrimary: boolean;
+
+    /**
+     * The list of the dns record related to Domain.
+     */
+    dnsRecords: DNSRecord[];
+}
+
+export interface DNSRecord extends IBaseObject {
+    type: DNSRecordType;
+
+    /**
+     * The host of the dns record.
+     *
+     * @remarks min: 1
+     */
+    host: string;
+
+    /**
+     * The value of the dns record.
+     */
+    value: string;
+
+    /**
+     * Flag to indicate if the dns record is verified.
+     */
+    verified: boolean;
+
+    /**
+     * The date and time when the dns record was verified.
+     *
+     * @remarks date-time
+     */
+    verifiedDate?: DateType | null;
 }
 
 //#region API types
@@ -87,16 +120,11 @@ export interface IGetDomainsParams extends IPageable, ISortable {
     isPrimary?: boolean;
 }
 
-// Not implemented yet. Will implement in the future if the domain feature is created.
-// export interface ICreateDomainParams {
-//     id: IdType;
-
-//     domain: string;
-//     isDefault?: boolean | null;
-//     isPrimary?: boolean | null;
-//     protocol: string;
-//     type: DomainType;
-// }
+// #WAIT_TSDOC
+export interface ICreateDomainParams {
+    domain: string;
+    type: DomainType;
+}
 
 // export type IUpdateDomainParams = ICreateDomainParams;
 
