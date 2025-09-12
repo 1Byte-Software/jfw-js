@@ -1,6 +1,7 @@
 const REST = 'domains';
 
 export const DOMAIN_PATH = {
+    CREATE_DOMAIN: `v1/${REST}`,
     GET_DOMAINS: `v1/${REST}`,
     GET_DOMAIN: `v1/${REST}/{id}`,
 

@@ -16,6 +16,25 @@ export class DomainAPI extends AbstractAPI {
     }
 
     /**
+     * # Create a Domain
+     *
+     * Creates a new domain.
+     *
+     * @param params - The params for creating a domain.
+     * @see {@link }
+     *
+     * #WAIT_TSDOC
+     */
+    public async createDomain(params: ICreateDomainParams) {
+        return this.callAPI<HttpResponse<IDomain>>({
+            method: 'POST',
+            path: DOMAIN_PATH.CREATE_DOMAIN,
+            data: params,
+        });
+    }
+
+
+    /**
      * # Delete a domain
      *
      * Delete a domain
