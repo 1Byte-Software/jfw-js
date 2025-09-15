@@ -6,7 +6,7 @@ export const DOMAIN_PATH = {
     GET_DOMAINS: `v1/${REST}`,
     GET_DOMAIN: `v1/${REST}/{id}`,
 
-    UPDATE_DOMAIN: `v1/${REST}`,
+    UPDATE_DOMAIN: `v1/${REST}/{id}`,
     DELETE_DOMAIN: `v1/${REST}/{id}`,
 };
 

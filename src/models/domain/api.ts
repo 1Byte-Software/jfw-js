@@ -5,7 +5,12 @@ import { IdType } from '../base';
 import { AbstractAPI } from '../base/AbstractAPI';
 import { BrandLinksAPI } from './brandLinks/api';
 import { DOMAIN_PATH } from './paths';
-import { ICreateDomainParams, IDomain, IGetDomainsParams } from './types';
+import {
+    CreateDomainParams,
+    IDomain,
+    IGetDomainsParams,
+    UpdateDomainParams,
+} from './types';
 
 export class DomainAPI extends AbstractAPI {
     public brandLinks: BrandLinksAPI;
@@ -25,7 +30,7 @@ export class DomainAPI extends AbstractAPI {
      *
      * #WAIT_TSDOC
      */
-    public async createDomain(params: ICreateDomainParams) {
+    public async createDomain(params: CreateDomainParams) {
         return this.callAPI<HttpResponse<IDomain>>({
             method: 'POST',
             path: DOMAIN_PATH.CREATE_DOMAIN,
@@ -117,23 +122,25 @@ export class DomainAPI extends AbstractAPI {
         return response.data;
     }
 
-    // Not implemented yet. Will implement in the future if the domain feature is created.
-    // /**
-    //  * # Update a Domain
-    //  *
-    //  * Updates a domain by the given id.
-    //  *
-    //  * @param id - The id of the domain.
-    //  * @param params - The params for updating a domain.
-    //  * @param config - Optional axios request configuration object.
-    //  * @see {@link }
-    //  */
-    // public async updateDomain(id: IdType, data: IUpdateDomainParams) {
-    //     const url = generatePath(DOMAIN_PATH.UPDATE_DOMAIN, {
-    //         id,
-    //     });
-    //     const response = await this.axios.put<HttpResponse<boolean>>(url, data);
-
-    //     return response.data;
-    // }
+    /**
+     * # Update a Domain
+     *
+     * Updates a domain by the given id.
+     *
+     * @param id - The id of the domain.
+     * @param params - The params for updating a domain.
+     * @param config - Optional axios request configuration object.
+     *
+     * #WAIT_TSDOC
+     */
+    public async updateDomain(id: IdType, params: UpdateDomainParams) {
+        return this.callAPI<HttpResponse<boolean>>({
+            method: 'put',
+            path: DOMAIN_PATH.UPDATE_DOMAIN,
+            pathParams: {
+                id,
+            },
+            data: params,
+        });
+    }
 }

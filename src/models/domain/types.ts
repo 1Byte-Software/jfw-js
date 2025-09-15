@@ -121,11 +121,11 @@ export interface IGetDomainsParams extends IPageable, ISortable {
 }
 
 // #WAIT_TSDOC
-export interface ICreateDomainParams {
+export interface CreateDomainParams {
     domain: string;
     type: DomainType;
+    isPrimary?: boolean;
 }
 
-// export type IUpdateDomainParams = ICreateDomainParams;
-
+export type UpdateDomainParams = CreateDomainParams;
 //#endregion
