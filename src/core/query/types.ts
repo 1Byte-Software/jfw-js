@@ -1,5 +1,5 @@
 import { HttpStatusCode } from 'axios';
-import { DateType, IdType } from '../../models';
+import { DateType, IdType } from '../../features';
 import { JFWError } from '../error';
 import { SortOrder } from './constants';
 
