@@ -3,7 +3,7 @@ import { HttpResponse, JFWOptions } from './core';
 import { ApiClient, createBackendApiClient } from './core/client/client';
 import { HeaderKey } from './core/client/constants';
 export * from './core';
-export * from './models';
+export * from './features';
 
 /**
  * Creates a configured JFW Axios instance along with utility methods
