@@ -10,3 +10,8 @@ export enum DomainProtocol {
     Http = 'Http',
     Https = 'Https',
 }
+
+export enum DNSRecordType {
+    CNAME = 'CNAME',
+    TXT = 'TXT',
+}
