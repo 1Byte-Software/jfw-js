@@ -1,0 +1,1 @@
+export const DEFAULT_PROTOCOL_URL = 'https://protocol.jframework.io/api'

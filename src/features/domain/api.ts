@@ -5,7 +5,12 @@ import { IdType } from '../base';
 import { AbstractAPI } from '../base/AbstractAPI';
 import { BrandLinksAPI } from './brandLinks/api';
 import { DOMAIN_PATH } from './paths';
-import { IDomain, IGetDomainsParams } from './types';
+import {
+    CreateDomainParams,
+    IDomain,
+    IGetDomainsParams,
+    UpdateDomainParams,
+} from './types';
 
 export class DomainAPI extends AbstractAPI {
     public brandLinks: BrandLinksAPI;
@@ -13,6 +18,44 @@ export class DomainAPI extends AbstractAPI {
     public constructor(axios: Axios) {
         super(axios);
         this.brandLinks = new BrandLinksAPI(axios);
+    }
+
+    /**
+     * # Create a Domain
+     *
+     * Creates a new domain.
+     *
+     * @param params - The params for creating a domain.
+     * @see {@link }
+     *
+     * #WAIT_TSDOC
+     */
+    public async createDomain(params: CreateDomainParams) {
+        return this.callAPI<HttpResponse<IDomain>>({
+            method: 'POST',
+            path: DOMAIN_PATH.CREATE_DOMAIN,
+            data: params,
+        });
+    }
+
+    /**
+     * # Create a Domain
+     *
+     * Creates a new domain.
+     *
+     * @param params - The params for creating a domain.
+     * @see {@link }
+     *
+     * #WAIT_TSDOC
+     */
+    public async verifyDomain(id: IdType) {
+        return this.callAPI<HttpResponse<IDomain>>({
+            method: 'POST',
+            path: DOMAIN_PATH.VERIFY_DOMAIN,
+            pathParams: {
+                id,
+            },
+        });
     }
 
     /**
@@ -79,47 +122,25 @@ export class DomainAPI extends AbstractAPI {
         return response.data;
     }
 
-    // Not implemented yet. Will implement in the future if the domain feature is created.
-    // /**
-    //  * # Create a Domain
-    //  *
-    //  * Creates a new domain.
-    //  *
-    //  * @param params - The params for creating a domain.
-    //  * @param config - Optional axios request configuration object.
-    //  * @see {@link }
-    //  */
-    // public async createDomain(
-    //     data: ICreateDomainParams,
-    //     config?: AxiosRequestConfig,
-    // ) {
-    //     const url = DOMAIN_PATH.CREATE_DOMAIN;
-    //     const response = await this.axios.post<HttpResponse<IDomain>>(
-    //         url,
-    //         data,
-    //         config,
-    //     );
-
-    //     return response.data;
-    // }
-
-    // Not implemented yet. Will implement in the future if the domain feature is created.
-    // /**
-    //  * # Update a Domain
-    //  *
-    //  * Updates a domain by the given id.
-    //  *
-    //  * @param id - The id of the domain.
-    //  * @param params - The params for updating a domain.
-    //  * @param config - Optional axios request configuration object.
-    //  * @see {@link }
-    //  */
-    // public async updateDomain(id: IdType, data: IUpdateDomainParams) {
-    //     const url = generatePath(DOMAIN_PATH.UPDATE_DOMAIN, {
-    //         id,
-    //     });
-    //     const response = await this.axios.put<HttpResponse<boolean>>(url, data);
-
-    //     return response.data;
-    // }
+    /**
+     * # Update a Domain
+     *
+     * Updates a domain by the given id.
+     *
+     * @param id - The id of the domain.
+     * @param params - The params for updating a domain.
+     * @param config - Optional axios request configuration object.
+     *
+     * #WAIT_TSDOC
+     */
+    public async updateDomain(id: IdType, params: UpdateDomainParams) {
+        return this.callAPI<HttpResponse<boolean>>({
+            method: 'put',
+            path: DOMAIN_PATH.UPDATE_DOMAIN,
+            pathParams: {
+                id,
+            },
+            data: params,
+        });
+    }
 }

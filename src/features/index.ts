@@ -1,6 +1,7 @@
 export * from './base';
 
 export * from './ad';
+export * from './analytic';
 export * from './appIntegration';
 export * from './base';
 export * from './brand';

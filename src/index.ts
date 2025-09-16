@@ -3,7 +3,7 @@ import { HttpResponse, JFWOptions } from './core';
 import { ApiClient, createBackendApiClient } from './core/client/client';
 import { HeaderKey } from './core/client/constants';
 export * from './core';
-export * from './models';
+export * from './features';
 
 /**
  * Creates a configured JFW Axios instance along with utility methods
@@ -13,10 +13,18 @@ export * from './models';
  * @returns An object containing the Axios instance and helper methods.
  */
 export const createJFWConfig = (options: JFWOptions) => {
+    const {
+        brandURL = null,
+        protocolDomain = 'protocol.jframework.io',
+        globalErrorHandler,
+    } = options;
+
+    const protocolURL = `https://${protocolDomain}/api`;
+
     const jfwAxios = axios.create({
-        baseURL: options.protocolURL,
+        baseURL: protocolURL,
         headers: {
-            [HeaderKey.BrandURL]: options.brandURL,
+            [HeaderKey.BrandURL]: brandURL,
             [HeaderKey.ContentType]: 'application/json',
         },
     });
@@ -46,8 +54,8 @@ export const createJFWConfig = (options: JFWOptions) => {
             return error;
         }
 
-        if (options.globalErrorHandler) {
-            return options.globalErrorHandler(error);
+        if (globalErrorHandler) {
+            return globalErrorHandler(error);
         }
     }
 
@@ -58,6 +66,8 @@ export const createJFWConfig = (options: JFWOptions) => {
      *
      * @param authKey - A string used to authenticate API requests.
      * Required for endpoints that enforce authentication (e.g., returns 401 if missing).
+     *
+     * @deprecated now, will auto storage authKey.
      */
     const changeAuthKey = (authKey: string) => {
         jfwAxios.defaults.headers.common[HeaderKey.AuthKey] = authKey;
@@ -66,6 +76,8 @@ export const createJFWConfig = (options: JFWOptions) => {
     /**
      * Removes the authentication key from the request headers.
      * Typically used when the user logs out or their session is cleared.
+     *
+     * @deprecated Use `jfwClient.user.signOut` instead
      */
     const clearAuthKey = () => {
         delete jfwAxios.defaults.headers.common[HeaderKey.AuthKey];
@@ -81,6 +93,8 @@ export const createJFWConfig = (options: JFWOptions) => {
      * the backend will automatically detect the brand based on your origin domain (e.g., `window.location.origin`).
      *
      * @param brandURL - The brand URL to set in the request headers. Used to identify the target brand for the request.
+     *
+     * @deprecated Not use it.
      */
     const changeBrandURL = (brandURL: string) => {
         jfwAxios.defaults.headers.common[HeaderKey.BrandURL] = brandURL;
@@ -88,8 +102,17 @@ export const createJFWConfig = (options: JFWOptions) => {
 
     return {
         jfwAxios,
+        /**
+         * @deprecated
+         */
         changeBrandURL,
+        /**
+         * @deprecated
+         */
         changeAuthKey,
+        /**
+         * @deprecated
+         */
         clearAuthKey,
     };
 };

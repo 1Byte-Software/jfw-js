@@ -1,42 +1,43 @@
 import { Axios } from 'axios';
-import { ConstantAPI, IssueCategoryAPI } from '../../models';
-import { AdAPI } from '../../models/ad/api';
-import { AppIntegrationAPI } from '../../models/appIntegration/api';
-import { BrandAPI } from '../../models/brand/api';
-import { CDNAPI } from '../../models/cdn/api';
-import { CityAPI } from '../../models/city/api';
-import { CommissionRateAPI } from '../../models/commissionRate/api';
-import { ConfigurationAPI } from '../../models/configuration/api';
-import { CountryAPI } from '../../models/country/api';
-import { CouponAPI } from '../../models/coupon/api';
-import { CryptographyAPI } from '../../models/cryptography/api';
-import { CurrencyAPI } from '../../models/currency/api';
-import { DeviceAPI } from '../../models/device/api';
-import { DomainAPI } from '../../models/domain/api';
-import { EmailTemplateAPI } from '../../models/emailTemplate/api';
-import { EventAPI } from '../../models/event/api';
-import { ExchangeRateAPI } from '../../models/exchangeRate/api';
-import { FeatureAPI } from '../../models/feature/api';
-import { InvoiceAPI } from '../../models/invoice/api';
-import { IssueAPI } from '../../models/issue/api';
-import { LanguageAPI } from '../../models/language/api';
-import { LicenseAPI } from '../../models/license/api';
-import { MFAAPI } from '../../models/mfa/api';
-import { NotificationAPI } from '../../models/notification/api';
-import { OrganizationAPI } from '../../models/organization/api';
-import { PackageAPI } from '../../models/package/api';
-import { PaymentAPI } from '../../models/payment/api';
-import { PermissionAPI } from '../../models/permission/api';
-import { PriceAPI } from '../../models/price/api';
-import { ResourceTypeAPI } from '../../models/resourceType/api';
-import { RoleAPI } from '../../models/role/api';
-import { StateAPI } from '../../models/state/api';
-import { SubscriptionTypeAPI } from '../../models/subscriptionType/api';
-import { TimezoneAPI } from '../../models/timezone/api';
-import { TrackingActivityAPI } from '../../models/trackingActivity/api';
-import { TrackingEmailAPI } from '../../models/trackingEmail/api';
-import { UserAPI } from '../../models/user/api';
-import { WalletAPI } from '../../models/wallet/api';
+import { ConstantAPI, IssueCategoryAPI } from '../../features';
+import { AdAPI } from '../../features/ad/api';
+import { AnalyticAPI } from '../../features/analytic/api';
+import { AppIntegrationAPI } from '../../features/appIntegration/api';
+import { BrandAPI } from '../../features/brand/api';
+import { CDNAPI } from '../../features/cdn/api';
+import { CityAPI } from '../../features/city/api';
+import { CommissionRateAPI } from '../../features/commissionRate/api';
+import { ConfigurationAPI } from '../../features/configuration/api';
+import { CountryAPI } from '../../features/country/api';
+import { CouponAPI } from '../../features/coupon/api';
+import { CryptographyAPI } from '../../features/cryptography/api';
+import { CurrencyAPI } from '../../features/currency/api';
+import { DeviceAPI } from '../../features/device/api';
+import { DomainAPI } from '../../features/domain/api';
+import { EmailTemplateAPI } from '../../features/emailTemplate/api';
+import { EventAPI } from '../../features/event/api';
+import { ExchangeRateAPI } from '../../features/exchangeRate/api';
+import { FeatureAPI } from '../../features/feature/api';
+import { InvoiceAPI } from '../../features/invoice/api';
+import { IssueAPI } from '../../features/issue/api';
+import { LanguageAPI } from '../../features/language/api';
+import { LicenseAPI } from '../../features/license/api';
+import { MFAAPI } from '../../features/mfa/api';
+import { NotificationAPI } from '../../features/notification/api';
+import { OrganizationAPI } from '../../features/organization/api';
+import { PackageAPI } from '../../features/package/api';
+import { PaymentAPI } from '../../features/payment/api';
+import { PermissionAPI } from '../../features/permission/api';
+import { PriceAPI } from '../../features/price/api';
+import { ResourceTypeAPI } from '../../features/resourceType/api';
+import { RoleAPI } from '../../features/role/api';
+import { StateAPI } from '../../features/state/api';
+import { SubscriptionTypeAPI } from '../../features/subscriptionType/api';
+import { TimezoneAPI } from '../../features/timezone/api';
+import { TrackingActivityAPI } from '../../features/trackingActivity/api';
+import { TrackingEmailAPI } from '../../features/trackingEmail/api';
+import { UserClient } from '../../features/user/client';
+import { WalletAPI } from '../../features/wallet/api';
 
 export type ApiClient = ReturnType<typeof createBackendApiClient>;
 
@@ -59,6 +60,7 @@ export type ApiClient = ReturnType<typeof createBackendApiClient>;
 export function createBackendApiClient(jfwAxios: Axios) {
     return {
         ad: new AdAPI(jfwAxios),
+        analytic: new AnalyticAPI(jfwAxios),
         appIntegration: new AppIntegrationAPI(jfwAxios),
         brand: new BrandAPI(jfwAxios),
         cdn: new CDNAPI(jfwAxios),
@@ -95,7 +97,7 @@ export function createBackendApiClient(jfwAxios: Axios) {
         timezone: new TimezoneAPI(jfwAxios),
         trackingActivity: new TrackingActivityAPI(jfwAxios),
         trackingEmail: new TrackingEmailAPI(jfwAxios),
-        user: new UserAPI(jfwAxios),
+        user: new UserClient(jfwAxios),
         wallet: new WalletAPI(jfwAxios),
     };
 }

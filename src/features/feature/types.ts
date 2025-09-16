@@ -19,13 +19,6 @@ export interface IFeature extends IBaseObject {
     eventId?: IdType | null;
 
     /**
-     * The type of the feature.
-     *
-     * @remarks enum
-     */
-    type: FeatureType;
-
-    /**
      * The code of the feature. This code is used to identify the feature.
      */
     code: string;
@@ -107,13 +100,6 @@ export interface IGetFeaturesParams extends IPageable, ISortable<'zOrder'> {
     eventId?: IdType;
 
     /**
-     * Filter by the feature type.
-     *
-     * @remarks enum
-     */
-    type?: FeatureType;
-
-    /**
      * Filter by the code.
      */
     code?: string;
@@ -162,13 +148,6 @@ export interface ICreateFeatureParams {
      * @deprecated Will delete eventId in future
      */
     eventId?: IdType | null;
-
-    /**
-     * The type of the feature.
-     *
-     * @remarks enum
-     */
-    type?: FeatureType;
 
     /**
      * The code of the feature.
