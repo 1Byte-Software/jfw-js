@@ -1,7 +1,8 @@
 import { ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
-import { IFeature } from '../feature';
+import { FeatureType, IFeature } from '../feature';
 import { IPrice } from '../price';
+import { ResetPolicy } from './constants';
 
 export interface IPackage extends IBaseObject {
     /**
@@ -81,6 +82,8 @@ export interface IPackage extends IBaseObject {
 }
 
 export interface IFeatureOfPackageBase {
+    type: FeatureType;
+
     /**
      * The title of the package feature.
      * This title is used to display the feature in the UI.
@@ -88,15 +91,6 @@ export interface IFeatureOfPackageBase {
      * @remarks min: 1
      */
     title?: string | null;
-
-    /**
-     * The quantity of the package feature.
-     * If the feature is unlimited, the quantity is not used.
-     *
-     * @remarks int32
-     * @deprecated Use value instead
-     */
-    quantity?: number | null;
 
     /**
      * The value of the package feature.
@@ -111,7 +105,14 @@ export interface IFeatureOfPackageBase {
      * If true, the feature is unlimited.
      * If false, the feature is limited to the quantity.
      */
-    isUnlimited: boolean;
+    isUnlimited?: boolean;
+
+    resetPolicy?: ResetPolicy | null;
+
+    /**
+     * @remarks int32
+     */
+    customIntervalDays?: number | null;
 }
 
 export interface ICheckoutTax {
@@ -298,29 +299,11 @@ export interface IAddFeatureToPackageParams extends IFeatureOfPackageBase {
      *
      * @remarks min: 1
      */
-    featureId: string;
+    featureId: IdType;
 }
 
-export interface IUpdatePackageFeatureDataParams {
-    /**
-     * The title of the feature. This title is used to display the feature in the UI.
-     */
-    title?: string | null;
-
-    /**
-     * The value of the feature follow by package.
-     *
-     * @remarks int32
-     */
-    value?: number | null;
-
-    /**
-     * Flag to indicate if the feature is unlimited. Default is false.
-     *
-     * @defaultValue `false`
-     */
-    isUnlimited?: boolean | null;
-}
+export interface IUpdatePackageFeatureDataParams
+    extends IFeatureOfPackageBase {}
 
 /**
  * Represents a request to calculate the total price of a package.
