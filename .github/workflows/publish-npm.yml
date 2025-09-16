@@ -2,10 +2,8 @@ name: Publish to npm
 
 on:
   push:
-    branches:
-      - main         # triggers on push to main
     tags:
-      - 'v*' # e.g., v1.0.0
+      - '[0-9]+.[0-9]+.[0-9]+' # Example: 1.0.0, 2.1.3
 
 jobs:
   publish:
