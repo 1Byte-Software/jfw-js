@@ -29,6 +29,7 @@ import { PackageAPI } from '../../features/package/api';
 import { PaymentAPI } from '../../features/payment/api';
 import { PermissionAPI } from '../../features/permission/api';
 import { PriceAPI } from '../../features/price/api';
+import { QuotaUsageAPI } from '../../features/quotaUsage/api';
 import { ResourceTypeAPI } from '../../features/resourceType/api';
 import { RoleAPI } from '../../features/role/api';
 import { StateAPI } from '../../features/state/api';
@@ -90,6 +91,7 @@ export function createBackendApiClient(jfwAxios: Axios) {
         payment: new PaymentAPI(jfwAxios),
         permission: new PermissionAPI(jfwAxios),
         price: new PriceAPI(jfwAxios),
+        quotaUsage: new QuotaUsageAPI(jfwAxios),
         resourceType: new ResourceTypeAPI(jfwAxios),
         role: new RoleAPI(jfwAxios),
         state: new StateAPI(jfwAxios),

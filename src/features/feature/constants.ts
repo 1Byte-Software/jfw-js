@@ -1,9 +1,14 @@
+import { JFWStatus } from '../base';
+
 export enum FeatureType {
     Function = 'Function',
     Limitation = 'Limitation',
 }
 
+/**
+ * @deprecated use JFWStatus instead
+ */
 export enum FeatureStatus {
-    Inactive = 'Inactive',
-    Active = 'Active',
+    Inactive = JFWStatus.Inactive,
+    Active = JFWStatus.Active,
 }

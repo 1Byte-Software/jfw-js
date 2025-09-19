@@ -1,5 +1,5 @@
 import { ISortable } from '../../core';
-import { IBaseObject, IdType } from '../base';
+import { IBaseObject, IdType, JFWStatus } from '../base';
 import { FeatureType, IFeature } from '../feature';
 import { IPrice } from '../price';
 import { ResetPolicy } from './constants';
@@ -54,6 +54,13 @@ export interface IPackage extends IBaseObject {
     isFree: boolean;
 
     /**
+     * The tier of the package.
+     *
+     * @remarks int-32
+     */
+    tier: number;
+
+    /**
      * The order of the package.
      *
      * @remarks int64
@@ -63,7 +70,7 @@ export interface IPackage extends IBaseObject {
     /**
      * The features of the package.
      */
-    features: IFeatureOfPackage[];
+    features: PackageFeature[];
 
     /**
      * The prices of the package.
@@ -75,10 +82,7 @@ export interface IPackage extends IBaseObject {
      */
     isDefault: boolean;
 
-    /**
-     * Will update doc in future.
-     */
-    tier: number;
+    status: JFWStatus;
 }
 
 export interface IFeatureOfPackageBase {
@@ -180,8 +184,11 @@ export interface ICalculateTotalPriceCheckoutResponse {
 
 /**
  * This class provides the Feature of Package Dto.
+ * @deprecated Use PackageFeature instead.
  */
 export interface IFeatureOfPackage extends IFeature, IFeatureOfPackageBase {}
+
+export type PackageFeature = IFeatureOfPackage;
 
 //#region API types
 
@@ -216,6 +223,11 @@ export interface IGetPackagesParams extends ISortable<'zOrder'> {
      * Filter by the keywords.
      */
     keywords?: string;
+
+    /**
+     * Filter by the status.
+     */
+    status?: JFWStatus
 }
 
 /**
@@ -279,6 +291,8 @@ export interface ICreatePackageParams {
      * @defaultValue false
      */
     isDefault?: boolean;
+
+    status?: JFWStatus;
 }
 /**
  * This class is used to present the package command request data transfer object.
