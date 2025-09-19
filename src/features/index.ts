@@ -28,6 +28,7 @@ export * from './package';
 export * from './payment';
 export * from './permission';
 export * from './price';
+export * from './quotaUsage';
 export * from './resourceType';
 export * from './role';
 export * from './state';
