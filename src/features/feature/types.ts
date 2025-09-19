@@ -1,7 +1,6 @@
 import { IPageable, ISortable } from '../../core';
-import { IBaseObject, IdType } from '../base';
+import { IBaseObject, IdType, JFWStatus } from '../base';
 import { IFeatureOfPackageBase } from '../package';
-import { FeatureStatus, FeatureType } from './constants';
 
 /**
  * This class represents the feature data transfer object.
@@ -83,7 +82,7 @@ export interface IFeature extends IBaseObject {
      *
      * @remarks enum
      */
-    status: FeatureStatus;
+    status: JFWStatus;
 }
 
 //#region API types
@@ -129,7 +128,7 @@ export interface IGetFeaturesParams extends IPageable, ISortable<'zOrder'> {
      *
      * @remarks enum
      */
-    status?: FeatureStatus;
+    status?: JFWStatus;
 
     /**
      * Filter by the keywords.
@@ -219,7 +218,7 @@ export interface ICreateFeatureParams {
      *
      * @remarks enum
      */
-    status?: FeatureStatus;
+    status?: JFWStatus;
 }
 
 /**
