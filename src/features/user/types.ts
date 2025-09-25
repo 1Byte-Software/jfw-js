@@ -259,6 +259,11 @@ export interface IDeviceOfUser extends IDevice {
      * @remarks enum
      */
     userDeviceStatus: UserDeviceStatus;
+
+    /**
+     * The last access time of the user device. This value is updated whenever the user interacts with the device.
+     */
+    lastAccessAt?: DateType | null;
 }
 
 export interface IAppIntegrationAuthenticateURL {
