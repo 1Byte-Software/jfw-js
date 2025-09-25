@@ -74,6 +74,7 @@ export interface IBrand extends IBaseObject {
      */
     domains: IDomain[];
 }
+
 //#region API types
 export interface IGetBrandsParams extends IPageable, ISortable {
     /**
@@ -233,6 +234,13 @@ export interface IUpdateBrandParams {
      * The tags of the Brand.
      */
     tags?: string | null;
+}
+
+export interface IGetUtilityLinksForBrandParams {
+    /**
+     * The code of the link to get. If not provided, all links will be returned.
+     */
+    code?: string;
 }
 
 //#endregion

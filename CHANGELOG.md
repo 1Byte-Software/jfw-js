@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.4.0]
+
+### Added
+
+- Added `getUtilityLinksForBrand` in `BrandAPI`.
+- Added `countryCode` for `Device` interface.
+- Added `UtilityLinks` for `BrandLinkType` enum.
+- Added `code` field for `IBrandLink` interface.
+- Added `UserPermission` and `DevicePermission` enums for support RBAC system.
+- Added `lastAccessAt` for DeviceOfUser interface.
+
+### Changed
+
+- Changed `queryParams` of `applyLicenseToGivenUser` api to `bodyParams`.
+
 ## [6.3.0]
 
 ### Added
