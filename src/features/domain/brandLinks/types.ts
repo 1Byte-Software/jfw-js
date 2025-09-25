@@ -28,6 +28,11 @@ export interface IBrandLink extends IBaseObject {
     name: string;
 
     /**
+     * #WAIT_TSDOC
+     */
+    code: string;
+
+    /**
      * The type of the link.
      *
      * @remarks enum
