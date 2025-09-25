@@ -6,6 +6,7 @@ const REST_CONFIGURATION = 'configuration';
 const REST_REFERRAL = 'referrals';
 const REST_DEVICE = 'devices';
 const REST_INTEGRATION = 'integrations';
+const REST_PERMISSION = 'permissions';
 
 export const USER_PATH = {
     ACTIVATE_USER: `v1/${REST}/{id}/activate`,
@@ -102,4 +103,6 @@ export const USER_PATH = {
     //#endregion
 
     //#endregion
+
+    GET_PERMISSIONS_OF_USER: `v1/${REST}/{id}/${REST_PERMISSION}`,
 };

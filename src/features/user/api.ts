@@ -1603,5 +1603,18 @@ export class UserAPI extends AbstractAPI {
 
         return response.data;
     }
+
+    /**
+     * #WAIT_TSDOC
+     */
+    public async getPermissionOfUser(id: IdType) {
+        return this.callAPI<HttpResponse<string[]>>({
+            method: 'GET',
+            path: USER_PATH.GET_PERMISSIONS_OF_USER,
+            pathParams: {
+                id,
+            },
+        });
+    }
 }
 //#endregion

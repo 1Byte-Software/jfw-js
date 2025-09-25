@@ -99,6 +99,11 @@ export interface IDevice extends IBaseObject {
      * @remarks date-time
      */
     modifiedDate?: DateType | null;
+
+    /**
+     * #WAIT_TSDOC
+     */
+    countryCode?: string;
 }
 
 //#region API types

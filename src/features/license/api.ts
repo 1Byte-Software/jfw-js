@@ -117,24 +117,16 @@ export class LicenseAPI extends AbstractAPI {
      * And send the email to the user to notify the license is applied.
      *
      * @param params - The params for applying a license to the given a user.
-     * @param config - Optional axios request configuration object.
      * @see {@link https://developers.jframework.io/references/api-reference/endpoints/licenses/applies-a-license-to-the-given-a-user}
      */
     public async applyLicenseToGivenUser(
         params: IApplyLicenseToGivenUserParams,
-        config?: AxiosRequestConfig,
     ) {
-        const url = LICENSE_PATH.APPLY_LICENSE_TO_GIVEN_USER;
-        const response = await this.axios.post<HttpResponse<boolean>>(
-            url,
-            null,
-            {
-                params,
-                ...config,
-            },
-        );
-
-        return response.data;
+        return this.callAPI<HttpResponse<boolean>>({
+            path: LICENSE_PATH.APPLY_LICENSE_TO_GIVEN_USER,
+            method: 'POST',
+            data: params,
+        });
     }
 
     /**

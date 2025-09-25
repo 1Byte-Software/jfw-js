@@ -9,11 +9,13 @@ import {
     ICreateBrandParams,
     IGeneratedDomain,
     IGetBrandsParams,
+    IGetUtilityLinksForBrandParams,
     IUpdateBrandParams,
 } from './types';
 import { BrandProfileAPI } from './profile/api';
 import { BrandSettingAPI } from './setting/api';
 import { EmailAddressAPI } from './emailAddress/api';
+import { IBrandLink } from '../domain';
 
 export class BrandAPI extends AbstractAPI {
     public brandProfile: BrandProfileAPI;
@@ -188,6 +190,20 @@ export class BrandAPI extends AbstractAPI {
             params,
             config,
         );
+
+        return response.data;
+    }
+
+    /**
+     * #WAIT_TSDOC
+     */
+    public async getUtilityLinksForBrand(
+        params?: IGetUtilityLinksForBrandParams,
+    ) {
+        const url = BRAND_PATH.GET_UTILITY_LINKS_FOR_BRAND;
+        const response = await this.axios.get<HttpResponse<IBrandLink[]>>(url, {
+            params,
+        });
 
         return response.data;
     }

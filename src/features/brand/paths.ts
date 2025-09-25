@@ -8,6 +8,9 @@ export const BRAND_PATH = {
     GET_BRAND_BY_URL: `v1/${REST}/by-url`,
     GET_BRANDS: `v1/${REST}`,
     UPDATE_BRAND: `v1/${REST}/{id}`,
+
+    // #WAIT_TSDOC
+    GET_UTILITY_LINKS_FOR_BRAND: `v1/${REST}/links/utilities`,
 };
 
 export { REST as REST_BRAND };
