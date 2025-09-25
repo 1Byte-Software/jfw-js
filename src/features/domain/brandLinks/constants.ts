@@ -29,6 +29,7 @@ export enum BrandLinkType {
     BodyFooter = 'BodyFooter',
 
     ReferenceLink = 'ReferenceLink',
+    UtilityLinks = 'UtilityLinks'
 }
 
 export enum BrandLinkStatus {
