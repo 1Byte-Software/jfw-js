@@ -462,6 +462,10 @@ export interface IGetUsersParams
     referralCode?: string;
 }
 
+
+export interface IGetDevicesFromUserParams {
+    isMobileApp?: boolean | null;
+}
 /**
  * The presentation data transfer object for updating the user.
  */
