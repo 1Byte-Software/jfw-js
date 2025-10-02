@@ -32,6 +32,7 @@ import {
     IGetAppIntegrationAuthenticateURLsParams,
     IGetCodeStatusResponse,
     IGetConfigurationsOfUserParams,
+    IGetDevicesFromUserParams,
     IGetNotificationRelatedToUserParams,
     IGetNotificationsByUserParams,
     IGetUsersParams,
@@ -628,6 +629,7 @@ export class UserAPI extends AbstractAPI {
      */
     public async getDevicesFromUser(
         userId: IdType,
+        params?: IGetDevicesFromUserParams,
         config?: AxiosRequestConfig,
     ) {
         const url = generatePath(USER_PATH.GET_DEVICES_FROM_USER, {
@@ -635,8 +637,13 @@ export class UserAPI extends AbstractAPI {
         });
         const response = await this.axios.get<HttpResponse<IDeviceOfUser[]>>(
             url,
-            config,
+            {
+                params,
+                ...config
+            },
         );
+
+      
 
         return response.data;
     }
