@@ -133,7 +133,7 @@ export class BrandAPI extends AbstractAPI {
      * If the host domain is not found, return 404 error.
      *
      * @param config - Optional axios request configuration object.
-     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-a-brand-by-brand-url}
+     * @see {@link https://developers.jframework.io/references/api-reference/endpoints/brands/get-a-brand-by-url}
      */
     public async getBrandByURL(config?: AxiosRequestConfig) {
         const url = BRAND_PATH.GET_BRAND_BY_URL;

@@ -39,7 +39,7 @@ import { TrackingActivityAPI } from '../../features/trackingActivity/api';
 import { TrackingEmailAPI } from '../../features/trackingEmail/api';
 import { UserClient } from '../../features/user/client';
 import { WalletAPI } from '../../features/wallet/api';
-
+export * from './constants';
 export type ApiClient = ReturnType<typeof createBackendApiClient>;
 
 /**
