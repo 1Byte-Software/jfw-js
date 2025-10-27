@@ -21,20 +21,20 @@ export class OrganizationAPI extends AbstractAPI {
      *
      * Add a user to the organization.
      *
-     * @param id - The id of the organization.
+     * @param organizationId - The id of the organization.
      * @param userId - The id of the user to add.
      * @param config - Optional axios request configuration object.
      * @see {@link https://developers.jframework.io/references/api-reference/endpoints/organizations/add-a-user-in-an-organization}
      */
     public async addNewUserToOrganization(
-        id: IdType,
+        organizationId: IdType,
         userId: IdType,
         config?: AxiosRequestConfig,
     ) {
         const url = generatePath(
             ORGANIZATION_PATH.ADD_NEW_USER_TO_ORGANIZATION,
             {
-                id,
+                organizationId,
                 userId,
             },
         );
@@ -221,13 +221,12 @@ export class OrganizationAPI extends AbstractAPI {
         const url = generatePath(ORGANIZATION_PATH.GET_USERS_OF_ORGANIZATION, {
             organizationId,
         });
-        const response = await this.axios.get<HttpResponse<IOrganizationUser>>(
-            url,
-            {
-                params,
-                ...config,
-            },
-        );
+        const response = await this.axios.get<
+            HttpResponseList<IOrganizationUser>
+        >(url, {
+            params,
+            ...config,
+        });
 
         return response.data;
     }
