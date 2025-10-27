@@ -17,6 +17,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Remove `IUploadedFileCDN` interface.
 
+## [6.6.0]
+
+### Added
+
+- Add `BrandEmailAddressCode` enum.
+
+### Fixed
+
+- Fixed axios interface of JFWClient.
+- Improve getIssuesByListId response type interface.
+- Change params name of addNewUserToOrganization api.
+
+### Removed
+
+- Remove `IUploadedFileCDN` interface.
+
 ### Fixed
 
 - Fix doc link of getBrandByURL api.
