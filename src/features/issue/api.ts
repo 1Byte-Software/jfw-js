@@ -111,7 +111,7 @@ export class IssueAPI extends AbstractAPI {
      */
     public async getIssuesByListId(ids: IdType[], config?: AxiosRequestConfig) {
         const url = ISSUE_PATH.GET_ISSUES_BY_LIST_ID;
-        const response = await this.axios.get<HttpResponse<IIssue[]>>(url, {
+        const response = await this.axios.get<HttpResponseList<IIssue>>(url, {
             params: {
                 ids,
             },

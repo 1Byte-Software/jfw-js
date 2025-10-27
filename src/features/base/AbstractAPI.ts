@@ -1,4 +1,4 @@
-import { Axios, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import { AxiosInstance, AxiosRequestConfig, Method } from 'axios';
 import { generatePath } from '../../utils/path';
 
 export interface CallAPIOptions {
@@ -9,7 +9,7 @@ export interface CallAPIOptions {
 }
 
 export abstract class AbstractAPI {
-    constructor(protected axios: Axios) {}
+    constructor(protected axios: AxiosInstance) {}
 
     protected async callAPI<T = any>(options: CallAPIOptions) {
         const { method = 'GET', path, pathParams = {}, data = null } = options;

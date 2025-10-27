@@ -174,9 +174,9 @@ export class WalletAPI extends AbstractAPI {
      * @param config - Optional axios request configuration object.
      * @see {@link https://developers.jframework.io/references/api-reference/endpoints/wallets/get-the-wallet-histories}
      */
-    public async getWalletHistory(
+    public async getWalletHistories(
         id: IdType,
-        params: IGetWalletHistoriesParams,
+        params?: IGetWalletHistoriesParams,
         config?: AxiosRequestConfig,
     ) {
         const url = generatePath(WALLET_PATH.GET_WALLET_HISTORIES, {

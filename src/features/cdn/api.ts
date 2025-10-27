@@ -8,8 +8,7 @@ import { CDN_PATH } from './paths';
 import {
     IFileCDN,
     IGetFilesCDNParams,
-    IUploadedFileCDN,
-    IUploadFileParams,
+    IUploadFileParams
 } from './types';
 
 export class CDNAPI extends AbstractAPI {
@@ -103,7 +102,7 @@ export class CDNAPI extends AbstractAPI {
             });
         }
 
-        const response = await this.axios.post<HttpResponse<IUploadedFileCDN>>(
+        const response = await this.axios.post<HttpResponse<IFileCDN>>(
             url,
             params,
             {

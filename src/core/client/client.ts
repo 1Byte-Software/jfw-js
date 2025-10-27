@@ -1,4 +1,4 @@
-import { Axios } from 'axios';
+import { AxiosInstance } from 'axios';
 import { ConstantAPI, IssueCategoryAPI } from '../../features';
 import { AdAPI } from '../../features/ad/api';
 import { AnalyticAPI } from '../../features/analytic/api';
@@ -58,7 +58,7 @@ export type ApiClient = ReturnType<typeof createBackendApiClient>;
  * const users = await client.user.getUsers();
  * ```
  */
-export function createBackendApiClient(jfwAxios: Axios) {
+export function createBackendApiClient(jfwAxios: AxiosInstance) {
     return {
         ad: new AdAPI(jfwAxios),
         analytic: new AnalyticAPI(jfwAxios),
