@@ -1,9 +1,13 @@
-import { Axios, AxiosRequestConfig } from 'axios';
+import { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
 import { AbstractAPI } from '../base/AbstractAPI';
+import { IBrandLink } from '../domain';
+import { EmailAddressAPI } from './emailAddress/api';
 import { BRAND_PATH } from './paths';
+import { BrandProfileAPI } from './profile/api';
+import { BrandSettingAPI } from './setting/api';
 import {
     IBrand,
     ICreateBrandParams,
@@ -12,17 +16,13 @@ import {
     IGetUtilityLinksForBrandParams,
     IUpdateBrandParams,
 } from './types';
-import { BrandProfileAPI } from './profile/api';
-import { BrandSettingAPI } from './setting/api';
-import { EmailAddressAPI } from './emailAddress/api';
-import { IBrandLink } from '../domain';
 
 export class BrandAPI extends AbstractAPI {
     public brandProfile: BrandProfileAPI;
     public brandSetting: BrandSettingAPI;
     public emailAddress: EmailAddressAPI;
 
-    constructor(protected axios: Axios) {
+    constructor(protected axios: AxiosInstance) {
         super(axios);
         this.brandProfile = new BrandProfileAPI(axios);
         this.brandSetting = new BrandSettingAPI(axios);
