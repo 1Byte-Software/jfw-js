@@ -1,4 +1,4 @@
-import { Axios, AxiosRequestConfig } from 'axios';
+import { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { AUTH_COOKIE_NAME } from '../../constants/cookie';
 import { HttpResponse } from '../../core';
 import { HeaderKey } from '../../core/client/constants';
@@ -15,7 +15,7 @@ import {
 export class UserClient extends UserAPI {
     private _authKey: string | null = null;
 
-    constructor(axios: Axios) {
+    constructor(axios: AxiosInstance) {
         super(axios);
 
         // Initialize auth header from cookie on instance creation (e.g., after F5)
@@ -31,7 +31,7 @@ export class UserClient extends UserAPI {
     }
 
     public set authKey(authKey: string) {
-        console.debug("setter", authKey)
+        console.debug('setter', authKey);
         // Default expiry 1 day if use authKey setter.
         const expires = new Date();
         expires.setDate(expires.getDate() + 1);

@@ -1,4 +1,4 @@
-import { Axios } from 'axios';
+import { AxiosInstance } from 'axios';
 import { AbstractAPI } from '../base/AbstractAPI';
 import { AnalyticDevicesAPI } from './devices/api';
 import { AnalyticIssuesAPI } from './issues/api';
@@ -11,7 +11,7 @@ export class AnalyticAPI extends AbstractAPI {
     public payments: AnalyticPaymentsAPI;
     public users: AnalyticUsersAPI;
 
-    constructor(axios: Axios) {
+    constructor(axios: AxiosInstance) {
         super(axios);
 
         this.devices = new AnalyticDevicesAPI(axios);

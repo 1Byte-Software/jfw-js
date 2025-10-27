@@ -1,4 +1,4 @@
-import { Axios, AxiosRequestConfig } from 'axios';
+import { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { HttpResponse, HttpResponseList } from '../../core';
 import { generatePath } from '../../utils/path';
 import { IdType } from '../base';
@@ -15,7 +15,7 @@ import {
 export class DomainAPI extends AbstractAPI {
     public brandLinks: BrandLinksAPI;
 
-    public constructor(axios: Axios) {
+    public constructor(axios: AxiosInstance) {
         super(axios);
         this.brandLinks = new BrandLinksAPI(axios);
     }
