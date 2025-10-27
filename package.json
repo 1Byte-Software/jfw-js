@@ -1,7 +1,7 @@
 {
     "name": "@jframework/jfw-js",
     "description": "The Javascript package for JFW",
-    "version": "6.6.0",
+    "version": "6.7.0",
     "author": "1byte devteam",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -22,14 +22,14 @@
         "build": "rollup -c",
         "watch": "npm run build -- --watch src",
         "prepublishOnly": "npm run build",
-        "test": "yalc publish --push --no-scripts --files ."
+        "test": "yalc publish --push --no-scripts --files .",
+        "test:publish": "pnpm install --no-frozen-lockfile && rollup -c"
     },
     "dependencies": {
         "axios": "^1.7.7",
         "query-string": "^9.1.0",
         "rollup": "^4.22.0",
-        "rollup-plugin-typescript2": "^0.36.0",
-        "rxjs": "^7.8.1"
+        "rollup-plugin-typescript2": "^0.36.0"
     },
     "devDependencies": {
         "@types/node": "^22.5.5",
