@@ -29,10 +29,17 @@ export type JFWOptions = {
     protocolDomain?: string;
 
     /**
+     * If enabled, will auto assign current URL to 'X-Current-URL' header.
+     * @default true
+     */
+    allowTracking?: boolean;
+
+    /**
      * A global error handler function for failed HTTP responses.
      *
      * If provided, this function will be called when a response error occurs (e.g., 4xx or 5xx),
      * and can be used to customize how your app handles errors (e.g., showing a toast or redirecting to login).
+     * @deprecated
      */
     globalErrorHandler?: (error: AxiosError<HttpResponse>) => void;
 };
