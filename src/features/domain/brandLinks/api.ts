@@ -10,6 +10,7 @@ import {
     IGetBrandLinkParams,
     IGetBrandLinksByTypeParams,
     IGetBrandLinksParams,
+    IGetCurrentBrandLinkByTypesParams,
     IUpdateBrandLinkParams,
 } from './types';
 
@@ -111,6 +112,26 @@ export class BrandLinksAPI extends AbstractAPI {
 
         const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINKS_BY_TYPE, {
             domainId,
+            type,
+        });
+        const response = await this.axios.get<HttpResponse<IBrandLink[]>>(url, {
+            params: queryParameters,
+            ...config,
+        });
+
+        return response.data;
+    }
+
+    /**
+     * #NOTE: Will update tsdoc in feature.
+     */
+    public async getCurrentBrandLinksByType(
+        params: IGetCurrentBrandLinkByTypesParams,
+        config?: AxiosRequestConfig,
+    ) {
+        const { type, ...queryParameters } = params;
+
+        const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINKS_BY_TYPE, {
             type,
         });
         const response = await this.axios.get<HttpResponse<IBrandLink[]>>(url, {

@@ -120,6 +120,26 @@ export interface IGetBrandLinksByTypeParams {
     isReplaceTemplate?: boolean;
 }
 
+export interface IGetCurrentBrandLinkByTypesParams {
+    /**
+     * The type of the brand link.
+     *
+     * @remarks enum
+     */
+    type: BrandLinkType;
+
+    /**
+     * The name query parameter to filter.
+     */
+    name?: string;
+
+    /**
+     * The flag to replace the template. If true, the template will be replaced with the brand link and return the result.
+     * @defaultValue `true`
+     */
+    isReplaceTemplate?: boolean;
+}
+
 export interface IGetBrandLinksParams {
     /**
      * The flag to replace the template. If true, the template will be replaced with the brand link and return the result.
