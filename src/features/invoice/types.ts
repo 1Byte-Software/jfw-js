@@ -1,14 +1,14 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IBaseObject, IdType } from '../base';
 import { IPaymentBase } from '../payment';
-import { IBaseUser } from '../user';
+import { IUserBase } from '../user';
 import { InvoiceStatus, InvoiceType } from './constants';
 
 export interface IInvoice extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
-    user: IBaseUser;
+    user: IUserBase;
 
     /**
      * This class represents the payment base data transfer object.

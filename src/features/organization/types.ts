@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { DateType, IBaseObject, IdType } from '../base';
-import { IBaseUser } from '../user';
+import { IUserBase } from '../user';
 import { OrganizationStatus, OrganizationUserStatus } from './constants';
 
 /**
@@ -94,7 +94,7 @@ export interface IOrganizationUser {
     /**
      * This class is used to return user information to client.
      */
-    user: IBaseUser;
+    user: IUserBase;
 
     /**
      * The role code.
