@@ -10,7 +10,7 @@ import {
     ICalculateTotalPriceCheckoutParams,
     ICalculateTotalPriceCheckoutResponse,
     ICreatePackageParams,
-    IFeatureOfPackage,
+    IFeaturePackage,
     IGetPackagesParams,
     IPackage,
     IRenewalOrUpgradeUserPackageParams,
@@ -160,9 +160,10 @@ export class PackageAPI extends AbstractAPI {
         const url = generatePath(PACKAGE_PATH.GET_FEATURES_FROM_PACKAGE, {
             packageId,
         });
-        const response = await this.axios.get<
-            HttpResponse<IFeatureOfPackage[]>
-        >(url, config);
+        const response = await this.axios.get<HttpResponse<IFeaturePackage[]>>(
+            url,
+            config,
+        );
 
         return response.data;
     }
