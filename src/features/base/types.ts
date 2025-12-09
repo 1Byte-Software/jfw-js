@@ -6,7 +6,7 @@ import { SegmentConditionOperator } from './constants';
  */
 export type IdType = string;
 
-export type DateType = Date | string;
+export type DateType = string;
 
 export interface IBaseObject {
     /**

@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
-import { HttpResponse, JFWOptions } from './core';
+import axios from 'axios';
+import { JFWOptions } from './core';
 import { ApiClient, createBackendApiClient } from './core/client/client';
 import { HeaderKey } from './core/client/constants';
 export * from './core';
@@ -17,7 +17,6 @@ export const createJFWConfig = (options: JFWOptions) => {
         brandURL = null,
         protocolDomain = 'protocol.jframework.io',
         allowTracking = true,
-        globalErrorHandler,
     } = options;
 
     const protocolURL = `https://${protocolDomain}/api`;
@@ -34,40 +33,6 @@ export const createJFWConfig = (options: JFWOptions) => {
         jfwAxios.defaults.headers.common[HeaderKey.XCurrentURL] =
             window.location.href;
     }
-
-    /**
-     * A response interceptor that simply returns the response without modification.
-     *
-     * @param response - The Axios response object.
-     * @returns The unmodified Axios response.
-     * @deprecated
-     */
-    function responseHandler<T = any>(response: AxiosResponse<T>) {
-        return response;
-    }
-
-    /**
-     * A response error interceptor that either:
-     * - Returns the error directly if the request config contains a `raw` flag,
-     * - Delegates to a custom global error handler if provided,
-     * - Or does nothing (commented out fallback).
-     *
-     * @param error - The Axios error object containing request and response info.
-     * @returns Either the original error or the result of the global error handler.
-     * @deprecated
-     */
-    function responseErrorHandler(error: AxiosError<HttpResponse>) {
-        const config = error?.config;
-        if (config.raw) {
-            return error;
-        }
-
-        if (globalErrorHandler) {
-            return globalErrorHandler(error);
-        }
-    }
-
-    jfwAxios.interceptors.response.use(responseHandler, responseErrorHandler);
 
     /**
      * Changes the authentication key for all subsequent requests.
