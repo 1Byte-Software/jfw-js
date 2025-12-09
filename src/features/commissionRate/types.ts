@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
-import { IBaseUser } from '../user';
+import { IUserBase } from '../user';
 import { CommissionRateType } from './constants';
 
 /**
@@ -15,7 +15,7 @@ export interface ICommissionRate extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
-    user?: IBaseUser;
+    user?: IUserBase | null;
 
     /**
      * @remarks enum
