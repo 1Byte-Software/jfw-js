@@ -1,14 +1,4 @@
-import { AxiosError, AxiosRequestConfig } from 'axios';
-import { HttpResponse } from '../query';
-
-declare module 'axios' {
-    export interface AxiosRequestConfig {
-        raw?: boolean;
-        silent?: boolean;
-        ignoreGlobalException?: boolean;
-        context?: string;
-    }
-}
+import { AxiosRequestConfig } from 'axios';
 
 export type JFWOptions = {
     /**
@@ -33,15 +23,6 @@ export type JFWOptions = {
      * @default true
      */
     allowTracking?: boolean;
-
-    /**
-     * A global error handler function for failed HTTP responses.
-     *
-     * If provided, this function will be called when a response error occurs (e.g., 4xx or 5xx),
-     * and can be used to customize how your app handles errors (e.g., showing a toast or redirecting to login).
-     * @deprecated
-     */
-    globalErrorHandler?: (error: AxiosError<HttpResponse>) => void;
 };
 
 export type RdAxiosRequestConfig = AxiosRequestConfig;
