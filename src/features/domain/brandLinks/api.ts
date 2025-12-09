@@ -131,9 +131,12 @@ export class BrandLinksAPI extends AbstractAPI {
     ) {
         const { type, ...queryParameters } = params;
 
-        const url = generatePath(BRAND_LINK_PATH.GET_BRAND_LINKS_BY_TYPE, {
-            type,
-        });
+        const url = generatePath(
+            BRAND_LINK_PATH.GET_CURRENT_BRAND_LINKS_BY_TYPE,
+            {
+                type,
+            },
+        );
         const response = await this.axios.get<HttpResponse<IBrandLink[]>>(url, {
             params: queryParameters,
             ...config,
