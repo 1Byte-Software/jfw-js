@@ -72,7 +72,7 @@ export interface IOrganization extends IBaseObject {
      *
      * @remarks enum
      */
-    statusUser?: OrganizationUserStatus;
+    statusUser?: OrganizationUserStatus | null;
 
     /**
      * The Total Members in the Organization.
