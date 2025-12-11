@@ -80,7 +80,7 @@ export interface ICoupon extends IBaseObject {
      *
      * @remarks date-time
      */
-    modifiedDate?: DateType;
+    modifiedDate?: DateType | null;
 }
 
 //#region API types

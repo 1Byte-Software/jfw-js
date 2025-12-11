@@ -85,7 +85,7 @@ export interface IPackage extends IBaseObject {
     status: JFWStatus;
 }
 
-export interface IFeatureOfPackageBase {
+export interface IFeaturePackageBase {
     type: FeatureType;
 
     /**
@@ -118,6 +118,11 @@ export interface IFeatureOfPackageBase {
      */
     customIntervalDays?: number | null;
 }
+
+/**
+ * @deprecated Use IFeaturePackageBase instead
+ */
+export type IFeatureOfPackageBase = IFeaturePackageBase;
 
 export interface ICheckoutTax {
     /**
@@ -184,11 +189,17 @@ export interface ICalculateTotalPriceCheckoutResponse {
 
 /**
  * This class provides the Feature of Package Dto.
- * @deprecated Use PackageFeature instead.
+ * @deprecated Use IFeaturePackage instead.
  */
 export interface IFeatureOfPackage extends IFeature, IFeatureOfPackageBase {}
 
+/**
+ * This class provides the Feature of Package Dto.
+ * @deprecated Use IFeaturePackage instead.
+ */
 export type PackageFeature = IFeatureOfPackage;
+
+export type IFeaturePackage = IFeatureOfPackage;
 
 //#region API types
 
@@ -227,7 +238,7 @@ export interface IGetPackagesParams extends ISortable<'zOrder'> {
     /**
      * Filter by the status.
      */
-    status?: JFWStatus
+    status?: JFWStatus;
 }
 
 /**

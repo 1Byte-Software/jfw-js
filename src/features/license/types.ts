@@ -56,14 +56,14 @@ export interface ILicense extends IBaseObject {
      *
      * @remarks date-time
      */
-    startDate?: DateType;
+    startDate?: DateType | null;
 
     /**
      * The end date of the license.
      *
      * @remarks date-time
      */
-    endDate?: DateType;
+    endDate?: DateType | null;
 
     /**
      * The tags of the license.
@@ -87,7 +87,7 @@ export interface ILicense extends IBaseObject {
      *
      * @remarks date-time
      */
-    usedDate?: DateType;
+    usedDate?: DateType | null;
 
     /**
      * Flag to indicate if the license is in test mode.
@@ -99,7 +99,7 @@ export interface ILicense extends IBaseObject {
      *
      * @remarks date-time
      */
-    modifiedDate?: DateType;
+    modifiedDate?: DateType | null;
 }
 
 export interface ILicenseStatistic {

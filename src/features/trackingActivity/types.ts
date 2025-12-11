@@ -1,7 +1,7 @@
 import { IPageable, ISortable } from '../../core';
 import { IBaseObject, IdType } from '../base';
 import { IEvent } from '../event';
-import { IBaseUser } from '../user';
+import { IUserBase } from '../user';
 
 /**
  * This class represents the data transfer object for the tracking activity.
@@ -10,7 +10,7 @@ export interface ITrackingActivity extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
-    user: IBaseUser;
+    user: IUserBase;
 
     /**
      * The device id.

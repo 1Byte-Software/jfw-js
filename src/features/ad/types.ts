@@ -34,12 +34,12 @@ export interface IAd extends IBaseObject {
     /**
      * Gets or sets the description of the advertisement.
      */
-    description: string | null;
+    description?: string | null;
 
     /**
      * Gets or sets the tags of the advertisement.
      */
-    tags: string | null;
+    tags?: string | null;
 
     /**
      * Gets or sets the start date and time when the advertisement becomes active. Format: yyyy-MM-dd HH:mm:ss

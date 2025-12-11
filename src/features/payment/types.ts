@@ -2,7 +2,7 @@ import { ICreatedDateFilter, IPageable, ISortable } from '../../core';
 import { DateType, IBaseObject, IdType } from '../base';
 import { IPackage } from '../package';
 import { IPrice } from '../price';
-import { IBaseUser } from '../user';
+import { IUserBase } from '../user';
 import { PaymentStatus } from './constants';
 
 /**
@@ -90,7 +90,7 @@ export interface IPaymentBase extends IBaseObject {
      *
      * @remarks date-time
      */
-    paymentDate?: DateType;
+    paymentDate?: DateType | null;
 }
 
 /**
@@ -100,7 +100,7 @@ export interface IPayment extends IPaymentBase {
     /**
      * This class is used to return user information to client.
      */
-    user?: IBaseUser;
+    user?: IUserBase;
 
     /**
      * This class presents the Price Data Transfer Object.
