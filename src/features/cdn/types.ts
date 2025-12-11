@@ -7,7 +7,7 @@ export interface IFileCDN extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
-    user?: IUser;
+    user?: IUser | null;
 
     /**
      * The reference of the object value.

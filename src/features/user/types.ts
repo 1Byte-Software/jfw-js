@@ -25,7 +25,7 @@ import {
 /**
  * This class is used to return user information to client.
  */
-export interface IBaseUser extends IBaseObject {
+export interface IUserBase extends IBaseObject {
     /**
      * The code of the user.
      *
@@ -68,6 +68,10 @@ export interface IBaseUser extends IBaseObject {
     roles?: string[] | null;
 }
 
+/**
+ * @deprecated use IUserBase instead
+ */
+export type IBaseUser = IUserBase;
 export interface IUser extends IBaseObject {
     /**
      * The brand id.
@@ -79,7 +83,7 @@ export interface IUser extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
-    parentUser?: IBaseUser;
+    parentUser?: IUserBase | null;
     /**
      * The user code.
      *
@@ -244,7 +248,7 @@ export interface IUser extends IBaseObject {
     isUserIntegration: boolean;
 }
 
-export interface IDeviceOfUser extends IDevice {
+export interface IDeviceUser extends IDevice {
     /**
      * The token of the user device.
      */
@@ -265,6 +269,11 @@ export interface IDeviceOfUser extends IDevice {
      */
     lastAccessAt?: DateType | null;
 }
+
+/**
+ * @deprecated use IDeviceUser instead.
+ */
+export type IDeviceOfUser = IDeviceUser;
 
 export interface IAppIntegrationAuthenticateURL {
     /**
@@ -461,7 +470,6 @@ export interface IGetUsersParams
      */
     referralCode?: string;
 }
-
 
 export interface IGetDevicesFromUserParams {
     isMobileApp?: boolean | null;

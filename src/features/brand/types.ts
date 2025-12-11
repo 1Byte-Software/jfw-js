@@ -60,12 +60,12 @@ export interface IBrand extends IBaseObject {
     /**
      * This class provides the Brand Profile Dto.
      */
-    profile?: IBrandProfile;
+    profile?: IBrandProfile | null;
 
     /**
      * This class provides the Brand Setting Dto.
      */
-    setting?: IBrandSetting;
+    setting?: IBrandSetting | null;
 
     /**
      * @deprecated use getBrandDomainsAPI instead

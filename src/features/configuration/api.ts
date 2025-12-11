@@ -70,12 +70,13 @@ export class ConfigurationAPI extends AbstractAPI {
         config?: AxiosRequestConfig,
     ) {
         const url = CONFIGURATION_PATH.GET_CONFIGURATIONS;
-        const response = await this.axios.get<
-            HttpResponse<HttpResponse<IConfiguration[]>>
-        >(url, {
-            params,
-            ...config,
-        });
+        const response = await this.axios.get<HttpResponse<IConfiguration[]>>(
+            url,
+            {
+                params,
+                ...config,
+            },
+        );
 
         return response.data;
     }

@@ -16,7 +16,7 @@ import {
     IAuthenticationByMagicLinkParams,
     IAuthenticationByPhoneNumberParams,
     IAuthenticationParams,
-    IBaseUser,
+    IUserBase,
     IBrandPartnerAuthenticate,
     IChangePasswordForAnotherUserParams,
     IChangePasswordParams,
@@ -639,11 +639,9 @@ export class UserAPI extends AbstractAPI {
             url,
             {
                 params,
-                ...config
+                ...config,
             },
         );
-
-      
 
         return response.data;
     }
@@ -746,7 +744,7 @@ export class UserAPI extends AbstractAPI {
         const url = generatePath(USER_PATH.GET_REFEREES_OF_USER, {
             id,
         });
-        const response = await this.axios.get<HttpResponse<IBaseUser[]>>(
+        const response = await this.axios.get<HttpResponse<IUserBase[]>>(
             url,
             config,
         );

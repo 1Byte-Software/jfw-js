@@ -1,6 +1,6 @@
 import { IPageable, ISortable } from '../../core';
-import { DateType, IBaseObject, IdType } from '../base';
-import { IBaseUser } from '../user';
+import { IBaseObject, IdType } from '../base';
+import { IUserBase } from '../user';
 import {
     IssuePriority,
     IssueReactionStatus,
@@ -114,7 +114,7 @@ export interface IIssue extends IBaseObject {
     /**
      * This class is used to return user information to client.
      */
-    user?: IBaseUser;
+    user?: IUserBase | null;
 }
 
 /**

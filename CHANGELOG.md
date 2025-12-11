@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [6.9.2]
+
+### Fixed
+
+- Improve nullable fields of JFW Objects.
+- Change `IBaseUser` to `IUserBase` interface.
+- Changed `IFeatureOfPackageBase` to `IFeaturePackageBase`.
+
+## [6.10.0]
+
+### Fixed
+
+- Fix Path of `getCurrentBrandLinksByType` api.
+
+### Removed
+
+- Remove global error handler in `jfwOptions`.
+
 ## [6.9.0]
 
 ### Added

@@ -34,7 +34,7 @@ export interface IIssueCategory extends IBaseObject {
     /**
      * Is system issue category.
      */
-    isSystem?: boolean;
+    isSystem?: boolean | null;
 
     /**
      * The tags of the issue category.
