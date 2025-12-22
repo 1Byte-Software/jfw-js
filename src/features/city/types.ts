@@ -29,7 +29,7 @@ export interface ICity {
 }
 //#region API types
 
-export interface IGetCitiesParams extends IPageable, ISortable {
+export interface IGetCitiesParams extends IPageable, ISortable<'name'> {
     /**
      * The keywords for filter.
      */
