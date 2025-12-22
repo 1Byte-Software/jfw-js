@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Improve `IGetCitiesParams` sortable fields interface.
+- Improve `IGetCountriesParams` sortable fields interface.
+
+### Deprecated
+
+- Deprecated `IUserNotification` interface. Please user `INotificationUser` instead.
 
 ## [6.9.2]
 

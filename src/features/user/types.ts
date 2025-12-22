@@ -333,7 +333,7 @@ export interface IAuthenticateResponse {
 
 export interface IStatisticsUsers extends IStatisticCommon {}
 
-export interface IUserNotification extends Omit<INotification, 'status'> {
+export interface INotificationUser extends Omit<INotification, 'status'> {
     /**
      * The seen at.
      *
@@ -348,6 +348,11 @@ export interface IUserNotification extends Omit<INotification, 'status'> {
      */
     status: UserNotificationStatus;
 }
+
+/**
+ * @deprecated Use INotificationUser instead
+ */
+export type IUserNotification = INotificationUser;
 
 //#region API types
 export interface IGetUsersParams
