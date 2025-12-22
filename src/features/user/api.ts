@@ -16,7 +16,6 @@ import {
     IAuthenticationByMagicLinkParams,
     IAuthenticationByPhoneNumberParams,
     IAuthenticationParams,
-    IUserBase,
     IBrandPartnerAuthenticate,
     IChangePasswordForAnotherUserParams,
     IChangePasswordParams,
@@ -37,6 +36,7 @@ import {
     IGetNotificationsByUserParams,
     IGetUsersParams,
     IMarkNotificationAsReadParams,
+    INotificationUser,
     IRegisterNewUserParams,
     IRemoveDeviceFromUserParams,
     IResetPasswordParams,
@@ -44,7 +44,7 @@ import {
     IStatisticsUsersParams,
     IUpdateUserParams,
     IUser,
-    IUserNotification,
+    IUserBase,
     IVerifyOTPCodeParams,
 } from './types';
 
@@ -1115,7 +1115,7 @@ export class UserAPI extends AbstractAPI {
             userId,
             notificationId,
         });
-        const response = await this.axios.get<HttpResponse<IUserNotification>>(
+        const response = await this.axios.get<HttpResponse<INotificationUser>>(
             url,
             {
                 params,
@@ -1144,7 +1144,7 @@ export class UserAPI extends AbstractAPI {
             userId,
         });
         const response = await this.axios.get<
-            HttpResponseList<IUserNotification, { unreadCount: number }>
+            HttpResponseList<INotificationUser, { unreadCount: number }>
         >(url, {
             params: restParams,
             ...config,

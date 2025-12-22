@@ -194,8 +194,8 @@ JFramework (JFW) is a comprehensive backend API client library for JavaScript, p
             - [sendEmailToVerifyEmailAddressOfUser(id: IdType, returnURL: string, config?: AxiosRequestConfig) => Promise<HttpResponse\<boolean>>](#sendemailtoverifyemailaddressofuserid-idtype-returnurl-string-config-axiosrequestconfig--promisehttpresponseboolean)
             - [activeUserEmailAddress(token: string, config?: AxiosRequestConfig) => Promise<HttpResponse\<boolean>>](#activeuseremailaddresstoken-string-config-axiosrequestconfig--promisehttpresponseboolean)
         - [Notification](#notification)
-            - [getNotificationRelatedToUser(params: IGetNotificationRelatedToUserParams, config?: AxiosRequestConfig) => Promise<HttpResponse\<IUserNotification>>](#getnotificationrelatedtouserparams-igetnotificationrelatedtouserparams-config-axiosrequestconfig--promisehttpresponseiusernotification)
-            - [getNotificationsByUser(params: IGetNotificationsByUserParams, config?: AxiosRequestConfig) => Promise<HttpResponseList\<IUserNotification, { unreadCount: number }>>](#getnotificationsbyuserparams-igetnotificationsbyuserparams-config-axiosrequestconfig--promisehttpresponselistiusernotification-unreadcount-number)
+            - [getNotificationRelatedToUser(params: IGetNotificationRelatedToUserParams, config?: AxiosRequestConfig) => Promise<HttpResponse\<INotificationUser>>](#getnotificationrelatedtouserparams-igetnotificationrelatedtouserparams-config-axiosrequestconfig--promisehttpresponseiusernotification)
+            - [getNotificationsByUser(params: IGetNotificationsByUserParams, config?: AxiosRequestConfig) => Promise<HttpResponseList\<INotificationUser, { unreadCount: number }>>](#getnotificationsbyuserparams-igetnotificationsbyuserparams-config-axiosrequestconfig--promisehttpresponselistiusernotification-unreadcount-number)
             - [markNotificationAsRead(params: IMarkNotificationAsReadParams, config?: AxiosRequestConfig) => Promise<HttpResponse\<boolean>>](#marknotificationasreadparams-imarknotificationasreadparams-config-axiosrequestconfig--promisehttpresponseboolean)
             - [markAllNotificationsAsRead(userId: IdType, config?: AxiosRequestConfig) => Promise<HttpResponse\<boolean>>](#markallnotificationsasreaduserid-idtype-config-axiosrequestconfig--promisehttpresponseboolean)
         - [Passwordless](#passwordless)
@@ -6213,7 +6213,7 @@ The `user` object provides methods for managing users, including authentication,
 
 #### Notification
 
-##### `getNotificationRelatedToUser(params: IGetNotificationRelatedToUserParams, config?: AxiosRequestConfig) => Promise<HttpResponse<IUserNotification>>`
+##### `getNotificationRelatedToUser(params: IGetNotificationRelatedToUserParams, config?: AxiosRequestConfig) => Promise<HttpResponse<INotificationUser>>`
 
 **Gets a notification detail related to a user by user ID and notification ID.**
 
@@ -6231,7 +6231,7 @@ The `user` object provides methods for managing users, including authentication,
 
 - **See**: [Get a Notification](https://developers.jframework.io/references/api-reference/endpoints/users/notification/get-a-notification)
 
-##### `getNotificationsByUser(params: IGetNotificationsByUserParams, config?: AxiosRequestConfig) => Promise<HttpResponseList<IUserNotification, { unreadCount: number }>>`
+##### `getNotificationsByUser(params: IGetNotificationsByUserParams, config?: AxiosRequestConfig) => Promise<HttpResponseList<INotificationUser, { unreadCount: number }>>`
 
 **Gets notifications by the user's ID.**
 

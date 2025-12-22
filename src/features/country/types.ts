@@ -74,7 +74,20 @@ export interface ICountry extends IBaseObject {
 }
 
 //#region API types
-export interface IGetCountriesParams extends IPageable, ISortable {
+export interface IGetCountriesParams
+    extends IPageable,
+        ISortable<
+            | 'region'
+            | 'subregion'
+            | 'codeAlpha2'
+            | 'codeAlpha3'
+            | 'codeNumeric'
+            | 'name'
+            | 'capital'
+            | 'currency'
+            | 'tld'
+            | 'native'
+        > {
     /**
      * The region of the country.
      */
