@@ -30,8 +30,10 @@ export const createJFWConfig = (options: JFWOptions) => {
     });
 
     if (allowTracking) {
-        jfwAxios.defaults.headers.common[HeaderKey.XCurrentURL] =
-            window.location.href;
+        jfwAxios.interceptors.request.use((config) => {
+            config.headers[HeaderKey.XCurrentURL] = window.location.href;
+            return config;
+        });
     }
 
     /**
